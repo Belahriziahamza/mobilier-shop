@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="fr"
       xmlns:th="http://www.thymeleaf.org">
 
@@ -13,9 +14,11 @@
         Produits | Administration Zineb Déco
     </title>
 
+
     <link rel="stylesheet"
           th:href="@{/css/style.css}"
           href="/css/style.css">
+
 
     <link rel="stylesheet"
           th:href="@{/css/admin.css}"
@@ -29,6 +32,7 @@
         ====================================================== */
 
         .product-filter-section {
+
             margin-top: 28px;
 
             padding: 22px;
@@ -40,6 +44,7 @@
 
 
         .product-filter-head span {
+
             display: block;
 
             color: #a47822;
@@ -54,6 +59,7 @@
 
 
         .product-filter-head h2 {
+
             margin: 5px 0 18px;
 
             font-family: Georgia, serif;
@@ -64,6 +70,7 @@
 
 
         .product-filter-form {
+
             display: grid;
 
             grid-template-columns:
@@ -81,6 +88,7 @@
 
 
         .product-filter-field {
+
             display: grid;
 
             gap: 7px;
@@ -88,6 +96,7 @@
 
 
         .product-filter-field label {
+
             color: #6f675f;
 
             font-size: 7px;
@@ -99,6 +108,7 @@
 
         .product-filter-field input,
         .product-filter-field select {
+
             width: 100%;
 
             min-height: 45px;
@@ -117,6 +127,7 @@
 
         .product-filter-field input:focus,
         .product-filter-field select:focus {
+
             border-color: #b88627;
 
             background: #ffffff;
@@ -124,6 +135,7 @@
 
 
         .product-filter-submit {
+
             min-height: 45px;
 
             padding: 0 16px;
@@ -144,6 +156,7 @@
 
 
         .product-filter-reset {
+
             min-height: 45px;
 
             padding: 0 15px;
@@ -166,11 +179,13 @@
         }
 
 
+
         /* =====================================================
            STATS RAPIDES
         ====================================================== */
 
         .product-quick-stats {
+
             margin-top: 20px;
 
             display: grid;
@@ -183,6 +198,7 @@
 
 
         .product-quick-card {
+
             min-height: 95px;
 
             padding: 15px;
@@ -196,11 +212,13 @@
 
 
         .product-quick-card:hover {
+
             border-color: #b88627;
         }
 
 
         .product-quick-card span {
+
             display: block;
 
             color: #817970;
@@ -213,6 +231,7 @@
 
 
         .product-quick-card strong {
+
             display: block;
 
             margin-top: 10px;
@@ -227,6 +246,7 @@
 
 
         .product-quick-card.selected {
+
             border-color: #080705;
 
             background: #080705;
@@ -234,13 +254,16 @@
 
 
         .product-quick-card.selected span {
+
             color: rgba(255,255,255,.55);
         }
 
 
         .product-quick-card.selected strong {
+
             color: #d4a536;
         }
+
 
 
         /* =====================================================
@@ -248,6 +271,7 @@
         ====================================================== */
 
         .product-results {
+
             margin-top: 14px;
 
             display: flex;
@@ -263,8 +287,10 @@
 
 
         .product-results strong {
+
             color: #a47822;
         }
+
 
 
         /* =====================================================
@@ -272,6 +298,7 @@
         ====================================================== */
 
         .product-current-image {
+
             padding: 12px;
 
             display: flex;
@@ -287,6 +314,7 @@
 
 
         .product-current-image img {
+
             width: 95px;
             height: 80px;
 
@@ -297,6 +325,7 @@
 
 
         .product-current-image span {
+
             color: #7f766d;
 
             font-size: 8px;
@@ -306,10 +335,12 @@
 
 
         .product-form-error {
+
             color: #a33d3d;
 
             font-size: 8px;
         }
+
 
 
         /* =====================================================
@@ -317,6 +348,7 @@
         ====================================================== */
 
         .product-old-price {
+
             display: inline-block;
 
             margin-left: 5px;
@@ -329,6 +361,7 @@
         }
 
 
+
         /* =====================================================
            RESPONSIVE
         ====================================================== */
@@ -336,12 +369,14 @@
         @media (max-width: 1250px) {
 
             .product-filter-form {
+
                 grid-template-columns:
                     repeat(2, 1fr);
             }
 
 
             .product-quick-stats {
+
                 grid-template-columns:
                     repeat(3, 1fr);
             }
@@ -352,11 +387,13 @@
         @media (max-width: 650px) {
 
             .product-filter-form {
+
                 grid-template-columns: 1fr;
             }
 
 
             .product-quick-stats {
+
                 grid-template-columns:
                     repeat(2, 1fr);
             }
@@ -364,6 +401,7 @@
 
             .product-filter-submit,
             .product-filter-reset {
+
                 width: 100%;
             }
 
@@ -384,9 +422,14 @@
          SIDEBAR COMMUNE
     ====================================================== -->
 
-    <div th:replace="~{fragments/admin-sidebar :: sidebar('produits')}"></div>
+    <div th:replace="~{fragments/admin-sidebar :: sidebar('produits')}">
+    </div>
 
 
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
 
     <main class="zdadm-main">
 
@@ -400,22 +443,31 @@
 
             <div>
 
+
                 <span class="zdadm-kicker">
+
                     ADMINISTRATION / PRODUITS
+
                 </span>
 
 
                 <h1>
+
                     Gestion des produits
+
                 </h1>
 
 
                 <p>
+
                     Recherchez, filtrez, ajoutez et modifiez
                     les produits visibles sur la boutique Zineb Déco.
+
                 </p>
 
+
             </div>
+
 
 
             <a th:href="@{/admin/produits/nouveau}"
@@ -457,42 +509,65 @@
 
             <article class="zdadm-stat dark">
 
+
                 <span class="zdadm-stat-label">
+
                     TOTAL PRODUITS
+
                 </span>
+
 
                 <strong class="zdadm-stat-value"
                         th:text="${totalProducts != null ? totalProducts : 0}">
+
                     0
+
                 </strong>
 
+
             </article>
+
 
 
             <article class="zdadm-stat">
 
+
                 <span class="zdadm-stat-label">
+
                     RÉSULTATS AFFICHÉS
+
                 </span>
+
 
                 <strong class="zdadm-stat-value"
                         th:text="${resultCount != null ? resultCount : 0}">
+
                     0
+
                 </strong>
+
 
             </article>
 
 
+
             <article class="zdadm-stat gold">
 
+
                 <span class="zdadm-stat-label">
+
                     PRODUITS ACTIFS
+
                 </span>
+
 
                 <strong class="zdadm-stat-value"
                         th:text="${activeProducts != null ? activeProducts : 0}">
+
                     0
+
                 </strong>
+
 
             </article>
 
@@ -510,15 +585,23 @@
 
             <div class="product-filter-head">
 
+
                 <span>
+
                     RECHERCHE & FILTRES
+
                 </span>
 
+
                 <h2>
+
                     Trouver un produit
+
                 </h2>
 
+
             </div>
+
 
 
             <form th:action="@{/admin/produits}"
@@ -531,15 +614,20 @@
 
                 <div class="product-filter-field">
 
+
                     <label for="search">
+
                         Recherche
+
                     </label>
+
 
                     <input id="search"
                            type="search"
                            name="search"
                            th:value="${search}"
                            placeholder="Nom, type, couleur, catégorie, ID...">
+
 
                 </div>
 
@@ -549,68 +637,91 @@
 
                 <div class="product-filter-field">
 
+
                     <label for="category">
+
                         Catégorie
+
                     </label>
+
 
                     <select id="category"
                             name="category">
 
 
                         <option value="">
+
                             Toutes
+
                         </option>
 
 
                         <option value="salon"
                                 th:selected="${selectedCategory == 'salon'}">
+
                             Salon
+
                         </option>
 
 
                         <option value="canape"
                                 th:selected="${selectedCategory == 'canape'}">
+
                             Canapé
+
                         </option>
 
 
                         <option value="chambre"
                                 th:selected="${selectedCategory == 'chambre'}">
+
                             Chambre
+
                         </option>
 
 
                         <option value="lit"
                                 th:selected="${selectedCategory == 'lit'}">
+
                             Lit
+
                         </option>
 
 
                         <option value="tete-de-lit"
                                 th:selected="${selectedCategory == 'tete-de-lit'}">
+
                             Tête de lit
+
                         </option>
 
 
                         <option value="chaise"
                                 th:selected="${selectedCategory == 'chaise'}">
+
                             Chaise
+
                         </option>
 
 
                         <option value="fauteuil"
                                 th:selected="${selectedCategory == 'fauteuil'}">
+
                             Fauteuil
+
                         </option>
 
 
                         <option value="table"
                                 th:selected="${selectedCategory == 'table'}">
+
                             Table
+
                         </option>
 
 
                     </select>
+
 
                 </div>
 
@@ -620,32 +731,43 @@
 
                 <div class="product-filter-field">
 
+
                     <label for="state">
+
                         État
+
                     </label>
+
 
                     <select id="state"
                             name="state">
 
 
                         <option value="">
+
                             Tous
+
                         </option>
 
 
                         <option value="ACTIVE"
                                 th:selected="${selectedState == 'ACTIVE'}">
+
                             Actifs
+
                         </option>
 
 
                         <option value="INACTIVE"
                                 th:selected="${selectedState == 'INACTIVE'}">
+
                             Inactifs
+
                         </option>
 
 
                     </select>
+
 
                 </div>
 
@@ -655,38 +777,51 @@
 
                 <div class="product-filter-field">
 
+
                     <label for="special">
+
                         Mise en avant
+
                     </label>
+
 
                     <select id="special"
                             name="special">
 
 
                         <option value="">
+
                             Toutes
+
                         </option>
 
 
                         <option value="NEW"
                                 th:selected="${selectedSpecial == 'NEW'}">
+
                             Nouveautés
+
                         </option>
 
 
                         <option value="PROMOTION"
                                 th:selected="${selectedSpecial == 'PROMOTION'}">
+
                             Promotions
+
                         </option>
 
 
                         <option value="FEATURED"
                                 th:selected="${selectedSpecial == 'FEATURED'}">
+
                             Vedettes
+
                         </option>
 
 
                     </select>
+
 
                 </div>
 
@@ -698,6 +833,7 @@
                     Rechercher
 
                 </button>
+
 
 
                 <a th:href="@{/admin/produits}"
@@ -718,13 +854,18 @@
 
                 <span>
 
+
                     <strong th:text="${resultCount != null ? resultCount : 0}">
+
                         0
+
                     </strong>
 
                     produit(s) trouvé(s)
 
+
                 </span>
+
 
 
                 <span th:if="${search != null and !#strings.isEmpty(search)}">
@@ -732,7 +873,9 @@
                     Recherche :
 
                     <strong th:text="${search}">
+
                         produit
+
                     </strong>
 
                 </span>
@@ -758,13 +901,20 @@
                class="product-quick-card"
                th:classappend="${selectedState == '' and selectedSpecial == '' and selectedCategory == ''} ? ' selected' : ''">
 
+
                 <span>
+
                     Tous
+
                 </span>
 
+
                 <strong th:text="${totalProducts != null ? totalProducts : 0}">
+
                     0
+
                 </strong>
+
 
             </a>
 
@@ -776,13 +926,20 @@
                class="product-quick-card"
                th:classappend="${selectedState == 'ACTIVE'} ? ' selected' : ''">
 
+
                 <span>
+
                     Actifs
+
                 </span>
 
+
                 <strong th:text="${activeProducts != null ? activeProducts : 0}">
+
                     0
+
                 </strong>
+
 
             </a>
 
@@ -794,13 +951,20 @@
                class="product-quick-card"
                th:classappend="${selectedState == 'INACTIVE'} ? ' selected' : ''">
 
+
                 <span>
+
                     Inactifs
+
                 </span>
 
+
                 <strong th:text="${inactiveProducts != null ? inactiveProducts : 0}">
+
                     0
+
                 </strong>
+
 
             </a>
 
@@ -812,13 +976,20 @@
                class="product-quick-card"
                th:classappend="${selectedSpecial == 'NEW'} ? ' selected' : ''">
 
+
                 <span>
+
                     Nouveautés
+
                 </span>
 
+
                 <strong th:text="${newProductsCount != null ? newProductsCount : 0}">
+
                     0
+
                 </strong>
+
 
             </a>
 
@@ -830,13 +1001,20 @@
                class="product-quick-card"
                th:classappend="${selectedSpecial == 'PROMOTION'} ? ' selected' : ''">
 
+
                 <span>
+
                     Promotions
+
                 </span>
 
+
                 <strong th:text="${promotionProductsCount != null ? promotionProductsCount : 0}">
+
                     0
+
                 </strong>
+
 
             </a>
 
@@ -848,13 +1026,20 @@
                class="product-quick-card"
                th:classappend="${selectedSpecial == 'FEATURED'} ? ' selected' : ''">
 
+
                 <span>
+
                     Vedettes
+
                 </span>
 
+
                 <strong th:text="${featuredProductsCount != null ? featuredProductsCount : 0}">
+
                     0
+
                 </strong>
+
 
             </a>
 
@@ -879,13 +1064,20 @@
 
                 <div class="zdadm-card-head">
 
+
                     <small th:text="${editing ? 'MODIFICATION' : 'NOUVEAU PRODUIT'}">
+
                         NOUVEAU PRODUIT
+
                     </small>
 
+
                     <h2 th:text="${editing ? 'Modifier le produit' : 'Ajouter un produit'}">
+
                         Ajouter un produit
+
                     </h2>
+
 
                 </div>
 
@@ -898,25 +1090,36 @@
                       class="zdadm-form">
 
 
+                    <!-- ID -->
+
                     <input type="hidden"
                            th:field="*{id}">
 
+
+                    <!-- CSRF -->
 
                     <input type="hidden"
                            th:name="${_csrf.parameterName}"
                            th:value="${_csrf.token}">
 
 
+
                     <div class="zdadm-form-grid">
 
 
-                        <!-- NOM -->
+                        <!-- =================================================
+                             NOM
+                        ================================================== -->
 
                         <div class="zdadm-field full">
 
+
                             <label for="name">
+
                                 Nom *
+
                             </label>
+
 
                             <input id="name"
                                    type="text"
@@ -924,22 +1127,30 @@
                                    placeholder="Ex : Canapé Royal Milano"
                                    required>
 
+
                             <small class="product-form-error"
                                    th:if="${#fields.hasErrors('name')}"
                                    th:errors="*{name}">
                             </small>
 
+
                         </div>
 
 
 
-                        <!-- CATEGORIE -->
+                        <!-- =================================================
+                             CATEGORIE
+                        ================================================== -->
 
                         <div class="zdadm-field">
 
+
                             <label for="formCategory">
+
                                 Catégorie *
+
                             </label>
+
 
                             <select id="formCategory"
                                     th:field="*{category}"
@@ -947,72 +1158,112 @@
 
 
                                 <option value="">
+
                                     Sélectionner
+
                                 </option>
+
 
                                 <option value="salon">
+
                                     Salon
+
                                 </option>
+
 
                                 <option value="canape">
+
                                     Canapé
+
                                 </option>
+
 
                                 <option value="chambre">
+
                                     Chambre
+
                                 </option>
+
 
                                 <option value="lit">
+
                                     Lit
+
                                 </option>
+
 
                                 <option value="tete-de-lit">
+
                                     Tête de lit
+
                                 </option>
+
 
                                 <option value="chaise">
+
                                     Chaise
+
                                 </option>
+
 
                                 <option value="fauteuil">
+
                                     Fauteuil
+
                                 </option>
 
+
                                 <option value="table">
+
                                     Table
+
                                 </option>
 
 
                             </select>
 
+
                         </div>
 
 
 
-                        <!-- TYPE -->
+                        <!-- =================================================
+                             TYPE
+                        ================================================== -->
 
                         <div class="zdadm-field">
 
+
                             <label for="type">
+
                                 Type
+
                             </label>
+
 
                             <input id="type"
                                    type="text"
                                    th:field="*{type}"
                                    placeholder="Moderne, classique...">
 
+
                         </div>
 
 
 
-                        <!-- PRIX -->
+                        <!-- =================================================
+                             PRIX
+                        ================================================== -->
 
                         <div class="zdadm-field">
 
+
                             <label for="price">
+
                                 Prix DH *
+
                             </label>
+
 
                             <input id="price"
                                    type="number"
@@ -1021,22 +1272,30 @@
                                    th:field="*{price}"
                                    required>
 
+
                             <small class="product-form-error"
                                    th:if="${#fields.hasErrors('price')}"
                                    th:errors="*{price}">
                             </small>
 
+
                         </div>
 
 
 
-                        <!-- ANCIEN PRIX -->
+                        <!-- =================================================
+                             ANCIEN PRIX
+                        ================================================== -->
 
                         <div class="zdadm-field">
 
+
                             <label for="oldPrice">
+
                                 Ancien prix
+
                             </label>
+
 
                             <input id="oldPrice"
                                    type="number"
@@ -1044,112 +1303,166 @@
                                    step="0.01"
                                    th:field="*{oldPrice}">
 
+
                         </div>
 
 
 
-                        <!-- COULEUR -->
+                        <!-- =================================================
+                             COULEUR
+                        ================================================== -->
 
                         <div class="zdadm-field">
 
+
                             <label for="color">
+
                                 Couleur
+
                             </label>
+
 
                             <input id="color"
                                    type="text"
                                    th:field="*{color}"
                                    placeholder="Beige, noir...">
 
+
                         </div>
 
 
 
-                        <!-- DISPONIBILITE -->
+                        <!-- =================================================
+                             DISPONIBILITE
+                        ================================================== -->
 
                         <div class="zdadm-field">
 
+
                             <label for="availability">
+
                                 Disponibilité
+
                             </label>
+
 
                             <select id="availability"
                                     th:field="*{availability}">
 
 
                                 <option value="stock">
+
                                     En stock
+
                                 </option>
+
 
                                 <option value="custom">
+
                                     Sur commande
+
                                 </option>
 
+
                                 <option value="out">
+
                                     Indisponible
+
                                 </option>
 
 
                             </select>
 
+
                         </div>
 
 
 
-                        <!-- SOURCE -->
+                        <!-- =================================================
+                             SOURCE
+                        ================================================== -->
 
                         <div class="zdadm-field full">
 
+
                             <label for="sourceUrl">
+
                                 URL source
+
                             </label>
+
 
                             <input id="sourceUrl"
                                    type="url"
                                    th:field="*{sourceUrl}"
                                    placeholder="https://...">
 
+
                         </div>
 
 
 
-                        <!-- DESCRIPTION -->
+                        <!-- =================================================
+                             DESCRIPTION
+                        ================================================== -->
 
                         <div class="zdadm-field full">
 
+
                             <label for="description">
+
                                 Description
+
                             </label>
+
 
                             <textarea id="description"
                                       th:field="*{description}"
                                       placeholder="Description du produit...">
                             </textarea>
 
+
                         </div>
 
 
 
-                        <!-- IMAGE ACTUELLE -->
+                        <!-- =================================================
+                             IMAGE ACTUELLE
+                        ================================================== -->
 
                         <div th:if="${editing and formProduct.imagePath != null and !#strings.isEmpty(formProduct.imagePath)}"
                              class="zdadm-field full">
 
 
                             <label>
+
                                 Image actuelle
+
                             </label>
 
 
                             <div class="product-current-image">
 
-                                <img th:src="${formProduct.imagePath}"
+
+                                <!--
+                                    IMPORTANT :
+                                    On force toujours une URL absolue
+                                    commençant par /
+                                -->
+
+                                <img th:src="${#strings.startsWith(formProduct.imagePath, '/')
+                                        ? formProduct.imagePath
+                                        : '/' + formProduct.imagePath}"
                                      th:alt="${formProduct.name}">
 
+
                                 <span>
+
                                     Choisissez une nouvelle image seulement
                                     si vous souhaitez remplacer celle-ci.
+
                                 </span>
+
 
                             </div>
 
@@ -1158,64 +1471,88 @@
 
 
 
-                        <!-- IMAGE -->
+                        <!-- =================================================
+                             IMAGE
+                        ================================================== -->
 
                         <div class="zdadm-field full">
 
+
                             <label for="image">
+
                                 Photo
+
                             </label>
+
 
                             <input id="image"
                                    type="file"
                                    name="image"
                                    accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
 
+
                         </div>
 
 
 
-                        <!-- CHECKBOXES -->
+                        <!-- =================================================
+                             CHECKBOXES
+                        ================================================== -->
 
                         <div class="zdadm-checkboxes">
 
 
                             <label class="zdadm-checkbox">
 
+
                                 <input type="checkbox"
                                        th:field="*{active}">
 
+
                                 Produit actif
+
 
                             </label>
 
 
+
                             <label class="zdadm-checkbox">
+
 
                                 <input type="checkbox"
                                        th:field="*{featured}">
 
+
                                 Vedette
+
 
                             </label>
 
 
+
                             <label class="zdadm-checkbox">
+
 
                                 <input type="checkbox"
                                        th:field="*{newProduct}">
 
+
                                 Nouveauté
+
 
                             </label>
 
 
+
                             <label class="zdadm-checkbox">
+
 
                                 <input type="checkbox"
                                        th:field="*{promotion}">
 
+
                                 Promotion
+
 
                             </label>
 
@@ -1224,7 +1561,9 @@
 
 
 
-                        <!-- ACTIONS -->
+                        <!-- =================================================
+                             ACTIONS FORMULAIRE
+                        ================================================== -->
 
                         <div class="zdadm-form-actions">
 
@@ -1236,6 +1575,7 @@
                                 Ajouter le produit
 
                             </button>
+
 
 
                             <a th:if="${editing}"
@@ -1271,7 +1611,9 @@
 
 
                     <small>
+
                         CATALOGUE
+
                     </small>
 
 
@@ -1279,16 +1621,18 @@
 
                         Produits
 
+
                         <span style="
                             font-family:'Segoe UI',Arial,sans-serif;
                             font-size:10px;
                             color:#91887f;
                         "
-                        th:text="${'(' + (resultCount != null ? resultCount : 0) + ')'}">
+                              th:text="${'(' + (resultCount != null ? resultCount : 0) + ')'}">
 
                             (0)
 
                         </span>
+
 
                     </h2>
 
@@ -1297,19 +1641,25 @@
 
 
 
-                <!-- VIDE -->
+                <!-- =================================================
+                     VIDE
+                ================================================== -->
 
                 <div th:if="${products == null or #lists.isEmpty(products)}"
                      class="zdadm-empty">
 
 
                     <strong>
+
                         Aucun produit trouvé
+
                     </strong>
 
 
                     <p>
+
                         Modifiez les filtres ou réinitialisez la recherche.
+
                     </p>
 
 
@@ -1326,7 +1676,9 @@
 
 
 
-                <!-- PRODUITS -->
+                <!-- =================================================
+                     PRODUITS
+                ================================================== -->
 
                 <div th:if="${products != null and !#lists.isEmpty(products)}"
                      class="zdadm-product-list">
@@ -1336,15 +1688,32 @@
                              class="zdadm-product">
 
 
-                        <!-- IMAGE -->
+                        <!-- =================================================
+                             IMAGE PRODUIT
+                        ================================================== -->
 
                         <div class="zdadm-product-image">
 
 
+                            <!--
+                                IMPORTANT :
+                                Même si MySQL contient :
+                                uploads/products/photo.jpg
+
+                                on transforme automatiquement en :
+                                /uploads/products/photo.jpg
+                            -->
+
                             <img th:if="${product.imagePath != null and !#strings.isEmpty(product.imagePath)}"
-                                 th:src="${product.imagePath}"
+
+                                 th:src="${#strings.startsWith(product.imagePath, '/')
+                                     ? product.imagePath
+                                     : '/' + product.imagePath}"
+
                                  th:alt="${product.name}">
 
+
+                            <!-- PLACEHOLDER -->
 
                             <div th:if="${product.imagePath == null or #strings.isEmpty(product.imagePath)}"
                                  class="zdadm-placeholder">
@@ -1358,7 +1727,9 @@
 
 
 
-                        <!-- INFOS -->
+                        <!-- =================================================
+                             INFOS
+                        ================================================== -->
 
                         <div>
 
@@ -1370,20 +1741,29 @@
 
 
                                     <h3 th:text="${product.name}">
+
                                         Produit
+
                                     </h3>
 
 
                                     <small>
 
+
                                         <span th:text="${product.category}">
+
                                             catégorie
+
                                         </span>
+
 
 
                                         <span th:if="${product.type != null and !#strings.isEmpty(product.type)}">
+
                                             •
+
                                         </span>
+
 
 
                                         <span th:if="${product.type != null and !#strings.isEmpty(product.type)}"
@@ -1398,24 +1778,33 @@
 
 
 
+                                <!-- PRIX -->
+
                                 <div class="zdadm-product-price">
 
 
                                     <span th:text="${product.price}">
+
                                         0
+
                                     </span>
 
                                     DH
 
 
+
                                     <span th:if="${product.oldPrice != null}"
                                           class="product-old-price">
 
+
                                         <span th:text="${product.oldPrice}">
+
                                             0
+
                                         </span>
 
                                         DH
+
 
                                     </span>
 
@@ -1427,7 +1816,9 @@
 
 
 
-                            <!-- BADGES -->
+                            <!-- =================================================
+                                 BADGES
+                            ================================================== -->
 
                             <div class="zdadm-badges">
 
@@ -1476,7 +1867,9 @@
 
 
 
-                            <!-- INFORMATIONS -->
+                            <!-- =================================================
+                                 INFORMATIONS
+                            ================================================== -->
 
                             <div style="
                                 margin-top:9px;
@@ -1488,16 +1881,23 @@
 
                                 <span th:if="${product.color != null and !#strings.isEmpty(product.color)}">
 
+
                                     Couleur :
-                                    <strong th:text="${product.color}"></strong>
+
+                                    <strong th:text="${product.color}">
+                                    </strong>
+
 
                                 </span>
+
 
 
                                 <span th:if="${product.availability != null}"
                                       style="margin-left:10px;">
 
+
                                     Disponibilité :
+
 
                                     <strong th:text="${
                                         product.availability == 'stock'
@@ -1510,6 +1910,7 @@
                                     }">
                                     </strong>
 
+
                                 </span>
 
 
@@ -1517,10 +1918,14 @@
 
 
 
-                            <!-- ACTIONS -->
+                            <!-- =================================================
+                                 ACTIONS
+                            ================================================== -->
 
                             <div class="zdadm-actions">
 
+
+                                <!-- MODIFIER -->
 
                                 <a th:href="@{/admin/produits/edit/{id}(id=${product.id})}"
                                    class="zdadm-small-button">
@@ -1531,6 +1936,8 @@
 
 
 
+                                <!-- VOIR BOUTIQUE -->
+
                                 <a th:href="@{/produit/{id}(id=${product.id})}"
                                    target="_blank"
                                    class="zdadm-small-button">
@@ -1540,6 +1947,8 @@
                                 </a>
 
 
+
+                                <!-- SUPPRIMER -->
 
                                 <form th:action="@{/admin/produits/delete/{id}(id=${product.id})}"
                                       method="post"
