@@ -3,38 +3,49 @@ package com.mobilier.shop.config;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig
-        implements WebMvcConfigurer {
+                implements WebMvcConfigurer {
 
+        private final String uploadDir;
 
-    @Override
-    public void addResourceHandlers(
-            ResourceHandlerRegistry registry
-    ) {
+        public WebConfig(
+                        @Value("${app.upload-dir:uploads}") String uploadDir) {
 
-        Path uploadDirectory =
-                Paths.get("uploads")
-                        .toAbsolutePath()
-                        .normalize();
+                this.uploadDir = uploadDir;
+        }
 
+        @Override
+        public void addResourceHandlers(
+                        ResourceHandlerRegistry registry) {
 
-        String location =
-                uploadDirectory
-                        .toUri()
-                        .toString();
+                Path uploadDirectory = Paths.get(uploadDir)
+                                .toAbsolutePath()
+                                .normalize();
 
+                String location = uploadDirectory
+                                .toUri()
+                                .toString();
 
-        registry
-                .addResourceHandler(
-                        "/uploads/**"
-                )
-                .addResourceLocations(
-                        location
-                );
-    }
+                /*
+                 * Important pour Spring :
+                 * le chemin doit terminer par /
+                 */
+
+                if (!location.endsWith("/")) {
+
+                        location += "/";
+                }
+
+                registry
+                                .addResourceHandler(
+                                                "/uploads/**")
+                                .addResourceLocations(
+                                                location);
+        }
 }
