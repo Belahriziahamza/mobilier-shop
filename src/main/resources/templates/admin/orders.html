@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Commandes | Administration Zineb Déco
+    </title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}"
+          href="/css/style.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin.css}"
+          href="/css/admin.css">
+
+
+    <style>
+
+        /* =====================================================
+           RECHERCHE + FILTRES COMMANDES
+        ====================================================== */
+
+        .order-filter-section {
+
+            margin-top: 28px;
+
+            padding: 22px;
+
+            border:
+                1px solid #ddd3c5;
+
+            background:
+                #ffffff;
+        }
+
+
+        .order-filter-head {
+
+            margin-bottom: 18px;
+        }
+
+
+        .order-filter-head span {
+
+            display: block;
+
+            color: #a47822;
+
+            font-size: 7px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+
+        .order-filter-head h2 {
+
+            margin: 5px 0 0;
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size: 25px;
+
+            font-weight: 400;
+        }
+
+
+        .order-filter-form {
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(250px, 1fr)
+                minmax(190px, 260px)
+                auto
+                auto;
+
+            gap: 10px;
+
+            align-items: end;
+        }
+
+
+        .order-filter-field {
+
+            display: grid;
+
+            gap: 7px;
+        }
+
+
+        .order-filter-field label {
+
+            color: #6f675f;
+
+            font-size: 7px;
+
+            font-weight: 900;
+
+            letter-spacing: 0.7px;
+
+            text-transform: uppercase;
+        }
+
+
+        .order-filter-field input,
+        .order-filter-field select {
+
+            width: 100%;
+
+            min-height: 45px;
+
+            padding: 0 12px;
+
+            border:
+                1px solid #d6ccbe;
+
+            background:
+                #faf8f4;
+
+            color:
+                #29241e;
+
+            outline:
+                none;
+        }
+
+
+        .order-filter-field input:focus,
+        .order-filter-field select:focus {
+
+            border-color:
+                #b88627;
+
+            background:
+                #ffffff;
+        }
+
+
+        .order-filter-submit {
+
+            min-height: 45px;
+
+            padding: 0 18px;
+
+            border:
+                1px solid #080705;
+
+            background:
+                #080705;
+
+            color:
+                #d4a536;
+
+            font-size: 7px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+            cursor: pointer;
+        }
+
+
+        .order-filter-submit:hover {
+
+            border-color:
+                #d4a536;
+
+            background:
+                #d4a536;
+
+            color:
+                #080705;
+        }
+
+
+        .order-filter-reset {
+
+            min-height: 45px;
+
+            padding: 0 17px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border:
+                1px solid #cfc4b6;
+
+            background:
+                #ffffff;
+
+            color:
+                #625b53;
+
+            font-size: 7px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+        }
+
+
+        .order-filter-reset:hover {
+
+            border-color:
+                #080705;
+
+            color:
+                #080705;
+        }
+
+
+        /* =====================================================
+           RESULTATS
+        ====================================================== */
+
+        .order-results-info {
+
+            margin-top: 14px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            color:
+                #837a70;
+
+            font-size:
+                8px;
+        }
+
+
+        .order-results-info strong {
+
+            color:
+                #a47822;
+        }
+
+
+        /* =====================================================
+           STATS STATUTS
+        ====================================================== */
+
+        .order-status-grid {
+
+            margin-top: 20px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    6,
+                    minmax(0, 1fr)
+                );
+
+            gap: 10px;
+        }
+
+
+        .order-status-card {
+
+            min-height: 100px;
+
+            padding: 15px;
+
+            display: block;
+
+            border:
+                1px solid #ddd3c5;
+
+            background:
+                #ffffff;
+        }
+
+
+        .order-status-card:hover {
+
+            border-color:
+                #b88627;
+        }
+
+
+        .order-status-card span {
+
+            display: block;
+
+            color:
+                #817970;
+
+            font-size:
+                7px;
+
+            font-weight:
+                900;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .order-status-card strong {
+
+            display: block;
+
+            margin-top:
+                12px;
+
+            color:
+                #a47822;
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size:
+                27px;
+
+            font-weight:
+                400;
+        }
+
+
+        .order-status-card.selected {
+
+            border-color:
+                #080705;
+
+            background:
+                #080705;
+        }
+
+
+        .order-status-card.selected span {
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.55
+                );
+        }
+
+
+        .order-status-card.selected strong {
+
+            color:
+                #d4a536;
+        }
+
+
+        /* =====================================================
+           CLIENT
+        ====================================================== */
+
+        .order-customer-name {
+
+            display: block;
+
+            color:
+                #29241e;
+
+            font-weight:
+                800;
+        }
+
+
+        .order-customer-email {
+
+            display: block;
+
+            margin-top:
+                3px;
+
+            color:
+                #91887f;
+
+            font-size:
+                8px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1150px) {
+
+            .order-status-grid {
+
+                grid-template-columns:
+                    repeat(
+                        3,
+                        1fr
+                    );
+            }
+
+
+            .order-filter-form {
+
+                grid-template-columns:
+                    1fr
+                    1fr;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .order-filter-form {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .order-status-grid {
+
+                grid-template-columns:
+                    repeat(
+                        2,
+                        1fr
+                    );
+            }
+
+
+            .order-filter-submit,
+            .order-filter-reset {
+
+                width:
+                    100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="zdadm-shell">
+
+
+    <!-- =====================================================
+         SIDEBAR ADMIN UNIQUE
+    ====================================================== -->
+
+    <div th:replace="~{fragments/admin-sidebar :: sidebar('commandes')}"></div>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="zdadm-main">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="zdadm-header">
+
+
+            <div>
+
+
+                <span class="zdadm-kicker">
+                    ADMINISTRATION / COMMANDES
+                </span>
+
+
+                <h1>
+                    Commandes clients
+                </h1>
+
+
+                <p>
+
+                    Recherchez une commande,
+                    filtrez par statut et consultez
+                    rapidement les informations
+                    de chaque client.
+
+                </p>
+
+
+            </div>
+
+
+            <a th:href="@{/admin}"
+               href="/admin"
+               class="zdadm-primary-button">
+
+                ← Tableau de bord
+
+            </a>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             ALERTES
+        ================================================== -->
+
+        <div th:if="${success}"
+             class="zdadm-alert success"
+             th:text="${success}">
+        </div>
+
+
+        <div th:if="${error}"
+             class="zdadm-alert error"
+             th:text="${error}">
+        </div>
+
+
+
+        <!-- =================================================
+             STAT PRINCIPALE
+        ================================================== -->
+
+        <section class="zdadm-stats">
+
+
+            <article class="zdadm-stat dark">
+
+
+                <span class="zdadm-stat-label">
+                    TOTAL COMMANDES
+                </span>
+
+
+                <strong class="zdadm-stat-value"
+                        th:text="${totalOrders}">
+
+                    0
+
+                </strong>
+
+
+            </article>
+
+
+
+            <article class="zdadm-stat">
+
+
+                <span class="zdadm-stat-label">
+                    RÉSULTATS AFFICHÉS
+                </span>
+
+
+                <strong class="zdadm-stat-value"
+                        th:text="${resultCount}">
+
+                    0
+
+                </strong>
+
+
+            </article>
+
+
+
+            <article class="zdadm-stat gold">
+
+
+                <span class="zdadm-stat-label">
+                    NOUVELLES COMMANDES
+                </span>
+
+
+                <strong class="zdadm-stat-value"
+                        th:text="${newOrders}">
+
+                    0
+
+                </strong>
+
+
+            </article>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             RECHERCHE
+        ================================================== -->
+
+        <section class="order-filter-section">
+
+
+            <div class="order-filter-head">
+
+
+                <span>
+                    RECHERCHE & FILTRES
+                </span>
+
+
+                <h2>
+                    Trouver une commande
+                </h2>
+
+
+            </div>
+
+
+
+            <form th:action="@{/admin/commandes}"
+                  action="/admin/commandes"
+                  method="get"
+                  class="order-filter-form">
+
+
+                <!-- RECHERCHE -->
+
+                <div class="order-filter-field">
+
+
+                    <label for="search">
+                        Recherche
+                    </label>
+
+
+                    <input
+                        id="search"
+
+                        name="search"
+
+                        type="search"
+
+                        th:value="${search}"
+
+                        placeholder="Nom, email, téléphone, ville ou N° commande">
+
+                </div>
+
+
+
+                <!-- STATUT -->
+
+                <div class="order-filter-field">
+
+
+                    <label for="status">
+                        Statut
+                    </label>
+
+
+                    <select id="status"
+                            name="status">
+
+
+                        <option value="">
+                            Tous les statuts
+                        </option>
+
+
+                        <option value="NOUVELLE"
+                                th:selected="${selectedStatus == 'NOUVELLE'}">
+
+                            Nouvelle
+
+                        </option>
+
+
+                        <option value="CONFIRMEE"
+                                th:selected="${selectedStatus == 'CONFIRMEE'}">
+
+                            Confirmée
+
+                        </option>
+
+
+                        <option value="EN_FABRICATION"
+                                th:selected="${selectedStatus == 'EN_FABRICATION'}">
+
+                            En fabrication
+
+                        </option>
+
+
+                        <option value="PRETE"
+                                th:selected="${selectedStatus == 'PRETE'}">
+
+                            Prête
+
+                        </option>
+
+
+                        <option value="LIVREE"
+                                th:selected="${selectedStatus == 'LIVREE'}">
+
+                            Livrée
+
+                        </option>
+
+
+                        <option value="ANNULEE"
+                                th:selected="${selectedStatus == 'ANNULEE'}">
+
+                            Annulée
+
+                        </option>
+
+
+                    </select>
+
+
+                </div>
+
+
+
+                <!-- RECHERCHER -->
+
+                <button type="submit"
+                        class="order-filter-submit">
+
+                    Rechercher
+
+                </button>
+
+
+
+                <!-- RESET -->
+
+                <a th:href="@{/admin/commandes}"
+                   href="/admin/commandes"
+                   class="order-filter-reset">
+
+                    Réinitialiser
+
+                </a>
+
+
+            </form>
+
+
+
+            <!-- RESULTATS -->
+
+            <div class="order-results-info">
+
+
+                <span>
+
+                    <strong th:text="${resultCount}">
+                        0
+                    </strong>
+
+                    résultat(s)
+
+                </span>
+
+
+                <span th:if="${search != null and !#strings.isEmpty(search)}">
+
+                    Recherche :
+
+                    <strong th:text="${search}">
+                        client
+                    </strong>
+
+                </span>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             FILTRES RAPIDES PAR STATUT
+        ================================================== -->
+
+        <section class="order-status-grid">
+
+
+            <!-- NOUVELLES -->
+
+            <a th:href="@{/admin/commandes(status='NOUVELLE',search=${search})}"
+
+               class="order-status-card"
+
+               th:classappend="${selectedStatus == 'NOUVELLE'} ? ' selected' : ''">
+
+
+                <span>
+                    Nouvelles
+                </span>
+
+
+                <strong th:text="${newOrders}">
+                    0
+                </strong>
+
+
+            </a>
+
+
+
+            <!-- CONFIRMEES -->
+
+            <a th:href="@{/admin/commandes(status='CONFIRMEE',search=${search})}"
+
+               class="order-status-card"
+
+               th:classappend="${selectedStatus == 'CONFIRMEE'} ? ' selected' : ''">
+
+
+                <span>
+                    Confirmées
+                </span>
+
+
+                <strong th:text="${confirmedOrders}">
+                    0
+                </strong>
+
+
+            </a>
+
+
+
+            <!-- FABRICATION -->
+
+            <a th:href="@{/admin/commandes(status='EN_FABRICATION',search=${search})}"
+
+               class="order-status-card"
+
+               th:classappend="${selectedStatus == 'EN_FABRICATION'} ? ' selected' : ''">
+
+
+                <span>
+                    En fabrication
+                </span>
+
+
+                <strong th:text="${manufacturingOrders}">
+                    0
+                </strong>
+
+
+            </a>
+
+
+
+            <!-- PRETES -->
+
+            <a th:href="@{/admin/commandes(status='PRETE',search=${search})}"
+
+               class="order-status-card"
+
+               th:classappend="${selectedStatus == 'PRETE'} ? ' selected' : ''">
+
+
+                <span>
+                    Prêtes
+                </span>
+
+
+                <strong th:text="${readyOrders}">
+                    0
+                </strong>
+
+
+            </a>
+
+
+
+            <!-- LIVREES -->
+
+            <a th:href="@{/admin/commandes(status='LIVREE',search=${search})}"
+
+               class="order-status-card"
+
+               th:classappend="${selectedStatus == 'LIVREE'} ? ' selected' : ''">
+
+
+                <span>
+                    Livrées
+                </span>
+
+
+                <strong th:text="${deliveredOrders}">
+                    0
+                </strong>
+
+
+            </a>
+
+
+
+            <!-- ANNULEES -->
+
+            <a th:href="@{/admin/commandes(status='ANNULEE',search=${search})}"
+
+               class="order-status-card"
+
+               th:classappend="${selectedStatus == 'ANNULEE'} ? ' selected' : ''">
+
+
+                <span>
+                    Annulées
+                </span>
+
+
+                <strong th:text="${cancelledOrders}">
+                    0
+                </strong>
+
+
+            </a>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             LISTE COMMANDES
+        ================================================== -->
+
+        <section class="zdadm-section">
+
+
+            <div class="zdadm-section-head">
+
+
+                <div>
+
+
+                    <small>
+                        COMMANDES
+                    </small>
+
+
+                    <h2>
+                        Résultats
+                    </h2>
+
+
+                </div>
+
+
+                <strong th:text="${resultCount + ' commande(s)'}">
+
+                    0 commande(s)
+
+                </strong>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 AUCUN RESULTAT
+            ================================================== -->
+
+            <div
+                th:if="${orders == null or #lists.isEmpty(orders)}"
+
+                class="zdadm-empty">
+
+
+                <strong>
+                    Aucune commande trouvée
+                </strong>
+
+
+                <p>
+
+                    Modifiez votre recherche
+                    ou réinitialisez les filtres.
+
+                </p>
+
+
+                <a th:href="@{/admin/commandes}"
+                   href="/admin/commandes"
+                   class="zdadm-primary-button"
+                   style="margin-top:15px;">
+
+                    Réinitialiser
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TABLE
+            ================================================== -->
+
+            <div
+                th:if="${orders != null and !#lists.isEmpty(orders)}"
+
+                class="zdadm-table-wrapper">
+
+
+                <table class="zdadm-table">
+
+
+                    <thead>
+
+
+                    <tr>
+
+
+                        <th>
+                            Commande
+                        </th>
+
+
+                        <th>
+                            Client
+                        </th>
+
+
+                        <th>
+                            Téléphone
+                        </th>
+
+
+                        <th>
+                            Ville
+                        </th>
+
+
+                        <th>
+                            Date
+                        </th>
+
+
+                        <th>
+                            Total
+                        </th>
+
+
+                        <th>
+                            Statut
+                        </th>
+
+
+                        <th>
+                            Action
+                        </th>
+
+
+                    </tr>
+
+
+                    </thead>
+
+
+
+                    <tbody>
+
+
+                    <tr th:each="order : ${orders}">
+
+
+                        <!-- ID -->
+
+                        <td>
+
+
+                            <strong
+                                class="zdadm-id"
+
+                                th:text="${'#' + order.id}">
+
+                                #1
+
+                            </strong>
+
+
+                        </td>
+
+
+
+                        <!-- CLIENT -->
+
+                        <td>
+
+
+                            <strong
+                                class="order-customer-name"
+
+                                th:text="${order.customerName}">
+
+                                Client
+
+                            </strong>
+
+
+                            <span
+                                class="order-customer-email"
+
+                                th:if="${order.customerEmail != null and !#strings.isEmpty(order.customerEmail)}"
+
+                                th:text="${order.customerEmail}">
+
+                                client@email.com
+
+                            </span>
+
+
+                        </td>
+
+
+
+                        <!-- TELEPHONE -->
+
+                        <td th:text="${order.phone}">
+                            +212...
+                        </td>
+
+
+
+                        <!-- VILLE -->
+
+                        <td>
+
+
+                            <span
+                                th:if="${order.city != null and !#strings.isEmpty(order.city)}"
+
+                                th:text="${order.city}">
+
+                                Casablanca
+
+                            </span>
+
+
+                            <span
+                                th:if="${order.city == null or #strings.isEmpty(order.city)}">
+
+                                —
+
+                            </span>
+
+
+                        </td>
+
+
+
+                        <!-- DATE -->
+
+                        <td>
+
+
+                            <span
+                                th:text="${#temporals.format(order.createdAt, 'dd/MM/yyyy')}">
+
+                                21/08/2026
+
+                            </span>
+
+
+                        </td>
+
+
+
+                        <!-- TOTAL -->
+
+                        <td>
+
+
+                            <strong class="zdadm-money">
+
+
+                                <span th:text="${order.totalAmount}">
+                                    0
+                                </span>
+
+                                DH
+
+
+                            </strong>
+
+
+                        </td>
+
+
+
+                        <!-- STATUT -->
+
+                        <td>
+
+
+                            <span
+                                class="zdadm-status"
+
+                                th:classappend="${
+                                    ' zdadm-status-' +
+                                    #strings.toLowerCase(order.status)
+                                }"
+
+                                th:text="${
+                                    order.status == 'NOUVELLE'
+                                        ? 'Nouvelle'
+                                    : order.status == 'CONFIRMEE'
+                                        ? 'Confirmée'
+                                    : order.status == 'EN_FABRICATION'
+                                        ? 'En fabrication'
+                                    : order.status == 'PRETE'
+                                        ? 'Prête'
+                                    : order.status == 'LIVREE'
+                                        ? 'Livrée'
+                                    : order.status == 'ANNULEE'
+                                        ? 'Annulée'
+                                    : order.status
+                                }">
+
+                                Nouvelle
+
+                            </span>
+
+
+                        </td>
+
+
+
+                        <!-- ACTION -->
+
+                        <td>
+
+
+                            <a
+                                th:href="@{/admin/commandes/{id}(id=${order.id})}"
+
+                                class="zdadm-small-button">
+
+                                Détail →
+
+                            </a>
+
+
+                        </td>
+
+
+                    </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Détail client | Zineb Déco
+    </title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin.css}">
+
+</head>
+
+
+<body>
+
+
+<div class="zdadm-shell">
+
+
+    <div th:replace="~{fragments/admin-sidebar :: sidebar('clients')}"></div>
+
+
+
+    <main class="zdadm-main">
+
+
+        <header class="zdadm-header">
+
+
+            <div>
+
+                <span class="zdadm-kicker">
+                    ADMINISTRATION / CLIENTS
+                </span>
+
+
+                <h1>
+
+                    Client
+
+                    <span th:text="${'#' + customer.id}">
+                        #1
+                    </span>
+
+                </h1>
+
+
+                <p>
+                    Informations et historique
+                    des commandes du client.
+                </p>
+
+            </div>
+
+
+            <a th:href="@{/admin/clients}"
+               class="zdadm-primary-button">
+
+                ← Tous les clients
+
+            </a>
+
+
+        </header>
+
+
+
+        <section class="zdadm-stats four">
+
+
+            <article class="zdadm-stat dark">
+
+                <span class="zdadm-stat-label">
+                    TOTAL DÉPENSÉ
+                </span>
+
+                <strong class="zdadm-stat-value">
+
+                    <span th:text="${totalSpent}">
+                        0
+                    </span>
+
+                    <small style="font-size:13px;">
+                        DH
+                    </small>
+
+                </strong>
+
+            </article>
+
+
+            <article class="zdadm-stat">
+
+                <span class="zdadm-stat-label">
+                    COMMANDES
+                </span>
+
+                <strong class="zdadm-stat-value"
+                        th:text="${totalOrders}">
+                    0
+                </strong>
+
+            </article>
+
+
+            <article class="zdadm-stat">
+
+                <span class="zdadm-stat-label">
+                    EN COURS
+                </span>
+
+                <strong class="zdadm-stat-value"
+                        th:text="${activeOrders}">
+                    0
+                </strong>
+
+            </article>
+
+
+            <article class="zdadm-stat">
+
+                <span class="zdadm-stat-label">
+                    LIVRÉES
+                </span>
+
+                <strong class="zdadm-stat-value"
+                        th:text="${deliveredOrders}">
+                    0
+                </strong>
+
+            </article>
+
+
+        </section>
+
+
+
+        <div class="zdadm-detail-grid">
+
+
+            <!-- PROFIL -->
+
+            <section class="zdadm-card">
+
+
+                <div class="zdadm-card-head">
+
+                    <small>
+                        PROFIL
+                    </small>
+
+                    <h2>
+                        Informations
+                    </h2>
+
+                </div>
+
+
+                <div class="zdadm-info">
+
+
+                    <div class="zdadm-info-row">
+
+                        <span>
+                            Nom complet
+                        </span>
+
+                        <strong th:text="${customer.firstName + ' ' + customer.lastName}">
+                            Client
+                        </strong>
+
+                    </div>
+
+
+                    <div class="zdadm-info-row">
+
+                        <span>
+                            Email
+                        </span>
+
+                        <strong th:text="${customer.email}">
+                            email
+                        </strong>
+
+                    </div>
+
+
+                    <div class="zdadm-info-row">
+
+                        <span>
+                            Téléphone
+                        </span>
+
+                        <strong th:text="${customer.phone}">
+                            téléphone
+                        </strong>
+
+                    </div>
+
+
+                    <div class="zdadm-info-row">
+
+                        <span>
+                            Ville
+                        </span>
+
+                        <strong th:text="${customer.city != null and !#strings.isEmpty(customer.city) ? customer.city : 'Non renseignée'}">
+                            Ville
+                        </strong>
+
+                    </div>
+
+
+                    <div class="zdadm-info-row">
+
+                        <span>
+                            Adresse
+                        </span>
+
+                        <strong th:text="${customer.address != null and !#strings.isEmpty(customer.address) ? customer.address : 'Non renseignée'}">
+                            Adresse
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- COMMANDES -->
+
+            <section class="zdadm-card">
+
+
+                <div class="zdadm-card-head">
+
+                    <small>
+                        HISTORIQUE
+                    </small>
+
+                    <h2>
+                        Commandes du client
+                    </h2>
+
+                </div>
+
+
+
+                <div th:if="${orders == null or #lists.isEmpty(orders)}"
+                     class="zdadm-empty">
+
+                    <strong>
+                        Aucune commande
+                    </strong>
+
+                </div>
+
+
+
+                <div th:if="${orders != null and !#lists.isEmpty(orders)}"
+                     class="zdadm-table-wrapper">
+
+
+                    <table class="zdadm-table">
+
+
+                        <thead>
+
+                        <tr>
+
+                            <th>Commande</th>
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Statut</th>
+                            <th>Action</th>
+
+                        </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                        <tr th:each="order : ${orders}">
+
+
+                            <td>
+
+                                <strong class="zdadm-id"
+                                        th:text="${'#' + order.id}">
+                                    #1
+                                </strong>
+
+                            </td>
+
+
+                            <td th:text="${#temporals.format(order.createdAt, 'dd/MM/yyyy')}">
+                                21/08/2026
+                            </td>
+
+
+                            <td>
+
+                                <strong class="zdadm-money">
+
+                                    <span th:text="${order.totalAmount}">
+                                        0
+                                    </span>
+
+                                    DH
+
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="zdadm-status"
+                                      th:classappend="${' zdadm-status-' + #strings.toLowerCase(order.status)}"
+                                      th:text="${order.status}">
+                                    NOUVELLE
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <a th:href="@{/admin/commandes/{id}(id=${order.id})}"
+                                   class="zdadm-small-button">
+
+                                    Voir →
+
+                                </a>
+
+                            </td>
+
+
+                        </tr>
+
+
+                        </tbody>
+
+
+                    </table>
+
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+</body>
+
+</html>

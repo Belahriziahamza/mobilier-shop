@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Tissus | Zineb Déco</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}"
+          href="/css/style.css">
+
+
+    <style>
+
+        .fabrics-page {
+            padding: 65px 0 90px;
+            background: #f6f3ee;
+        }
+
+
+        .fabrics-header {
+            max-width: 850px;
+            margin-bottom: 42px;
+        }
+
+
+        .fabrics-label {
+            display: block;
+
+            color: #ad7d23;
+
+            font-size: 9px;
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+        }
+
+
+        .fabrics-header h1 {
+            margin: 10px 0 15px;
+
+            color: #17130f;
+
+            font-family: Georgia, serif;
+            font-size: clamp(44px, 6vw, 70px);
+            font-weight: 400;
+
+            line-height: 1;
+        }
+
+
+        .fabrics-header h1 span {
+            color: #b88727;
+            font-style: italic;
+        }
+
+
+        .fabrics-header p {
+            max-width: 680px;
+
+            margin: 0;
+
+            color: #776f65;
+
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+
+
+        /* =============================================
+           GRID
+        ============================================= */
+
+        .fabrics-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 18px;
+        }
+
+
+
+        /* =============================================
+           CARD
+        ============================================= */
+
+        .fabric-public-card {
+            overflow: hidden;
+
+            border: 1px solid #ddd4c8;
+
+            background: #ffffff;
+
+            transition:
+                transform .25s ease,
+                border-color .25s ease,
+                box-shadow .25s ease;
+        }
+
+
+        .fabric-public-card:hover {
+            transform: translateY(-5px);
+
+            border-color: #b88727;
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,.07);
+        }
+
+
+
+        /* =============================================
+           IMAGE
+        ============================================= */
+
+        .fabric-public-image {
+            height: 210px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e6ded2,
+                    #cfc2b0
+                );
+        }
+
+
+        .fabric-public-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+
+        .fabric-placeholder {
+            color: #a57c32;
+
+            font-family: Georgia, serif;
+            font-size: 45px;
+        }
+
+
+
+        /* =============================================
+           INFORMATION
+        ============================================= */
+
+        .fabric-public-content {
+            padding: 20px;
+        }
+
+
+        .fabric-reference {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #b07c1d;
+
+            font-size: 7px;
+            font-weight: 900;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+
+        .fabric-public-content h2 {
+            margin: 0;
+
+            color: #241f19;
+
+            font-family: Georgia, serif;
+            font-size: 23px;
+            font-weight: 400;
+        }
+
+
+        .fabric-public-content p {
+            min-height: 43px;
+
+            margin: 10px 0 0;
+
+            color: #81786e;
+
+            font-size: 10px;
+            line-height: 1.7;
+        }
+
+
+
+        /* =============================================
+           CTA
+        ============================================= */
+
+        .fabric-cta {
+            margin-top: 45px;
+
+            padding: 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 25px;
+
+            background: #15120f;
+
+            color: #ffffff;
+        }
+
+
+        .fabric-cta span {
+            color: #d2a33f;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+
+        .fabric-cta h2 {
+            margin: 7px 0 0;
+
+            font-family: Georgia, serif;
+            font-size: 29px;
+            font-weight: 400;
+        }
+
+
+        .fabric-cta a {
+            min-height: 47px;
+
+            padding: 0 20px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            background: #d2a33f;
+
+            color: #15120f;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            text-decoration: none;
+
+            text-transform: uppercase;
+
+            transition: .2s ease;
+        }
+
+
+        .fabric-cta a:hover {
+            background: #ffffff;
+        }
+
+
+
+        /* =============================================
+           EMPTY
+        ============================================= */
+
+        .fabrics-empty {
+            grid-column: 1 / -1;
+
+            padding: 60px 25px;
+
+            border: 1px dashed #d3c9bc;
+
+            background: #ffffff;
+
+            color: #877d72;
+
+            text-align: center;
+        }
+
+
+
+        /* =============================================
+           RESPONSIVE
+        ============================================= */
+
+        @media (max-width: 1050px) {
+
+            .fabrics-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .fabrics-page {
+                padding: 40px 0 60px;
+            }
+
+
+            .fabrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .fabric-cta {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+
+
+<main>
+
+
+<section class="fabrics-page">
+
+
+<div class="container">
+
+
+    <!-- =============================================
+         HEADER
+    ============================================== -->
+
+    <header class="fabrics-header">
+
+        <span class="fabrics-label">
+            MATIÈRES & FINITIONS
+        </span>
+
+        <h1>
+            Nos
+            <span>tissus.</span>
+        </h1>
+
+        <p>
+            Découvrez notre sélection de tissus pour
+            salons, canapés, fauteuils et mobilier sur mesure.
+            Les références disponibles sont gérées directement
+            par Zineb Déco.
+        </p>
+
+    </header>
+
+
+
+    <!-- =============================================
+         TISSUS MYSQL
+    ============================================== -->
+
+    <div class="fabrics-grid">
+
+
+        <article class="fabric-public-card"
+                 th:each="fabric : ${fabrics}">
+
+
+            <!-- IMAGE -->
+
+            <div class="fabric-public-image">
+
+
+                <img th:if="${fabric.imagePath != null
+                            and !#strings.isEmpty(fabric.imagePath)}"
+
+                     th:src="${fabric.imagePath}"
+
+                     th:alt="${fabric.name}">
+
+
+                <span class="fabric-placeholder"
+                      th:if="${fabric.imagePath == null
+                             or #strings.isEmpty(fabric.imagePath)}">
+
+                    T
+
+                </span>
+
+
+            </div>
+
+
+
+            <!-- INFO -->
+
+            <div class="fabric-public-content">
+
+
+                <span class="fabric-reference"
+                      th:if="${fabric.referenceCode != null
+                             and !#strings.isEmpty(fabric.referenceCode)}"
+
+                      th:text="${fabric.referenceCode}">
+
+                    TIS-001
+
+                </span>
+
+
+                <h2 th:text="${fabric.name}">
+                    Velours
+                </h2>
+
+
+                <p th:if="${fabric.description != null
+                           and !#strings.isEmpty(fabric.description)}"
+
+                   th:text="${fabric.description}">
+
+                    Description du tissu.
+
+                </p>
+
+
+                <p th:if="${fabric.description == null
+                           or #strings.isEmpty(fabric.description)}">
+
+                    Disponible pour vos créations
+                    et projets sur mesure.
+
+                </p>
+
+
+            </div>
+
+
+        </article>
+
+
+
+        <!-- AUCUN TISSU -->
+
+        <div class="fabrics-empty"
+             th:if="${fabrics == null || #lists.isEmpty(fabrics)}">
+
+            Aucun tissu disponible actuellement.
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =============================================
+         SUR MESURE
+    ============================================== -->
+
+    <section class="fabric-cta">
+
+
+        <div>
+
+            <span>
+                VOTRE PROJET
+            </span>
+
+            <h2>
+                Trouvez le tissu idéal pour votre mobilier.
+            </h2>
+
+        </div>
+
+
+        <a th:href="@{/sur-mesure}"
+           href="/sur-mesure">
+
+            Configurer mon projet →
+
+        </a>
+
+
+    </section>
+
+
+</div>
+
+
+</section>
+
+
+</main>
+
+
+
+<!-- FOOTER -->
+
+<div th:replace="~{fragments/site-footer :: footer}"></div>
+
+
+<script th:src="@{/js/main.js}"
+        src="/js/main.js"
+        defer>
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1299 @@
+/* =========================================================
+   ZINEB DECO - ADMIN COMMUN
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.zdadm-shell {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 245px minmax(0, 1fr);
+
+    background: #f3eee5;
+    color: #29241e;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.zdadm-shell a {
+    text-decoration: none;
+}
+
+.zdadm-shell button,
+.zdadm-shell input,
+.zdadm-shell textarea,
+.zdadm-shell select {
+    font: inherit;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.zdadm-sidebar {
+    width: 245px;
+    min-width: 245px;
+
+    height: 100vh;
+
+    position: sticky;
+    top: 0;
+
+    padding: 28px 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            #080705,
+            #151008
+        );
+
+    color: white;
+
+    z-index: 100;
+}
+
+
+/* LOGO */
+
+.zdadm-logo {
+    width: 66px;
+    height: 66px;
+
+    min-width: 66px;
+    min-height: 66px;
+
+    max-width: 66px;
+    max-height: 66px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 66px;
+
+    overflow: hidden;
+
+    border: 1px solid #d4a536;
+    border-radius: 50%;
+
+    background: #080705;
+}
+
+.zdadm-logo img {
+    width: 100% !important;
+    height: 100% !important;
+
+    max-width: 66px !important;
+    max-height: 66px !important;
+
+    padding: 4px;
+
+    object-fit: contain;
+}
+
+
+/* BRAND */
+
+.zdadm-brand {
+    width: 100%;
+
+    margin-top: 20px;
+}
+
+.zdadm-brand span {
+    display: block;
+
+    color: #d4a536;
+
+    font-size: 8px;
+    font-weight: 900;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+}
+
+.zdadm-brand strong {
+    display: block;
+
+    margin-top: 5px;
+
+    color: white;
+
+    font-family: Georgia, serif;
+
+    font-size: 22px;
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.zdadm-nav {
+    width: 100%;
+
+    margin: 38px 0 25px;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    flex: 0 0 auto;
+}
+
+.zdadm-nav > a {
+    width: 100%;
+
+    height: 54px;
+    min-height: 54px;
+
+    margin: 0;
+    padding: 0 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    flex: 0 0 54px;
+
+    border: 0;
+    border-left: 3px solid transparent;
+
+    background: transparent;
+
+    color: rgba(255, 255, 255, 0.70);
+
+    font-size: 9px;
+    font-weight: 900;
+
+    text-transform: uppercase;
+
+    opacity: 1;
+    visibility: visible;
+
+    transition: 0.2s ease;
+}
+
+.zdadm-nav > a:hover {
+    border-left-color:
+        rgba(
+            212,
+            165,
+            54,
+            0.60
+        );
+
+    background:
+        rgba(
+            212,
+            165,
+            54,
+            0.07
+        );
+
+    color: white;
+}
+
+.zdadm-nav > a.active {
+    border-left-color: #d4a536;
+
+    background:
+        rgba(
+            212,
+            165,
+            54,
+            0.13
+        );
+
+    color: #d4a536;
+}
+
+
+/* =========================================================
+   SIDEBAR BOTTOM
+========================================================= */
+
+.zdadm-bottom {
+    width: 100%;
+
+    margin-top: auto;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.10
+        );
+}
+
+.zdadm-shop {
+    width: 100%;
+
+    min-height: 42px;
+
+    margin-bottom: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid
+        rgba(
+            212,
+            165,
+            54,
+            0.50
+        );
+
+    color: #d4a536;
+
+    font-size: 8px;
+    font-weight: 900;
+
+    text-transform: uppercase;
+}
+
+.zdadm-shop:hover {
+    background:
+        rgba(
+            212,
+            165,
+            54,
+            0.08
+        );
+}
+
+.zdadm-bottom form {
+    width: 100%;
+    margin: 0;
+}
+
+.zdadm-logout {
+    width: 100%;
+
+    min-height: 42px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.20
+        );
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 8px;
+    font-weight: 900;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+}
+
+.zdadm-logout:hover {
+    border-color: #d4a536;
+
+    color: #d4a536;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.zdadm-main {
+    min-width: 0;
+
+    padding:
+        38px
+        42px
+        70px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.zdadm-header {
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+.zdadm-kicker {
+    color: #a47822;
+
+    font-size: 9px;
+    font-weight: 900;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+}
+
+.zdadm-header h1 {
+    margin: 7px 0 0;
+
+    font-family: Georgia, serif;
+
+    font-size:
+        clamp(
+            38px,
+            5vw,
+            58px
+        );
+
+    line-height: 1;
+
+    font-weight: 400;
+}
+
+.zdadm-header h1 span {
+    color: #a47822;
+}
+
+.zdadm-header p {
+    max-width: 650px;
+
+    margin-top: 12px;
+
+    color: #837a70;
+
+    font-size: 10px;
+
+    line-height: 1.7;
+}
+
+.zdadm-primary-button {
+    min-height: 44px;
+
+    padding: 0 17px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #080705;
+
+    background: #080705;
+
+    color: #d4a536;
+
+    font-size: 8px;
+    font-weight: 900;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+}
+
+.zdadm-primary-button:hover {
+    border-color: #d4a536;
+
+    background: #d4a536;
+
+    color: #080705;
+}
+
+
+/* =========================================================
+   ALERTES
+========================================================= */
+
+.zdadm-alert {
+    margin-top: 24px;
+
+    padding: 13px 16px;
+
+    border: 1px solid;
+
+    font-size: 9px;
+}
+
+.zdadm-alert.success {
+    border-color: #9fb695;
+    background: #edf5e9;
+    color: #42603b;
+}
+
+.zdadm-alert.error {
+    border-color: #d2a0a0;
+    background: #fff0f0;
+    color: #933636;
+}
+
+
+/* =========================================================
+   STATISTIQUES
+========================================================= */
+
+.zdadm-stats {
+    margin-top: 32px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+    gap: 15px;
+}
+
+.zdadm-stats.four {
+    grid-template-columns:
+        repeat(
+            4,
+            minmax(0, 1fr)
+        );
+}
+
+.zdadm-stat {
+    min-height: 135px;
+
+    padding: 22px;
+
+    border: 1px solid #ddd3c5;
+
+    background: white;
+}
+
+.zdadm-stat.dark {
+    border-color: #080705;
+
+    background: #080705;
+
+    color: white;
+}
+
+.zdadm-stat.gold {
+    border-color: #b98a2c;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c79a3a,
+            #e2bc62
+        );
+
+    color: #080705;
+}
+
+.zdadm-stat-label {
+    display: block;
+
+    color: #8b8278;
+
+    font-size: 7px;
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+}
+
+.zdadm-stat.dark .zdadm-stat-label {
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.48
+        );
+}
+
+.zdadm-stat.gold .zdadm-stat-label {
+    color:
+        rgba(
+            8,
+            7,
+            5,
+            0.60
+        );
+}
+
+.zdadm-stat-value {
+    display: block;
+
+    margin-top: 14px;
+
+    color: #a47822;
+
+    font-family: Georgia, serif;
+
+    font-size: 38px;
+    font-weight: 400;
+}
+
+.zdadm-stat.dark .zdadm-stat-value {
+    color: #d4a536;
+}
+
+.zdadm-stat.gold .zdadm-stat-value {
+    color: #080705;
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.zdadm-section {
+    margin-top: 28px;
+
+    border: 1px solid #ddd3c5;
+
+    background: white;
+}
+
+.zdadm-section-head {
+    padding: 22px 24px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    border-bottom:
+        1px solid #e8e0d6;
+}
+
+.zdadm-section-head small {
+    display: block;
+
+    color: #a47822;
+
+    font-size: 7px;
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.zdadm-section-head h2 {
+    margin: 5px 0 0;
+
+    font-family: Georgia, serif;
+
+    font-size: 27px;
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.zdadm-table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+.zdadm-table {
+    width: 100%;
+
+    min-width: 800px;
+
+    border-collapse: collapse;
+}
+
+.zdadm-table th {
+    padding: 13px 16px;
+
+    background: #f5f0e8;
+
+    color: #817970;
+
+    text-align: left;
+
+    font-size: 7px;
+    font-weight: 900;
+
+    letter-spacing: 0.8px;
+
+    text-transform: uppercase;
+
+    border-bottom:
+        1px solid #ddd3c5;
+}
+
+.zdadm-table td {
+    padding: 16px;
+
+    vertical-align: middle;
+
+    font-size: 9px;
+
+    border-bottom:
+        1px solid #eee7de;
+}
+
+.zdadm-table tbody tr:hover {
+    background: #fbf8f3;
+}
+
+.zdadm-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.zdadm-id {
+    color: #a47822;
+
+    font-family: Georgia, serif;
+
+    font-size: 16px;
+}
+
+.zdadm-money {
+    color: #a47822;
+
+    font-family: Georgia, serif;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.zdadm-status {
+    padding: 6px 9px;
+
+    display: inline-flex;
+
+    font-size: 7px;
+    font-weight: 900;
+
+    text-transform: uppercase;
+}
+
+.zdadm-status-nouvelle {
+    background: #eee4ce;
+    color: #866219;
+}
+
+.zdadm-status-confirmee {
+    background: #e0eaf6;
+    color: #365e8d;
+}
+
+.zdadm-status-en_fabrication {
+    background: #f1e2ca;
+    color: #91601d;
+}
+
+.zdadm-status-prete {
+    background: #e2efe1;
+    color: #467247;
+}
+
+.zdadm-status-livree {
+    background: #dcefe3;
+    color: #2f6a41;
+}
+
+.zdadm-status-annulee {
+    background: #f3dddd;
+    color: #963939;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.zdadm-empty {
+    padding: 55px 25px;
+
+    text-align: center;
+}
+
+.zdadm-empty strong {
+    display: block;
+
+    font-family: Georgia, serif;
+
+    font-size: 27px;
+    font-weight: 400;
+}
+
+.zdadm-empty p {
+    color: #817970;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   DETAIL GRID
+========================================================= */
+
+.zdadm-detail-grid {
+    margin-top: 25px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(300px, 0.65fr)
+        minmax(0, 1.35fr);
+
+    gap: 22px;
+
+    align-items: start;
+}
+
+.zdadm-card {
+    border: 1px solid #ddd3c5;
+
+    background: white;
+}
+
+.zdadm-card + .zdadm-card {
+    margin-top: 22px;
+}
+
+.zdadm-card-head {
+    padding: 22px 24px;
+
+    border-bottom:
+        1px solid #e8e0d6;
+}
+
+.zdadm-card-head small {
+    display: block;
+
+    color: #a47822;
+
+    font-size: 7px;
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.zdadm-card-head h2 {
+    margin: 5px 0 0;
+
+    font-family: Georgia, serif;
+
+    font-size: 27px;
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.zdadm-info {
+    padding: 23px;
+}
+
+.zdadm-info-row {
+    padding: 12px 0;
+
+    border-bottom:
+        1px solid #ece4da;
+}
+
+.zdadm-info-row:last-child {
+    border-bottom: 0;
+}
+
+.zdadm-info-row span {
+    display: block;
+
+    color: #91887f;
+
+    font-size: 7px;
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+}
+
+.zdadm-info-row strong {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #2b2722;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   FORMS
+========================================================= */
+
+.zdadm-form {
+    padding: 24px;
+}
+
+.zdadm-form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap: 15px;
+}
+
+.zdadm-field {
+    display: grid;
+
+    gap: 7px;
+}
+
+.zdadm-field.full {
+    grid-column: 1 / -1;
+}
+
+.zdadm-field label {
+    color: #625b53;
+
+    font-size: 8px;
+    font-weight: 900;
+
+    text-transform: uppercase;
+}
+
+.zdadm-field input,
+.zdadm-field select,
+.zdadm-field textarea {
+    width: 100%;
+
+    border: 1px solid #d6ccbe;
+
+    background: #faf8f4;
+
+    color: #29241e;
+
+    outline: none;
+}
+
+.zdadm-field input,
+.zdadm-field select {
+    min-height: 46px;
+
+    padding: 0 12px;
+}
+
+.zdadm-field textarea {
+    min-height: 120px;
+
+    padding: 12px;
+
+    resize: vertical;
+}
+
+.zdadm-field input:focus,
+.zdadm-field select:focus,
+.zdadm-field textarea:focus {
+    border-color: #b88627;
+
+    background: white;
+}
+
+.zdadm-checkboxes {
+    grid-column: 1 / -1;
+
+    padding: 16px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap: 12px;
+
+    background: #f7f3ec;
+
+    border: 1px solid #dfd5c8;
+}
+
+.zdadm-checkbox {
+    display: flex;
+
+    gap: 9px;
+
+    align-items: center;
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.zdadm-checkbox input {
+    width: 16px;
+    height: 16px;
+
+    accent-color: #b88627;
+}
+
+.zdadm-form-actions {
+    grid-column: 1 / -1;
+
+    display: flex;
+
+    gap: 10px;
+}
+
+.zdadm-save {
+    flex: 1;
+
+    min-height: 48px;
+
+    border: 1px solid #080705;
+
+    background: #080705;
+
+    color: #d4a536;
+
+    font-size: 8px;
+    font-weight: 900;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+}
+
+.zdadm-cancel {
+    min-height: 48px;
+
+    padding: 0 18px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #cfc4b6;
+
+    color: #6d655c;
+
+    font-size: 8px;
+    font-weight: 900;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   PRODUITS
+========================================================= */
+
+.zdadm-products-layout {
+    margin-top: 28px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(350px, 0.75fr)
+        minmax(0, 1.25fr);
+
+    gap: 22px;
+
+    align-items: start;
+}
+
+.zdadm-product-list {
+    padding: 8px 20px;
+}
+
+.zdadm-product {
+    padding: 16px 0;
+
+    display: grid;
+
+    grid-template-columns:
+        100px
+        minmax(0, 1fr);
+
+    gap: 16px;
+
+    border-bottom:
+        1px solid #ebe3d9;
+}
+
+.zdadm-product:last-child {
+    border-bottom: 0;
+}
+
+.zdadm-product-image {
+    width: 100px;
+    height: 90px;
+
+    overflow: hidden;
+
+    background: #080705;
+}
+
+.zdadm-product-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.zdadm-placeholder {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #d4a536;
+
+    font-family: Georgia, serif;
+
+    font-size: 22px;
+}
+
+.zdadm-product-head {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.zdadm-product-head h3 {
+    margin: 0;
+
+    font-family: Georgia, serif;
+
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.zdadm-product-price {
+    color: #a47822;
+
+    font-family: Georgia, serif;
+
+    font-size: 17px;
+}
+
+.zdadm-badges {
+    margin-top: 10px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 5px;
+}
+
+.zdadm-badge {
+    padding: 5px 7px;
+
+    font-size: 6px;
+    font-weight: 900;
+
+    text-transform: uppercase;
+}
+
+.zdadm-badge.green {
+    background: #e0efe0;
+    color: #477144;
+}
+
+.zdadm-badge.gray {
+    background: #eeeeee;
+    color: #777777;
+}
+
+.zdadm-badge.gold {
+    background: #eee4ce;
+    color: #806019;
+}
+
+.zdadm-badge.blue {
+    background: #dce8f5;
+    color: #365e8d;
+}
+
+.zdadm-badge.red {
+    background: #f1dddd;
+    color: #943d3d;
+}
+
+.zdadm-actions {
+    margin-top: 13px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+.zdadm-small-button {
+    min-height: 34px;
+
+    padding: 0 11px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #080705;
+
+    background: #080705;
+
+    color: #d4a536;
+
+    font-size: 7px;
+    font-weight: 900;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+}
+
+.zdadm-delete {
+    min-height: 34px;
+
+    padding: 0 11px;
+
+    border: 1px solid #b35353;
+
+    background: white;
+
+    color: #a33d3d;
+
+    font-size: 7px;
+    font-weight: 900;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .zdadm-stats.four {
+        grid-template-columns:
+            repeat(
+                2,
+                1fr
+            );
+    }
+
+    .zdadm-products-layout,
+    .zdadm-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 900px) {
+
+    .zdadm-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .zdadm-sidebar {
+        width: 100%;
+        min-width: 100%;
+
+        height: auto;
+
+        position: relative;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .zdadm-main {
+        padding:
+            28px
+            15px
+            50px;
+    }
+
+    .zdadm-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .zdadm-stats,
+    .zdadm-stats.four {
+        grid-template-columns: 1fr;
+    }
+
+    .zdadm-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .zdadm-field.full,
+    .zdadm-checkboxes,
+    .zdadm-form-actions {
+        grid-column: auto;
+    }
+
+    .zdadm-checkboxes {
+        grid-template-columns: 1fr;
+    }
+}

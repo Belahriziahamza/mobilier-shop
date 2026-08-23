@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+
+    <!-- =====================================================
+         CSRF SPRING SECURITY
+    ====================================================== -->
+
+    <meta name="_csrf"
+          th:content="${_csrf != null ? _csrf.token : ''}">
+
+    <meta name="_csrf_header"
+          th:content="${_csrf != null ? _csrf.headerName : ''}">
+
+
+    <title>
+        Mon panier | Zineb Déco
+    </title>
+
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}"
+          href="/css/style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER COMMUN
+========================================================= -->
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+
+
+<main class="cart-page">
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="cart-hero">
+
+        <div class="container">
+
+
+            <span class="section-label dark"
+                  th:text="${shopSetting != null
+                      and shopSetting.shopName != null
+                      and !#strings.isEmpty(shopSetting.shopName)
+                      ? shopSetting.shopName
+                      : 'ZINEB DÉCO'}">
+
+                ZINEB DÉCO
+
+            </span>
+
+
+            <h1>
+                Mon panier
+            </h1>
+
+
+            <p>
+
+                Vérifiez votre sélection,
+                renseignez vos informations
+                puis enregistrez votre réservation
+                avant de continuer sur WhatsApp.
+
+            </p>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CONTENU
+    ====================================================== -->
+
+    <section class="cart-content">
+
+        <div class="container">
+
+
+            <!-- =================================================
+                 PANIER VIDE
+            ================================================== -->
+
+            <div id="cartPageEmpty"
+                 class="cart-empty"
+                 style="display:none;">
+
+
+                <div class="cart-empty-icon">
+                    🛋️
+                </div>
+
+
+                <h2>
+                    Votre panier est vide
+                </h2>
+
+
+                <p>
+
+                    Découvrez nos collections
+                    et ajoutez les meubles
+                    qui vous plaisent.
+
+                </p>
+
+
+                <a th:href="@{/salons}"
+                   href="/salons"
+                   class="btn btn-gold"
+                   style="margin-top:22px;">
+
+                    Découvrir les salons
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PANIER NON VIDE
+            ================================================== -->
+
+            <div id="cartPageLayout"
+                 class="cart-layout"
+                 style="display:none;">
+
+
+                <!-- =============================================
+                     PRODUITS
+                ============================================== -->
+
+                <section>
+
+
+                    <div class="cart-products-heading">
+
+
+                        <div>
+
+
+                            <span class="section-label dark">
+                                VOTRE SÉLECTION
+                            </span>
+
+
+                            <h2>
+                                Produits
+                            </h2>
+
+
+                        </div>
+
+
+
+                        <button id="clearCartButton"
+                                type="button"
+                                class="cart-clear-button">
+
+                            Vider le panier
+
+                        </button>
+
+
+                    </div>
+
+
+
+                    <!--
+                        main.js construit automatiquement
+                        les produits du panier ici
+                    -->
+
+                    <div id="cartPageItems"></div>
+
+
+                </section>
+
+
+
+                <!-- =============================================
+                     RESUME
+                ============================================== -->
+
+                <aside class="cart-summary">
+
+
+                    <span class="section-label">
+                        RÉSUMÉ
+                    </span>
+
+
+                    <h2>
+                        Votre réservation
+                    </h2>
+
+
+
+                    <!-- =========================================
+                         SOUS TOTAL
+                    ========================================== -->
+
+                    <div class="cart-summary-line">
+
+
+                        <span>
+                            Sous-total
+                        </span>
+
+
+                        <strong id="cartSubtotal">
+                            0 DH
+                        </strong>
+
+
+                    </div>
+
+
+
+                    <!-- =========================================
+                         LIVRAISON
+                    ========================================== -->
+
+                    <div class="cart-summary-line">
+
+
+                        <span>
+                            Livraison
+                        </span>
+
+
+                        <strong>
+                            À confirmer
+                        </strong>
+
+
+                    </div>
+
+
+
+                    <div class="cart-summary-separator"></div>
+
+
+
+                    <!-- =========================================
+                         TOTAL
+                    ========================================== -->
+
+                    <div class="cart-summary-total">
+
+
+                        <span>
+                            Total
+                        </span>
+
+
+                        <strong id="cartTotal">
+                            0 DH
+                        </strong>
+
+
+                    </div>
+
+
+
+                    <p class="cart-summary-note">
+
+                        Le prix de livraison dépend
+                        de la ville, des dimensions
+                        du mobilier et des modalités
+                        convenues avec
+
+                        <span th:text="${shopSetting != null
+                            and shopSetting.shopName != null
+                            and !#strings.isEmpty(shopSetting.shopName)
+                            ? shopSetting.shopName
+                            : 'Zineb Déco'}">
+
+                            Zineb Déco
+
+                        </span>.
+
+                    </p>
+
+
+
+                    <!-- =========================================
+                         CLIENT CONNECTE
+                    ========================================== -->
+
+                    <div sec:authorize="isAuthenticated()"
+                         class="cart-connected-customer">
+
+
+                        <span>
+                            Compte connecté
+                        </span>
+
+
+                        <strong sec:authentication="name">
+
+                            client@email.com
+
+                        </strong>
+
+
+                    </div>
+
+
+
+                    <!-- =========================================
+                         INFORMATIONS CLIENT
+                    ========================================== -->
+
+                    <div class="cart-customer-form">
+
+
+                        <h3>
+                            Vos informations
+                        </h3>
+
+
+
+                        <!-- NOM -->
+
+                        <label for="orderCustomerName">
+                            Nom complet *
+                        </label>
+
+
+                        <input id="orderCustomerName"
+                               name="customerName"
+                               type="text"
+                               maxlength="150"
+                               autocomplete="name"
+                               placeholder="Votre nom complet"
+                               required>
+
+
+
+                        <!-- TELEPHONE -->
+
+                        <label for="orderPhone">
+                            Téléphone *
+                        </label>
+
+
+                        <input id="orderPhone"
+                               name="phone"
+                               type="tel"
+                               maxlength="30"
+                               autocomplete="tel"
+                               placeholder="+212 6..."
+                               required>
+
+
+
+                        <!-- VILLE -->
+
+                        <label for="orderCity">
+                            Ville
+                        </label>
+
+
+                        <input id="orderCity"
+                               name="city"
+                               type="text"
+                               maxlength="100"
+                               autocomplete="address-level2"
+                               placeholder="Ex : Casablanca">
+
+
+
+                        <!-- ADRESSE -->
+
+                        <label for="orderAddress">
+                            Adresse
+                        </label>
+
+
+                        <textarea id="orderAddress"
+                                  name="address"
+                                  rows="3"
+                                  maxlength="500"
+                                  autocomplete="street-address"
+                                  placeholder="Adresse de livraison"></textarea>
+
+
+
+                        <!-- NOTES -->
+
+                        <label for="orderNotes">
+                            Remarque / personnalisation
+                        </label>
+
+
+                        <textarea id="orderNotes"
+                                  name="notes"
+                                  rows="4"
+                                  maxlength="1000"
+                                  placeholder="Ex : couleur, tissu, dimensions, délai souhaité..."></textarea>
+
+
+                    </div>
+
+
+
+                    <!-- =========================================
+                         ERREUR COMMANDE
+                    ========================================== -->
+
+                    <div id="orderErrorMessage"
+                         class="order-error-message"
+                         role="alert"
+                         aria-live="polite">
+                    </div>
+
+
+
+                    <!-- =========================================
+                         BOUTON COMMANDE
+
+                         IMPORTANT :
+                         les IDs sont conservés pour main.js
+                    ========================================== -->
+
+                    <button id="cartOrderButton"
+                            type="button"
+                            class="cart-order-button"
+
+                            th:data-whatsapp="${shopSetting != null
+                                and shopSetting.whatsappLink != null
+                                ? shopSetting.whatsappLink
+                                : ''}">
+
+                        Réserver sur WhatsApp
+
+                    </button>
+
+
+
+                    <!-- =========================================
+                         INFO WHATSAPP DYNAMIQUE
+                    ========================================== -->
+
+                    <p th:if="${shopSetting != null
+                            and shopSetting.whatsapp != null
+                            and !#strings.isEmpty(shopSetting.whatsapp)}"
+                       style="
+                            margin-top:12px;
+                            font-size:8px;
+                            opacity:.65;
+                            text-align:center;
+                       ">
+
+
+                        WhatsApp :
+
+                        <strong th:text="${shopSetting.whatsapp}">
+
+                            +212...
+
+                        </strong>
+
+
+                    </p>
+
+
+
+                    <!-- =========================================
+                         CONTINUER ACHATS
+                    ========================================== -->
+
+                    <a th:href="@{/}"
+                       href="/"
+                       class="cart-continue">
+
+                        ← Continuer mes achats
+
+                    </a>
+
+
+                </aside>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     FOOTER DYNAMIQUE MYSQL
+========================================================= -->
+
+<div th:replace="~{fragments/site-footer :: footer}"></div>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+
+     NE PAS CHANGER :
+     main.js gère actuellement :
+     - localStorage
+     - quantités
+     - suppression
+     - total
+     - création commande
+     - WhatsApp
+========================================================= -->
+
+<script th:src="@{/js/main.js}"
+        src="/js/main.js"
+        defer>
+</script>
+
+
+</body>
+
+</html>

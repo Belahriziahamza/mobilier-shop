@@ -1,0 +1,65 @@
+# ==============================
+# MAVEN / JAVA
+# ==============================
+
+target/
+*.class
+*.jar
+*.war
+
+
+# ==============================
+# LOGS / ERREURS
+# ==============================
+
+*.log
+boot-error.txt
+startup-error.txt
+customization-error.txt
+
+
+# ==============================
+# FICHIERS SECRETS
+# ==============================
+
+.env
+.env.*
+*.env
+
+application-local.properties
+application-secret.properties
+secrets.properties
+
+
+# ==============================
+# UPLOADS UTILISATEURS
+# ==============================
+
+uploads/
+
+
+# ==============================
+# VS CODE / INTELLIJ
+# ==============================
+
+.vscode/
+.idea/
+*.iml
+
+
+# ==============================
+# ECLIPSE
+# ==============================
+
+.classpath
+.project
+.settings/
+
+
+# ==============================
+# WINDOWS / MAC
+# ==============================
+
+Thumbs.db
+Desktop.ini
+.DS_Store

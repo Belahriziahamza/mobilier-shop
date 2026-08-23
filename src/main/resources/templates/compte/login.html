@@ -1,0 +1,1150 @@
+﻿<!DOCTYPE html>
+
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Connexion client | Zineb Déco</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}"
+          href="/css/style.css">
+
+
+    <style>
+
+        /* =====================================================
+           BASE
+        ====================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f3eee5;
+
+            color: #221e19;
+        }
+
+
+
+        /* =====================================================
+           PAGE
+        ====================================================== */
+
+        .client-login-page {
+
+            min-height: 100vh;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+        }
+
+
+
+        /* =====================================================
+           PARTIE GAUCHE
+        ====================================================== */
+
+        .client-login-left {
+
+            min-height: 100vh;
+
+            padding: 60px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #080705,
+                    #171108
+                );
+
+            color: #ffffff;
+        }
+
+
+
+        /* =====================================================
+           LOGO ZINEB DECO
+        ====================================================== */
+
+        .client-logo {
+
+            width: 78px;
+
+            height: 78px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border: 1px solid #d4a536;
+
+            border-radius: 50%;
+
+            overflow: hidden;
+
+            text-decoration: none;
+        }
+
+
+        .client-logo img {
+
+            width: 100%;
+
+            height: 100%;
+
+            padding: 5px;
+
+            object-fit: contain;
+        }
+
+
+
+        /* =====================================================
+           TEXTE GAUCHE
+        ====================================================== */
+
+        .client-left-content {
+
+            max-width: 550px;
+        }
+
+
+        .client-left-label {
+
+            display: block;
+
+            margin-bottom: 15px;
+
+            color: #d4a536;
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+        }
+
+
+        .client-left-content h1 {
+
+            margin: 0;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: clamp(45px, 6vw, 75px);
+
+            font-weight: 400;
+
+            line-height: 1.05;
+        }
+
+
+        .client-left-content h1 span {
+
+            display: block;
+
+            color: #d4a536;
+        }
+
+
+        .client-left-content p {
+
+            max-width: 500px;
+
+            margin-top: 25px;
+
+            color: rgba(255, 255, 255, 0.60);
+
+            font-size: 12px;
+
+            line-height: 1.9;
+        }
+
+
+        .client-left-bottom {
+
+            color: rgba(255, 255, 255, 0.35);
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+        }
+
+
+
+        /* =====================================================
+           PARTIE DROITE
+        ====================================================== */
+
+        .client-login-right {
+
+            min-height: 100vh;
+
+            padding: 45px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #f3eee5;
+        }
+
+
+        .client-login-card {
+
+            width: 100%;
+
+            max-width: 500px;
+        }
+
+
+
+        /* =====================================================
+           TITRE
+        ====================================================== */
+
+        .client-login-label {
+
+            color: #a47822;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+        }
+
+
+        .client-login-card h2 {
+
+            margin: 10px 0 0;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 48px;
+
+            font-weight: 400;
+        }
+
+
+        .client-login-description {
+
+            margin: 18px 0 30px;
+
+            color: #81786f;
+
+            font-size: 11px;
+
+            line-height: 1.8;
+        }
+
+
+
+        /* =====================================================
+           ALERTES
+        ====================================================== */
+
+        .client-alert {
+
+            margin-bottom: 20px;
+
+            padding: 13px 15px;
+
+            border: 1px solid;
+
+            font-size: 10px;
+
+            line-height: 1.6;
+        }
+
+
+        .client-alert.error {
+
+            border-color: #d7a2a2;
+
+            background: #fff0f0;
+
+            color: #963939;
+        }
+
+
+        .client-alert.success {
+
+            border-color: #a7bea0;
+
+            background: #edf6ea;
+
+            color: #41613a;
+        }
+
+
+
+        /* =====================================================
+           BOUTON GOOGLE
+        ====================================================== */
+
+        .google-login-button {
+
+            width: 100%;
+
+            min-height: 56px;
+
+            padding: 0 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            border: 1px solid #dadce0;
+
+            border-radius: 4px;
+
+            background: #ffffff;
+
+            color: #202124;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .google-login-button:hover {
+
+            border-color: #c7c9cc;
+
+            background: #f8f9fa;
+
+            box-shadow:
+                0 1px 3px
+                rgba(60, 64, 67, 0.20);
+        }
+
+
+        .google-login-button:active {
+
+            background: #f1f3f4;
+        }
+
+
+        .google-real-logo {
+
+            width: 20px;
+
+            height: 20px;
+
+            flex-shrink: 0;
+
+            object-fit: contain;
+        }
+
+
+
+        /* =====================================================
+           SEPARATEUR
+        ====================================================== */
+
+        .client-login-divider {
+
+            margin: 26px 0;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .client-login-divider::before,
+        .client-login-divider::after {
+
+            content: "";
+
+            flex: 1;
+
+            height: 1px;
+
+            background: #d9d0c4;
+        }
+
+
+        .client-login-divider span {
+
+            color: #91887f;
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+        }
+
+
+
+        /* =====================================================
+           FORMULAIRE
+        ====================================================== */
+
+        .client-login-form {
+
+            display: grid;
+
+            gap: 18px;
+        }
+
+
+        .client-field {
+
+            display: grid;
+
+            gap: 8px;
+        }
+
+
+        .client-field label {
+
+            color: #625a51;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            letter-spacing: 0.4px;
+
+            text-transform: uppercase;
+        }
+
+
+        .client-field input {
+
+            width: 100%;
+
+            min-height: 52px;
+
+            padding: 0 14px;
+
+            border: 1px solid #d6ccbe;
+
+            background: #ffffff;
+
+            color: #221e19;
+
+            outline: none;
+        }
+
+
+        .client-field input:focus {
+
+            border-color: #b88627;
+        }
+
+
+
+        /* =====================================================
+           PASSWORD
+        ====================================================== */
+
+        .password-wrapper {
+
+            position: relative;
+        }
+
+
+        .password-wrapper input {
+
+            padding-right: 55px;
+        }
+
+
+        .password-toggle {
+
+            position: absolute;
+
+            top: 50%;
+
+            right: 10px;
+
+            transform: translateY(-50%);
+
+            width: 38px;
+
+            height: 38px;
+
+            border: none;
+
+            background: transparent;
+
+            color: #776e65;
+
+            cursor: pointer;
+
+            font-size: 15px;
+        }
+
+
+
+        /* =====================================================
+           BOUTON CONNEXION CLASSIQUE
+        ====================================================== */
+
+        .client-login-button {
+
+            width: 100%;
+
+            min-height: 54px;
+
+            margin-top: 5px;
+
+            border: 1px solid #080705;
+
+            background: #080705;
+
+            color: #d4a536;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            letter-spacing: 0.8px;
+
+            text-transform: uppercase;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease;
+        }
+
+
+        .client-login-button:hover {
+
+            border-color: #d4a536;
+
+            background: #d4a536;
+
+            color: #080705;
+        }
+
+
+
+        /* =====================================================
+           INSCRIPTION
+        ====================================================== */
+
+        .client-register {
+
+            margin-top: 28px;
+
+            padding-top: 22px;
+
+            border-top: 1px solid #ddd3c5;
+
+            color: #81786f;
+
+            font-size: 10px;
+
+            line-height: 1.7;
+        }
+
+
+        .client-register a {
+
+            display: inline-block;
+
+            margin-left: 5px;
+
+            color: #a47822;
+
+            font-weight: 900;
+
+            text-decoration: none;
+        }
+
+
+        .client-register a:hover {
+
+            color: #080705;
+        }
+
+
+
+        /* =====================================================
+           RETOUR
+        ====================================================== */
+
+        .client-back {
+
+            display: inline-block;
+
+            margin-top: 20px;
+
+            color: #625a51;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            text-decoration: none;
+        }
+
+
+        .client-back:hover {
+
+            color: #a47822;
+        }
+
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 850px) {
+
+            .client-login-page {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .client-login-left {
+
+                min-height: 380px;
+
+                padding: 35px 25px;
+            }
+
+
+            .client-login-right {
+
+                min-height: auto;
+
+                padding: 45px 20px;
+            }
+
+
+            .client-login-card h2 {
+
+                font-size: 40px;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            .client-login-left {
+
+                min-height: 330px;
+            }
+
+
+            .client-left-content h1 {
+
+                font-size: 42px;
+            }
+
+
+            .client-login-right {
+
+                padding: 35px 16px;
+            }
+
+
+            .google-login-button {
+
+                font-size: 13px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<main class="client-login-page">
+
+
+    <!-- =====================================================
+         PARTIE GAUCHE
+    ====================================================== -->
+
+    <section class="client-login-left">
+
+
+        <!-- LOGO -->
+
+        <a th:href="@{/}"
+           href="/"
+           class="client-logo">
+
+
+            <img th:src="@{/images/logo-zineb-deco.png}"
+                 src="/images/logo-zineb-deco.png"
+                 alt="Zineb Déco">
+
+
+        </a>
+
+
+
+        <!-- TEXTE -->
+
+        <div class="client-left-content">
+
+
+            <span class="client-left-label">
+
+                ESPACE CLIENT
+
+            </span>
+
+
+            <h1>
+
+                Votre espace
+
+                <span>
+                    Zineb Déco
+                </span>
+
+            </h1>
+
+
+            <p>
+
+                Connectez-vous pour consulter vos commandes,
+                suivre leur statut, gérer vos informations
+                personnelles et retrouver vos favoris.
+
+            </p>
+
+
+        </div>
+
+
+
+        <!-- BAS -->
+
+        <div class="client-left-bottom">
+
+            ZINEB DÉCO — MOBILIER & DÉCORATION
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PARTIE DROITE
+    ====================================================== -->
+
+    <section class="client-login-right">
+
+
+        <div class="client-login-card">
+
+
+            <!-- TITRE -->
+
+            <span class="client-login-label">
+
+                CONNEXION CLIENT
+
+            </span>
+
+
+            <h2>
+
+                Mon compte
+
+            </h2>
+
+
+            <p class="client-login-description">
+
+                Connectez-vous avec votre compte Google
+                ou avec l'adresse email et le mot de passe
+                utilisés lors de votre inscription.
+
+            </p>
+
+
+
+            <!-- =================================================
+                 INSCRIPTION REUSSIE
+            ================================================== -->
+
+            <div th:if="${param.registered}"
+                 class="client-alert success">
+
+                Votre compte a été créé avec succès.
+                Vous pouvez maintenant vous connecter.
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ERREUR LOGIN LOCAL
+            ================================================== -->
+
+            <div th:if="${param.error}"
+                 class="client-alert error">
+
+                Adresse email ou mot de passe incorrect.
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ERREUR GOOGLE
+            ================================================== -->
+
+            <div th:if="${param.googleError}"
+                 class="client-alert error">
+
+                La connexion avec Google a échoué.
+                Veuillez réessayer.
+
+            </div>
+
+
+
+            <!-- =================================================
+                 LOGOUT
+            ================================================== -->
+
+            <div th:if="${param.logout}"
+                 class="client-alert success">
+
+                Vous êtes maintenant déconnecté.
+
+            </div>
+
+
+
+            <!-- =================================================
+                 GOOGLE
+            ================================================== -->
+
+            <a th:href="@{/oauth2/authorization/google}"
+               href="/oauth2/authorization/google"
+               class="google-login-button">
+
+
+                <img th:src="@{/images/google-logo.svg}"
+                     src="/images/google-logo.svg"
+                     class="google-real-logo"
+                     alt="Google">
+
+
+                <span>
+
+                    Continuer avec Google
+
+                </span>
+
+
+            </a>
+
+
+
+            <!-- =================================================
+                 SEPARATEUR
+            ================================================== -->
+
+            <div class="client-login-divider">
+
+                <span>
+
+                    ou
+
+                </span>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 LOGIN CLASSIQUE
+            ================================================== -->
+
+            <form th:action="@{/compte/login}"
+                  action="/compte/login"
+                  method="post"
+                  class="client-login-form">
+
+
+                <!-- CSRF -->
+
+                <input type="hidden"
+                       th:name="${_csrf.parameterName}"
+                       th:value="${_csrf.token}">
+
+
+
+                <!-- EMAIL -->
+
+                <div class="client-field">
+
+
+                    <label for="username">
+
+                        Adresse email
+
+                    </label>
+
+
+                    <input id="username"
+                           name="username"
+                           type="email"
+                           placeholder="votre@email.com"
+                           autocomplete="username"
+                           required
+                           autofocus>
+
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="client-field">
+
+
+                    <label for="password">
+
+                        Mot de passe
+
+                    </label>
+
+
+                    <div class="password-wrapper">
+
+
+                        <input id="password"
+                               name="password"
+                               type="password"
+                               placeholder="Votre mot de passe"
+                               autocomplete="current-password"
+                               required>
+
+
+                        <button type="button"
+                                id="togglePassword"
+                                class="password-toggle"
+                                aria-label="Afficher le mot de passe">
+
+                            👁
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- SUBMIT -->
+
+                <button type="submit"
+                        class="client-login-button">
+
+                    Se connecter à mon compte
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- =================================================
+                 CREER COMPTE
+            ================================================== -->
+
+            <div class="client-register">
+
+
+                Vous n'avez pas encore de compte ?
+
+
+                <a th:href="@{/compte/inscription}"
+                   href="/compte/inscription">
+
+                    Créer un compte →
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 RETOUR
+            ================================================== -->
+
+            <a th:href="@{/}"
+               href="/"
+               class="client-back">
+
+                ← Retour à la boutique
+
+            </a>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     AFFICHER / CACHER MOT DE PASSE
+========================================================== -->
+
+<script>
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+
+            const password =
+                document.getElementById(
+                    "password"
+                );
+
+
+            const button =
+                document.getElementById(
+                    "togglePassword"
+                );
+
+
+            if (!password || !button) {
+
+                return;
+            }
+
+
+            button.addEventListener(
+                "click",
+                function () {
+
+
+                    const hidden =
+                        password.type ===
+                        "password";
+
+
+                    password.type =
+                        hidden
+                            ? "text"
+                            : "password";
+
+
+                    button.textContent =
+                        hidden
+                            ? "🙈"
+                            : "👁";
+
+
+                    button.setAttribute(
+
+                        "aria-label",
+
+                        hidden
+                            ? "Masquer le mot de passe"
+                            : "Afficher le mot de passe"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

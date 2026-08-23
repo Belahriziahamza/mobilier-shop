@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+
+    <title th:text="${product.name + ' | Zineb Déco'}">
+
+        Produit | Zineb Déco
+
+    </title>
+
+
+    <link
+        rel="stylesheet"
+        th:href="@{/css/style.css}"
+        href="/css/style.css">
+
+
+    <style>
+
+        /* =====================================================
+           PLACEHOLDER IMAGE
+        ====================================================== */
+
+        .detail-image-placeholder {
+
+            width: 100%;
+            min-height: 500px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #080705,
+                    #21180c
+                );
+
+            color: #d4a536;
+        }
+
+
+        .detail-image-placeholder strong {
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size: 65px;
+
+            font-weight: 400;
+        }
+
+
+        .detail-image-placeholder span {
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .45
+                );
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =====================================================
+           DISPONIBILITE
+        ====================================================== */
+
+        .detail-availability-stock {
+
+            color: #3c7544;
+        }
+
+
+        .detail-availability-custom {
+
+            color: #9a7021;
+        }
+
+
+        .detail-availability-out {
+
+            color: #a33d3d;
+        }
+
+
+        /* =====================================================
+           BOUTON INDISPONIBLE
+        ====================================================== */
+
+        .detail-cart-button:disabled {
+
+            opacity: .45;
+
+            cursor: not-allowed;
+        }
+
+
+        /* =====================================================
+           INFO SUPPLEMENTAIRE
+        ====================================================== */
+
+        .detail-product-status {
+
+            margin-top: 18px;
+
+            padding: 12px 15px;
+
+            border-left:
+                3px solid #d4a536;
+
+            background: #f5f0e8;
+
+            color: #70675e;
+
+            font-size: 9px;
+
+            line-height: 1.7;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER COMMUN
+===================================================== -->
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+
+
+<main>
+
+
+    <!-- =================================================
+         BREADCRUMB
+    ================================================== -->
+
+    <div class="catalog-breadcrumb">
+
+
+        <div class="container">
+
+
+            <a th:href="@{/}"
+               href="/">
+
+                Accueil
+
+            </a>
+
+
+            <span>
+                ›
+            </span>
+
+
+            <strong th:text="${product.name}">
+
+                Produit
+
+            </strong>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         DETAIL PRODUIT
+    ================================================== -->
+
+    <section class="product-detail">
+
+
+        <div class="container product-detail-grid">
+
+
+            <!-- =================================================
+                 IMAGE
+            ================================================== -->
+
+            <div class="product-detail-image">
+
+
+                <!-- IMAGE REELLE -->
+
+                <img
+                    th:if="${product.imagePath != null
+                        and !#strings.isEmpty(product.imagePath)}"
+
+                    th:src="${product.imagePath}"
+
+                    th:alt="${product.name}">
+
+
+
+                <!-- PLACEHOLDER -->
+
+                <div
+                    th:if="${product.imagePath == null
+                        or #strings.isEmpty(product.imagePath)}"
+
+                    class="detail-image-placeholder">
+
+
+                    <strong>
+                        ZD
+                    </strong>
+
+
+                    <span>
+
+                        Zineb Déco
+
+                    </span>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 INFORMATIONS
+            ================================================== -->
+
+            <div class="product-detail-content">
+
+
+                <!-- CATEGORIE -->
+
+                <span
+                    class="section-label dark"
+
+                    th:text="${product.category != null
+                        ? product.category
+                        : 'PRODUIT'}">
+
+                    PRODUIT
+
+                </span>
+
+
+
+                <!-- NOM -->
+
+                <h1 th:text="${product.name}">
+
+                    Produit
+
+                </h1>
+
+
+
+                <!-- =================================================
+                     PRIX
+                ================================================== -->
+
+                <div class="detail-price">
+
+
+                    <!-- ANCIEN PRIX -->
+
+                    <span
+                        class="detail-old-price"
+
+                        th:if="${product.oldPrice != null}">
+
+
+                        <span th:text="${product.oldPrice}">
+
+                            0
+
+                        </span>
+
+                        DH
+
+
+                    </span>
+
+
+
+                    <!-- PRIX ACTUEL -->
+
+                    <strong>
+
+
+                        <span th:text="${product.price}">
+
+                            0
+
+                        </span>
+
+                        DH
+
+
+                    </strong>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     DESCRIPTION
+                ================================================== -->
+
+                <p
+                    class="detail-description"
+
+                    th:text="${product.description != null
+                        and !#strings.isEmpty(product.description)
+                        ? product.description
+                        : 'Découvrez ce modèle Zineb Déco et personnalisez-le selon votre intérieur.'}">
+
+                    Description
+
+                </p>
+
+
+
+                <!-- =================================================
+                     INFORMATIONS PRODUIT
+                ================================================== -->
+
+                <div class="detail-information">
+
+
+                    <!-- CATEGORIE -->
+
+                    <div>
+
+
+                        <span>
+                            Catégorie
+                        </span>
+
+
+                        <strong th:text="${product.category != null
+                            ? product.category
+                            : '-'}">
+
+                            Produit
+
+                        </strong>
+
+
+                    </div>
+
+
+
+                    <!-- STYLE -->
+
+                    <div>
+
+
+                        <span>
+                            Style
+                        </span>
+
+
+                        <strong
+                            th:text="${product.type != null
+                                and !#strings.isEmpty(product.type)
+                                ? product.type
+                                : '-'}">
+
+                            -
+
+                        </strong>
+
+
+                    </div>
+
+
+
+                    <!-- COULEUR -->
+
+                    <div>
+
+
+                        <span>
+                            Couleur
+                        </span>
+
+
+                        <strong
+                            th:text="${product.color != null
+                                and !#strings.isEmpty(product.color)
+                                ? product.color
+                                : 'Personnalisable'}">
+
+                            Personnalisable
+
+                        </strong>
+
+
+                    </div>
+
+
+
+                    <!-- DISPONIBILITE -->
+
+                    <div>
+
+
+                        <span>
+                            Disponibilité
+                        </span>
+
+
+                        <!-- EN STOCK -->
+
+                        <strong
+                            th:if="${product.availability == 'stock'}"
+
+                            class="detail-availability-stock">
+
+                            En stock
+
+                        </strong>
+
+
+
+                        <!-- SUR COMMANDE -->
+
+                        <strong
+                            th:if="${product.availability == 'custom'}"
+
+                            class="detail-availability-custom">
+
+                            Fabrication sur commande
+
+                        </strong>
+
+
+
+                        <!-- INDISPONIBLE -->
+
+                        <strong
+                            th:if="${product.availability == 'out'}"
+
+                            class="detail-availability-out">
+
+                            Indisponible
+
+                        </strong>
+
+
+
+                        <!-- SECURITE -->
+
+                        <strong
+                            th:if="${product.availability == null
+                                or (
+                                    product.availability != 'stock'
+                                    and product.availability != 'custom'
+                                    and product.availability != 'out'
+                                )}">
+
+                            Sur commande
+
+                        </strong>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     INFO SUR MESURE
+                ================================================== -->
+
+                <div class="detail-product-status">
+
+
+                    <strong>
+                        Personnalisation disponible
+                    </strong>
+
+                    <br>
+
+                    Contactez-nous pour discuter
+                    des dimensions, tissus,
+                    couleurs et finitions disponibles.
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     AJOUT PANIER
+                ================================================== -->
+
+                <button
+                    type="button"
+
+                    class="detail-cart-button add-detail-cart"
+
+                    th:data-id="${product.id}"
+
+                    th:data-name="${product.name}"
+
+                    th:data-price="${product.price}"
+
+                    th:data-image="${product.imagePath}"
+
+                    th:disabled="${product.availability == 'out'}"
+
+                    th:text="${product.availability == 'out'
+                        ? 'Produit indisponible'
+                        : 'Ajouter au panier'}">
+
+                    Ajouter au panier
+
+                </button>
+
+
+
+                <!-- =================================================
+                     WHATSAPP DYNAMIQUE MYSQL
+                ================================================== -->
+
+                <a
+                    th:if="${shopSetting != null
+                        and shopSetting.whatsapp != null
+                        and !#strings.isEmpty(shopSetting.whatsapp)}"
+
+                    th:href="${shopSetting.whatsappLink
+                        + '?text='
+                        + #uris.escapeQueryParam(
+                            'Bonjour '
+                            + (
+                                shopSetting.shopName != null
+                                and !#strings.isEmpty(shopSetting.shopName)
+                                ? shopSetting.shopName
+                                : 'Zineb Déco'
+                            )
+                            + ', je souhaite avoir des informations concernant le produit : '
+                            + product.name
+                        )}"
+
+                    target="_blank"
+
+                    rel="noopener noreferrer"
+
+                    class="detail-whatsapp">
+
+                    Demander sur WhatsApp
+
+                </a>
+
+
+
+                <!-- =================================================
+                     CONTACT SI WHATSAPP ABSENT
+                ================================================== -->
+
+                <a
+                    th:if="${shopSetting == null
+                        or shopSetting.whatsapp == null
+                        or #strings.isEmpty(shopSetting.whatsapp)}"
+
+                    th:href="@{/contact}"
+
+                    href="/contact"
+
+                    class="detail-whatsapp">
+
+                    Nous contacter
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER DYNAMIQUE MYSQL
+===================================================== -->
+
+<div th:replace="~{fragments/site-footer :: footer}"></div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT PANIER / FAVORIS
+===================================================== -->
+
+<script
+    th:src="@{/js/main.js}"
+    src="/js/main.js"
+    defer>
+</script>
+
+
+</body>
+
+</html>

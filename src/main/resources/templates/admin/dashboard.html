@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Tableau de bord | Administration Zineb Déco
+    </title>
+
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}"
+          href="/css/style.css">
+
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin.css}"
+          href="/css/admin.css">
+
+
+    <style>
+
+        /* =====================================================
+           STATISTIQUES CLIENTS
+        ====================================================== */
+
+        .dashboard-customer-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                    repeat(3, minmax(0, 1fr));
+
+            gap: 14px;
+
+            padding: 20px;
+        }
+
+
+        .dashboard-customer-card {
+
+            min-height: 120px;
+
+            padding: 20px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            border: 1px solid #ddd3c5;
+
+            background: #ffffff;
+        }
+
+
+        .dashboard-customer-card.dark {
+
+            border-color: #080705;
+
+            background: #080705;
+
+            color: #ffffff;
+        }
+
+
+        .dashboard-customer-card.gold {
+
+            border-color: #b88627;
+
+            background: #f9f3e7;
+        }
+
+
+        .dashboard-customer-label {
+
+            color: #867c70;
+
+            font-size: 7px;
+
+            font-weight: 900;
+
+            letter-spacing: 1.3px;
+
+            text-transform: uppercase;
+        }
+
+
+        .dashboard-customer-card.dark
+        .dashboard-customer-label {
+
+            color: #d4a536;
+        }
+
+
+        .dashboard-customer-value {
+
+            margin-top: 12px;
+
+            font-family: Georgia, serif;
+
+            font-size: 34px;
+
+            font-weight: 400;
+        }
+
+
+        .dashboard-customer-note {
+
+            display: block;
+
+            margin-top: 8px;
+
+            color: #91877d;
+
+            font-size: 7px;
+
+            line-height: 1.5;
+        }
+
+
+        .dashboard-customer-card.dark
+        .dashboard-customer-note {
+
+            color: rgba(255,255,255,.50);
+        }
+
+
+        @media (max-width: 950px) {
+
+            .dashboard-customer-grid {
+
+                grid-template-columns:
+                        repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .dashboard-customer-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="zdadm-shell">
+
+
+    <!-- =====================================================
+         SIDEBAR ADMIN COMMUNE
+    ====================================================== -->
+
+    <div th:replace="~{fragments/admin-sidebar :: sidebar('dashboard')}"></div>
+
+
+
+    <!-- =====================================================
+         CONTENU
+    ====================================================== -->
+
+    <main class="zdadm-main">
+
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="zdadm-header">
+
+
+            <div>
+
+
+                <span class="zdadm-kicker">
+
+                    ADMINISTRATION
+
+                </span>
+
+
+                <h1>
+
+                    Tableau de bord
+
+                </h1>
+
+
+                <p>
+
+                    Suivez les clients,
+                    les produits, les commandes,
+                    leur état de production
+                    et le chiffre total enregistré.
+
+                </p>
+
+
+            </div>
+
+
+
+            <a th:href="@{/admin/commandes}"
+               href="/admin/commandes"
+               class="zdadm-primary-button">
+
+                Voir les commandes →
+
+            </a>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             STATISTIQUES PRINCIPALES
+        ================================================== -->
+
+        <section class="zdadm-stats four">
+
+
+
+            <!-- PRODUITS -->
+
+            <article class="zdadm-stat">
+
+
+                <span class="zdadm-stat-label">
+
+                    PRODUITS ACTIFS
+
+                </span>
+
+
+                <strong class="zdadm-stat-value"
+                        th:text="${activeProducts}">
+
+                    0
+
+                </strong>
+
+
+                <a th:href="@{/admin/produits}"
+                   href="/admin/produits"
+                   style="
+                       display:inline-block;
+                       margin-top:12px;
+                       color:#a47822;
+                       font-size:7px;
+                       font-weight:900;
+                       text-transform:uppercase;
+                   ">
+
+                    Gérer les produits →
+
+                </a>
+
+
+            </article>
+
+
+
+            <!-- CLIENTS -->
+
+            <article class="zdadm-stat">
+
+
+                <span class="zdadm-stat-label">
+
+                    CLIENTS INSCRITS
+
+                </span>
+
+
+                <strong class="zdadm-stat-value"
+                        th:text="${totalCustomers}">
+
+                    0
+
+                </strong>
+
+
+                <a th:href="@{/admin/clients}"
+                   href="/admin/clients"
+                   style="
+                       display:inline-block;
+                       margin-top:12px;
+                       color:#a47822;
+                       font-size:7px;
+                       font-weight:900;
+                       text-transform:uppercase;
+                   ">
+
+                    Voir les clients →
+
+                </a>
+
+
+            </article>
+
+
+
+            <!-- COMMANDES -->
+
+            <article class="zdadm-stat dark">
+
+
+                <span class="zdadm-stat-label">
+
+                    TOTAL COMMANDES
+
+                </span>
+
+
+                <strong class="zdadm-stat-value"
+                        th:text="${totalOrders}">
+
+                    0
+
+                </strong>
+
+
+                <a th:href="@{/admin/commandes}"
+                   href="/admin/commandes"
+                   style="
+                       display:inline-block;
+                       margin-top:12px;
+                       color:#d4a536;
+                       font-size:7px;
+                       font-weight:900;
+                       text-transform:uppercase;
+                   ">
+
+                    Voir les commandes →
+
+                </a>
+
+
+            </article>
+
+
+
+            <!-- CHIFFRE TOTAL -->
+
+            <article class="zdadm-stat gold">
+
+
+                <span class="zdadm-stat-label">
+
+                    CHIFFRE TOTAL
+
+                </span>
+
+
+                <strong class="zdadm-stat-value">
+
+
+                    <span th:text="${totalAmount}">
+
+                        0
+
+                    </span>
+
+
+                    <small style="
+                        font-size:14px;
+                        font-family:'Segoe UI',Arial,sans-serif;
+                    ">
+
+                        DH
+
+                    </small>
+
+
+                </strong>
+
+
+                <span style="
+                    display:block;
+                    margin-top:12px;
+                    font-size:7px;
+                    font-weight:800;
+                    text-transform:uppercase;
+                    opacity:.65;
+                ">
+
+                    Hors commandes annulées
+
+                </span>
+
+
+            </article>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             SUIVI DES CLIENTS
+        ================================================== -->
+
+        <section class="zdadm-section">
+
+
+            <div class="zdadm-section-head">
+
+
+                <div>
+
+
+                    <small>
+
+                        COMPTES CLIENTS
+
+                    </small>
+
+
+                    <h2>
+
+                        Suivi des clients
+
+                    </h2>
+
+
+                </div>
+
+
+
+                <a th:href="@{/admin/clients}"
+                   href="/admin/clients"
+                   class="zdadm-primary-button">
+
+                    Gérer les clients →
+
+                </a>
+
+
+            </div>
+
+
+
+            <div class="dashboard-customer-grid">
+
+
+
+                <!-- TOTAL CLIENTS -->
+
+                <article class="dashboard-customer-card dark">
+
+
+                    <span class="dashboard-customer-label">
+
+                        TOTAL CLIENTS
+
+                    </span>
+
+
+                    <strong class="dashboard-customer-value"
+                            th:text="${totalCustomers}">
+
+                        0
+
+                    </strong>
+
+
+                    <span class="dashboard-customer-note">
+
+                        Nombre total de comptes enregistrés.
+
+                    </span>
+
+
+                </article>
+
+
+
+                <!-- LOCAL -->
+
+                <article class="dashboard-customer-card">
+
+
+                    <span class="dashboard-customer-label">
+
+                        CONNEXION LOCAL
+
+                    </span>
+
+
+                    <strong class="dashboard-customer-value"
+                            th:text="${localCustomers}">
+
+                        0
+
+                    </strong>
+
+
+                    <span class="dashboard-customer-note">
+
+                        Comptes créés avec email
+                        et mot de passe.
+
+                    </span>
+
+
+                </article>
+
+
+
+                <!-- GOOGLE -->
+
+                <article class="dashboard-customer-card">
+
+
+                    <span class="dashboard-customer-label">
+
+                        CONNEXION GOOGLE
+
+                    </span>
+
+
+                    <strong class="dashboard-customer-value"
+                            th:text="${googleCustomers}">
+
+                        0
+
+                    </strong>
+
+
+                    <span class="dashboard-customer-note">
+
+                        Comptes authentifiés avec Google.
+
+                    </span>
+
+
+                </article>
+
+
+
+                <!-- VERIFIED -->
+
+                <article class="dashboard-customer-card gold">
+
+
+                    <span class="dashboard-customer-label">
+
+                        EMAILS VÉRIFIÉS
+
+                    </span>
+
+
+                    <strong class="dashboard-customer-value"
+                            th:text="${verifiedCustomers}">
+
+                        0
+
+                    </strong>
+
+
+                    <span class="dashboard-customer-note">
+
+                        Adresse email confirmée.
+
+                    </span>
+
+
+                </article>
+
+
+
+                <!-- NON VERIFIED -->
+
+                <article class="dashboard-customer-card">
+
+
+                    <span class="dashboard-customer-label">
+
+                        EMAILS NON VÉRIFIÉS
+
+                    </span>
+
+
+                    <strong class="dashboard-customer-value"
+                            th:text="${unverifiedCustomers}">
+
+                        0
+
+                    </strong>
+
+
+                    <span class="dashboard-customer-note">
+
+                        Adresse email pas encore confirmée.
+
+                    </span>
+
+
+                </article>
+
+
+
+                <!-- DEJA CONNECTES -->
+
+                <article class="dashboard-customer-card">
+
+
+                    <span class="dashboard-customer-label">
+
+                        DÉJÀ CONNECTÉS
+
+                    </span>
+
+
+                    <strong class="dashboard-customer-value"
+                            th:text="${customersWithLogin}">
+
+                        0
+
+                    </strong>
+
+
+                    <span class="dashboard-customer-note">
+
+                        Clients ayant réussi au moins
+                        une connexion.
+
+                    </span>
+
+
+                </article>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             ETAT DES COMMANDES
+        ================================================== -->
+
+        <section class="zdadm-section">
+
+
+            <div class="zdadm-section-head">
+
+
+                <div>
+
+
+                    <small>
+
+                        SUIVI DE PRODUCTION
+
+                    </small>
+
+
+                    <h2>
+
+                        État des commandes
+
+                    </h2>
+
+
+                </div>
+
+
+
+                <a th:href="@{/admin/commandes}"
+                   href="/admin/commandes"
+                   class="zdadm-primary-button">
+
+                    Gérer →
+
+                </a>
+
+
+            </div>
+
+
+
+            <div class="zdadm-stats four"
+                 style="
+                    margin:0;
+                    padding:20px;
+                 ">
+
+
+
+                <!-- NOUVELLES -->
+
+                <article class="zdadm-stat">
+
+
+                    <span class="zdadm-stat-label">
+
+                        NOUVELLES
+
+                    </span>
+
+
+                    <strong class="zdadm-stat-value"
+                            th:text="${newOrders}">
+
+                        0
+
+                    </strong>
+
+
+                </article>
+
+
+
+                <!-- CONFIRMEES -->
+
+                <article class="zdadm-stat">
+
+
+                    <span class="zdadm-stat-label">
+
+                        CONFIRMÉES
+
+                    </span>
+
+
+                    <strong class="zdadm-stat-value"
+                            th:text="${confirmedOrders}">
+
+                        0
+
+                    </strong>
+
+
+                </article>
+
+
+
+                <!-- FABRICATION -->
+
+                <article class="zdadm-stat">
+
+
+                    <span class="zdadm-stat-label">
+
+                        EN FABRICATION
+
+                    </span>
+
+
+                    <strong class="zdadm-stat-value"
+                            th:text="${manufacturingOrders}">
+
+                        0
+
+                    </strong>
+
+
+                </article>
+
+
+
+                <!-- PRETES -->
+
+                <article class="zdadm-stat">
+
+
+                    <span class="zdadm-stat-label">
+
+                        PRÊTES
+
+                    </span>
+
+
+                    <strong class="zdadm-stat-value"
+                            th:text="${readyOrders}">
+
+                        0
+
+                    </strong>
+
+
+                </article>
+
+
+
+                <!-- LIVREES -->
+
+                <article class="zdadm-stat">
+
+
+                    <span class="zdadm-stat-label">
+
+                        LIVRÉES
+
+                    </span>
+
+
+                    <strong class="zdadm-stat-value"
+                            th:text="${deliveredOrders}">
+
+                        0
+
+                    </strong>
+
+
+                </article>
+
+
+
+                <!-- ANNULEES -->
+
+                <article class="zdadm-stat">
+
+
+                    <span class="zdadm-stat-label">
+
+                        ANNULÉES
+
+                    </span>
+
+
+                    <strong class="zdadm-stat-value"
+                            th:text="${cancelledOrders}">
+
+                        0
+
+                    </strong>
+
+
+                </article>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             DERNIERES COMMANDES
+        ================================================== -->
+
+        <section class="zdadm-section">
+
+
+            <div class="zdadm-section-head">
+
+
+                <div>
+
+
+                    <small>
+
+                        ACTIVITÉ RÉCENTE
+
+                    </small>
+
+
+                    <h2>
+
+                        Dernières commandes
+
+                    </h2>
+
+
+                </div>
+
+
+
+                <a th:href="@{/admin/commandes}"
+                   href="/admin/commandes"
+                   class="zdadm-primary-button">
+
+                    Voir toutes →
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 AUCUNE COMMANDE
+            ================================================== -->
+
+            <div th:if="${recentOrders == null or #lists.isEmpty(recentOrders)}"
+                 class="zdadm-empty">
+
+
+                <strong>
+
+                    Aucune commande
+
+                </strong>
+
+
+                <p>
+
+                    Les nouvelles commandes apparaîtront ici.
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TABLE COMMANDES
+            ================================================== -->
+
+            <div th:if="${recentOrders != null and !#lists.isEmpty(recentOrders)}"
+                 class="zdadm-table-wrapper">
+
+
+                <table class="zdadm-table">
+
+
+                    <thead>
+
+
+                    <tr>
+
+
+                        <th>
+                            Commande
+                        </th>
+
+
+                        <th>
+                            Client
+                        </th>
+
+
+                        <th>
+                            Date
+                        </th>
+
+
+                        <th>
+                            Total
+                        </th>
+
+
+                        <th>
+                            Statut
+                        </th>
+
+
+                        <th>
+                            Action
+                        </th>
+
+
+                    </tr>
+
+
+                    </thead>
+
+
+
+                    <tbody>
+
+
+                    <tr th:each="order : ${recentOrders}">
+
+
+
+                        <!-- ID -->
+
+                        <td>
+
+
+                            <strong class="zdadm-id"
+                                    th:text="${'#' + order.id}">
+
+                                #1
+
+                            </strong>
+
+
+                        </td>
+
+
+
+                        <!-- CLIENT -->
+
+                        <td>
+
+
+                            <strong th:text="${order.customerName}">
+
+                                Client
+
+                            </strong>
+
+
+                            <br>
+
+
+                            <small th:if="${order.customerEmail != null}"
+                                   th:text="${order.customerEmail}">
+
+                                client@email.com
+
+                            </small>
+
+
+                        </td>
+
+
+
+                        <!-- DATE -->
+
+                        <td th:text="${#temporals.format(
+                                            order.createdAt,
+                                            'dd/MM/yyyy'
+                                       )}">
+
+                            21/08/2026
+
+                        </td>
+
+
+
+                        <!-- TOTAL -->
+
+                        <td>
+
+
+                            <strong class="zdadm-money">
+
+
+                                <span th:text="${order.totalAmount}">
+
+                                    0
+
+                                </span>
+
+                                DH
+
+
+                            </strong>
+
+
+                        </td>
+
+
+
+                        <!-- STATUT -->
+
+                        <td>
+
+
+                            <span
+                                    class="zdadm-status"
+
+                                    th:classappend="${
+                                        ' zdadm-status-' +
+                                        #strings.toLowerCase(order.status)
+                                    }"
+
+                                    th:text="${
+                                        order.status == 'NOUVELLE'
+                                            ? 'Nouvelle'
+                                        : order.status == 'CONFIRMEE'
+                                            ? 'Confirmée'
+                                        : order.status == 'EN_FABRICATION'
+                                            ? 'En fabrication'
+                                        : order.status == 'PRETE'
+                                            ? 'Prête'
+                                        : order.status == 'LIVREE'
+                                            ? 'Livrée'
+                                        : order.status == 'ANNULEE'
+                                            ? 'Annulée'
+                                        : order.status
+                                    }">
+
+                                Nouvelle
+
+                            </span>
+
+
+                        </td>
+
+
+
+                        <!-- ACTION -->
+
+                        <td>
+
+
+                            <a th:href="@{/admin/commandes/{id}(id=${order.id})}"
+                               class="zdadm-small-button">
+
+                                Détail →
+
+                            </a>
+
+
+                        </td>
+
+
+                    </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+</body>
+
+</html>

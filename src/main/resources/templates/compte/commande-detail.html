@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Détail commande | Zineb Déco</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}"
+          href="/css/style.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+
+            background: #f5f0e8;
+
+            color: #25211c;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+        }
+
+
+        a {
+            color: inherit;
+
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           HERO
+        ====================================================== */
+
+        .zd-order-detail-hero {
+
+            position: relative;
+
+            overflow: hidden;
+
+            padding:
+                65px 0;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    #080705,
+                    #171007 65%,
+                    #2a1c0c
+                );
+
+            color: white;
+        }
+
+
+        .zd-order-detail-hero::after {
+
+            content: "#";
+
+            position: absolute;
+
+            top: -80px;
+            right: 5%;
+
+            color:
+                rgba(
+                    212,
+                    165,
+                    54,
+                    0.07
+                );
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size: 330px;
+
+            line-height: 1;
+        }
+
+
+        .zd-order-container {
+
+            width:
+                min(
+                    1250px,
+                    calc(100% - 60px)
+                );
+
+            margin:
+                0 auto;
+        }
+
+
+        .zd-order-detail-hero-inner {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                flex-end;
+
+            gap: 40px;
+        }
+
+
+        .zd-order-eyebrow {
+
+            color: #d4a536;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            letter-spacing: 4px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .zd-order-detail-hero h1 {
+
+            margin:
+                10px 0 0;
+
+            color: white;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                clamp(
+                    43px,
+                    5vw,
+                    68px
+                );
+
+            font-weight: 400;
+
+            line-height: 1;
+        }
+
+
+        .zd-order-number {
+
+            color: #d4a536;
+        }
+
+
+        .zd-order-detail-hero p {
+
+            max-width: 600px;
+
+            margin-top: 16px;
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.55
+                );
+
+            font-size: 11px;
+
+            line-height: 1.7;
+        }
+
+
+        .zd-back-button {
+
+            min-height: 45px;
+
+            padding:
+                0 18px;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
+            color: white;
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            letter-spacing: 0.6px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .zd-back-button:hover {
+
+            border-color:
+                #d4a536;
+
+            color:
+                #d4a536;
+        }
+
+
+        /* =====================================================
+           PAGE
+        ====================================================== */
+
+        .zd-order-detail-main {
+
+            padding:
+                45px 0
+                80px;
+        }
+
+
+        /* =====================================================
+           STATUS CARDS
+        ====================================================== */
+
+        .zd-order-summary {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    4,
+                    minmax(0, 1fr)
+                );
+
+            gap: 14px;
+        }
+
+
+        .zd-summary-card {
+
+            min-width: 0;
+
+            padding: 22px;
+
+            border:
+                1px solid
+                #ded5c8;
+
+            background: white;
+        }
+
+
+        .zd-summary-card.dark {
+
+            border-color:
+                #080705;
+
+            background:
+                #080705;
+
+            color: white;
+        }
+
+
+        .zd-summary-label {
+
+            display: block;
+
+            color: #9a9188;
+
+            font-size: 7px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .zd-summary-card.dark
+        .zd-summary-label {
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.45
+                );
+        }
+
+
+        .zd-summary-value {
+
+            display: block;
+
+            margin-top: 8px;
+
+            color: #29241e;
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size: 22px;
+
+            font-weight: 400;
+
+            word-break:
+                break-word;
+        }
+
+
+        .zd-summary-card.dark
+        .zd-summary-value {
+
+            color: #d4a536;
+        }
+
+
+        /* =====================================================
+           STATUS
+        ====================================================== */
+
+        .zd-detail-status {
+
+            width: fit-content;
+
+            margin-top: 9px;
+
+            padding:
+                7px 10px;
+
+            display:
+                inline-flex;
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .zd-status-nouvelle {
+
+            background: #eee4ce;
+
+            color: #856118;
+        }
+
+
+        .zd-status-confirmee {
+
+            background: #e0eaf6;
+
+            color: #365d88;
+        }
+
+
+        .zd-status-en_fabrication {
+
+            background: #f0e1c9;
+
+            color: #91601d;
+        }
+
+
+        .zd-status-prete {
+
+            background: #e0eee0;
+
+            color: #467147;
+        }
+
+
+        .zd-status-livree {
+
+            background: #dcefe3;
+
+            color: #316843;
+        }
+
+
+        .zd-status-annulee {
+
+            background: #f2dddd;
+
+            color: #913737;
+        }
+
+
+        /* =====================================================
+           LAYOUT
+        ====================================================== */
+
+        .zd-order-layout {
+
+            margin-top: 30px;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.5fr)
+                minmax(310px, 0.7fr);
+
+            gap: 22px;
+
+            align-items:
+                start;
+        }
+
+
+        /* =====================================================
+           SECTION
+        ====================================================== */
+
+        .zd-detail-section {
+
+            border:
+                1px solid
+                #ded5c8;
+
+            background: white;
+        }
+
+
+        .zd-detail-section-head {
+
+            padding:
+                22px 25px;
+
+            border-bottom:
+                1px solid
+                #e8e0d5;
+        }
+
+
+        .zd-detail-section-kicker {
+
+            color: #a77a20;
+
+            font-size: 7px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .zd-detail-section-head h2 {
+
+            margin:
+                5px 0 0;
+
+            color: #29241e;
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size: 28px;
+
+            font-weight: 400;
+        }
+
+
+        /* =====================================================
+           ITEMS
+        ====================================================== */
+
+        .zd-detail-items {
+
+            padding:
+                5px 25px;
+        }
+
+
+        .zd-detail-item {
+
+            padding:
+                20px 0;
+
+            display: grid;
+
+            grid-template-columns:
+                115px
+                minmax(0, 1fr)
+                auto;
+
+            align-items:
+                center;
+
+            gap: 20px;
+
+            border-bottom:
+                1px solid
+                #ebe4da;
+        }
+
+
+        .zd-detail-item:last-child {
+
+            border-bottom: 0;
+        }
+
+
+        .zd-detail-image {
+
+            width: 115px;
+
+            height: 95px;
+
+            overflow: hidden;
+
+            background: #e9e2d9;
+        }
+
+
+        .zd-detail-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+
+        .zd-detail-image-placeholder {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            background: #080705;
+
+            color: #d4a536;
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size: 25px;
+        }
+
+
+        .zd-detail-item-info h3 {
+
+            margin: 0;
+
+            color: #29241e;
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size: 20px;
+
+            font-weight: 400;
+        }
+
+
+        .zd-detail-item-info p {
+
+            margin:
+                7px 0 0;
+
+            color: #867e74;
+
+            font-size: 9px;
+
+            line-height: 1.6;
+        }
+
+
+        .zd-detail-item-price {
+
+            text-align: right;
+        }
+
+
+        .zd-detail-item-price small {
+
+            display: block;
+
+            color: #938a80;
+
+            font-size: 7px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .zd-detail-item-price strong {
+
+            display: block;
+
+            margin-top: 5px;
+
+            color: #9c6d18;
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size: 19px;
+
+            font-weight: 400;
+        }
+
+
+        /* =====================================================
+           TOTAL
+        ====================================================== */
+
+        .zd-order-total {
+
+            padding:
+                22px 25px;
+
+            display: flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap: 20px;
+
+            border-top:
+                1px solid
+                #ded5c8;
+
+            background:
+                #f5f0e8;
+        }
+
+
+        .zd-order-total span {
+
+            color: #655e56;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .zd-order-total strong {
+
+            color: #9c6d18;
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size: 30px;
+
+            font-weight: 400;
+        }
+
+
+        /* =====================================================
+           CLIENT INFO
+        ====================================================== */
+
+        .zd-customer-card {
+
+            padding: 25px;
+        }
+
+
+        .zd-customer-info {
+
+            padding:
+                14px 0;
+
+            border-bottom:
+                1px solid
+                #ebe4da;
+        }
+
+
+        .zd-customer-info:first-child {
+
+            padding-top: 0;
+        }
+
+
+        .zd-customer-info:last-child {
+
+            border-bottom: 0;
+
+            padding-bottom: 0;
+        }
+
+
+        .zd-customer-info span {
+
+            display: block;
+
+            color: #978e84;
+
+            font-size: 7px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .zd-customer-info strong {
+
+            display: block;
+
+            margin-top: 5px;
+
+            color: #29241e;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+
+            font-weight: 600;
+
+            word-break:
+                break-word;
+        }
+
+
+        /* =====================================================
+           NOTES
+        ====================================================== */
+
+        .zd-notes {
+
+            margin-top: 22px;
+        }
+
+
+        .zd-notes-content {
+
+            padding: 25px;
+
+            color: #756d64;
+
+            font-size: 10px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           ACTIONS
+        ====================================================== */
+
+        .zd-order-actions {
+
+            margin-top: 22px;
+
+            display: grid;
+
+            gap: 10px;
+        }
+
+
+        .zd-action-primary,
+        .zd-action-secondary {
+
+            min-height: 48px;
+
+            padding:
+                0 18px;
+
+            display: flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid;
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            letter-spacing: 0.8px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .zd-action-primary {
+
+            border-color:
+                #080705;
+
+            background: #080705;
+
+            color: #d4a536;
+        }
+
+
+        .zd-action-primary:hover {
+
+            border-color:
+                #d4a536;
+
+            background: #d4a536;
+
+            color: #080705;
+        }
+
+
+        .zd-action-secondary {
+
+            border-color:
+                #cfc5b7;
+
+            background:
+                transparent;
+
+            color: #574f46;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 950px) {
+
+            .zd-order-summary {
+
+                grid-template-columns:
+                    repeat(
+                        2,
+                        1fr
+                    );
+            }
+
+
+            .zd-order-layout {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .zd-order-container {
+
+                width:
+                    calc(
+                        100% - 26px
+                    );
+            }
+
+
+            .zd-order-detail-hero {
+
+                padding:
+                    45px 0;
+            }
+
+
+            .zd-order-detail-hero-inner {
+
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+            }
+
+
+            .zd-order-summary {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .zd-detail-item {
+
+                grid-template-columns:
+                    80px
+                    minmax(0, 1fr);
+            }
+
+
+            .zd-detail-image {
+
+                width: 80px;
+
+                height: 70px;
+            }
+
+
+            .zd-detail-item-price {
+
+                grid-column: 2;
+
+                text-align: left;
+            }
+
+
+            .zd-detail-section-head,
+            .zd-detail-items,
+            .zd-customer-card {
+
+                padding-left: 17px;
+
+                padding-right: 17px;
+            }
+
+
+            .zd-order-total {
+
+                padding:
+                    18px 17px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="zd-order-detail-hero">
+
+
+    <div class="zd-order-container
+                zd-order-detail-hero-inner">
+
+
+        <div>
+
+
+            <span class="zd-order-eyebrow">
+
+                MON COMPTE / MES COMMANDES
+
+            </span>
+
+
+            <h1>
+
+                Commande
+
+                <span class="zd-order-number"
+                      th:text="${'#' + order.id}">
+
+                    #1
+
+                </span>
+
+            </h1>
+
+
+            <p>
+
+                Consultez le détail de votre commande,
+                les produits réservés, son statut ainsi
+                que vos informations de livraison.
+
+            </p>
+
+
+        </div>
+
+
+
+        <a th:href="@{/compte#commandes}"
+           href="/compte#commandes"
+           class="zd-back-button">
+
+            ← Retour aux commandes
+
+        </a>
+
+
+    </div>
+
+
+</section>
+
+
+
+<main class="zd-order-detail-main">
+
+
+    <div class="zd-order-container">
+
+
+        <!-- =================================================
+             RESUME
+        ================================================== -->
+
+        <section class="zd-order-summary">
+
+
+            <!-- NUMERO -->
+
+            <article class="zd-summary-card">
+
+
+                <span class="zd-summary-label">
+
+                    NUMÉRO DE COMMANDE
+
+                </span>
+
+
+                <strong class="zd-summary-value"
+                        th:text="${'#' + order.id}">
+
+                    #1
+
+                </strong>
+
+
+            </article>
+
+
+
+            <!-- DATE -->
+
+            <article class="zd-summary-card">
+
+
+                <span class="zd-summary-label">
+
+                    DATE
+
+                </span>
+
+
+                <strong class="zd-summary-value"
+                        th:text="${#temporals.format(order.createdAt, 'dd/MM/yyyy')}">
+
+                    19/08/2026
+
+                </strong>
+
+
+            </article>
+
+
+
+            <!-- STATUS -->
+
+            <article class="zd-summary-card">
+
+
+                <span class="zd-summary-label">
+
+                    STATUT
+
+                </span>
+
+
+                <span class="zd-detail-status"
+                      th:classappend="${' zd-status-' + #strings.toLowerCase(order.status)}"
+
+                      th:text="${
+                          order.status == 'NOUVELLE'
+                              ? 'Nouvelle'
+                          : order.status == 'CONFIRMEE'
+                              ? 'Confirmée'
+                          : order.status == 'EN_FABRICATION'
+                              ? 'En fabrication'
+                          : order.status == 'PRETE'
+                              ? 'Prête'
+                          : order.status == 'LIVREE'
+                              ? 'Livrée'
+                          : order.status == 'ANNULEE'
+                              ? 'Annulée'
+                          : order.status
+                      }">
+
+                    Nouvelle
+
+                </span>
+
+
+            </article>
+
+
+
+            <!-- TOTAL -->
+
+            <article class="zd-summary-card dark">
+
+
+                <span class="zd-summary-label">
+
+                    TOTAL
+
+                </span>
+
+
+                <strong class="zd-summary-value">
+
+                    <span th:text="${order.totalAmount}">
+                        0
+                    </span>
+
+                    DH
+
+                </strong>
+
+
+            </article>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             LAYOUT
+        ================================================== -->
+
+        <div class="zd-order-layout">
+
+
+            <!-- =================================================
+                 GAUCHE
+            ================================================== -->
+
+            <div>
+
+
+                <!-- =============================================
+                     PRODUITS
+                ============================================== -->
+
+                <section class="zd-detail-section">
+
+
+                    <div class="zd-detail-section-head">
+
+
+                        <span class="zd-detail-section-kicker">
+
+                            ARTICLES COMMANDÉS
+
+                        </span>
+
+
+                        <h2>
+
+                            Votre sélection
+
+                        </h2>
+
+
+                    </div>
+
+
+
+                    <div class="zd-detail-items">
+
+
+                        <article th:each="item : ${order.items}"
+                                 class="zd-detail-item">
+
+
+                            <!-- IMAGE -->
+
+                            <div class="zd-detail-image">
+
+
+                                <img
+                                    th:if="${item.imagePath != null and !#strings.isEmpty(item.imagePath)}"
+
+                                    th:src="${item.imagePath}"
+
+                                    th:alt="${item.productName}">
+
+
+                                <div
+                                    th:if="${item.imagePath == null or #strings.isEmpty(item.imagePath)}"
+
+                                    class="zd-detail-image-placeholder">
+
+                                    ZD
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <!-- INFO -->
+
+                            <div class="zd-detail-item-info">
+
+
+                                <h3 th:text="${item.productName}">
+
+                                    Produit
+
+                                </h3>
+
+
+                                <p>
+
+                                    Quantité :
+
+                                    <strong th:text="${item.quantity}">
+                                        1
+                                    </strong>
+
+                                </p>
+
+
+                                <p>
+
+                                    Prix unitaire :
+
+                                    <strong>
+
+                                        <span th:text="${item.unitPrice}">
+                                            0
+                                        </span>
+
+                                        DH
+
+                                    </strong>
+
+                                </p>
+
+
+                            </div>
+
+
+
+                            <!-- TOTAL LIGNE -->
+
+                            <div class="zd-detail-item-price">
+
+
+                                <small>
+
+                                    Total
+
+                                </small>
+
+
+                                <strong>
+
+                                    <span th:text="${item.lineTotal}">
+                                        0
+                                    </span>
+
+                                    DH
+
+                                </strong>
+
+
+                            </div>
+
+
+                        </article>
+
+
+                    </div>
+
+
+
+                    <!-- TOTAL -->
+
+                    <div class="zd-order-total">
+
+
+                        <span>
+
+                            Total de la commande
+
+                        </span>
+
+
+                        <strong>
+
+                            <span th:text="${order.totalAmount}">
+                                0
+                            </span>
+
+                            DH
+
+                        </strong>
+
+
+                    </div>
+
+
+                </section>
+
+
+
+                <!-- =============================================
+                     NOTES
+                ============================================== -->
+
+                <section
+                    th:if="${order.notes != null and !#strings.isEmpty(order.notes)}"
+
+                    class="zd-detail-section zd-notes">
+
+
+                    <div class="zd-detail-section-head">
+
+
+                        <span class="zd-detail-section-kicker">
+
+                            INFORMATIONS
+
+                        </span>
+
+
+                        <h2>
+
+                            Notes de la commande
+
+                        </h2>
+
+
+                    </div>
+
+
+                    <div class="zd-notes-content"
+                         th:text="${order.notes}">
+
+                        Notes du client.
+
+                    </div>
+
+
+                </section>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 DROITE
+            ================================================== -->
+
+            <aside>
+
+
+                <!-- CLIENT -->
+
+                <section class="zd-detail-section">
+
+
+                    <div class="zd-detail-section-head">
+
+
+                        <span class="zd-detail-section-kicker">
+
+                            LIVRAISON
+
+                        </span>
+
+
+                        <h2>
+
+                            Vos informations
+
+                        </h2>
+
+
+                    </div>
+
+
+
+                    <div class="zd-customer-card">
+
+
+                        <!-- NOM -->
+
+                        <div class="zd-customer-info">
+
+
+                            <span>
+
+                                NOM
+
+                            </span>
+
+
+                            <strong th:text="${order.customerName}">
+
+                                Client Zineb Déco
+
+                            </strong>
+
+
+                        </div>
+
+
+
+                        <!-- TELEPHONE -->
+
+                        <div class="zd-customer-info">
+
+
+                            <span>
+
+                                TÉLÉPHONE
+
+                            </span>
+
+
+                            <strong th:text="${order.phone}">
+
+                                +212 6...
+
+                            </strong>
+
+
+                        </div>
+
+
+
+                        <!-- EMAIL -->
+
+                        <div
+                            th:if="${order.customerEmail != null and !#strings.isEmpty(order.customerEmail)}"
+
+                            class="zd-customer-info">
+
+
+                            <span>
+
+                                EMAIL
+
+                            </span>
+
+
+                            <strong th:text="${order.customerEmail}">
+
+                                client@email.com
+
+                            </strong>
+
+
+                        </div>
+
+
+
+                        <!-- VILLE -->
+
+                        <div
+                            th:if="${order.city != null and !#strings.isEmpty(order.city)}"
+
+                            class="zd-customer-info">
+
+
+                            <span>
+
+                                VILLE
+
+                            </span>
+
+
+                            <strong th:text="${order.city}">
+
+                                Casablanca
+
+                            </strong>
+
+
+                        </div>
+
+
+
+                        <!-- ADRESSE -->
+
+                        <div
+                            th:if="${order.address != null and !#strings.isEmpty(order.address)}"
+
+                            class="zd-customer-info">
+
+
+                            <span>
+
+                                ADRESSE
+
+                            </span>
+
+
+                            <strong th:text="${order.address}">
+
+                                Adresse
+
+                            </strong>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </section>
+
+
+
+                <!-- ACTIONS -->
+
+                <div class="zd-order-actions">
+
+
+                    <a th:href="@{/}"
+                       href="/"
+                       class="zd-action-primary">
+
+                        Continuer mes achats
+
+                    </a>
+
+
+                    <a th:href="@{/compte}"
+                       href="/compte"
+                       class="zd-action-secondary">
+
+                        Retour à mon compte
+
+                    </a>
+
+
+                </div>
+
+
+            </aside>
+
+
+        </div>
+
+
+    </div>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+
+</body>
+
+</html>

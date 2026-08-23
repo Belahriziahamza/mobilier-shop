@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MDF | Zineb Déco</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}"
+          href="/css/style.css">
+
+    <style>
+
+        .mdf-page {
+            padding: 65px 0 90px;
+            background: #f6f3ee;
+        }
+
+        .mdf-header {
+            max-width: 850px;
+            margin-bottom: 42px;
+        }
+
+        .mdf-label {
+            display: block;
+
+            color: #ad7d23;
+
+            font-size: 9px;
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+        }
+
+        .mdf-header h1 {
+            margin: 10px 0 15px;
+
+            color: #17130f;
+
+            font-family: Georgia, serif;
+            font-size: clamp(44px, 6vw, 70px);
+            font-weight: 400;
+
+            line-height: 1;
+        }
+
+        .mdf-header h1 span {
+            color: #b88727;
+            font-style: italic;
+        }
+
+        .mdf-header p {
+            max-width: 700px;
+
+            margin: 0;
+
+            color: #776f65;
+
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+
+        /* =============================================
+           GRID
+        ============================================= */
+
+        .mdf-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 18px;
+        }
+
+
+        /* =============================================
+           CARD
+        ============================================= */
+
+        .mdf-card {
+            min-height: 280px;
+
+            padding: 28px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            border: 1px solid #ddd4c8;
+
+            background: #ffffff;
+
+            transition: .25s ease;
+        }
+
+        .mdf-card:hover {
+            transform: translateY(-5px);
+
+            border-color: #b88727;
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,.07);
+        }
+
+        .mdf-number {
+            color: #b88727;
+
+            font-size: 9px;
+            font-weight: 900;
+
+            letter-spacing: 1px;
+        }
+
+        .mdf-card h2 {
+            margin: 70px 0 10px;
+
+            color: #241f19;
+
+            font-family: Georgia, serif;
+            font-size: 30px;
+            font-weight: 400;
+        }
+
+        .mdf-card p {
+            margin: 0;
+
+            color: #81786e;
+
+            font-size: 10px;
+            line-height: 1.8;
+        }
+
+        .mdf-detail {
+            margin-top: 20px;
+            padding-top: 15px;
+
+            border-top: 1px solid #e4dcd1;
+
+            color: #a47822;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =============================================
+           DARK
+        ============================================= */
+
+        .mdf-card.dark {
+            border-color: #11100e;
+
+            background: #11100e;
+        }
+
+        .mdf-card.dark h2 {
+            color: #ffffff;
+        }
+
+        .mdf-card.dark p {
+            color: #aaa198;
+        }
+
+        .mdf-card.dark .mdf-detail {
+            border-color: #3a332a;
+
+            color: #d4a333;
+        }
+
+
+        /* =============================================
+           CTA
+        ============================================= */
+
+        .mdf-cta {
+            margin-top: 45px;
+
+            padding: 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 25px;
+
+            background: #15120f;
+
+            color: #ffffff;
+        }
+
+        .mdf-cta span {
+            color: #d2a33f;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+        .mdf-cta h2 {
+            margin: 7px 0 0;
+
+            font-family: Georgia, serif;
+            font-size: 29px;
+            font-weight: 400;
+        }
+
+        .mdf-cta a {
+            min-height: 47px;
+
+            padding: 0 20px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            background: #d2a33f;
+
+            color: #15120f;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            text-decoration: none;
+
+            text-transform: uppercase;
+        }
+
+        .mdf-cta a:hover {
+            background: #ffffff;
+        }
+
+
+        /* =============================================
+           RESPONSIVE
+        ============================================= */
+
+        @media (max-width: 950px) {
+
+            .mdf-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .mdf-page {
+                padding: 40px 0 60px;
+            }
+
+            .mdf-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mdf-cta {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+
+<main>
+
+<section class="mdf-page">
+
+<div class="container">
+
+
+    <header class="mdf-header">
+
+        <span class="mdf-label">
+            MATIÈRES & FINITIONS
+        </span>
+
+        <h1>
+            Nos finitions
+            <span>MDF.</span>
+        </h1>
+
+        <p>
+            Découvrez les principales finitions MDF
+            disponibles pour personnaliser vos meubles,
+            façades et éléments décoratifs.
+        </p>
+
+    </header>
+
+
+    <div class="mdf-grid">
+
+
+        <article class="mdf-card">
+
+            <span class="mdf-number">
+                01
+            </span>
+
+            <div>
+
+                <h2>
+                    MDF mat
+                </h2>
+
+                <p>
+                    Une finition sobre et moderne,
+                    idéale pour les intérieurs contemporains.
+                </p>
+
+                <div class="mdf-detail">
+                    Mat · Moderne · Élégant
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <article class="mdf-card dark">
+
+            <span class="mdf-number">
+                02
+            </span>
+
+            <div>
+
+                <h2>
+                    MDF brillant
+                </h2>
+
+                <p>
+                    Une finition lumineuse qui apporte
+                    un aspect premium et contemporain.
+                </p>
+
+                <div class="mdf-detail">
+                    Brillant · Premium · Lumineux
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <article class="mdf-card">
+
+            <span class="mdf-number">
+                03
+            </span>
+
+            <div>
+
+                <h2>
+                    Effet bois
+                </h2>
+
+                <p>
+                    Une finition MDF reproduisant
+                    l'aspect naturel du bois.
+                </p>
+
+                <div class="mdf-detail">
+                    Bois · Chaleureux · Décoratif
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <article class="mdf-card">
+
+            <span class="mdf-number">
+                04
+            </span>
+
+            <div>
+
+                <h2>
+                    MDF coloré
+                </h2>
+
+                <p>
+                    Une large sélection de couleurs
+                    pour adapter le meuble à votre décoration.
+                </p>
+
+                <div class="mdf-detail">
+                    Couleurs · Personnalisable
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <article class="mdf-card">
+
+            <span class="mdf-number">
+                05
+            </span>
+
+            <div>
+
+                <h2>
+                    Effet texturé
+                </h2>
+
+                <p>
+                    Une finition décorative avec relief
+                    pour créer un rendu plus original.
+                </p>
+
+                <div class="mdf-detail">
+                    Texture · Relief · Design
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <article class="mdf-card">
+
+            <span class="mdf-number">
+                06
+            </span>
+
+            <div>
+
+                <h2>
+                    Sur demande
+                </h2>
+
+                <p>
+                    Vous souhaitez une finition particulière ?
+                    Elle peut être étudiée selon votre projet.
+                </p>
+
+                <div class="mdf-detail">
+                    Projet personnalisé
+                </div>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+
+    <section class="mdf-cta">
+
+        <div>
+
+            <span>
+                FABRICATION SUR MESURE
+            </span>
+
+            <h2>
+                Personnalisez la finition de votre mobilier.
+            </h2>
+
+        </div>
+
+        <a th:href="@{/sur-mesure}"
+           href="/sur-mesure">
+
+            Configurer mon projet →
+
+        </a>
+
+    </section>
+
+
+</div>
+
+</section>
+
+</main>
+
+
+<div th:replace="~{fragments/site-footer :: footer}"></div>
+
+
+<script th:src="@{/js/main.js}"
+        src="/js/main.js"
+        defer>
+</script>
+
+
+</body>
+</html>

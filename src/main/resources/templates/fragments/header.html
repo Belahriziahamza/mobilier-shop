@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+
+<!-- =========================================================
+     HEADER ZINEB DECO
+========================================================= -->
+
+<header
+    th:fragment="header"
+    class="site-header">
+
+
+    <!-- =====================================================
+         TOP BAR
+    ====================================================== -->
+
+    <div class="top-bar">
+
+        <div class="container top-bar-content">
+
+
+            <div class="top-bar-left">
+
+                <span>
+                    Mobilier & décoration sur mesure
+                </span>
+
+            </div>
+
+
+            <div class="top-bar-right">
+
+                <a href="tel:+212667928660">
+
+                    +212 667-928660
+
+                </a>
+
+
+                <span>
+                    |
+                </span>
+
+
+                <a
+                    href="https://wa.me/212667928660"
+                    target="_blank"
+                    rel="noopener">
+
+                    WhatsApp
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         HEADER PRINCIPAL
+    ====================================================== -->
+
+    <div class="main-header">
+
+        <div class="container main-header-content">
+
+
+            <!-- =================================================
+                 LOGO
+            ================================================== -->
+
+            <a
+                th:href="@{/}"
+                href="/"
+                class="logo"
+                aria-label="Accueil Zineb Déco">
+
+
+                <img
+                    th:src="@{/images/logo-zineb-deco.png}"
+                    src="/images/logo-zineb-deco.png"
+                    alt="Zineb Déco">
+
+            </a>
+
+
+
+            <!-- =================================================
+                 RECHERCHE
+            ================================================== -->
+
+            <form
+                class="search-box"
+                id="mainSearchForm"
+                role="search">
+
+
+                <input
+                    id="mainSearchInput"
+                    type="search"
+                    autocomplete="off"
+                    placeholder="Rechercher un canapé, salon, lit...">
+
+
+                <button
+                    type="submit"
+                    aria-label="Rechercher">
+
+                    ⌕  
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- =================================================
+                 ACTIONS
+            ================================================== -->
+
+            <div class="header-actions">
+
+
+                <!-- =============================================
+                     FAVORIS
+                ============================================== -->
+
+                <a
+                    th:href="@{/compte}"
+                    href="/compte"
+                    class="header-action"
+                    aria-label="Mes favoris">
+
+
+                    <span class="header-action-icon">
+
+                        ♡
+
+                    </span>
+
+
+                    <span class="header-action-text">
+
+                        <small>
+                            Mes
+                        </small>
+
+                        <strong>
+                            Favoris
+                        </strong>
+
+                    </span>
+
+                </a>
+
+
+
+                <!-- =============================================
+                     COMPTE CLIENT
+                ============================================== -->
+
+                <a
+                    th:href="@{/compte}"
+                    href="/compte"
+                    class="header-action account-link"
+                    aria-label="Mon compte">
+
+
+                    <span class="header-action-icon">
+
+                        ♙
+
+                    </span>
+
+
+                    <span class="header-action-text">
+
+                        <small>
+                            Mon
+                        </small>
+
+                        <strong>
+                            Compte
+                        </strong>
+
+                    </span>
+
+                </a>
+
+
+
+                <!-- =============================================
+                     PANIER
+                ============================================== -->
+
+                <a
+                    th:href="@{/panier}"
+                    href="/panier"
+                    class="header-action cart-link"
+                    aria-label="Mon panier">
+
+
+                    <span class="header-action-icon">
+
+                        ♧
+
+
+                        <span
+                            class="cart-count">
+
+                            0
+
+                        </span>
+
+                    </span>
+
+
+                    <span class="header-action-text">
+
+                        <small>
+                            Mon
+                        </small>
+
+                        <strong>
+                            Panier
+                        </strong>
+
+                    </span>
+
+                </a>
+
+
+
+                <!-- =============================================
+                     MENU MOBILE
+                ============================================== -->
+
+                <button
+                    id="mobileMenuButton"
+                    type="button"
+                    class="mobile-menu-button"
+                    aria-label="Ouvrir le menu"
+                    aria-expanded="false">
+
+                    ☰
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    <nav
+        id="mainNavigation"
+        class="main-navigation">
+
+
+        <div class="container navigation-content">
+
+
+            <!-- ACCUEIL -->
+
+            <a
+                th:href="@{/}"
+                href="/">
+
+                Accueil
+
+            </a>
+
+
+
+            <!-- SALONS -->
+
+            <a
+                th:href="@{/salons}"
+                href="/salons">
+
+                Salons
+
+            </a>
+
+
+
+            <!-- CANAPES -->
+
+            <a
+                th:href="@{/canapes}"
+                href="/canapes">
+
+                Canapés
+
+            </a>
+
+
+
+            <!-- CHAMBRES -->
+
+            <a
+                th:href="@{/chambres}"
+                href="/chambres">
+
+                Chambres
+
+            </a>
+
+
+
+            <!-- LITS -->
+
+            <a
+                th:href="@{/lits}"
+                href="/lits">
+
+                Lits
+
+            </a>
+
+
+
+            <!-- TETES DE LIT -->
+
+            <a
+                th:href="@{/tetes-de-lit}"
+                href="/tetes-de-lit">
+
+                Têtes de lit
+
+            </a>
+
+
+
+            <!-- CHAISES -->
+
+            <a
+                th:href="@{/chaises}"
+                href="/chaises">
+
+                Chaises & fauteuils
+
+            </a>
+
+
+
+            <!-- TABLES -->
+
+            <a
+                th:href="@{/tables}"
+                href="/tables">
+
+                Tables
+
+            </a>
+
+
+
+            <!-- SUR MESURE -->
+
+            <a
+                th:href="@{/sur-mesure}"
+                href="/sur-mesure">
+
+                Sur mesure
+
+            </a>
+
+
+
+            <!-- NOUVEAUTES -->
+
+            <a
+                th:href="@{/nouveautes}"
+                href="/nouveautes">
+
+                Nouveautés
+
+            </a>
+
+
+
+            <!-- PROMOTIONS -->
+
+            <a
+                th:href="@{/promotions}"
+                href="/promotions"
+                class="nav-promotion">
+
+                Promotions
+
+            </a>
+
+
+
+            <!-- CONTACT -->
+
+            <a
+                th:href="@{/contact}"
+                href="/contact">
+
+                Contact
+
+            </a>
+
+
+        </div>
+
+
+    </nav>
+
+<!-- =====================================================
+     PETIT MENU FLOTTANT AU SCROLL
+===================================================== -->
+
+<button type="button"
+        id="zdFloatingMenuButton"
+        class="zd-floating-menu-button"
+        aria-label="Ouvrir le menu"
+        aria-expanded="false">
+
+    <span class="zd-floating-menu-icon">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </span>
+
+</button>
+
+
+<nav id="zdFloatingMenu"
+     class="zd-floating-menu">
+
+    <span class="zd-floating-menu-title">
+
+        Navigation
+
+    </span>
+
+
+    <ul class="zd-floating-menu-links">
+
+
+        <li>
+
+            <a th:href="@{/}"
+               href="/">
+
+                Accueil
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a th:href="@{/salons}"
+               href="/salons">
+
+                Salons
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a th:href="@{/canapes}"
+               href="/canapes">
+
+                Canapés
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a th:href="@{/chambres}"
+               href="/chambres">
+
+                Chambres
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a th:href="@{/sur-mesure}"
+               href="/sur-mesure">
+
+                Sur mesure
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a th:href="@{/nouveautes}"
+               href="/nouveautes">
+
+                Nouveautés
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a th:href="@{/promotions}"
+               href="/promotions">
+
+                Promotions
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a th:href="@{/contact}"
+               href="/contact">
+
+                Contact
+
+            </a>
+
+        </li>
+
+
+        <li class="zd-floating-menu-separator"></li>
+
+
+        <li>
+
+            <a th:href="@{/compte}"
+               href="/compte">
+
+                Mon compte
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a th:href="@{/panier}"
+               href="/panier"
+               class="zd-floating-cart">
+
+                Mon panier
+
+            </a>
+
+        </li>
+
+
+    </ul>
+
+
+</nav>
+<!-- =====================================================
+     MENU FLOTTANT
+===================================================== -->
+
+<button type="button"
+        id="zdFloatingMenuButton"
+        class="zd-floating-menu-button"
+        aria-label="Ouvrir le menu">
+
+    <span class="zd-floating-menu-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+    </span>
+
+</button>
+
+
+<nav id="zdFloatingMenu"
+     class="zd-floating-menu">
+
+    <span class="zd-floating-menu-title">
+        ZINEB DÉCO
+    </span>
+
+    <ul class="zd-floating-menu-links">
+
+        <li>
+            <a th:href="@{/}">Accueil</a>
+        </li>
+
+        <li>
+            <a th:href="@{/salons}">Salons</a>
+        </li>
+
+        <li>
+            <a th:href="@{/canapes}">Canapés</a>
+        </li>
+
+        <li>
+            <a th:href="@{/chambres}">Chambres</a>
+        </li>
+
+        <li>
+            <a th:href="@{/sur-mesure}">Sur mesure</a>
+        </li>
+
+        <li>
+            <a th:href="@{/nouveautes}">Nouveautés</a>
+        </li>
+
+        <li>
+            <a th:href="@{/promotions}">Promotions</a>
+        </li>
+
+        <li>
+            <a th:href="@{/contact}">Contact</a>
+        </li>
+
+        <li class="zd-floating-menu-separator"></li>
+
+        <li>
+            <a th:href="@{/compte}">Mon compte</a>
+        </li>
+
+        <li>
+            <a th:href="@{/panier}"
+               class="zd-floating-cart">
+                Panier
+            </a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const button =
+        document.getElementById("zdFloatingMenuButton");
+
+    const menu =
+        document.getElementById("zdFloatingMenu");
+
+
+    if (!button || !menu) {
+        console.log("Menu flottant introuvable");
+        return;
+    }
+
+
+    function updateFloatingButton() {
+
+        if (window.scrollY > 200) {
+
+            button.classList.add("visible");
+
+        } else {
+
+            button.classList.remove("visible");
+            button.classList.remove("open");
+            menu.classList.remove("open");
+
+        }
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        updateFloatingButton,
+        { passive: true }
+    );
+
+
+    button.addEventListener("click", function (event) {
+
+        event.stopPropagation();
+
+        button.classList.toggle("open");
+        menu.classList.toggle("open");
+
+    });
+
+
+    menu.addEventListener("click", function (event) {
+        event.stopPropagation();
+    });
+
+
+    document.addEventListener("click", function () {
+
+        button.classList.remove("open");
+        menu.classList.remove("open");
+
+    });
+
+
+    updateFloatingButton();
+
+});
+
+</script>
+
+
+<!-- ⚠️ LE MENU DOIT ÊTRE AVANT CETTE LIGNE -->
+</header>
+</header>
+
+</body>
+
+</html>

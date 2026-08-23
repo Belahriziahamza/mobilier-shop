@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+
+<!-- =========================================================
+     PRODUCT GRID - ZINEB DECO
+========================================================= -->
+
+<section
+    th:fragment="productGrid(products)"
+    class="products-section">
+
+
+    <!-- =====================================================
+         AUCUN PRODUIT
+    ====================================================== -->
+
+    <div
+        class="catalog-empty"
+        th:if="${products == null or #lists.isEmpty(products)}">
+
+
+        <div class="catalog-empty-icon">
+            ZD
+        </div>
+
+
+        <h2>
+            Aucun produit disponible
+        </h2>
+
+
+        <p>
+            De nouveaux modèles seront bientôt disponibles.
+        </p>
+
+
+        <a
+            th:href="@{/}"
+            href="/"
+            class="btn btn-gold">
+
+            Retour à l'accueil
+
+        </a>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         GRILLE PRODUITS
+    ====================================================== -->
+
+    <div
+        class="product-grid"
+        th:if="${products != null and !#lists.isEmpty(products)}">
+
+
+        <!-- =================================================
+             PRODUIT
+        ================================================== -->
+
+        <article
+            class="product-card"
+            th:each="product : ${products}"
+            th:attr="data-product-id=${product.id}">
+
+
+            <!-- =============================================
+                 IMAGE
+            ============================================== -->
+
+            <div class="product-card-image">
+
+
+                <!-- LIEN DETAIL -->
+
+                <a
+                    th:href="@{/produit/{id}(id=${product.id})}"
+                    href="#"
+                    class="product-image-link">
+
+
+                    <!-- IMAGE PRODUIT -->
+
+                    <img
+                        th:if="${product.imagePath != null and !#strings.isEmpty(product.imagePath)}"
+                        th:src="${product.imagePath}"
+                        th:alt="${product.name}"
+                        loading="lazy">
+
+
+                    <!-- IMAGE PLACEHOLDER -->
+
+                    <div
+                        class="product-image-placeholder"
+                        th:if="${product.imagePath == null or #strings.isEmpty(product.imagePath)}">
+
+                        <span>
+                            ZD
+                        </span>
+
+                        <small>
+                            ZINEB DÉCO
+                        </small>
+
+                    </div>
+
+
+                </a>
+
+
+
+                <!-- =========================================
+                     BADGES
+                ========================================== -->
+
+                <div class="product-badges">
+
+
+                    <!-- NOUVEAU -->
+
+                    <span
+                        class="product-badge product-badge-new"
+                        th:if="${product.newProduct}">
+
+                        Nouveau
+
+                    </span>
+
+
+
+                    <!-- PROMOTION -->
+
+                    <span
+                        class="product-badge product-badge-promo"
+                        th:if="${product.promotion}">
+
+                        Promotion
+
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- =========================================
+                     FAVORIS MYSQL
+                ========================================== -->
+
+                <button
+                    type="button"
+
+                    class="mysql-favorite-button"
+
+                    th:attr="
+                        data-product-id=${product.id},
+                        data-csrf-token=${_csrf.token},
+                        data-csrf-header=${_csrf.headerName}"
+
+                    aria-label="Ajouter aux favoris"
+
+                    title="Ajouter aux favoris">
+
+                    ♡
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- =============================================
+                 INFORMATIONS PRODUIT
+            ============================================== -->
+
+            <div class="product-card-content">
+
+
+                <!-- CATEGORIE -->
+
+                <div
+                    class="product-category"
+                    th:if="${product.category != null}">
+
+                    <span
+                        th:text="${
+                            product.category == 'salon'
+                                ? 'Salon'
+                            : product.category == 'canape'
+                                ? 'Canapé'
+                            : product.category == 'chambre'
+                                ? 'Chambre'
+                            : product.category == 'lit'
+                                ? 'Lit'
+                            : product.category == 'tete-de-lit'
+                                ? 'Tête de lit'
+                            : product.category == 'chaise'
+                                ? 'Chaise'
+                            : product.category == 'fauteuil'
+                                ? 'Fauteuil'
+                            : product.category == 'table'
+                                ? 'Table'
+                            : product.category
+                        }">
+
+                        Catégorie
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- NOM -->
+
+                <h3 class="product-card-title">
+
+
+                    <a
+                        th:href="@{/produit/{id}(id=${product.id})}"
+                        href="#"
+                        th:text="${product.name}">
+
+                        Produit Zineb Déco
+
+                    </a>
+
+
+                </h3>
+
+
+
+                <!-- TYPE -->
+
+                <p
+                    class="product-card-type"
+                    th:if="${product.type != null and !#strings.isEmpty(product.type)}"
+                    th:text="${product.type}">
+
+                    Type
+
+                </p>
+
+
+
+                <!-- =========================================
+                     PRIX
+                ========================================== -->
+
+                <div class="product-card-prices">
+
+
+                    <!-- PRIX ACTUEL -->
+
+                    <strong class="product-price">
+
+                        <span
+                            th:text="${product.price}">
+
+                            0
+
+                        </span>
+
+                        <small>
+                            DH
+                        </small>
+
+                    </strong>
+
+
+
+                    <!-- ANCIEN PRIX -->
+
+                    <span
+                        class="product-old-price"
+                        th:if="${product.oldPrice != null and product.oldPrice > product.price}">
+
+
+                        <span
+                            th:text="${product.oldPrice}">
+
+                            0
+
+                        </span>
+
+                        DH
+
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- =========================================
+                     COULEUR
+                ========================================== -->
+
+                <div
+                    class="product-extra-info"
+                    th:if="${product.color != null and !#strings.isEmpty(product.color)}">
+
+
+                    <span>
+                        Couleur
+                    </span>
+
+
+                    <strong
+                        th:text="${product.color}">
+
+                        Beige
+
+                    </strong>
+
+
+                </div>
+
+
+
+                <!-- =========================================
+                     DISPONIBILITE
+                ========================================== -->
+
+                <div class="product-availability">
+
+
+                    <span
+                        class="availability-dot"
+                        th:classappend="${product.active} ? ' available' : ' unavailable'">
+                    </span>
+
+
+                    <span
+                        th:if="${product.availability != null and !#strings.isEmpty(product.availability)}"
+                        th:text="${product.availability}">
+
+                        Disponible
+
+                    </span>
+
+
+                    <span
+                        th:if="${product.availability == null or #strings.isEmpty(product.availability)}"
+                        th:text="${product.active ? 'Disponible' : 'Indisponible'}">
+
+                        Disponible
+
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- =========================================
+                     ACTIONS
+                ========================================== -->
+
+                <div class="product-card-actions">
+
+
+                    <!-- DETAILS -->
+
+                    <a
+                        th:href="@{/produit/{id}(id=${product.id})}"
+                        href="#"
+                        class="product-detail-button">
+
+                        Voir détails
+
+                    </a>
+
+
+
+                    <!-- =====================================
+                         AJOUT PANIER
+                    ====================================== -->
+
+                    <button
+                        type="button"
+
+                        class="add-cart-button"
+
+                        th:if="${product.active}"
+
+                        th:attr="
+                            data-id=${product.id},
+                            data-name=${product.name},
+                            data-price=${product.price},
+                            data-image=${product.imagePath != null ? product.imagePath : ''}">
+
+                        Ajouter au panier
+
+                    </button>
+
+
+
+                    <!-- PRODUIT INDISPONIBLE -->
+
+                    <button
+                        type="button"
+                        class="add-cart-button disabled"
+                        disabled
+                        th:if="${!product.active}">
+
+                        Indisponible
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+        </article>
+
+
+    </div>
+
+
+</section>
+
+
+</body>
+
+</html>

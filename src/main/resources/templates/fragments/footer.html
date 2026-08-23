@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<footer th:fragment="footer"
+        class="footer"
+        id="contact">
+
+    <div class="container footer-grid">
+
+
+        <!-- MARQUE -->
+
+        <div class="footer-brand">
+
+            <img
+                th:src="@{/images/logo-zineb-deco.png}"
+                src="/images/logo-zineb-deco.png"
+                alt="Zineb Déco">
+
+            <p>
+                Mobilier, décoration et fabrication
+                sur mesure.
+            </p>
+
+
+            <div class="footer-socials">
+
+                <a
+                    href="https://www.instagram.com/zineb_deco?igsh=MXBzbTB0aW16eDBpaw=="
+                    target="_blank"
+                    rel="noopener">
+
+                    Instagram
+
+                </a>
+
+                <a
+                    href="https://www.facebook.com/share/1DiumDb7Py/?mibextid=wwXIfr"
+                    target="_blank"
+                    rel="noopener">
+
+                    Facebook
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- COLLECTIONS -->
+
+        <div class="footer-column">
+
+            <h3>
+                Collections
+            </h3>
+
+            <a th:href="@{/salons}">
+                Salons
+            </a>
+
+            <a th:href="@{/canapes}">
+                Canapés
+            </a>
+
+            <a th:href="@{/chambres}">
+                Chambres
+            </a>
+
+            <a th:href="@{/lits}">
+                Lits
+            </a>
+
+            <a th:href="@{/chaises}">
+                Chaises & fauteuils
+            </a>
+
+        </div>
+
+
+        <!-- SERVICES -->
+
+        <div class="footer-column">
+
+            <h3>
+                Nos services
+            </h3>
+
+            <a th:href="@{/sur-mesure}">
+                Fabrication sur mesure
+            </a>
+
+            <a th:href="@{/tissus}">
+                Tissus
+            </a>
+
+            <a th:href="@{/bois}">
+                Bois
+            </a>
+
+            <a th:href="@{/mdf}">
+                MDF
+            </a>
+
+            <a th:href="@{/promotions}">
+                Promotions
+            </a>
+
+        </div>
+
+
+        <!-- CONTACT -->
+
+        <div class="footer-column footer-contact">
+
+            <h3>
+                Contact
+            </h3>
+
+
+            <a href="tel:+212667928660"
+               class="footer-contact-link">
+
+                <span>☎</span>
+
+                +212 667-928660
+
+            </a>
+
+
+            <a
+                href="https://wa.me/212667928660"
+                target="_blank"
+                rel="noopener"
+                class="footer-contact-link">
+
+                <span>◉</span>
+
+                WhatsApp 1
+
+            </a>
+
+
+            <a href="tel:+212709807532"
+               class="footer-contact-link">
+
+                <span>☎</span>
+
+                +212 709-807532
+
+            </a>
+
+
+            <a
+                href="https://wa.me/212709807532"
+                target="_blank"
+                rel="noopener"
+                class="footer-contact-link">
+
+                <span>◉</span>
+
+                WhatsApp 2
+
+            </a>
+
+
+            <a
+                href="https://www.instagram.com/zineb_deco?igsh=MXBzbTB0aW16eDBpaw=="
+                target="_blank"
+                rel="noopener"
+                class="footer-contact-link">
+
+                <span>◎</span>
+
+                @zineb_deco
+
+            </a>
+
+
+            <a
+                href="https://www.facebook.com/share/1DiumDb7Py/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener"
+                class="footer-contact-link">
+
+                <span>f</span>
+
+                Facebook
+
+            </a>
+
+
+            <a
+                href="https://maps.app.goo.gl/BQMZTeR1he6xYfc38?g_st=ic"
+                target="_blank"
+                rel="noopener"
+                class="footer-contact-link">
+
+                <span>📍</span>
+
+                Notre localisation
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- PETITE CARTE -->
+
+    <div class="container footer-location">
+
+        <div class="footer-location-info">
+
+            <span class="footer-location-label">
+                NOTRE LOCALISATION
+            </span>
+
+            <h3>
+                Retrouvez Zineb Déco
+            </h3>
+
+            <p>
+                Cliquez sur la carte ou sur le bouton
+                pour ouvrir votre itinéraire.
+            </p>
+
+            <a
+                href="https://maps.app.goo.gl/BQMZTeR1he6xYfc38?g_st=ic"
+                target="_blank"
+                rel="noopener"
+                class="footer-map-button">
+
+                Ouvrir Google Maps →
+
+            </a>
+
+        </div>
+
+
+        <a
+            href="https://maps.app.goo.gl/BQMZTeR1he6xYfc38?g_st=ic"
+            target="_blank"
+            rel="noopener"
+            class="footer-map">
+
+            <iframe
+                src="https://www.google.com/maps?q=34.2689782,-6.6011491&z=16&output=embed"
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+
+        </a>
+
+    </div>
+
+
+    <!-- COPYRIGHT -->
+
+    <div class="container footer-bottom">
+
+        <p>
+            © 2026 Zineb Déco.
+            Tous droits réservés.
+        </p>
+
+        <p>
+            Mobilier • Décoration • Sur mesure
+        </p>
+
+    </div>
+
+</footer>
+
+</body>
+</html>

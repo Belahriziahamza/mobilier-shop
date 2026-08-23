@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Créer un compte | Zineb Déco</title>
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ====================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: #080705;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        input,
+        button {
+            font: inherit;
+        }
+
+
+        /* =====================================================
+           PAGE
+        ====================================================== */
+
+        .zd-register {
+            width: 100%;
+            min-height: 100vh;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 0.9fr)
+                minmax(520px, 1.1fr);
+        }
+
+
+        /* =====================================================
+           GAUCHE
+        ====================================================== */
+
+        .zd-register-showcase {
+            position: relative;
+
+            min-height: 100vh;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(5,4,2,0.86),
+                    rgba(5,4,2,0.48),
+                    rgba(5,4,2,0.72)
+                ),
+                url("/images/login-background.jpg");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+
+        .zd-register-showcase::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(0,0,0,0.06),
+                    rgba(0,0,0,0.18) 45%,
+                    rgba(0,0,0,0.72)
+                );
+        }
+
+
+        .zd-register-showcase-inner {
+            position: relative;
+            z-index: 2;
+
+            width:
+                min(
+                    650px,
+                    calc(100% - 80px)
+                );
+
+            min-height: 100vh;
+
+            margin: auto;
+
+            padding: 38px 0 30px;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        /* =====================================================
+           LOGO
+        ====================================================== */
+
+        .zd-register-logo {
+            width: 76px;
+            height: 76px;
+
+            flex: 0 0 76px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(212,165,54,0.9);
+
+            background:
+                rgba(8,7,5,0.9);
+        }
+
+
+        .zd-register-logo img {
+            width: 100% !important;
+            height: 100% !important;
+
+            max-width: 76px !important;
+            max-height: 76px !important;
+
+            padding: 4px;
+
+            object-fit: contain;
+        }
+
+
+        /* =====================================================
+           TEXTE GAUCHE
+        ====================================================== */
+
+        .zd-register-hero {
+            margin: auto 0;
+
+            max-width: 520px;
+
+            padding: 55px 0;
+        }
+
+
+        .zd-register-kicker {
+            color: #d4a536;
+
+            font-size: 10px;
+            font-weight: 900;
+
+            letter-spacing: 5px;
+
+            text-transform: uppercase;
+        }
+
+
+        .zd-register-hero h1 {
+            margin-top: 17px;
+
+            color: white;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                clamp(53px, 5.5vw, 82px);
+
+            line-height: 0.96;
+
+            font-weight: 400;
+        }
+
+
+        .zd-register-hero h1 span {
+            display: block;
+
+            margin-top: 7px;
+
+            color: #d4a536;
+
+            font-style: italic;
+        }
+
+
+        .zd-register-hero p {
+            max-width: 480px;
+
+            margin-top: 25px;
+
+            color:
+                rgba(255,255,255,0.68);
+
+            font-size: 13px;
+
+            line-height: 1.85;
+        }
+
+
+        /* =====================================================
+           BENEFITS
+        ====================================================== */
+
+        .zd-register-benefits {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            border-top:
+                1px solid
+                rgba(212,165,54,0.24);
+        }
+
+
+        .zd-register-benefit {
+            padding: 17px;
+
+            border-right:
+                1px solid
+                rgba(212,165,54,0.14);
+        }
+
+
+        .zd-register-benefit:first-child {
+            padding-left: 0;
+        }
+
+
+        .zd-register-benefit:last-child {
+            border-right: 0;
+        }
+
+
+        .zd-register-benefit strong {
+            display: block;
+
+            color: white;
+
+            font-size: 10px;
+        }
+
+
+        .zd-register-benefit span {
+            display: block;
+
+            margin-top: 3px;
+
+            color:
+                rgba(255,255,255,0.44);
+
+            font-size: 8px;
+        }
+
+
+        /* =====================================================
+           DROITE
+        ====================================================== */
+
+        .zd-register-panel {
+            min-height: 100vh;
+
+            padding: 45px 55px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(212,165,54,0.12),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    145deg,
+                    #faf7f1,
+                    #eee5d8
+                );
+        }
+
+
+        .zd-register-box {
+            width: 100%;
+            max-width: 620px;
+        }
+
+
+        /* =====================================================
+           PETIT LOGO
+        ====================================================== */
+
+        .zd-register-small-logo {
+            width: 58px;
+            height: 58px;
+
+            margin-bottom: 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            border-radius: 50%;
+
+            border:
+                1px solid #d4a536;
+
+            background: #080705;
+        }
+
+
+        .zd-register-small-logo img {
+            width: 100% !important;
+            height: 100% !important;
+
+            max-width: 58px !important;
+            max-height: 58px !important;
+
+            padding: 3px;
+
+            object-fit: contain;
+        }
+
+
+        /* =====================================================
+           TITRE
+        ====================================================== */
+
+        .zd-register-label {
+            display: block;
+
+            color: #a77a20;
+
+            font-size: 9px;
+            font-weight: 900;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+        }
+
+
+        .zd-register-box h2 {
+            margin-top: 7px;
+
+            color: #24211c;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                clamp(39px, 4vw, 52px);
+
+            line-height: 1;
+
+            font-weight: 400;
+        }
+
+
+        .zd-register-description {
+            max-width: 500px;
+
+            margin-top: 12px;
+
+            color: #756f67;
+
+            font-size: 10px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           ERROR
+        ====================================================== */
+
+        .zd-register-error {
+            margin-top: 18px;
+
+            padding: 11px 13px;
+
+            border:
+                1px solid #d1a0a0;
+
+            background: #fff1f1;
+
+            color: #923131;
+
+            font-size: 9px;
+        }
+
+
+        /* =====================================================
+           FORM
+        ====================================================== */
+
+        .zd-register-form {
+            margin-top: 25px;
+
+            display: grid;
+
+            gap: 15px;
+        }
+
+
+        .zd-register-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 15px;
+        }
+
+
+        .zd-register-field {
+            min-width: 0;
+
+            display: grid;
+
+            gap: 6px;
+        }
+
+
+        .zd-register-full {
+            grid-column: 1 / -1;
+        }
+
+
+        .zd-register-field label {
+            color: #4d463e;
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            letter-spacing: 0.6px;
+
+            text-transform: uppercase;
+        }
+
+
+        .zd-register-field input {
+            width: 100%;
+            height: 49px;
+
+            padding: 0 14px;
+
+            border:
+                1px solid #d8cfc2;
+
+            outline: none;
+
+            background:
+                rgba(255,255,255,0.82);
+
+            color: #24211c;
+
+            font-size: 10px;
+        }
+
+
+        .zd-register-field input:focus {
+            border-color: #b8892b;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(212,165,54,0.08);
+        }
+
+
+        .zd-register-field input::placeholder {
+            color: #aaa197;
+        }
+
+
+        /* =====================================================
+           PASSWORD
+        ====================================================== */
+
+        .zd-register-password {
+            position: relative;
+        }
+
+
+        .zd-register-password input {
+            padding-right: 50px;
+        }
+
+
+        .zd-register-password button {
+            position: absolute;
+
+            top: 50%;
+            right: 6px;
+
+            width: 38px;
+            height: 38px;
+
+            transform:
+                translateY(-50%);
+
+            border: 0;
+
+            background: transparent;
+
+            color: #8b6826;
+
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           BUTTON
+        ====================================================== */
+
+        .zd-register-submit {
+            width: 100%;
+            min-height: 51px;
+
+            margin-top: 4px;
+
+            padding: 0 18px;
+
+            border:
+                1px solid #080705;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            background: #080705;
+
+            color: #d4a536;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+
+        .zd-register-submit:hover {
+            border-color: #d4a536;
+
+            background: #d4a536;
+
+            color: #080705;
+        }
+
+
+        /* =====================================================
+           LOGIN LINK
+        ====================================================== */
+
+        .zd-register-login {
+            margin-top: 22px;
+
+            padding-top: 19px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            border-top:
+                1px solid #dcd3c7;
+
+            color: #817970;
+
+            font-size: 9px;
+        }
+
+
+        .zd-register-login a {
+            color: #956818;
+
+            font-weight: 900;
+        }
+
+
+        .zd-register-return {
+            display: inline-block;
+
+            margin-top: 20px;
+
+            color: #817970;
+
+            font-size: 9px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1050px) {
+
+            .zd-register {
+                grid-template-columns:
+                    minmax(0, 0.8fr)
+                    minmax(480px, 1.2fr);
+            }
+
+
+            .zd-register-showcase-inner {
+                width:
+                    calc(100% - 50px);
+            }
+
+
+            .zd-register-panel {
+                padding:
+                    40px 30px;
+            }
+
+
+            .zd-register-benefits {
+                grid-template-columns: 1fr;
+            }
+
+
+            .zd-register-benefit {
+                padding: 9px 0;
+
+                border-right: 0;
+            }
+
+        }
+
+
+        @media (max-width: 820px) {
+
+            .zd-register {
+                display: block;
+            }
+
+
+            .zd-register-showcase {
+                min-height: 320px;
+            }
+
+
+            .zd-register-showcase-inner {
+                width:
+                    calc(100% - 36px);
+
+                min-height: 320px;
+
+                padding: 22px 0;
+            }
+
+
+            .zd-register-logo {
+                width: 60px;
+                height: 60px;
+
+                flex-basis: 60px;
+            }
+
+
+            .zd-register-logo img {
+                max-width:
+                    60px !important;
+
+                max-height:
+                    60px !important;
+            }
+
+
+            .zd-register-hero {
+                margin: auto 0;
+
+                padding: 30px 0;
+            }
+
+
+            .zd-register-hero h1 {
+                font-size: 48px;
+            }
+
+
+            .zd-register-benefits {
+                display: none;
+            }
+
+
+            .zd-register-panel {
+                min-height: auto;
+
+                padding:
+                    38px 20px
+                    50px;
+            }
+
+        }
+
+
+        @media (max-width: 550px) {
+
+            .zd-register-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .zd-register-full {
+                grid-column: auto;
+            }
+
+
+            .zd-register-showcase {
+                min-height: 270px;
+            }
+
+
+            .zd-register-showcase-inner {
+                min-height: 270px;
+            }
+
+
+            .zd-register-hero h1 {
+                font-size: 39px;
+            }
+
+
+            .zd-register-hero p {
+                display: none;
+            }
+
+
+            .zd-register-panel {
+                padding:
+                    30px 16px
+                    45px;
+            }
+
+
+            .zd-register-box h2 {
+                font-size: 39px;
+            }
+
+
+            .zd-register-login {
+                flex-direction: column;
+
+                gap: 6px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<main class="zd-register">
+
+
+    <!-- =====================================================
+         GAUCHE
+    ====================================================== -->
+
+    <section class="zd-register-showcase">
+
+
+        <div class="zd-register-showcase-inner">
+
+
+            <a th:href="@{/}"
+               href="/"
+               class="zd-register-logo">
+
+                <img th:src="@{/images/logo-zineb-deco.png}"
+                     src="/images/logo-zineb-deco.png"
+                     alt="Zineb Déco">
+
+            </a>
+
+
+
+            <div class="zd-register-hero">
+
+                <span class="zd-register-kicker">
+                    ZINEB DÉCO
+                </span>
+
+
+                <h1>
+
+                    Votre intérieur,
+
+                    <span>
+                        votre histoire.
+                    </span>
+
+                </h1>
+
+
+                <p>
+
+                    Créez votre espace client pour
+                    enregistrer vos favoris, retrouver
+                    vos commandes et faciliter vos
+                    prochaines réservations.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="zd-register-benefits">
+
+
+                <div class="zd-register-benefit">
+
+                    <strong>
+                        Mes favoris
+                    </strong>
+
+                    <span>
+                        Retrouvez vos sélections
+                    </span>
+
+                </div>
+
+
+                <div class="zd-register-benefit">
+
+                    <strong>
+                        Mes commandes
+                    </strong>
+
+                    <span>
+                        Suivez vos réservations
+                    </span>
+
+                </div>
+
+
+                <div class="zd-register-benefit">
+
+                    <strong>
+                        Plus rapide
+                    </strong>
+
+                    <span>
+                        Informations enregistrées
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DROITE
+    ====================================================== -->
+
+    <section class="zd-register-panel">
+
+
+        <div class="zd-register-box">
+
+
+            <a th:href="@{/}"
+               href="/"
+               class="zd-register-small-logo">
+
+                <img th:src="@{/images/logo-zineb-deco.png}"
+                     src="/images/logo-zineb-deco.png"
+                     alt="Zineb Déco">
+
+            </a>
+
+
+            <span class="zd-register-label">
+                ESPACE CLIENT
+            </span>
+
+
+            <h2>
+                Créer mon compte
+            </h2>
+
+
+            <p class="zd-register-description">
+
+                Quelques informations suffisent
+                pour créer votre espace Zineb Déco.
+
+            </p>
+
+
+
+            <!-- ERREUR -->
+
+            <div th:if="${registrationError != null}"
+                 class="zd-register-error"
+                 th:text="${registrationError}">
+
+                Erreur inscription
+
+            </div>
+
+
+
+            <!-- =================================================
+                 FORMULAIRE
+            ================================================== -->
+
+            <form th:action="@{/compte/inscription}"
+                  action="/compte/inscription"
+                  method="post"
+                  class="zd-register-form">
+
+
+                <input type="hidden"
+                       th:name="${_csrf.parameterName}"
+                       th:value="${_csrf.token}">
+
+
+                <div class="zd-register-grid">
+
+
+                    <!-- PRENOM -->
+
+                    <div class="zd-register-field">
+
+                        <label for="firstName">
+                            Prénom *
+                        </label>
+
+                        <input id="firstName"
+                               name="firstName"
+                               type="text"
+                               maxlength="100"
+                               th:value="${firstName}"
+                               placeholder="Votre prénom"
+                               autocomplete="given-name"
+                               required>
+
+                    </div>
+
+
+
+                    <!-- NOM -->
+
+                    <div class="zd-register-field">
+
+                        <label for="lastName">
+                            Nom *
+                        </label>
+
+                        <input id="lastName"
+                               name="lastName"
+                               type="text"
+                               maxlength="100"
+                               th:value="${lastName}"
+                               placeholder="Votre nom"
+                               autocomplete="family-name"
+                               required>
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div class="zd-register-field zd-register-full">
+
+                        <label for="email">
+                            Adresse email *
+                        </label>
+
+                        <input id="email"
+                               name="email"
+                               type="email"
+                               th:value="${email}"
+                               placeholder="exemple@email.com"
+                               autocomplete="email"
+                               required>
+
+                    </div>
+
+
+
+                    <!-- TELEPHONE -->
+
+                    <div class="zd-register-field zd-register-full">
+
+                        <label for="phone">
+                            Téléphone *
+                        </label>
+
+                        <input id="phone"
+                               name="phone"
+                               type="tel"
+                               maxlength="30"
+                               th:value="${phone}"
+                               placeholder="+212 6..."
+                               autocomplete="tel"
+                               required>
+
+                    </div>
+
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="zd-register-field">
+
+                        <label for="password">
+                            Mot de passe *
+                        </label>
+
+
+                        <div class="zd-register-password">
+
+                            <input id="password"
+                                   name="password"
+                                   type="password"
+                                   minlength="8"
+                                   maxlength="100"
+                                   placeholder="Minimum 8 caractères"
+                                   autocomplete="new-password"
+                                   required>
+
+
+                            <button type="button"
+                                    class="toggle-register-password"
+                                    data-target="password">
+
+                                ◉
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CONFIRMATION -->
+
+                    <div class="zd-register-field">
+
+                        <label for="confirmPassword">
+                            Confirmation *
+                        </label>
+
+
+                        <div class="zd-register-password">
+
+                            <input id="confirmPassword"
+                                   name="confirmPassword"
+                                   type="password"
+                                   minlength="8"
+                                   maxlength="100"
+                                   placeholder="Répétez le mot de passe"
+                                   autocomplete="new-password"
+                                   required>
+
+
+                            <button type="button"
+                                    class="toggle-register-password"
+                                    data-target="confirmPassword">
+
+                                ◉
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <button type="submit"
+                        class="zd-register-submit">
+
+                    <span>
+                        Créer mon compte
+                    </span>
+
+                    <span>
+                        →
+                    </span>
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- LOGIN -->
+
+            <div class="zd-register-login">
+
+                <span>
+                    Vous avez déjà un compte ?
+                </span>
+
+
+                <a th:href="@{/compte/login}"
+                   href="/compte/login">
+
+                    Se connecter
+
+                </a>
+
+            </div>
+
+
+
+            <a th:href="@{/}"
+               href="/"
+               class="zd-register-return">
+
+                ← Retour à la boutique
+
+            </a>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<script>
+
+    document
+        .querySelectorAll(
+            ".toggle-register-password"
+        )
+        .forEach(
+            function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        const target =
+                            document.getElementById(
+                                button.dataset.target
+                            );
+
+
+                        if (!target) {
+                            return;
+                        }
+
+
+                        const hidden =
+                            target.type === "password";
+
+
+                        target.type =
+                            hidden
+                                ? "text"
+                                : "password";
+
+
+                        button.textContent =
+                            hidden
+                                ? "●"
+                                : "◉";
+
+                    }
+                );
+
+            }
+        );
+
+</script>
+
+
+</body>
+
+</html>

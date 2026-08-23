@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Zineb Déco - Salons, canapés, chambres, mobilier et fabrication sur mesure.">
+
+    <title>
+        Zineb Déco | Mobilier & Décoration
+    </title>
+
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}"
+          href="/css/style.css">
+
+
+    <!-- =====================================================
+         STYLE IMAGE HERO
+    ====================================================== -->
+
+    <style>
+
+        .home-hero-image {
+
+            position: relative;
+
+            overflow: hidden;
+
+            min-height: 560px;
+
+            background: #e9e4dc;
+        }
+
+
+        .home-hero-real-image {
+
+            width: 100%;
+
+            height: 100%;
+
+            min-height: 560px;
+
+            display: block;
+
+            object-fit: cover;
+
+            object-position: center;
+
+            transition: transform .5s ease;
+        }
+
+
+        .home-hero-image:hover
+        .home-hero-real-image {
+
+            transform: scale(1.025);
+        }
+
+
+        @media (max-width: 768px) {
+
+            .home-hero-image {
+
+                min-height: 430px;
+            }
+
+
+            .home-hero-real-image {
+
+                min-height: 430px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER COMMUN
+===================================================== -->
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+
+
+<main>
+
+
+    <!-- =================================================
+         HERO
+    ================================================== -->
+
+    <section class="home-hero">
+
+
+        <div class="container home-hero-grid">
+
+
+            <!-- =================================================
+                 TEXTE HERO
+            ================================================== -->
+
+            <div class="home-hero-content">
+
+
+                <span class="section-label"
+
+                      th:text="${shopSetting != null
+                          and shopSetting.shopName != null
+                          and !#strings.isEmpty(shopSetting.shopName)
+                          ? shopSetting.shopName
+                          : 'ZINEB DÉCO'}">
+
+                    ZINEB DÉCO
+
+                </span>
+
+
+
+                <h1>
+
+                    L'élégance prend
+
+                    <span>
+                        place chez vous.
+                    </span>
+
+                </h1>
+
+
+
+                <p class="hero-description">
+
+                    Découvrez notre univers de salons,
+                    canapés, chambres et mobilier.
+
+                    Choisissez votre modèle,
+                    vos dimensions, votre tissu,
+                    vos couleurs et vos finitions.
+
+                </p>
+
+
+
+                <div class="hero-buttons">
+
+
+                    <a th:href="@{/salons}"
+                       href="/salons"
+                       class="btn btn-gold">
+
+                        Découvrir nos salons
+
+                    </a>
+
+
+
+                    <a th:href="@{/sur-mesure}"
+                       href="/sur-mesure"
+                       class="btn btn-outline">
+
+                        Créer mon salon
+
+                    </a>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     AVANTAGES
+                ================================================== -->
+
+                <div class="hero-benefits">
+
+
+                    <div class="hero-benefit">
+
+                        <strong>
+                            Sur mesure
+                        </strong>
+
+                        <span>
+                            Adapté à votre intérieur
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="hero-benefit">
+
+                        <strong>
+                            Personnalisable
+                        </strong>
+
+                        <span>
+                            Tissus, couleurs & MDF
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="hero-benefit">
+
+                        <strong>
+                            Qualité
+                        </strong>
+
+                        <span>
+                            Finitions soignées
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 IMAGE HERO REELLE
+            ================================================== -->
+
+            <div class="home-hero-image">
+
+
+                <img th:src="@{/images/home-hero.jpg}"
+                     src="/images/home-hero.jpg"
+
+                     alt="Salon sur mesure Zineb Déco"
+
+                     class="home-hero-real-image">
+
+
+                <!-- CARTE FLOTTANTE -->
+
+                <div class="hero-floating-card">
+
+
+                    <span>
+                        Collection
+                    </span>
+
+
+                    <strong th:text="${shopSetting != null
+                        and shopSetting.shopName != null
+                        and !#strings.isEmpty(shopSetting.shopName)
+                        ? shopSetting.shopName
+                        : 'Zineb Déco'}">
+
+                        Zineb Déco
+
+                    </strong>
+
+
+                    <p>
+                        Mobilier & décoration
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         CATEGORIES
+    ================================================== -->
+
+    <section class="home-section categories-section">
+
+
+        <div class="container">
+
+
+            <div class="section-heading">
+
+
+                <span class="section-label dark">
+                    NOS COLLECTIONS
+                </span>
+
+
+                <h2>
+                    Découvrez nos univers
+                </h2>
+
+
+                <p>
+
+                    Trouvez le mobilier adapté
+                    à votre style et à votre intérieur.
+
+                </p>
+
+
+            </div>
+
+
+
+            <div class="categories-grid">
+
+
+                <!-- SALONS -->
+
+                <a th:href="@{/salons}"
+                   href="/salons"
+                   class="category-card">
+
+
+                    <div class="category-photo salon-photo">
+
+
+                        <span class="category-number">
+                            01
+                        </span>
+
+
+                        <div class="category-photo-text">
+                            Salons
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="category-info">
+
+
+                        <div>
+
+                            <span>
+                                Collection
+                            </span>
+
+                            <h3>
+                                Salons
+                            </h3>
+
+                        </div>
+
+
+                        <strong>
+                            →
+                        </strong>
+
+
+                    </div>
+
+
+                </a>
+
+
+
+                <!-- CANAPES -->
+
+                <a th:href="@{/canapes}"
+                   href="/canapes"
+                   class="category-card">
+
+
+                    <div class="category-photo canape-photo">
+
+
+                        <span class="category-number">
+                            02
+                        </span>
+
+
+                        <div class="category-photo-text">
+                            Canapés
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="category-info">
+
+
+                        <div>
+
+                            <span>
+                                Collection
+                            </span>
+
+                            <h3>
+                                Canapés
+                            </h3>
+
+                        </div>
+
+
+                        <strong>
+                            →
+                        </strong>
+
+
+                    </div>
+
+
+                </a>
+
+
+
+                <!-- CHAMBRES -->
+
+                <a th:href="@{/chambres}"
+                   href="/chambres"
+                   class="category-card">
+
+
+                    <div class="category-photo chambre-photo">
+
+
+                        <span class="category-number">
+                            03
+                        </span>
+
+
+                        <div class="category-photo-text">
+                            Chambres
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="category-info">
+
+
+                        <div>
+
+                            <span>
+                                Collection
+                            </span>
+
+                            <h3>
+                                Chambres
+                            </h3>
+
+                        </div>
+
+
+                        <strong>
+                            →
+                        </strong>
+
+
+                    </div>
+
+
+                </a>
+
+
+
+                <!-- CHAISES -->
+
+                <a th:href="@{/chaises}"
+                   href="/chaises"
+                   class="category-card">
+
+
+                    <div class="category-photo chaise-photo">
+
+
+                        <span class="category-number">
+                            04
+                        </span>
+
+
+                        <div class="category-photo-text">
+                            Chaises
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="category-info">
+
+
+                        <div>
+
+                            <span>
+                                Collection
+                            </span>
+
+
+                            <h3>
+                                Chaises & fauteuils
+                            </h3>
+
+                        </div>
+
+
+                        <strong>
+                            →
+                        </strong>
+
+
+                    </div>
+
+
+                </a>
+
+
+
+                <!-- LITS -->
+
+                <a th:href="@{/lits}"
+                   href="/lits"
+                   class="category-card">
+
+
+                    <div class="category-photo lit-photo">
+
+
+                        <span class="category-number">
+                            05
+                        </span>
+
+
+                        <div class="category-photo-text">
+                            Lits
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="category-info">
+
+
+                        <div>
+
+                            <span>
+                                Collection
+                            </span>
+
+                            <h3>
+                                Lits
+                            </h3>
+
+                        </div>
+
+
+                        <strong>
+                            →
+                        </strong>
+
+
+                    </div>
+
+
+                </a>
+
+
+
+                <!-- TETES DE LIT -->
+
+                <a th:href="@{/tetes-de-lit}"
+                   href="/tetes-de-lit"
+                   class="category-card">
+
+
+                    <div class="category-photo tete-lit-photo">
+
+
+                        <span class="category-number">
+                            06
+                        </span>
+
+
+                        <div class="category-photo-text">
+                            Têtes de lit
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="category-info">
+
+
+                        <div>
+
+                            <span>
+                                Collection
+                            </span>
+
+
+                            <h3>
+                                Têtes de lit
+                            </h3>
+
+                        </div>
+
+
+                        <strong>
+                            →
+                        </strong>
+
+
+                    </div>
+
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         NOUVEAUTES
+    ================================================== -->
+
+    <section class="home-section products-section">
+
+
+        <div class="container">
+
+
+            <div class="products-title-row">
+
+
+                <div>
+
+
+                    <span class="section-label dark">
+                        NOUVELLE COLLECTION
+                    </span>
+
+
+                    <h2>
+                        Nos nouveautés
+                    </h2>
+
+
+                </div>
+
+
+
+                <a th:href="@{/nouveautes}"
+                   href="/nouveautes"
+                   class="view-all-link">
+
+                    Voir tous les modèles →
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PRODUITS MYSQL
+            ================================================== -->
+
+            <div class="home-products-grid"
+
+                 th:if="${newProducts != null
+                         and !#lists.isEmpty(newProducts)}">
+
+
+                <article class="product-card"
+
+                         th:each="product : ${newProducts}"
+
+                         th:data-id="${product.id}"
+
+                         th:data-name="${product.name}"
+
+                         th:data-price="${product.price}"
+
+                         th:data-image="${product.imagePath}"
+
+                         th:data-category="${product.category}">
+
+
+                    <!-- IMAGE -->
+
+                    <div class="product-image">
+
+
+                        <span class="product-label">
+                            Nouveau
+                        </span>
+
+
+                        <button type="button"
+                                class="favorite-button"
+                                aria-label="Ajouter aux favoris">
+
+                            ♡
+
+                        </button>
+
+
+
+                        <!-- IMAGE REELLE -->
+
+                        <a th:if="${product.imagePath != null
+                                  and !#strings.isEmpty(product.imagePath)}"
+
+                           th:href="@{/produit/{id}(id=${product.id})}"
+
+                           class="home-product-image-link">
+
+
+                            <img class="home-product-real-image"
+
+                                 th:src="${product.imagePath}"
+
+                                 th:alt="${product.name}"
+
+                                 loading="lazy">
+
+
+                        </a>
+
+
+
+                        <!-- PLACEHOLDER PRODUIT -->
+
+                        <a th:if="${product.imagePath == null
+                                  or #strings.isEmpty(product.imagePath)}"
+
+                           th:href="@{/produit/{id}(id=${product.id})}"
+
+                           class="home-product-image-link">
+
+
+                            <div class="hero-image-placeholder"
+                                 style="height:100%;">
+
+
+                                <span class="hero-logo-text">
+                                    ZD
+                                </span>
+
+
+                            </div>
+
+
+                        </a>
+
+
+
+                        <a th:href="@{/produit/{id}(id=${product.id})}"
+                           class="quick-view">
+
+                            Voir le modèle
+
+                        </a>
+
+
+                    </div>
+
+
+
+                    <!-- INFORMATIONS -->
+
+                    <div class="product-content">
+
+
+                        <p class="product-category"
+
+                           th:text="${product.type != null
+                               and !#strings.isEmpty(product.type)
+                               ? product.type
+                               : product.category}">
+
+                            Produit
+
+                        </p>
+
+
+
+                        <h3>
+
+
+                            <a th:href="@{/produit/{id}(id=${product.id})}"
+
+                               th:text="${product.name}">
+
+                                Produit
+
+                            </a>
+
+
+                        </h3>
+
+
+
+                        <p class="product-description"
+
+                           th:text="${product.description != null
+                               and !#strings.isEmpty(product.description)
+                               ? product.description
+                               : 'Découvrez ce modèle Zineb Déco.'}">
+
+                            Description
+
+                        </p>
+
+
+
+                        <!-- BADGES -->
+
+                        <div class="home-product-badges">
+
+
+                            <span th:if="${product.availability == 'stock'}"
+                                  class="available">
+
+                                En stock
+
+                            </span>
+
+
+                            <span th:if="${product.availability == 'custom'}">
+
+                                Sur commande
+
+                            </span>
+
+
+                            <span th:if="${product.availability == 'out'}">
+
+                                Indisponible
+
+                            </span>
+
+
+                            <span th:if="${product.promotion}"
+                                  class="promo">
+
+                                Promotion
+
+                            </span>
+
+
+                        </div>
+
+
+
+                        <!-- PRIX -->
+
+                        <div class="product-price-row">
+
+
+                            <div>
+
+
+                                <span class="old-price"
+                                      th:if="${product.oldPrice != null}">
+
+                                    <span th:text="${product.oldPrice}">
+                                        0
+                                    </span>
+
+                                    DH
+
+                                </span>
+
+
+
+                                <strong>
+
+                                    <span th:text="${product.price}">
+                                        0
+                                    </span>
+
+                                    DH
+
+                                </strong>
+
+
+                            </div>
+
+
+
+                            <button type="button"
+                                    class="add-cart-button"
+
+                                    th:disabled="${product.availability == 'out'}">
+
+                                Ajouter
+
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </article>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 AUCUNE NOUVEAUTE
+            ================================================== -->
+
+            <div class="home-products-empty"
+
+                 th:if="${newProducts == null
+                         or #lists.isEmpty(newProducts)}">
+
+
+                <span class="section-label dark">
+                    ZINEB DÉCO
+                </span>
+
+
+                <h3>
+                    Nos prochaines nouveautés arrivent bientôt.
+                </h3>
+
+
+                <p>
+                    Découvrez en attendant toutes nos collections.
+                </p>
+
+
+                <a th:href="@{/canapes}"
+                   href="/canapes"
+                   class="btn btn-gold">
+
+                    Voir les collections
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         PRODUITS VEDETTES
+    ================================================== -->
+
+    <section class="home-section featured-section"
+
+             th:if="${featuredProducts != null
+                     and !#lists.isEmpty(featuredProducts)}">
+
+
+        <div class="container">
+
+
+            <div class="products-title-row">
+
+
+                <div>
+
+
+                    <span class="section-label dark">
+                        SÉLECTION ZINEB DÉCO
+                    </span>
+
+
+                    <h2>
+                        Nos produits vedettes
+                    </h2>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="home-products-grid">
+
+
+                <article class="product-card"
+
+                         th:each="product : ${featuredProducts}"
+
+                         th:data-id="${product.id}"
+
+                         th:data-name="${product.name}"
+
+                         th:data-price="${product.price}"
+
+                         th:data-image="${product.imagePath}"
+
+                         th:data-category="${product.category}">
+
+
+                    <div class="product-image">
+
+
+                        <span class="product-label featured-label">
+                            Vedette
+                        </span>
+
+
+                        <button type="button"
+                                class="favorite-button"
+                                aria-label="Ajouter aux favoris">
+
+                            ♡
+
+                        </button>
+
+
+
+                        <a th:if="${product.imagePath != null
+                                  and !#strings.isEmpty(product.imagePath)}"
+
+                           th:href="@{/produit/{id}(id=${product.id})}"
+
+                           class="home-product-image-link">
+
+
+                            <img class="home-product-real-image"
+
+                                 th:src="${product.imagePath}"
+
+                                 th:alt="${product.name}"
+
+                                 loading="lazy">
+
+
+                        </a>
+
+
+
+                        <a th:if="${product.imagePath == null
+                                  or #strings.isEmpty(product.imagePath)}"
+
+                           th:href="@{/produit/{id}(id=${product.id})}"
+
+                           class="home-product-image-link">
+
+
+                            <div class="hero-image-placeholder"
+                                 style="height:100%;">
+
+
+                                <span class="hero-logo-text">
+                                    ZD
+                                </span>
+
+
+                            </div>
+
+
+                        </a>
+
+
+
+                        <a th:href="@{/produit/{id}(id=${product.id})}"
+                           class="quick-view">
+
+                            Voir le modèle
+
+                        </a>
+
+
+                    </div>
+
+
+
+                    <div class="product-content">
+
+
+                        <p class="product-category"
+
+                           th:text="${product.type != null
+                               and !#strings.isEmpty(product.type)
+                               ? product.type
+                               : product.category}">
+
+                            Produit
+
+                        </p>
+
+
+
+                        <h3>
+
+
+                            <a th:href="@{/produit/{id}(id=${product.id})}"
+
+                               th:text="${product.name}">
+
+                                Produit
+
+                            </a>
+
+
+                        </h3>
+
+
+
+                        <p class="product-description"
+
+                           th:text="${product.description != null
+                               and !#strings.isEmpty(product.description)
+                               ? product.description
+                               : 'Découvrez ce modèle Zineb Déco.'}">
+
+                            Description
+
+                        </p>
+
+
+
+                        <div class="home-product-badges">
+
+
+                            <span th:if="${product.availability == 'stock'}"
+                                  class="available">
+
+                                En stock
+
+                            </span>
+
+
+                            <span th:if="${product.availability == 'custom'}">
+
+                                Sur commande
+
+                            </span>
+
+
+                            <span th:if="${product.availability == 'out'}">
+
+                                Indisponible
+
+                            </span>
+
+
+                        </div>
+
+
+
+                        <div class="product-price-row">
+
+
+                            <div>
+
+
+                                <span class="old-price"
+                                      th:if="${product.oldPrice != null}">
+
+
+                                    <span th:text="${product.oldPrice}">
+                                        0
+                                    </span>
+
+                                    DH
+
+
+                                </span>
+
+
+
+                                <strong>
+
+                                    <span th:text="${product.price}">
+                                        0
+                                    </span>
+
+                                    DH
+
+                                </strong>
+
+
+                            </div>
+
+
+
+                            <button type="button"
+                                    class="add-cart-button"
+
+                                    th:disabled="${product.availability == 'out'}">
+
+                                Ajouter
+
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </article>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         SUR MESURE
+    ================================================== -->
+
+    <section class="custom-home-section">
+
+
+        <div class="container custom-home-grid">
+
+
+            <div class="custom-home-content">
+
+
+                <span class="section-label">
+                    FABRICATION SUR MESURE
+                </span>
+
+
+                <h2>
+
+                    Votre espace.
+
+                    <span>
+                        Votre salon.
+                    </span>
+
+                </h2>
+
+
+                <p>
+
+                    Vous choisissez le modèle,
+                    les dimensions, le tissu,
+                    les couleurs, le bois,
+                    le MDF et les finitions.
+
+                    Zineb Déco transforme ensuite
+                    votre choix en projet personnalisé.
+
+                </p>
+
+
+                <a th:href="@{/sur-mesure}"
+                   href="/sur-mesure"
+                   class="btn btn-gold">
+
+                    Configurer mon projet
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- PROCESS -->
+
+            <div class="custom-process">
+
+
+                <div class="process-row">
+
+
+                    <span>
+                        01
+                    </span>
+
+
+                    <div>
+
+                        <h3>
+                            Choisissez le modèle
+                        </h3>
+
+                        <p>
+                            Salon, canapé ou autre mobilier.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="process-row">
+
+
+                    <span>
+                        02
+                    </span>
+
+
+                    <div>
+
+                        <h3>
+                            Dimensions
+                        </h3>
+
+                        <p>
+                            Adaptez le meuble à votre espace.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="process-row">
+
+
+                    <span>
+                        03
+                    </span>
+
+
+                    <div>
+
+                        <h3>
+                            Tissu & couleur
+                        </h3>
+
+                        <p>
+                            Choisissez parmi le catalogue disponible.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="process-row">
+
+
+                    <span>
+                        04
+                    </span>
+
+
+                    <div>
+
+                        <h3>
+                            Bois & MDF
+                        </h3>
+
+                        <p>
+                            Sélectionnez vos finitions.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         MATIERES
+    ================================================== -->
+
+    <section class="home-section materials-home-section">
+
+
+        <div class="container">
+
+
+            <div class="section-heading">
+
+
+                <span class="section-label dark">
+                    PERSONNALISEZ CHAQUE DÉTAIL
+                </span>
+
+
+                <h2>
+                    Matières & finitions
+                </h2>
+
+
+                <p>
+
+                    Découvrez nos choix de tissus,
+                    bois et panneaux MDF.
+
+                </p>
+
+
+            </div>
+
+
+
+            <div class="materials-home-grid">
+
+
+                <!-- TISSUS -->
+
+                <a th:href="@{/tissus}"
+                   href="/tissus"
+                   class="material-home-card">
+
+
+                    <span class="material-number">
+                        01
+                    </span>
+
+
+                    <h3>
+                        Tissus
+                    </h3>
+
+
+                    <p>
+
+                        Couleurs, matières,
+                        textures et références.
+
+                    </p>
+
+
+                    <strong>
+                        Découvrir →
+                    </strong>
+
+
+                </a>
+
+
+
+                <!-- BOIS -->
+
+                <a th:href="@{/bois}"
+                   href="/bois"
+                   class="material-home-card">
+
+
+                    <span class="material-number">
+                        02
+                    </span>
+
+
+                    <h3>
+                        Bois
+                    </h3>
+
+
+                    <p>
+
+                        Types de bois,
+                        couleurs et finitions.
+
+                    </p>
+
+
+                    <strong>
+                        Découvrir →
+                    </strong>
+
+
+                </a>
+
+
+
+                <!-- MDF -->
+
+                <a th:href="@{/mdf}"
+                   href="/mdf"
+                   class="material-home-card material-dark">
+
+
+                    <span class="material-number">
+                        03
+                    </span>
+
+
+                    <h3>
+                        MDF
+                    </h3>
+
+
+                    <p>
+
+                        Couleurs, effets bois,
+                        mat, brillant et autres finitions.
+
+                    </p>
+
+
+                    <strong>
+                        Découvrir →
+                    </strong>
+
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         PROMOTIONS
+    ================================================== -->
+
+    <section class="home-section home-promotions-section">
+
+
+        <div class="container">
+
+
+            <div class="products-title-row">
+
+
+                <div>
+
+
+                    <span class="section-label">
+                        OFFRES ZINEB DÉCO
+                    </span>
+
+
+                    <h2>
+                        Nos promotions
+                    </h2>
+
+
+                    <p class="promotion-intro">
+
+                        Découvrez une sélection de modèles
+                        actuellement proposés à prix spécial.
+
+                    </p>
+
+
+                </div>
+
+
+
+                <a th:href="@{/promotions}"
+                   href="/promotions"
+                   class="view-all-link promotion-view-all">
+
+                    Voir toutes les promotions →
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- PRODUITS PROMO -->
+
+            <div class="home-products-grid"
+
+                 th:if="${promotionProducts != null
+                         and !#lists.isEmpty(promotionProducts)}">
+
+
+                <article class="product-card promotion-product-card"
+
+                         th:each="product : ${promotionProducts}"
+
+                         th:data-id="${product.id}"
+
+                         th:data-name="${product.name}"
+
+                         th:data-price="${product.price}"
+
+                         th:data-image="${product.imagePath}"
+
+                         th:data-category="${product.category}">
+
+
+                    <div class="product-image">
+
+
+                        <span class="product-label sale">
+                            Promotion
+                        </span>
+
+
+                        <button type="button"
+                                class="favorite-button"
+                                aria-label="Ajouter aux favoris">
+
+                            ♡
+
+                        </button>
+
+
+
+                        <a th:if="${product.imagePath != null
+                                  and !#strings.isEmpty(product.imagePath)}"
+
+                           th:href="@{/produit/{id}(id=${product.id})}"
+
+                           class="home-product-image-link">
+
+
+                            <img class="home-product-real-image"
+
+                                 th:src="${product.imagePath}"
+
+                                 th:alt="${product.name}"
+
+                                 loading="lazy">
+
+
+                        </a>
+
+
+
+                        <a th:if="${product.imagePath == null
+                                  or #strings.isEmpty(product.imagePath)}"
+
+                           th:href="@{/produit/{id}(id=${product.id})}"
+
+                           class="home-product-image-link">
+
+
+                            <div class="hero-image-placeholder"
+                                 style="height:100%;">
+
+
+                                <span class="hero-logo-text">
+                                    ZD
+                                </span>
+
+
+                            </div>
+
+
+                        </a>
+
+
+
+                        <a th:href="@{/produit/{id}(id=${product.id})}"
+                           class="quick-view">
+
+                            Voir l'offre
+
+                        </a>
+
+
+                    </div>
+
+
+
+                    <div class="product-content">
+
+
+                        <p class="product-category"
+
+                           th:text="${product.type != null
+                               and !#strings.isEmpty(product.type)
+                               ? product.type
+                               : product.category}">
+
+                            Produit
+
+                        </p>
+
+
+
+                        <h3>
+
+
+                            <a th:href="@{/produit/{id}(id=${product.id})}"
+
+                               th:text="${product.name}">
+
+                                Produit
+
+                            </a>
+
+
+                        </h3>
+
+
+
+                        <p class="product-description"
+
+                           th:text="${product.description != null
+                               and !#strings.isEmpty(product.description)
+                               ? product.description
+                               : 'Offre spéciale Zineb Déco.'}">
+
+                            Description
+
+                        </p>
+
+
+
+                        <div class="home-product-badges">
+
+
+                            <span class="promo">
+                                Promotion
+                            </span>
+
+
+                            <span th:if="${product.availability == 'stock'}"
+                                  class="available">
+
+                                En stock
+
+                            </span>
+
+
+                            <span th:if="${product.availability == 'custom'}">
+
+                                Sur commande
+
+                            </span>
+
+
+                            <span th:if="${product.availability == 'out'}">
+
+                                Indisponible
+
+                            </span>
+
+
+                        </div>
+
+
+
+                        <div class="product-price-row">
+
+
+                            <div>
+
+
+                                <span class="old-price"
+                                      th:if="${product.oldPrice != null}">
+
+
+                                    <span th:text="${product.oldPrice}">
+                                        0
+                                    </span>
+
+                                    DH
+
+
+                                </span>
+
+
+
+                                <strong class="promotion-price">
+
+                                    <span th:text="${product.price}">
+                                        0
+                                    </span>
+
+                                    DH
+
+                                </strong>
+
+
+                            </div>
+
+
+
+                            <button type="button"
+                                    class="add-cart-button"
+
+                                    th:disabled="${product.availability == 'out'}">
+
+                                Ajouter
+
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </article>
+
+
+            </div>
+
+
+
+            <!-- AUCUNE PROMOTION -->
+
+            <div class="home-promotion-empty"
+
+                 th:if="${promotionProducts == null
+                         or #lists.isEmpty(promotionProducts)}">
+
+
+                <span class="section-label">
+                    ZINEB DÉCO
+                </span>
+
+
+                <h3>
+                    Aucune promotion actuellement
+                </h3>
+
+
+                <p>
+
+                    Consultez nos collections pour découvrir
+                    tous les modèles disponibles.
+
+                </p>
+
+
+                <a th:href="@{/canapes}"
+                   href="/canapes"
+                   class="btn btn-gold">
+
+                    Découvrir les collections
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER COMMUN
+===================================================== -->
+
+<div th:replace="~{fragments/site-footer :: footer}"></div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script th:src="@{/js/main.js}"
+        src="/js/main.js"
+        defer>
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Chaises | Zineb Déco
+    </title>
+
+    <link
+        rel="stylesheet"
+        th:href="@{/css/style.css}"
+        href="/css/style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER COMMUN
+===================================================== -->
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+
+
+<main>
+
+
+    <!-- =================================================
+         BREADCRUMB
+    ================================================== -->
+
+    <div class="catalog-breadcrumb">
+
+        <div class="container">
+
+            <a th:href="@{/}"
+               href="/">
+
+                Accueil
+
+            </a>
+
+            <span>
+                ›
+            </span>
+
+            <strong>
+                Chaises
+            </strong>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         HERO
+    ================================================== -->
+
+    <section class="generic-catalog-hero">
+
+        <div class="container generic-catalog-header">
+
+
+            <div>
+
+
+                <span class="section-label dark">
+
+                    COLLECTION
+
+                    <span th:text="${shopSetting != null
+                        and shopSetting.shopName != null
+                        and !#strings.isEmpty(shopSetting.shopName)
+                        ? shopSetting.shopName
+                        : 'ZINEB DÉCO'}">
+
+                        ZINEB DÉCO
+
+                    </span>
+
+                </span>
+
+
+
+                <h1 th:text="${pageTitle != null
+                    ? pageTitle
+                    : 'Chaises'}">
+
+                    Chaises
+
+                </h1>
+
+
+
+                <p th:text="${pageDescription != null
+                    ? pageDescription
+                    : 'Découvrez notre collection de chaises élégantes et personnalisables.'}">
+
+                    Découvrez nos chaises.
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 NOMBRE DE MODELES
+            ================================================== -->
+
+            <div class="generic-result-count">
+
+
+                <strong th:text="${products != null
+                    ? #lists.size(products)
+                    : 0}">
+
+                    0
+
+                </strong>
+
+
+                <span>
+                    modèles
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         PRODUITS
+    ================================================== -->
+
+    <section class="generic-catalog-products">
+
+        <div class="container">
+
+
+            <!-- =================================================
+                 GRILLE PRODUITS
+            ================================================== -->
+
+            <div th:if="${products != null and !#lists.isEmpty(products)}">
+
+                <div th:replace="~{fragments/product-grid :: productGrid(${products})}">
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 AUCUN PRODUIT
+            ================================================== -->
+
+            <div
+                class="catalog-empty visible"
+
+                th:if="${products == null or #lists.isEmpty(products)}">
+
+
+                <strong>
+                    Aucune chaise pour le moment
+                </strong>
+
+
+                <p>
+
+                    Les nouveaux modèles de chaises
+                    seront bientôt disponibles.
+
+                </p>
+
+
+                <a th:href="@{/}"
+                   href="/"
+                   class="btn btn-gold">
+
+                    Retour à l'accueil
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER DYNAMIQUE MYSQL
+===================================================== -->
+
+<div th:replace="~{fragments/site-footer :: footer}"></div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script
+    th:src="@{/js/main.js}"
+    src="/js/main.js"
+    defer>
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,2941 @@
+<!DOCTYPE html>
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Configurez votre mobilier sur mesure avec Zineb Déco.">
+
+    <title>Sur mesure | Zineb Déco</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}"
+          href="/css/style.css">
+
+
+    <style>
+
+        /* =====================================================
+           PAGE
+        ====================================================== */
+
+        .customizer-page {
+            padding: 60px 0 90px;
+            background: #f6f3ee;
+        }
+
+        .customizer-heading {
+            max-width: 850px;
+            margin-bottom: 35px;
+        }
+
+        .customizer-heading h1 {
+            margin: 10px 0 18px;
+
+            color: #17130f;
+
+            font-family: Georgia, serif;
+            font-size: clamp(42px, 6vw, 70px);
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .customizer-heading h1 span {
+            color: #b88727;
+            font-style: italic;
+        }
+
+        .customizer-heading p {
+            max-width: 720px;
+            margin: 0;
+
+            color: #71695f;
+
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           PROGRESSION
+        ====================================================== */
+
+        .customizer-progress {
+            margin-bottom: 25px;
+            padding: 22px;
+
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+
+            border: 1px solid #ded5c8;
+
+            background: #ffffff;
+        }
+
+        .progress-step {
+            position: relative;
+
+            color: #aaa199;
+
+            text-align: center;
+        }
+
+        .progress-step:not(:last-child)::after {
+            content: "";
+
+            position: absolute;
+            z-index: 0;
+
+            top: 15px;
+            left: 58%;
+
+            width: 84%;
+            height: 1px;
+
+            background: #ded5c8;
+        }
+
+        .progress-circle {
+            position: relative;
+            z-index: 2;
+
+            width: 31px;
+            height: 31px;
+
+            margin: 0 auto 9px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid #cfc5b8;
+            border-radius: 50%;
+
+            background: #ffffff;
+
+            font-size: 9px;
+            font-weight: 900;
+        }
+
+        .progress-step > span:last-child {
+            display: block;
+
+            font-size: 7px;
+            font-weight: 900;
+            letter-spacing: .7px;
+
+            text-transform: uppercase;
+        }
+
+        .progress-step.active {
+            color: #a6771d;
+        }
+
+        .progress-step.active .progress-circle {
+            border-color: #d0a037;
+
+            background: #d0a037;
+            color: #090806;
+        }
+
+        .progress-step.done {
+            color: #5b5147;
+        }
+
+        .progress-step.done .progress-circle {
+            border-color: #17130f;
+
+            background: #17130f;
+            color: #d7aa42;
+        }
+
+        .progress-step.done:not(:last-child)::after {
+            background: #d0a037;
+        }
+
+
+        /* =====================================================
+           CONFIGURATEUR
+        ====================================================== */
+
+        .customizer-box {
+            padding: 35px;
+
+            border: 1px solid #ded5c8;
+
+            background: #ffffff;
+        }
+
+        .customizer-step {
+            display: none;
+        }
+
+        .customizer-step.active {
+            display: block;
+
+            animation: customFade .25s ease;
+        }
+
+        @keyframes customFade {
+
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-kicker {
+            color: #ab7d23;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+        .step-title {
+            margin: 7px 0 8px;
+
+            color: #181410;
+
+            font-family: Georgia, serif;
+            font-size: 34px;
+            font-weight: 400;
+        }
+
+        .step-description {
+            max-width: 700px;
+
+            margin: 0 0 28px;
+
+            color: #837a70;
+
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           CHOIX GENERIQUES
+        ====================================================== */
+
+        .choice-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 14px;
+        }
+
+        .choice-card {
+            position: relative;
+
+            min-height: 130px;
+
+            padding: 20px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            border: 1px solid #ddd4c8;
+
+            background: #faf8f4;
+            color: #28221c;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            transition: .2s ease;
+        }
+
+        .choice-card:hover {
+            transform: translateY(-3px);
+
+            border-color: #ba8a2b;
+
+            background: #ffffff;
+
+            box-shadow: 0 10px 25px rgba(0,0,0,.06);
+        }
+
+        .choice-card.selected {
+            border-color: #15120e;
+
+            background: #15120e;
+            color: #ffffff;
+
+            box-shadow:
+                inset 0 0 0 2px #d0a037;
+        }
+
+        .choice-card.selected::after {
+            content: "✓";
+
+            position: absolute;
+
+            top: 10px;
+            right: 10px;
+
+            width: 24px;
+            height: 24px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #d0a037;
+            color: #15120e;
+
+            font-size: 11px;
+            font-weight: 900;
+        }
+
+        .choice-number {
+            color: #b88727;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            letter-spacing: 1.2px;
+        }
+
+        .choice-card strong {
+            font-family: Georgia, serif;
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .choice-card small {
+            display: block;
+
+            margin-top: 6px;
+
+            color: #8b8177;
+
+            font-size: 9px;
+            line-height: 1.5;
+        }
+
+        .choice-card.selected small {
+            color: #bfb7ae;
+        }
+
+
+        /* =====================================================
+           DIMENSIONS
+        ====================================================== */
+
+        .dimensions-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 14px;
+        }
+
+        .dimension-field {
+            display: grid;
+            gap: 8px;
+        }
+
+        .dimension-field label {
+            color: #635b52;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            letter-spacing: .7px;
+
+            text-transform: uppercase;
+        }
+
+        .dimension-field input,
+        .dimension-field select {
+            width: 100%;
+            min-height: 52px;
+
+            padding: 0 15px;
+
+            border: 1px solid #d9d0c4;
+
+            background: #faf8f4;
+            color: #28231e;
+
+            outline: none;
+        }
+
+        .dimension-field input:focus,
+        .dimension-field select:focus {
+            border-color: #b88727;
+
+            background: #ffffff;
+        }
+
+
+        /* =====================================================
+           TISSUS
+        ====================================================== */
+
+        .fabric-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 14px;
+        }
+
+        .fabric-card {
+            position: relative;
+
+            padding: 0;
+
+            overflow: hidden;
+
+            border: 1px solid #ddd4c8;
+
+            background: #ffffff;
+
+            cursor: pointer;
+
+            text-align: left;
+
+            transition: .2s ease;
+        }
+
+        .fabric-card:hover {
+            transform: translateY(-3px);
+
+            border-color: #b88727;
+
+            box-shadow:
+                0 10px 25px rgba(0,0,0,.06);
+        }
+
+        .fabric-card.selected {
+            border-color: #b88727;
+
+            box-shadow:
+                0 0 0 2px #b88727;
+        }
+
+        .fabric-card.selected::after {
+            content: "✓";
+
+            position: absolute;
+            z-index: 5;
+
+            top: 10px;
+            right: 10px;
+
+            width: 28px;
+            height: 28px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #d0a037;
+            color: #15120e;
+
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .fabric-image {
+            height: 120px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e6ded2,
+                    #cfc3b3
+                );
+        }
+
+        .fabric-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+        .fabric-placeholder {
+            color: #9b7d49;
+
+            font-family: Georgia, serif;
+            font-size: 30px;
+        }
+
+        .fabric-info {
+            padding: 15px;
+        }
+
+        .fabric-info strong {
+            display: block;
+
+            color: #29231d;
+
+            font-family: Georgia, serif;
+            font-size: 17px;
+            font-weight: 400;
+        }
+
+        .fabric-info span {
+            display: block;
+
+            margin-top: 5px;
+
+            color: #9a9086;
+
+            font-size: 8px;
+        }
+
+
+        /* =====================================================
+           SELECTION AFFICHÉE
+        ====================================================== */
+
+        .selection-feedback {
+            margin-top: 22px;
+            padding: 16px 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            border: 1px solid #d1aa59;
+
+            background: #fcf8ef;
+        }
+
+        .selection-feedback[hidden] {
+            display: none;
+        }
+
+        .selection-feedback-label {
+            display: block;
+
+            margin-bottom: 4px;
+
+            color: #98701f;
+
+            font-size: 7px;
+            font-weight: 900;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+        }
+
+        .selection-feedback strong {
+            color: #27211b;
+
+            font-family: Georgia, serif;
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .selection-check {
+            width: 32px;
+            height: 32px;
+
+            flex: 0 0 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #17130f;
+            color: #d0a037;
+
+            font-weight: 900;
+        }
+
+
+        /* =====================================================
+           COULEURS
+        ====================================================== */
+
+        .colors-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(6, minmax(0, 1fr));
+
+            gap: 12px;
+        }
+
+        .color-card {
+            position: relative;
+
+            padding: 10px;
+
+            border: 1px solid #ddd4c8;
+
+            background: #ffffff;
+
+            cursor: pointer;
+
+            transition: .2s ease;
+        }
+
+        .color-card:hover {
+            transform: translateY(-2px);
+
+            border-color: #b88727;
+
+            box-shadow:
+                0 7px 18px rgba(0,0,0,.07);
+        }
+
+        .color-card.selected {
+            border-color: #17130f;
+
+            outline: 2px solid #d0a037;
+            outline-offset: 2px;
+        }
+
+        .color-card.selected::after {
+            content: "✓";
+
+            position: absolute;
+
+            top: 16px;
+            right: 16px;
+
+            width: 23px;
+            height: 23px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #17130f;
+            color: #d0a037;
+
+            font-size: 10px;
+            font-weight: 900;
+        }
+
+        .color-preview {
+            width: 100%;
+            height: 68px;
+
+            border: 1px solid rgba(0,0,0,.08);
+        }
+
+        .color-name {
+            display: block;
+
+            margin-top: 8px;
+
+            color: #4b443d;
+
+            font-size: 8px;
+            font-weight: 800;
+
+            text-align: center;
+        }
+
+
+        /* =====================================================
+           COULEUR PERSONNALISÉE
+        ====================================================== */
+
+        .custom-color-box {
+            margin-top: 25px;
+            padding: 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            border: 1px solid #ddd4c8;
+
+            background: #faf8f4;
+
+            transition: .2s ease;
+        }
+
+        .custom-color-box.selected {
+            border-color: #b88727;
+
+            box-shadow:
+                inset 0 0 0 1px #b88727;
+        }
+
+        .custom-color-box h3 {
+            margin: 0 0 5px;
+
+            font-family: Georgia, serif;
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .custom-color-box p {
+            margin: 0;
+
+            color: #8a8178;
+
+            font-size: 10px;
+        }
+
+        .custom-color-input {
+            width: 75px;
+            height: 50px;
+
+            padding: 3px;
+
+            border: 1px solid #cfc5b8;
+
+            background: #ffffff;
+
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           APERÇU COULEUR SÉLECTIONNÉE
+        ====================================================== */
+
+        .selected-color-content {
+            display: flex;
+            align-items: center;
+
+            gap: 11px;
+        }
+
+        .selected-color-preview,
+        .summary-color-preview {
+            width: 34px;
+            height: 34px;
+
+            flex: 0 0 34px;
+
+            border: 1px solid rgba(0,0,0,.15);
+            border-radius: 50%;
+
+            background: #ffffff;
+        }
+
+
+        /* =====================================================
+           ERREUR
+        ====================================================== */
+
+        .customizer-error {
+            display: none;
+
+            margin-top: 18px;
+            padding: 12px 15px;
+
+            border: 1px solid #d6ada2;
+
+            background: #fff1ee;
+            color: #9c4638;
+
+            font-size: 10px;
+        }
+
+        .customizer-error.visible {
+            display: block;
+        }
+
+
+        /* =====================================================
+           NAVIGATION
+        ====================================================== */
+
+        .customizer-navigation {
+            margin-top: 35px;
+            padding-top: 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            border-top: 1px solid #eee7dd;
+        }
+
+        .customizer-button {
+            min-height: 47px;
+
+            padding: 0 22px;
+
+            border: 1px solid #17130f;
+
+            background: #17130f;
+            color: #d8aa42;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            letter-spacing: .5px;
+
+            text-transform: uppercase;
+
+            cursor: pointer;
+
+            transition: .2s ease;
+        }
+
+        .customizer-button:hover {
+            border-color: #d4a333;
+
+            background: #d4a333;
+            color: #17130f;
+        }
+
+        .customizer-button.secondary {
+            border-color: #cfc5b8;
+
+            background: #ffffff;
+            color: #5e564d;
+        }
+
+        .customizer-button.secondary:hover {
+            border-color: #17130f;
+
+            color: #17130f;
+        }
+
+        .customizer-button[hidden] {
+            display: none;
+        }
+
+
+        /* =====================================================
+           RÉSUMÉ
+        ====================================================== */
+
+        .summary-grid {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                minmax(320px, .65fr);
+
+            gap: 25px;
+        }
+
+        .summary-card {
+            border: 1px solid #ded5c8;
+
+            background: #faf8f4;
+        }
+
+        .summary-row {
+            min-height: 60px;
+
+            padding: 15px 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            border-bottom: 1px solid #e7dfd5;
+        }
+
+        .summary-row:last-child {
+            border-bottom: 0;
+        }
+
+        .summary-row > span:first-child {
+            color: #8e847a;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            letter-spacing: .8px;
+
+            text-transform: uppercase;
+        }
+
+        .summary-row strong {
+            color: #27211b;
+
+            font-size: 11px;
+
+            text-align: right;
+        }
+
+        .summary-color-value {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            gap: 10px;
+        }
+
+        .summary-action {
+            padding: 28px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            background: #11100e;
+            color: #ffffff;
+        }
+
+        .summary-action > span {
+            color: #d4a333;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+        .summary-action h3 {
+            margin: 9px 0 12px;
+
+            font-family: Georgia, serif;
+            font-size: 29px;
+            font-weight: 400;
+        }
+
+        .summary-action p {
+            margin: 0 0 20px;
+
+            color: #ada69e;
+
+            font-size: 10px;
+            line-height: 1.7;
+        }
+
+        .whatsapp-quote {
+            min-height: 50px;
+
+            padding: 0 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #d3a234;
+            color: #0b0907;
+
+            font-size: 9px;
+            font-weight: 900;
+
+            text-align: center;
+            text-decoration: none;
+
+            text-transform: uppercase;
+
+            transition: .2s ease;
+        }
+
+        .whatsapp-quote:hover {
+            background: #ffffff;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1000px) {
+
+            .choice-grid,
+            .fabric-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .colors-grid {
+                grid-template-columns:
+                    repeat(4, minmax(0, 1fr));
+            }
+
+            .dimensions-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+        }
+
+
+        @media (max-width: 760px) {
+
+            .customizer-page {
+                padding: 40px 0 60px;
+            }
+
+            .customizer-progress {
+                padding: 15px 10px;
+
+                overflow-x: auto;
+
+                grid-template-columns:
+                    repeat(6, minmax(90px, 1fr));
+            }
+
+            .customizer-box {
+                padding: 22px 16px;
+            }
+
+            .choice-grid,
+            .fabric-grid,
+            .dimensions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .colors-grid {
+                grid-template-columns:
+                    repeat(3, minmax(0, 1fr));
+            }
+
+            .custom-color-box {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .selection-feedback {
+                align-items: flex-start;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+
+<main>
+
+
+<section class="customizer-page">
+
+
+<div class="container">
+
+
+    <!-- =================================================
+         INTRO
+    ================================================== -->
+
+    <header class="customizer-heading">
+
+        <span class="section-label dark">
+            FABRICATION SUR MESURE
+        </span>
+
+        <h1>
+            Créez votre
+            <span>mobilier idéal.</span>
+        </h1>
+
+        <p>
+            Choisissez votre modèle, vos dimensions,
+            le tissu, la couleur et la finition.
+            À la fin, vérifiez votre projet et envoyez
+            votre demande de devis directement à Zineb Déco.
+        </p>
+
+    </header>
+
+
+    <!-- =================================================
+         PROGRESSION
+    ================================================== -->
+
+    <div class="customizer-progress"
+         id="customizerProgress">
+
+
+        <div class="progress-step active"
+             data-progress="1">
+
+            <span class="progress-circle">1</span>
+            <span>Modèle</span>
+
+        </div>
+
+
+        <div class="progress-step"
+             data-progress="2">
+
+            <span class="progress-circle">2</span>
+            <span>Dimensions</span>
+
+        </div>
+
+
+        <div class="progress-step"
+             data-progress="3">
+
+            <span class="progress-circle">3</span>
+            <span>Tissu</span>
+
+        </div>
+
+
+        <div class="progress-step"
+             data-progress="4">
+
+            <span class="progress-circle">4</span>
+            <span>Couleur</span>
+
+        </div>
+
+
+        <div class="progress-step"
+             data-progress="5">
+
+            <span class="progress-circle">5</span>
+            <span>Finition</span>
+
+        </div>
+
+
+        <div class="progress-step"
+             data-progress="6">
+
+            <span class="progress-circle">6</span>
+            <span>Résumé</span>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =================================================
+         CONFIGURATEUR
+    ================================================== -->
+
+    <section class="customizer-box"
+             id="customizer"
+
+             th:data-whatsapp="${shopSetting != null
+                 and shopSetting.whatsappLink != null
+                 ? shopSetting.whatsappLink
+                 : ''}">
+
+
+        <!-- =================================================
+             ETAPE 1 : MODELE
+        ================================================== -->
+
+        <div class="customizer-step active"
+             data-step="1">
+
+
+            <span class="step-kicker">
+                Étape 01
+            </span>
+
+
+            <h2 class="step-title">
+                Quel meuble souhaitez-vous ?
+            </h2>
+
+
+            <p class="step-description">
+                Sélectionnez le type de mobilier
+                que vous souhaitez personnaliser.
+            </p>
+
+
+            <div class="choice-grid"
+                 data-choice-group="model">
+
+
+                <button type="button"
+                        class="choice-card"
+                        data-value="Salon">
+
+                    <span class="choice-number">01</span>
+
+                    <div>
+                        <strong>Salon</strong>
+
+                        <small>
+                            Salon complet personnalisé.
+                        </small>
+                    </div>
+
+                </button>
+
+
+                <button type="button"
+                        class="choice-card"
+                        data-value="Canapé">
+
+                    <span class="choice-number">02</span>
+
+                    <div>
+                        <strong>Canapé</strong>
+
+                        <small>
+                            Canapé droit, angle ou modulable.
+                        </small>
+                    </div>
+
+                </button>
+
+
+                <button type="button"
+                        class="choice-card"
+                        data-value="Lit">
+
+                    <span class="choice-number">03</span>
+
+                    <div>
+                        <strong>Lit</strong>
+
+                        <small>
+                            Lit et tête de lit personnalisés.
+                        </small>
+                    </div>
+
+                </button>
+
+
+                <button type="button"
+                        class="choice-card"
+                        data-value="Fauteuil">
+
+                    <span class="choice-number">04</span>
+
+                    <div>
+                        <strong>Fauteuil</strong>
+
+                        <small>
+                            Fauteuil adapté à votre intérieur.
+                        </small>
+                    </div>
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             ETAPE 2 : DIMENSIONS
+        ================================================== -->
+
+        <div class="customizer-step"
+             data-step="2">
+
+
+            <span class="step-kicker">
+                Étape 02
+            </span>
+
+
+            <h2 class="step-title">
+                Vos dimensions
+            </h2>
+
+
+            <p class="step-description">
+                Indiquez les dimensions souhaitées
+                en centimètres.
+            </p>
+
+
+            <div class="dimensions-grid">
+
+
+                <div class="dimension-field">
+
+                    <label for="customLength">
+                        Longueur *
+                    </label>
+
+                    <input id="customLength"
+                           type="number"
+                           min="1"
+                           placeholder="Ex. 300">
+
+                </div>
+
+
+                <div class="dimension-field">
+
+                    <label for="customWidth">
+                        Largeur *
+                    </label>
+
+                    <input id="customWidth"
+                           type="number"
+                           min="1"
+                           placeholder="Ex. 220">
+
+                </div>
+
+
+                <div class="dimension-field">
+
+                    <label for="customDepth">
+                        Profondeur
+                    </label>
+
+                    <input id="customDepth"
+                           type="number"
+                           min="1"
+                           placeholder="Ex. 90">
+
+                </div>
+
+
+                <div class="dimension-field">
+
+                    <label for="customPlaces">
+                        Nombre de places
+                    </label>
+
+                    <select id="customPlaces">
+
+                        <option value="">
+                            Choisir
+                        </option>
+
+                        <option value="1">
+                            1 place
+                        </option>
+
+                        <option value="2">
+                            2 places
+                        </option>
+
+                        <option value="3">
+                            3 places
+                        </option>
+
+                        <option value="4">
+                            4 places
+                        </option>
+
+                        <option value="5">
+                            5 places
+                        </option>
+
+                        <option value="6+">
+                            6 places ou plus
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             ETAPE 3 : TISSU MYSQL
+        ================================================== -->
+
+        <div class="customizer-step"
+             data-step="3">
+
+
+            <span class="step-kicker">
+                Étape 03
+            </span>
+
+
+            <h2 class="step-title">
+                Choisissez votre tissu
+            </h2>
+
+
+            <p class="step-description">
+                Les tissus actifs affichés ici
+                sont chargés directement depuis MySQL.
+            </p>
+
+
+            <div class="fabric-grid"
+                 data-choice-group="fabric">
+
+
+                <button type="button"
+                        class="fabric-card"
+
+                        th:each="fabric : ${fabrics}"
+
+                        th:data-value="${fabric.name}"
+
+                        th:data-reference="${fabric.referenceCode}">
+
+
+                    <div class="fabric-image">
+
+
+                        <img th:if="${fabric.imagePath != null
+                                    and !#strings.isEmpty(fabric.imagePath)}"
+
+                             th:src="${fabric.imagePath}"
+
+                             th:alt="${fabric.name}">
+
+
+                        <span class="fabric-placeholder"
+
+                              th:if="${fabric.imagePath == null
+                                     or #strings.isEmpty(fabric.imagePath)}">
+
+                            T
+
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="fabric-info">
+
+
+                        <strong th:text="${fabric.name}">
+                            Velours
+                        </strong>
+
+
+                        <span th:if="${fabric.referenceCode != null
+                                     and !#strings.isEmpty(fabric.referenceCode)}"
+
+                              th:text="${fabric.referenceCode}">
+
+                            TIS-001
+
+                        </span>
+
+
+                    </div>
+
+
+                </button>
+
+
+                <!-- AUTRE TISSU -->
+
+                <button type="button"
+                        class="fabric-card"
+                        data-value="Autre / sur demande"
+                        data-reference="">
+
+
+                    <div class="fabric-image">
+
+                        <span class="fabric-placeholder">
+                            +
+                        </span>
+
+                    </div>
+
+
+                    <div class="fabric-info">
+
+                        <strong>
+                            Autre tissu
+                        </strong>
+
+                        <span>
+                            Sur demande
+                        </span>
+
+                    </div>
+
+
+                </button>
+
+
+            </div>
+
+
+            <!-- TISSU SELECTIONNÉ -->
+
+            <div class="selection-feedback"
+                 id="fabricSelection"
+                 hidden>
+
+
+                <div>
+
+                    <span class="selection-feedback-label">
+                        Tissu sélectionné
+                    </span>
+
+                    <strong id="selectedFabricText">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <span class="selection-check">
+                    ✓
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             ETAPE 4 : COULEUR MYSQL
+        ================================================== -->
+
+        <div class="customizer-step"
+             data-step="4">
+
+
+            <span class="step-kicker">
+                Étape 04
+            </span>
+
+
+            <h2 class="step-title">
+                Choisissez votre couleur
+            </h2>
+
+
+            <p class="step-description">
+                Sélectionnez une couleur du catalogue
+                ou choisissez librement votre propre teinte.
+            </p>
+
+
+            <div class="colors-grid"
+                 data-choice-group="color">
+
+
+                <button type="button"
+                        class="color-card"
+
+                        th:each="color : ${customColors}"
+
+                        th:data-value="${color.name}"
+
+                        th:data-hex="${color.hexCode}">
+
+
+                    <div class="color-preview"
+                         th:style="|background-color:${color.hexCode};|">
+                    </div>
+
+
+                    <span class="color-name"
+                          th:text="${color.name}">
+
+                        Beige
+
+                    </span>
+
+
+                </button>
+
+
+            </div>
+
+
+            <!-- COULEUR LIBRE -->
+
+            <div class="custom-color-box"
+                 id="customColorBox">
+
+
+                <div>
+
+                    <h3>
+                        Une autre couleur ?
+                    </h3>
+
+                    <p>
+                        Utilisez le sélecteur pour choisir
+                        librement votre teinte.
+                    </p>
+
+                </div>
+
+
+                <input type="color"
+                       id="customColorPicker"
+                       class="custom-color-input"
+                       value="#C8A87C">
+
+
+            </div>
+
+
+            <!-- COULEUR SELECTIONNÉE -->
+
+            <div class="selection-feedback"
+                 id="colorSelection"
+                 hidden>
+
+
+                <div class="selected-color-content">
+
+
+                    <span class="selected-color-preview"
+                          id="selectedColorPreview">
+                    </span>
+
+
+                    <div>
+
+                        <span class="selection-feedback-label">
+                            Couleur sélectionnée
+                        </span>
+
+                        <strong id="selectedColorText">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                <span class="selection-check">
+                    ✓
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             ETAPE 5 : FINITION
+        ================================================== -->
+
+        <div class="customizer-step"
+             data-step="5">
+
+
+            <span class="step-kicker">
+                Étape 05
+            </span>
+
+
+            <h2 class="step-title">
+                Bois, MDF & finition
+            </h2>
+
+
+            <p class="step-description">
+                Choisissez la finition principale
+                souhaitée pour votre mobilier.
+            </p>
+
+
+            <div class="choice-grid"
+                 data-choice-group="finish">
+
+
+                <button type="button"
+                        class="choice-card"
+                        data-value="Bois naturel">
+
+                    <span class="choice-number">01</span>
+
+                    <strong>
+                        Bois naturel
+                    </strong>
+
+                </button>
+
+
+                <button type="button"
+                        class="choice-card"
+                        data-value="Noyer">
+
+                    <span class="choice-number">02</span>
+
+                    <strong>
+                        Noyer
+                    </strong>
+
+                </button>
+
+
+                <button type="button"
+                        class="choice-card"
+                        data-value="Chêne">
+
+                    <span class="choice-number">03</span>
+
+                    <strong>
+                        Chêne
+                    </strong>
+
+                </button>
+
+
+                <button type="button"
+                        class="choice-card"
+                        data-value="MDF mat">
+
+                    <span class="choice-number">04</span>
+
+                    <strong>
+                        MDF mat
+                    </strong>
+
+                </button>
+
+
+                <button type="button"
+                        class="choice-card"
+                        data-value="MDF brillant">
+
+                    <span class="choice-number">05</span>
+
+                    <strong>
+                        MDF brillant
+                    </strong>
+
+                </button>
+
+
+                <button type="button"
+                        class="choice-card"
+                        data-value="Autre finition">
+
+                    <span class="choice-number">06</span>
+
+                    <strong>
+                        Autre finition
+                    </strong>
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             ETAPE 6 : RESUME
+        ================================================== -->
+
+        <div class="customizer-step"
+             data-step="6">
+
+
+            <span class="step-kicker">
+                Étape 06
+            </span>
+
+
+            <h2 class="step-title">
+                Votre configuration
+            </h2>
+
+
+            <p class="step-description">
+                Vérifiez votre projet avant
+                d'envoyer votre demande de devis.
+            </p>
+
+
+            <div class="summary-grid">
+
+
+                <!-- RESUME -->
+
+                <div class="summary-card">
+
+
+                    <div class="summary-row">
+
+                        <span>Modèle</span>
+
+                        <strong id="summaryModel">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>Dimensions</span>
+
+                        <strong id="summaryDimensions">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>Places</span>
+
+                        <strong id="summaryPlaces">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>Tissu</span>
+
+                        <strong id="summaryFabric">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>Couleur</span>
+
+
+                        <div class="summary-color-value">
+
+
+                            <span class="summary-color-preview"
+                                  id="summaryColorPreview">
+                            </span>
+
+
+                            <strong id="summaryColor">
+                                —
+                            </strong>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>Finition</span>
+
+                        <strong id="summaryFinish">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- WHATSAPP -->
+
+                <div class="summary-action">
+
+
+                    <span>
+                        DEMANDE DE DEVIS
+                    </span>
+
+
+                    <h3>
+                        Votre projet est prêt.
+                    </h3>
+
+
+                    <p>
+                        Envoyez cette configuration
+                        directement à Zineb Déco pour discuter
+                        du prix, des détails et de la fabrication.
+                    </p>
+
+
+                    <a id="whatsappQuote"
+                       class="whatsapp-quote"
+                       href="#"
+                       target="_blank"
+                       rel="noopener noreferrer">
+
+                        Demander un devis sur WhatsApp →
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             ERREUR
+        ================================================== -->
+
+        <div id="customizerError"
+             class="customizer-error"
+             role="alert">
+
+            Veuillez compléter cette étape avant de continuer.
+
+        </div>
+
+
+        <!-- =================================================
+             NAVIGATION
+        ================================================== -->
+
+        <div class="customizer-navigation">
+
+
+            <button type="button"
+                    id="previousStep"
+                    class="customizer-button secondary"
+                    hidden>
+
+                ← Retour
+
+            </button>
+
+
+            <button type="button"
+                    id="nextStep"
+                    class="customizer-button">
+
+                Continuer →
+
+            </button>
+
+
+        </div>
+
+
+    </section>
+
+
+</div>
+
+
+</section>
+
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<div th:replace="~{fragments/site-footer :: footer}"></div>
+
+
+<script th:src="@{/js/main.js}"
+        src="/js/main.js"
+        defer>
+</script>
+
+
+<!-- =====================================================
+     JAVASCRIPT CONFIGURATEUR
+===================================================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /* =====================================================
+       ELEMENTS
+    ====================================================== */
+
+    const customizer =
+        document.getElementById("customizer");
+
+
+    if (!customizer) {
+        return;
+    }
+
+
+    let currentStep = 1;
+
+    const totalSteps = 6;
+
+
+    const configuration = {
+
+        model: "",
+
+        length: "",
+
+        width: "",
+
+        depth: "",
+
+        places: "",
+
+        fabric: "",
+
+        fabricReference: "",
+
+        color: "",
+
+        colorHex: "",
+
+        finish: ""
+
+    };
+
+
+    const steps =
+        document.querySelectorAll(
+            ".customizer-step"
+        );
+
+
+    const progressSteps =
+        document.querySelectorAll(
+            ".progress-step"
+        );
+
+
+    const previousButton =
+        document.getElementById(
+            "previousStep"
+        );
+
+
+    const nextButton =
+        document.getElementById(
+            "nextStep"
+        );
+
+
+    const errorBox =
+        document.getElementById(
+            "customizerError"
+        );
+
+
+    const fabricSelection =
+        document.getElementById(
+            "fabricSelection"
+        );
+
+
+    const selectedFabricText =
+        document.getElementById(
+            "selectedFabricText"
+        );
+
+
+    const colorSelection =
+        document.getElementById(
+            "colorSelection"
+        );
+
+
+    const selectedColorText =
+        document.getElementById(
+            "selectedColorText"
+        );
+
+
+    const selectedColorPreview =
+        document.getElementById(
+            "selectedColorPreview"
+        );
+
+
+    const customColorPicker =
+        document.getElementById(
+            "customColorPicker"
+        );
+
+
+    const customColorBox =
+        document.getElementById(
+            "customColorBox"
+        );
+
+
+    /* =====================================================
+       ERREUR
+    ====================================================== */
+
+    function showError(message) {
+
+        errorBox.textContent =
+            message ||
+            "Veuillez compléter cette étape avant de continuer.";
+
+
+        errorBox.classList.add(
+            "visible"
+        );
+
+    }
+
+
+    function hideError() {
+
+        errorBox.classList.remove(
+            "visible"
+        );
+
+    }
+
+
+    /* =====================================================
+       AFFICHAGE TISSU SELECTIONNE
+    ====================================================== */
+
+    function updateFabricSelection() {
+
+
+        if (!configuration.fabric) {
+
+            fabricSelection.hidden = true;
+
+            return;
+        }
+
+
+        let text =
+            configuration.fabric;
+
+
+        if (configuration.fabricReference) {
+
+            text +=
+                " — "
+                + configuration.fabricReference;
+
+        }
+
+
+        selectedFabricText.textContent =
+            text;
+
+
+        fabricSelection.hidden =
+            false;
+
+    }
+
+
+    /* =====================================================
+       AFFICHAGE COULEUR SELECTIONNEE
+    ====================================================== */
+
+    function updateColorSelection() {
+
+
+        if (!configuration.color) {
+
+            colorSelection.hidden = true;
+
+            return;
+        }
+
+
+        let text =
+            configuration.color;
+
+
+        if (configuration.colorHex) {
+
+            text +=
+                " — "
+                + configuration.colorHex.toUpperCase();
+
+        }
+
+
+        selectedColorText.textContent =
+            text;
+
+
+        if (configuration.colorHex) {
+
+            selectedColorPreview.style.backgroundColor =
+                configuration.colorHex;
+
+        }
+
+
+        colorSelection.hidden =
+            false;
+
+    }
+
+
+    /* =====================================================
+       CLIC SUR LES CHOIX
+    ====================================================== */
+
+    document
+        .querySelectorAll(
+            "[data-choice-group]"
+        )
+        .forEach(function (group) {
+
+
+            const groupName =
+                group.dataset.choiceGroup;
+
+
+            group
+                .querySelectorAll("button")
+                .forEach(function (button) {
+
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+
+                            group
+                                .querySelectorAll("button")
+                                .forEach(function (item) {
+
+                                    item.classList.remove(
+                                        "selected"
+                                    );
+
+                                });
+
+
+                            button.classList.add(
+                                "selected"
+                            );
+
+
+                            const value =
+                                button.dataset.value || "";
+
+
+                            /* MODELE */
+
+                            if (groupName === "model") {
+
+                                configuration.model =
+                                    value;
+
+                            }
+
+
+                            /* TISSU */
+
+                            if (groupName === "fabric") {
+
+                                configuration.fabric =
+                                    value;
+
+
+                                configuration.fabricReference =
+                                    button.dataset.reference || "";
+
+
+                                updateFabricSelection();
+
+                            }
+
+
+                            /* COULEUR */
+
+                            if (groupName === "color") {
+
+                                configuration.color =
+                                    value;
+
+
+                                configuration.colorHex =
+                                    button.dataset.hex || "";
+
+
+                                customColorBox.classList.remove(
+                                    "selected"
+                                );
+
+
+                                updateColorSelection();
+
+                            }
+
+
+                            /* FINITION */
+
+                            if (groupName === "finish") {
+
+                                configuration.finish =
+                                    value;
+
+                            }
+
+
+                            hideError();
+
+                        }
+                    );
+
+                });
+
+        });
+
+
+    /* =====================================================
+       COULEUR LIBRE
+    ====================================================== */
+
+    customColorPicker.addEventListener(
+        "input",
+        function () {
+
+
+            document
+                .querySelectorAll(
+                    '[data-choice-group="color"] .color-card'
+                )
+                .forEach(function (item) {
+
+                    item.classList.remove(
+                        "selected"
+                    );
+
+                });
+
+
+            customColorBox.classList.add(
+                "selected"
+            );
+
+
+            configuration.color =
+                "Couleur personnalisée";
+
+
+            configuration.colorHex =
+                customColorPicker.value.toUpperCase();
+
+
+            updateColorSelection();
+
+
+            hideError();
+
+        }
+    );
+
+
+    /* =====================================================
+       AFFICHAGE ETAPE
+    ====================================================== */
+
+    function showStep() {
+
+
+        steps.forEach(function (step) {
+
+
+            const stepNumber =
+                Number(
+                    step.dataset.step
+                );
+
+
+            step.classList.toggle(
+                "active",
+                stepNumber === currentStep
+            );
+
+        });
+
+
+        progressSteps.forEach(
+            function (progress) {
+
+
+                const number =
+                    Number(
+                        progress.dataset.progress
+                    );
+
+
+                progress.classList.remove(
+                    "active",
+                    "done"
+                );
+
+
+                if (number < currentStep) {
+
+                    progress.classList.add(
+                        "done"
+                    );
+
+                }
+
+
+                if (number === currentStep) {
+
+                    progress.classList.add(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+
+        previousButton.hidden =
+            currentStep === 1;
+
+
+        nextButton.hidden =
+            currentStep === totalSteps;
+
+
+        if (currentStep === totalSteps) {
+
+            updateSummary();
+
+        }
+
+
+        hideError();
+
+
+        const top =
+            customizer.getBoundingClientRect().top
+            + window.scrollY
+            - 100;
+
+
+        window.scrollTo({
+
+            top: top,
+
+            behavior: "smooth"
+
+        });
+
+    }
+
+
+    /* =====================================================
+       VALIDATION
+    ====================================================== */
+
+    function validateStep() {
+
+
+        /* MODELE */
+
+        if (
+            currentStep === 1
+            &&
+            !configuration.model
+        ) {
+
+            showError(
+                "Veuillez choisir un modèle."
+            );
+
+            return false;
+        }
+
+
+        /* DIMENSIONS */
+
+        if (currentStep === 2) {
+
+
+            configuration.length =
+                document
+                    .getElementById(
+                        "customLength"
+                    )
+                    .value;
+
+
+            configuration.width =
+                document
+                    .getElementById(
+                        "customWidth"
+                    )
+                    .value;
+
+
+            configuration.depth =
+                document
+                    .getElementById(
+                        "customDepth"
+                    )
+                    .value;
+
+
+            configuration.places =
+                document
+                    .getElementById(
+                        "customPlaces"
+                    )
+                    .value;
+
+
+            if (
+                !configuration.length
+                ||
+                !configuration.width
+            ) {
+
+                showError(
+                    "La longueur et la largeur sont obligatoires."
+                );
+
+                return false;
+            }
+
+        }
+
+
+        /* TISSU */
+
+        if (
+            currentStep === 3
+            &&
+            !configuration.fabric
+        ) {
+
+            showError(
+                "Veuillez choisir un tissu."
+            );
+
+            return false;
+        }
+
+
+        /* COULEUR */
+
+        if (
+            currentStep === 4
+            &&
+            !configuration.color
+        ) {
+
+            showError(
+                "Veuillez choisir une couleur."
+            );
+
+            return false;
+        }
+
+
+        /* FINITION */
+
+        if (
+            currentStep === 5
+            &&
+            !configuration.finish
+        ) {
+
+            showError(
+                "Veuillez choisir une finition."
+            );
+
+            return false;
+        }
+
+
+        return true;
+
+    }
+
+
+    /* =====================================================
+       SUIVANT
+    ====================================================== */
+
+    nextButton.addEventListener(
+        "click",
+        function () {
+
+
+            if (!validateStep()) {
+                return;
+            }
+
+
+            if (currentStep < totalSteps) {
+
+                currentStep++;
+
+                showStep();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       RETOUR
+    ====================================================== */
+
+    previousButton.addEventListener(
+        "click",
+        function () {
+
+
+            if (currentStep > 1) {
+
+                currentStep--;
+
+                showStep();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       RESUME
+    ====================================================== */
+
+    function updateSummary() {
+
+
+        /* MODELE */
+
+        document
+            .getElementById(
+                "summaryModel"
+            )
+            .textContent =
+                configuration.model || "—";
+
+
+        /* DIMENSIONS */
+
+        let dimensions = "";
+
+
+        if (configuration.length) {
+
+            dimensions =
+                configuration.length
+                + " cm";
+
+        }
+
+
+        if (configuration.width) {
+
+            dimensions +=
+                " × "
+                + configuration.width
+                + " cm";
+
+        }
+
+
+        if (configuration.depth) {
+
+            dimensions +=
+                " × "
+                + configuration.depth
+                + " cm";
+
+        }
+
+
+        document
+            .getElementById(
+                "summaryDimensions"
+            )
+            .textContent =
+                dimensions || "—";
+
+
+        /* PLACES */
+
+        document
+            .getElementById(
+                "summaryPlaces"
+            )
+            .textContent =
+                configuration.places
+                    ? configuration.places
+                      + " place(s)"
+                    : "Non précisé";
+
+
+        /* TISSU */
+
+        let fabricText =
+            configuration.fabric || "—";
+
+
+        if (
+            configuration.fabricReference
+        ) {
+
+            fabricText +=
+                " ("
+                + configuration.fabricReference
+                + ")";
+
+        }
+
+
+        document
+            .getElementById(
+                "summaryFabric"
+            )
+            .textContent =
+                fabricText;
+
+
+        /* COULEUR */
+
+        let colorText =
+            configuration.color || "—";
+
+
+        if (configuration.colorHex) {
+
+            colorText +=
+                " "
+                + configuration.colorHex.toUpperCase();
+
+        }
+
+
+        document
+            .getElementById(
+                "summaryColor"
+            )
+            .textContent =
+                colorText;
+
+
+        const summaryColorPreview =
+            document.getElementById(
+                "summaryColorPreview"
+            );
+
+
+        if (configuration.colorHex) {
+
+            summaryColorPreview.style.backgroundColor =
+                configuration.colorHex;
+
+        } else {
+
+            summaryColorPreview.style.backgroundColor =
+                "#FFFFFF";
+
+        }
+
+
+        /* FINITION */
+
+        document
+            .getElementById(
+                "summaryFinish"
+            )
+            .textContent =
+                configuration.finish || "—";
+
+
+        updateWhatsApp(
+            dimensions,
+            fabricText,
+            colorText
+        );
+
+    }
+
+
+    /* =====================================================
+       WHATSAPP
+    ====================================================== */
+
+    function updateWhatsApp(
+        dimensions,
+        fabricText,
+        colorText
+    ) {
+
+
+        const whatsappBase =
+            customizer.dataset.whatsapp || "";
+
+
+        const button =
+            document.getElementById(
+                "whatsappQuote"
+            );
+
+
+        /* PAS DE WHATSAPP CONFIGURE */
+
+        if (!whatsappBase) {
+
+            button.href =
+                "/contact";
+
+
+            button.removeAttribute(
+                "target"
+            );
+
+
+            button.textContent =
+                "Contacter Zineb Déco →";
+
+
+            return;
+
+        }
+
+
+        const message =
+
+            "Bonjour Zineb Déco,\n\n"
+
+            + "Je souhaite demander un devis "
+            + "pour un projet sur mesure.\n\n"
+
+            + "Modèle : "
+            + configuration.model
+            + "\n"
+
+            + "Dimensions : "
+            + dimensions
+            + "\n"
+
+            + "Nombre de places : "
+            + (
+                configuration.places
+                || "Non précisé"
+            )
+            + "\n"
+
+            + "Tissu : "
+            + fabricText
+            + "\n"
+
+            + "Couleur : "
+            + colorText
+            + "\n"
+
+            + "Finition : "
+            + configuration.finish
+            + "\n\n"
+
+            + "Merci de me communiquer "
+            + "le prix et les détails de fabrication.";
+
+
+        const separator =
+            whatsappBase.includes("?")
+                ? "&"
+                : "?";
+
+
+        button.href =
+            whatsappBase
+            + separator
+            + "text="
+            + encodeURIComponent(
+                message
+            );
+
+    }
+
+
+    /* =====================================================
+       INITIALISATION
+    ====================================================== */
+
+    showStep();
+
+
+});
+
+</script>
+
+
+</body>
+</html>

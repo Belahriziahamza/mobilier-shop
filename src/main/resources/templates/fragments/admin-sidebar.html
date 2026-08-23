@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+
+<aside th:fragment="sidebar(activePage)"
+       class="zdadm-sidebar">
+
+
+    <!-- =====================================================
+         LOGO
+    ====================================================== -->
+
+    <a th:href="@{/admin}"
+       href="/admin"
+       class="zdadm-logo">
+
+        <img th:src="@{/images/logo-zineb-deco.png}"
+             src="/images/logo-zineb-deco.png"
+             alt="Zineb Déco">
+
+    </a>
+
+
+
+    <!-- =====================================================
+         BRAND
+    ====================================================== -->
+
+    <div class="zdadm-brand">
+
+        <span>
+            ZINEB DÉCO
+        </span>
+
+        <strong>
+            Administration
+        </strong>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    <nav class="zdadm-nav">
+
+
+        <!-- TABLEAU DE BORD -->
+
+        <a th:href="@{/admin}"
+           href="/admin"
+           th:classappend="${activePage == 'dashboard'} ? 'active' : ''">
+
+            Tableau de bord
+
+        </a>
+
+
+
+        <!-- COMMANDES -->
+
+        <a th:href="@{/admin/commandes}"
+           href="/admin/commandes"
+           th:classappend="${activePage == 'commandes'} ? 'active' : ''">
+
+            Commandes
+
+        </a>
+
+
+
+        <!-- PRODUITS -->
+
+        <a th:href="@{/admin/produits}"
+           href="/admin/produits"
+           th:classappend="${activePage == 'produits'} ? 'active' : ''">
+
+            Produits
+
+        </a>
+
+
+
+        <!-- =================================================
+             TISSUS & COULEURS
+        ================================================== -->
+
+        <a th:href="@{/admin/customization}"
+           href="/admin/customization"
+           th:classappend="${activePage == 'customization'} ? 'active' : ''">
+
+            Tissus & Couleurs
+
+        </a>
+
+
+
+        <!-- CLIENTS -->
+
+        <a th:href="@{/admin/clients}"
+           href="/admin/clients"
+           th:classappend="${activePage == 'clients'} ? 'active' : ''">
+
+            Clients
+
+        </a>
+
+
+
+        <!-- PARAMETRES -->
+
+        <a th:href="@{/admin/parametres}"
+           href="/admin/parametres"
+           th:classappend="${activePage == 'parametres'} ? 'active' : ''">
+
+            Paramètres
+
+        </a>
+
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         BOTTOM
+    ====================================================== -->
+
+    <div class="zdadm-bottom">
+
+
+        <a th:href="@{/}"
+           href="/"
+           class="zdadm-shop">
+
+            Voir la boutique
+
+        </a>
+
+
+
+        <form th:action="@{/admin/logout}"
+              action="/admin/logout"
+              method="post">
+
+
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}">
+
+
+            <button type="submit"
+                    class="zdadm-logout">
+
+                Déconnexion
+
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+</aside>
+
+
+</body>
+
+</html>

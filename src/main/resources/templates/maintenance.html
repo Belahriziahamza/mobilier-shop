@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Maintenance | Zineb Déco</title>
+
+    <meta name="description"
+          content="Zineb Déco est momentanément en maintenance.">
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+        }
+
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    #292014 0,
+                    #100d09 35%,
+                    #080705 75%
+                );
+
+            color: #ffffff;
+
+            font-family: Arial, sans-serif;
+        }
+
+
+        .maintenance {
+            width: min(1050px, 100%);
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.2fr)
+                minmax(280px, .8fr);
+
+            border:
+                1px solid
+                rgba(212,165,54,.30);
+
+            background:
+                rgba(12,10,7,.90);
+
+            box-shadow:
+                0 30px 80px
+                rgba(0,0,0,.35);
+        }
+
+
+        /* =============================================
+           CONTENU
+        ============================================= */
+
+        .maintenance-content {
+            padding:
+                clamp(40px, 7vw, 85px);
+        }
+
+
+        .maintenance-kicker {
+            color: #d4a536;
+
+            font-size: 10px;
+            font-weight: 900;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+        }
+
+
+        .maintenance h1 {
+            max-width: 650px;
+
+            margin: 18px 0 22px;
+
+            font-family: Georgia, serif;
+
+            font-size:
+                clamp(
+                    45px,
+                    7vw,
+                    82px
+                );
+
+            font-weight: 400;
+
+            line-height: .98;
+        }
+
+
+        .maintenance h1 span {
+            color: #d4a536;
+
+            font-style: italic;
+        }
+
+
+        .maintenance-description {
+            max-width: 610px;
+
+            margin: 0;
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .64
+                );
+
+            font-size: 13px;
+
+            line-height: 1.9;
+        }
+
+
+        /* =============================================
+           STATUS
+        ============================================= */
+
+        .maintenance-status {
+            margin-top: 32px;
+
+            padding: 16px 18px;
+
+            display: inline-flex;
+            align-items: center;
+
+            gap: 12px;
+
+            border:
+                1px solid
+                rgba(212,165,54,.25);
+
+            background:
+                rgba(212,165,54,.06);
+        }
+
+
+        .status-dot {
+            width: 9px;
+            height: 9px;
+
+            flex: 0 0 9px;
+
+            border-radius: 50%;
+
+            background: #d4a536;
+
+            box-shadow:
+                0 0 18px
+                rgba(212,165,54,.8);
+
+            animation:
+                maintenancePulse
+                1.5s
+                infinite;
+        }
+
+
+        @keyframes maintenancePulse {
+
+            50% {
+                opacity: .35;
+            }
+
+        }
+
+
+        .maintenance-status strong {
+            color: #d4a536;
+
+            font-size: 9px;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =============================================
+           COTE DROIT
+        ============================================= */
+
+        .maintenance-side {
+            padding: 45px;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            border-left:
+                1px solid
+                rgba(212,165,54,.20);
+
+            background:
+                rgba(255,255,255,.025);
+        }
+
+
+        .maintenance-logo {
+            width: 110px;
+            height: 110px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            border:
+                1px solid
+                rgba(212,165,54,.75);
+
+            border-radius: 50%;
+        }
+
+
+        .maintenance-logo img {
+            width: 100%;
+            height: 100%;
+
+            padding: 6px;
+
+            object-fit: contain;
+        }
+
+
+        .side-info {
+            margin-top: 60px;
+        }
+
+
+        .side-info-label {
+            display: block;
+
+            margin-bottom: 16px;
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .40
+                );
+
+            font-size: 8px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+
+        .maintenance-contact {
+            display: grid;
+
+            gap: 9px;
+        }
+
+
+        .maintenance-contact a {
+            min-height: 46px;
+
+            padding: 0 15px;
+
+            display: flex;
+            align-items: center;
+
+            border:
+                1px solid
+                rgba(255,255,255,.14);
+
+            color: #ffffff;
+
+            font-size: 9px;
+            font-weight: 800;
+
+            text-decoration: none;
+
+            transition: .2s ease;
+        }
+
+
+        .maintenance-contact a:hover {
+            border-color: #d4a536;
+
+            color: #d4a536;
+        }
+
+
+        .maintenance-footer {
+            margin-top: 45px;
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .32
+                );
+
+            font-size: 8px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =============================================
+           RESPONSIVE
+        ============================================= */
+
+        @media (max-width: 800px) {
+
+            body {
+                padding: 15px;
+            }
+
+
+            .maintenance {
+                grid-template-columns: 1fr;
+            }
+
+
+            .maintenance-side {
+                border-top:
+                    1px solid
+                    rgba(212,165,54,.20);
+
+                border-left: 0;
+            }
+
+
+            .side-info {
+                margin-top: 35px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<main class="maintenance">
+
+
+    <!-- =============================================
+         MESSAGE
+    ============================================== -->
+
+    <section class="maintenance-content">
+
+
+        <span class="maintenance-kicker">
+            ZINEB DÉCO
+        </span>
+
+
+        <h1>
+
+            Nous revenons
+            <span>très bientôt.</span>
+
+        </h1>
+
+
+        <p class="maintenance-description">
+
+            Notre site est momentanément en maintenance
+            afin d'effectuer des améliorations.
+
+            L'équipe Zineb Déco travaille actuellement
+            sur la boutique pour vous offrir une meilleure
+            expérience.
+
+            Merci pour votre patience.
+
+        </p>
+
+
+        <div class="maintenance-status">
+
+            <span class="status-dot"></span>
+
+            <strong>
+                Maintenance en cours
+            </strong>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =============================================
+         INFORMATIONS
+    ============================================== -->
+
+    <aside class="maintenance-side">
+
+
+        <div>
+
+
+            <div class="maintenance-logo">
+
+                <img src="/images/logo-zineb-deco.png"
+                     alt="Zineb Déco">
+
+            </div>
+
+
+            <div class="side-info">
+
+
+                <span class="side-info-label">
+                    Besoin de nous contacter ?
+                </span>
+
+
+                <div class="maintenance-contact">
+
+
+                    <a th:if="${shopSetting != null
+                              and shopSetting.whatsappLink != null}"
+
+                       th:href="${shopSetting.whatsappLink}"
+
+                       target="_blank"
+                       rel="noopener noreferrer">
+
+                        WhatsApp →
+
+                    </a>
+
+
+                    <a th:if="${shopSetting != null
+                              and shopSetting.phoneLink != null}"
+
+                       th:href="${shopSetting.phoneLink}">
+
+                        Téléphone →
+
+                    </a>
+
+
+                    <a th:if="${shopSetting != null
+                              and shopSetting.email != null}"
+
+                       th:href="|mailto:${shopSetting.email}|">
+
+                        Email →
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="maintenance-footer">
+
+            © Zineb Déco<br>
+
+            Site temporairement indisponible.
+
+        </div>
+
+
+    </aside>
+
+
+</main>
+
+
+</body>
+
+</html>

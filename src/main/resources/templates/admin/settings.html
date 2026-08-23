@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Paramètres | Administration Zineb Déco
+    </title>
+
+
+    <!-- =====================================================
+         CSS PUBLIC
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}"
+          href="/css/style.css">
+
+
+    <!-- =====================================================
+         CSS ADMIN
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin.css}"
+          href="/css/admin.css">
+
+
+    <style>
+
+        /* =====================================================
+           SETTINGS LAYOUT
+        ====================================================== */
+
+        .settings-layout {
+
+            margin-top: 30px;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.3fr)
+                minmax(280px, .7fr);
+
+            gap: 22px;
+
+            align-items: start;
+        }
+
+
+        /* =====================================================
+           APERCU BOUTIQUE
+        ====================================================== */
+
+        .settings-description {
+
+            padding: 22px;
+
+            border: 1px solid #ddd3c5;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #080705,
+                    #171108
+                );
+
+            color: white;
+        }
+
+
+        .settings-description small {
+
+            display: block;
+
+            color: #d4a536;
+
+            font-size: 7px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+
+        .settings-description h2 {
+
+            margin: 8px 0 13px;
+
+            font-family: Georgia, serif;
+
+            font-size: 29px;
+            font-weight: 400;
+        }
+
+
+        .settings-description p {
+
+            margin: 0;
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .63
+                );
+
+            font-size: 9px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           LISTE INFORMATIONS
+        ====================================================== */
+
+        .settings-info-list {
+
+            margin-top: 22px;
+
+            display: grid;
+
+            gap: 9px;
+        }
+
+
+        .settings-info-item {
+
+            padding: 13px;
+
+            border:
+                1px solid
+                rgba(
+                    212,
+                    165,
+                    54,
+                    .20
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .03
+                );
+        }
+
+
+        .settings-info-item span {
+
+            display: block;
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .40
+                );
+
+            font-size: 7px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+        }
+
+
+        .settings-info-item strong {
+
+            display: block;
+
+            margin-top: 5px;
+
+            color: #d4a536;
+
+            font-size: 9px;
+
+            line-height: 1.5;
+
+            word-break: break-word;
+        }
+
+
+        /* =====================================================
+           MODE MAINTENANCE
+        ====================================================== */
+
+        .maintenance-admin-card {
+
+            margin-top: 22px;
+
+            padding: 24px;
+
+            border: 1px solid #ddd3c5;
+
+            background: white;
+
+            transition: .25s ease;
+        }
+
+
+        /* MAINTENANCE ACTIVE */
+
+        .maintenance-admin-card.active {
+
+            border-color: #b98a2c;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #171108,
+                    #080705
+                );
+
+            color: white;
+
+            box-shadow:
+                0 14px 35px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    .10
+                );
+        }
+
+
+        .maintenance-admin-label {
+
+            display: block;
+
+            color: #a47822;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+
+        .maintenance-admin-card.active
+        .maintenance-admin-label {
+
+            color: #d4a536;
+        }
+
+
+        .maintenance-admin-card h3 {
+
+            margin: 8px 0 10px;
+
+            color: #29241e;
+
+            font-family: Georgia, serif;
+
+            font-size: 27px;
+            font-weight: 400;
+        }
+
+
+        .maintenance-admin-card.active h3 {
+
+            color: white;
+        }
+
+
+        .maintenance-admin-card p {
+
+            margin: 0;
+
+            color: #817970;
+
+            font-size: 9px;
+
+            line-height: 1.8;
+        }
+
+
+        .maintenance-admin-card.active p {
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .62
+                );
+        }
+
+
+        /* =====================================================
+           STATUS MAINTENANCE
+        ====================================================== */
+
+        .maintenance-status {
+
+            margin-top: 18px;
+
+            padding: 13px 14px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            border: 1px solid #d8d0c4;
+
+            background: #faf8f4;
+
+            color: #42603b;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            letter-spacing: .7px;
+
+            text-transform: uppercase;
+        }
+
+
+        .maintenance-admin-card.active
+        .maintenance-status {
+
+            border-color:
+                rgba(
+                    212,
+                    165,
+                    54,
+                    .35
+                );
+
+            background:
+                rgba(
+                    212,
+                    165,
+                    54,
+                    .07
+                );
+
+            color: #d4a536;
+        }
+
+
+        .maintenance-dot {
+
+            width: 9px;
+            height: 9px;
+
+            flex: 0 0 9px;
+
+            border-radius: 50%;
+
+            background: #42925b;
+
+            box-shadow:
+                0 0 10px
+                rgba(
+                    66,
+                    146,
+                    91,
+                    .40
+                );
+        }
+
+
+        .maintenance-admin-card.active
+        .maintenance-dot {
+
+            background: #d4a536;
+
+            box-shadow:
+                0 0 15px
+                rgba(
+                    212,
+                    165,
+                    54,
+                    .65
+                );
+
+            animation:
+                maintenancePulse
+                1.4s
+                infinite;
+        }
+
+
+        @keyframes maintenancePulse {
+
+            50% {
+                opacity: .40;
+            }
+
+        }
+
+
+        /* =====================================================
+           MAINTENANCE BUTTON
+        ====================================================== */
+
+        .maintenance-form {
+
+            margin-top: 18px;
+        }
+
+
+        .maintenance-button {
+
+            width: 100%;
+
+            min-height: 47px;
+
+            padding: 0 15px;
+
+            border: 1px solid #080705;
+
+            background: #080705;
+
+            color: #d4a536;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            letter-spacing: .5px;
+
+            text-transform: uppercase;
+
+            cursor: pointer;
+
+            transition: .2s ease;
+        }
+
+
+        .maintenance-button:hover {
+
+            border-color: #d4a536;
+
+            background: #d4a536;
+
+            color: #080705;
+        }
+
+
+        /* BOUTON RÉOUVRIR */
+
+        .maintenance-admin-card.active
+        .maintenance-button {
+
+            border-color: #d4a536;
+
+            background: #d4a536;
+
+            color: #080705;
+        }
+
+
+        .maintenance-admin-card.active
+        .maintenance-button:hover {
+
+            border-color: white;
+
+            background: white;
+
+            color: #080705;
+        }
+
+
+        /* =====================================================
+           WARNING
+        ====================================================== */
+
+        .maintenance-warning {
+
+            margin-top: 13px;
+
+            color: #948a7e;
+
+            font-size: 7px;
+
+            line-height: 1.7;
+        }
+
+
+        .maintenance-admin-card.active
+        .maintenance-warning {
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .38
+                );
+        }
+
+
+        /* =====================================================
+           NOTE
+        ====================================================== */
+
+        .settings-note {
+
+            margin-top: 20px;
+
+            padding: 14px;
+
+            border-left:
+                3px solid #d4a536;
+
+            background: #f6f0e6;
+
+            color: #71685f;
+
+            font-size: 8px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1000px) {
+
+            .settings-layout {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     ADMIN SHELL
+========================================================= -->
+
+<div class="zdadm-shell">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <div th:replace="~{fragments/admin-sidebar :: sidebar('parametres')}">
+    </div>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="zdadm-main">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="zdadm-header">
+
+
+            <div>
+
+
+                <span class="zdadm-kicker">
+
+                    ADMINISTRATION / PARAMÈTRES
+
+                </span>
+
+
+                <h1>
+
+                    Paramètres
+
+                    <span>
+                        boutique
+                    </span>
+
+                </h1>
+
+
+                <p>
+
+                    Gérez les informations principales,
+                    les coordonnées, les réseaux sociaux
+                    et la disponibilité de Zineb Déco.
+
+                </p>
+
+
+            </div>
+
+
+            <!-- VOIR BOUTIQUE -->
+
+            <a th:href="@{/}"
+               href="/"
+               target="_blank"
+               class="zdadm-primary-button">
+
+                Voir la boutique →
+
+            </a>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             SUCCESS
+        ================================================== -->
+
+        <div th:if="${success}"
+             class="zdadm-alert success"
+             th:text="${success}">
+
+            Paramètres enregistrés.
+
+        </div>
+
+
+
+        <!-- =================================================
+             LAYOUT
+        ================================================== -->
+
+        <div class="settings-layout">
+
+
+            <!-- =================================================
+                 COLONNE GAUCHE
+                 INFORMATIONS BOUTIQUE
+            ================================================== -->
+
+            <section class="zdadm-card">
+
+
+                <div class="zdadm-card-head">
+
+
+                    <small>
+
+                        CONFIGURATION
+
+                    </small>
+
+
+                    <h2>
+
+                        Informations de la boutique
+
+                    </h2>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FORMULAIRE
+                ================================================== -->
+
+                <form th:action="@{/admin/parametres/save}"
+                      action="/admin/parametres/save"
+
+                      th:object="${shopSetting}"
+
+                      method="post"
+
+                      class="zdadm-form">
+
+
+                    <!-- =================================================
+                         ID
+                    ================================================== -->
+
+                    <input type="hidden"
+                           th:field="*{id}">
+
+
+
+                    <!-- =================================================
+                         CSRF
+                    ================================================== -->
+
+                    <input type="hidden"
+                           th:name="${_csrf.parameterName}"
+                           th:value="${_csrf.token}">
+
+
+
+                    <div class="zdadm-form-grid">
+
+
+                        <!-- =================================================
+                             NOM
+                        ================================================== -->
+
+                        <div class="zdadm-field full">
+
+
+                            <label for="shopName">
+
+                                Nom de la boutique
+
+                            </label>
+
+
+                            <input id="shopName"
+                                   type="text"
+
+                                   th:field="*{shopName}"
+
+                                   placeholder="ZINEB DÉCO"
+
+                                   required>
+
+
+                        </div>
+
+
+
+                        <!-- =================================================
+                             TELEPHONE
+                        ================================================== -->
+
+                        <div class="zdadm-field">
+
+
+                            <label for="phone">
+
+                                Téléphone
+
+                            </label>
+
+
+                            <input id="phone"
+                                   type="text"
+
+                                   th:field="*{phone}"
+
+                                   placeholder="+212 ...">
+
+
+                        </div>
+
+
+
+                        <!-- =================================================
+                             WHATSAPP
+                        ================================================== -->
+
+                        <div class="zdadm-field">
+
+
+                            <label for="whatsapp">
+
+                                WhatsApp
+
+                            </label>
+
+
+                            <input id="whatsapp"
+                                   type="text"
+
+                                   th:field="*{whatsapp}"
+
+                                   placeholder="+212 ...">
+
+
+                        </div>
+
+
+
+                        <!-- =================================================
+                             EMAIL
+                        ================================================== -->
+
+                        <div class="zdadm-field full">
+
+
+                            <label for="email">
+
+                                Email
+
+                            </label>
+
+
+                            <input id="email"
+                                   type="email"
+
+                                   th:field="*{email}"
+
+                                   placeholder="contact@zinebdeco.ma">
+
+
+                        </div>
+
+
+
+                        <!-- =================================================
+                             ADRESSE
+                        ================================================== -->
+
+                        <div class="zdadm-field full">
+
+
+                            <label for="address">
+
+                                Adresse
+
+                            </label>
+
+
+                            <textarea id="address"
+
+                                      th:field="*{address}"
+
+                                      placeholder="Adresse de la boutique...">
+                            </textarea>
+
+
+                        </div>
+
+
+
+                        <!-- =================================================
+                             INSTAGRAM
+                        ================================================== -->
+
+                        <div class="zdadm-field full">
+
+
+                            <label for="instagramUrl">
+
+                                Instagram
+
+                            </label>
+
+
+                            <input id="instagramUrl"
+                                   type="url"
+
+                                   th:field="*{instagramUrl}"
+
+                                   placeholder="https://www.instagram.com/...">
+
+
+                        </div>
+
+
+
+                        <!-- =================================================
+                             FACEBOOK
+                        ================================================== -->
+
+                        <div class="zdadm-field full">
+
+
+                            <label for="facebookUrl">
+
+                                Facebook
+
+                            </label>
+
+
+                            <input id="facebookUrl"
+                                   type="url"
+
+                                   th:field="*{facebookUrl}"
+
+                                   placeholder="https://www.facebook.com/...">
+
+
+                        </div>
+
+
+
+                        <!-- =================================================
+                             GOOGLE MAPS
+                        ================================================== -->
+
+                        <div class="zdadm-field full">
+
+
+                            <label for="mapsUrl">
+
+                                Google Maps
+
+                            </label>
+
+
+                            <input id="mapsUrl"
+                                   type="url"
+
+                                   th:field="*{mapsUrl}"
+
+                                   placeholder="https://maps.app.goo.gl/...">
+
+
+                        </div>
+
+
+
+                        <!-- =================================================
+                             SAVE
+                        ================================================== -->
+
+                        <div class="zdadm-form-actions">
+
+
+                            <button type="submit"
+                                    class="zdadm-save">
+
+                                Enregistrer les paramètres
+
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </form>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 COLONNE DROITE
+            ================================================== -->
+
+            <aside>
+
+
+                <!-- =================================================
+                     IDENTITE BOUTIQUE
+                ================================================== -->
+
+                <div class="settings-description">
+
+
+                    <small>
+
+                        ZINEB DÉCO
+
+                    </small>
+
+
+                    <h2>
+
+                        Identité boutique
+
+                    </h2>
+
+
+                    <p>
+
+                        Ces informations sont enregistrées
+                        dans MySQL et utilisées automatiquement
+                        dans le site public.
+
+                    </p>
+
+
+
+                    <div class="settings-info-list">
+
+
+                        <!-- NOM -->
+
+                        <div class="settings-info-item">
+
+
+                            <span>
+
+                                Boutique
+
+                            </span>
+
+
+                            <strong th:if="${shopSetting.shopName != null}"
+                                    th:text="${shopSetting.shopName}">
+
+                                ZINEB DÉCO
+
+                            </strong>
+
+
+                            <strong th:unless="${shopSetting.shopName != null}">
+
+                                ZINEB DÉCO
+
+                            </strong>
+
+
+                        </div>
+
+
+
+                        <!-- TELEPHONE -->
+
+                        <div class="settings-info-item">
+
+
+                            <span>
+
+                                Téléphone
+
+                            </span>
+
+
+                            <strong th:if="${shopSetting.phone != null}"
+                                    th:text="${shopSetting.phone}">
+
+                                Non renseigné
+
+                            </strong>
+
+
+                            <strong th:unless="${shopSetting.phone != null}">
+
+                                Non renseigné
+
+                            </strong>
+
+
+                        </div>
+
+
+
+                        <!-- WHATSAPP -->
+
+                        <div class="settings-info-item">
+
+
+                            <span>
+
+                                WhatsApp
+
+                            </span>
+
+
+                            <strong th:if="${shopSetting.whatsapp != null}"
+                                    th:text="${shopSetting.whatsapp}">
+
+                                Non renseigné
+
+                            </strong>
+
+
+                            <strong th:unless="${shopSetting.whatsapp != null}">
+
+                                Non renseigné
+
+                            </strong>
+
+
+                        </div>
+
+
+
+                        <!-- EMAIL -->
+
+                        <div class="settings-info-item">
+
+
+                            <span>
+
+                                Email
+
+                            </span>
+
+
+                            <strong th:if="${shopSetting.email != null}"
+                                    th:text="${shopSetting.email}">
+
+                                Non renseigné
+
+                            </strong>
+
+
+                            <strong th:unless="${shopSetting.email != null}">
+
+                                Non renseigné
+
+                            </strong>
+
+
+                        </div>
+
+
+
+                        <!-- ADRESSE -->
+
+                        <div class="settings-info-item">
+
+
+                            <span>
+
+                                Adresse
+
+                            </span>
+
+
+                            <strong th:if="${shopSetting.address != null}"
+                                    th:text="${shopSetting.address}">
+
+                                Non renseignée
+
+                            </strong>
+
+
+                            <strong th:unless="${shopSetting.address != null}">
+
+                                Non renseignée
+
+                            </strong>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     MODE MAINTENANCE
+                ================================================== -->
+
+                <section class="maintenance-admin-card"
+                         th:classappend="${shopSetting.maintenanceMode} ? ' active' : ''">
+
+
+                    <span class="maintenance-admin-label">
+
+                        DISPONIBILITÉ DU SITE
+
+                    </span>
+
+
+                    <h3>
+
+                        Mode maintenance
+
+                    </h3>
+
+
+
+                    <!-- =================================================
+                         SITE OUVERT
+                    ================================================== -->
+
+                    <p th:unless="${shopSetting.maintenanceMode}">
+
+                        La boutique est actuellement accessible
+                        normalement aux visiteurs.
+
+                        Activez ce mode uniquement lorsque
+                        vous souhaitez effectuer une maintenance
+                        ou des modifications importantes.
+
+                    </p>
+
+
+
+                    <!-- =================================================
+                         MAINTENANCE ACTIVE
+                    ================================================== -->
+
+                    <p th:if="${shopSetting.maintenanceMode}">
+
+                        La boutique publique est actuellement
+                        masquée aux visiteurs.
+
+                        L'administration reste accessible,
+                        vous pouvez donc continuer vos modifications
+                        normalement.
+
+                    </p>
+
+
+
+                    <!-- =================================================
+                         STATUS
+                    ================================================== -->
+
+                    <div class="maintenance-status">
+
+
+                        <span class="maintenance-dot">
+                        </span>
+
+
+                        <span th:unless="${shopSetting.maintenanceMode}">
+
+                            SITE OUVERT
+
+                        </span>
+
+
+                        <span th:if="${shopSetting.maintenanceMode}">
+
+                            MAINTENANCE ACTIVE
+
+                        </span>
+
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         FORMULAIRE TOGGLE
+                    ================================================== -->
+
+                    <form th:action="@{/admin/parametres/maintenance/toggle}"
+                          action="/admin/parametres/maintenance/toggle"
+
+                          method="post"
+
+                          class="maintenance-form">
+
+
+                        <!-- CSRF -->
+
+                        <input type="hidden"
+                               th:name="${_csrf.parameterName}"
+                               th:value="${_csrf.token}">
+
+
+
+                        <!-- =================================================
+                             BOUTON ACTIVER
+                        ================================================== -->
+
+                        <button th:unless="${shopSetting.maintenanceMode}"
+
+                                type="submit"
+
+                                class="maintenance-button"
+
+                                onclick="return confirm('Activer le mode maintenance ? Les visiteurs ne pourront temporairement plus accéder à la boutique.');">
+
+                            ACTIVER LA MAINTENANCE
+
+                        </button>
+
+
+
+                        <!-- =================================================
+                             BOUTON DESACTIVER
+                        ================================================== -->
+
+                        <button th:if="${shopSetting.maintenanceMode}"
+
+                                type="submit"
+
+                                class="maintenance-button">
+
+                            RÉOUVRIR LA BOUTIQUE
+
+                        </button>
+
+
+                    </form>
+
+
+
+                    <!-- INFO -->
+
+                    <div class="maintenance-warning"
+                         th:unless="${shopSetting.maintenanceMode}">
+
+                        L'espace Admin restera accessible
+                        pendant toute la maintenance.
+
+                    </div>
+
+
+                    <div class="maintenance-warning"
+                         th:if="${shopSetting.maintenanceMode}">
+
+                        Les visiteurs voient actuellement
+                        la page de maintenance avec un statut HTTP 503.
+
+                    </div>
+
+
+                </section>
+
+
+
+                <!-- =================================================
+                     NOTE
+                ================================================== -->
+
+                <div class="settings-note">
+
+                    <strong>
+
+                        Important :
+
+                    </strong>
+
+                    utilisez le mode maintenance uniquement
+                    lorsque vous souhaitez empêcher temporairement
+                    les visiteurs d'utiliser la boutique.
+
+                    L'administration reste disponible pendant
+                    toute la maintenance.
+
+                </div>
+
+
+            </aside>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "name": "app.base-url",
+      "type": "java.lang.String",
+      "description": "URL de base de l'application Zineb Déco.",
+      "defaultValue": "http://localhost:8080"
+    }
+  ]
+}

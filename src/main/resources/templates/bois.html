@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Bois | Zineb Déco</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}"
+          href="/css/style.css">
+
+
+    <style>
+
+        .wood-page {
+            padding: 65px 0 90px;
+            background: #f6f3ee;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ====================================================== */
+
+        .wood-header {
+            max-width: 850px;
+            margin-bottom: 42px;
+        }
+
+
+        .wood-label {
+            display: block;
+
+            color: #ad7d23;
+
+            font-size: 9px;
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+        }
+
+
+        .wood-header h1 {
+            margin: 10px 0 15px;
+
+            color: #17130f;
+
+            font-family: Georgia, serif;
+            font-size: clamp(44px, 6vw, 70px);
+            font-weight: 400;
+
+            line-height: 1;
+        }
+
+
+        .wood-header h1 span {
+            color: #b88727;
+            font-style: italic;
+        }
+
+
+        .wood-header p {
+            max-width: 700px;
+
+            margin: 0;
+
+            color: #776f65;
+
+            font-size: 12px;
+
+            line-height: 1.8;
+        }
+
+
+
+        /* =====================================================
+           GRID
+        ====================================================== */
+
+        .wood-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 18px;
+        }
+
+
+
+        /* =====================================================
+           CARD
+        ====================================================== */
+
+        .wood-card {
+            position: relative;
+
+            min-height: 280px;
+
+            padding: 28px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            border: 1px solid #ddd4c8;
+
+            background: #ffffff;
+
+            transition: .25s ease;
+        }
+
+
+        .wood-card:hover {
+            transform: translateY(-5px);
+
+            border-color: #b88727;
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,.07);
+        }
+
+
+        .wood-number {
+            color: #b88727;
+
+            font-size: 9px;
+            font-weight: 900;
+
+            letter-spacing: 1px;
+        }
+
+
+        .wood-card h2 {
+            margin: 70px 0 10px;
+
+            color: #241f19;
+
+            font-family: Georgia, serif;
+            font-size: 30px;
+            font-weight: 400;
+        }
+
+
+        .wood-card p {
+            margin: 0;
+
+            color: #81786e;
+
+            font-size: 10px;
+
+            line-height: 1.8;
+        }
+
+
+
+        /* =====================================================
+           DARK CARD
+        ====================================================== */
+
+        .wood-card.dark {
+            border-color: #11100e;
+
+            background: #11100e;
+
+            color: #ffffff;
+        }
+
+
+        .wood-card.dark h2 {
+            color: #ffffff;
+        }
+
+
+        .wood-card.dark p {
+            color: #aaa198;
+        }
+
+
+
+        /* =====================================================
+           FOOT INFO
+        ====================================================== */
+
+        .wood-detail {
+            margin-top: 20px;
+            padding-top: 15px;
+
+            border-top: 1px solid #e4dcd1;
+
+            color: #a47822;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+        }
+
+
+        .wood-card.dark .wood-detail {
+            border-color: #3a332a;
+
+            color: #d4a333;
+        }
+
+
+
+        /* =====================================================
+           CTA
+        ====================================================== */
+
+        .wood-cta {
+            margin-top: 45px;
+
+            padding: 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 25px;
+
+            background: #15120f;
+
+            color: #ffffff;
+        }
+
+
+        .wood-cta span {
+            color: #d2a33f;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+
+        .wood-cta h2 {
+            margin: 7px 0 0;
+
+            font-family: Georgia, serif;
+            font-size: 29px;
+            font-weight: 400;
+        }
+
+
+        .wood-cta a {
+            min-height: 47px;
+
+            padding: 0 20px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            background: #d2a33f;
+
+            color: #15120f;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            text-decoration: none;
+
+            text-transform: uppercase;
+
+            transition: .2s ease;
+        }
+
+
+        .wood-cta a:hover {
+            background: #ffffff;
+        }
+
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 950px) {
+
+            .wood-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .wood-page {
+                padding: 40px 0 60px;
+            }
+
+
+            .wood-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .wood-cta {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+
+
+<main>
+
+
+<section class="wood-page">
+
+
+<div class="container">
+
+
+    <!-- =================================================
+         INTRO
+    ================================================== -->
+
+    <header class="wood-header">
+
+
+        <span class="wood-label">
+            MATIÈRES & FINITIONS
+        </span>
+
+
+        <h1>
+            Nos choix de
+            <span>bois.</span>
+        </h1>
+
+
+        <p>
+            Découvrez les principales finitions bois
+            proposées pour personnaliser votre mobilier.
+            Le choix final peut être adapté selon votre
+            projet et le style recherché.
+        </p>
+
+
+    </header>
+
+
+
+    <!-- =================================================
+         BOIS
+    ================================================== -->
+
+    <div class="wood-grid">
+
+
+        <!-- BOIS NATUREL -->
+
+        <article class="wood-card">
+
+            <span class="wood-number">
+                01
+            </span>
+
+            <div>
+
+                <h2>
+                    Bois naturel
+                </h2>
+
+                <p>
+                    Une finition chaleureuse qui conserve
+                    l'aspect authentique et naturel du bois.
+                </p>
+
+                <div class="wood-detail">
+                    Naturel · Chaleureux · Authentique
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- CHENE -->
+
+        <article class="wood-card">
+
+            <span class="wood-number">
+                02
+            </span>
+
+            <div>
+
+                <h2>
+                    Chêne
+                </h2>
+
+                <p>
+                    Un bois élégant et intemporel,
+                    adapté aux meubles modernes
+                    comme aux créations classiques.
+                </p>
+
+                <div class="wood-detail">
+                    Élégant · Résistant · Intemporel
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- NOYER -->
+
+        <article class="wood-card dark">
+
+            <span class="wood-number">
+                03
+            </span>
+
+            <div>
+
+                <h2>
+                    Noyer
+                </h2>
+
+                <p>
+                    Une teinte profonde et raffinée,
+                    particulièrement adaptée aux
+                    intérieurs élégants et premium.
+                </p>
+
+                <div class="wood-detail">
+                    Foncé · Premium · Raffiné
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- HETRE -->
+
+        <article class="wood-card">
+
+            <span class="wood-number">
+                04
+            </span>
+
+            <div>
+
+                <h2>
+                    Hêtre
+                </h2>
+
+                <p>
+                    Une finition claire et discrète
+                    idéale pour créer un mobilier
+                    lumineux et contemporain.
+                </p>
+
+                <div class="wood-detail">
+                    Clair · Moderne · Sobre
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- BOIS TEINTE -->
+
+        <article class="wood-card">
+
+            <span class="wood-number">
+                05
+            </span>
+
+            <div>
+
+                <h2>
+                    Bois teinté
+                </h2>
+
+                <p>
+                    La teinte permet d'adapter
+                    l'apparence du bois à votre
+                    décoration et à vos couleurs.
+                </p>
+
+                <div class="wood-detail">
+                    Personnalisable · Plusieurs teintes
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- SUR DEMANDE -->
+
+        <article class="wood-card">
+
+            <span class="wood-number">
+                06
+            </span>
+
+            <div>
+
+                <h2>
+                    Sur demande
+                </h2>
+
+                <p>
+                    Vous recherchez une essence
+                    ou une finition particulière ?
+                    Votre demande peut être étudiée
+                    selon le projet.
+                </p>
+
+                <div class="wood-detail">
+                    Projet personnalisé
+                </div>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         CTA
+    ================================================== -->
+
+    <section class="wood-cta">
+
+
+        <div>
+
+            <span>
+                FABRICATION SUR MESURE
+            </span>
+
+            <h2>
+                Choisissez la finition de votre projet.
+            </h2>
+
+        </div>
+
+
+        <a th:href="@{/sur-mesure}"
+           href="/sur-mesure">
+
+            Configurer mon projet →
+
+        </a>
+
+
+    </section>
+
+
+</div>
+
+
+</section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<div th:replace="~{fragments/site-footer :: footer}"></div>
+
+
+<script th:src="@{/js/main.js}"
+        src="/js/main.js"
+        defer>
+</script>
+
+
+</body>
+</html>

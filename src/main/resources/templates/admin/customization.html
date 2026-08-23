@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Tissus & Couleurs | Administration
+    </title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin.css}"
+          href="/css/admin.css">
+
+
+    <style>
+
+        /* =====================================================
+           CUSTOMIZATION UNIQUEMENT
+        ====================================================== */
+
+        .zdadm-custom-grid {
+
+            margin-top: 28px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 22px;
+
+            align-items: start;
+        }
+
+
+        /* =====================================================
+           FORMULAIRE
+        ====================================================== */
+
+        .zdadm-custom-form {
+
+            padding: 24px;
+
+            border-bottom: 1px solid #e8e0d6;
+        }
+
+
+        .zdadm-custom-form h3 {
+
+            margin: 0 0 18px;
+
+            color: #29241e;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+
+        .zdadm-custom-fields {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 14px;
+        }
+
+
+        .zdadm-custom-fields.one {
+
+            grid-template-columns: 1fr;
+        }
+
+
+        .zdadm-custom-field {
+
+            display: grid;
+
+            gap: 7px;
+        }
+
+
+        .zdadm-custom-field.full {
+
+            grid-column: 1 / -1;
+        }
+
+
+        .zdadm-custom-field label {
+
+            color: #625b53;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+        }
+
+
+        .zdadm-custom-field input,
+        .zdadm-custom-field textarea {
+
+            width: 100%;
+
+            border: 1px solid #d6ccbe;
+
+            background: #faf8f4;
+
+            color: #29241e;
+
+            outline: none;
+        }
+
+
+        .zdadm-custom-field input {
+
+            min-height: 46px;
+
+            padding: 0 12px;
+        }
+
+
+        .zdadm-custom-field textarea {
+
+            min-height: 100px;
+
+            padding: 12px;
+
+            resize: vertical;
+        }
+
+
+        .zdadm-custom-field input:focus,
+        .zdadm-custom-field textarea:focus {
+
+            border-color: #b88627;
+
+            background: white;
+        }
+
+
+
+        /* =====================================================
+           COLOR INPUT
+        ====================================================== */
+
+        .zdadm-color-input {
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr) 60px;
+
+            gap: 10px;
+        }
+
+
+        .zdadm-color-picker {
+
+            width: 60px !important;
+
+            height: 46px !important;
+
+            padding: 3px !important;
+
+            cursor: pointer;
+        }
+
+
+
+        /* =====================================================
+           AJOUT
+        ====================================================== */
+
+        .zdadm-custom-submit {
+
+            margin-top: 17px;
+
+            min-height: 44px;
+
+            padding: 0 18px;
+
+            border: 1px solid #080705;
+
+            background: #080705;
+
+            color: #d4a536;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+            cursor: pointer;
+        }
+
+
+        .zdadm-custom-submit:hover {
+
+            border-color: #d4a536;
+
+            background: #d4a536;
+
+            color: #080705;
+        }
+
+
+
+        /* =====================================================
+           LISTE
+        ====================================================== */
+
+        .zdadm-custom-list {
+
+            padding: 10px 20px 20px;
+
+            display: grid;
+
+            gap: 9px;
+        }
+
+
+        .zdadm-custom-item {
+
+            padding: 14px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 14px;
+
+            border: 1px solid #e4ddd3;
+
+            background: #faf9f6;
+        }
+
+
+        .zdadm-custom-item:hover {
+
+            background: white;
+
+            border-color: #c9a65f;
+        }
+
+
+        .zdadm-custom-item-main {
+
+            min-width: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .zdadm-fabric-icon {
+
+            width: 42px;
+            height: 42px;
+
+            flex: 0 0 42px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid #d7c9b5;
+
+            background: #f3eee5;
+
+            color: #a47822;
+
+            font-family: Georgia, serif;
+
+            font-size: 19px;
+        }
+
+
+        .zdadm-saved-color {
+
+            width: 42px;
+            height: 42px;
+
+            flex: 0 0 42px;
+
+            padding: 2px;
+
+            border: 1px solid #d7c9b5;
+
+            background: white;
+
+            pointer-events: none;
+        }
+
+
+        .zdadm-custom-info {
+
+            min-width: 0;
+        }
+
+
+        .zdadm-custom-info strong {
+
+            display: block;
+
+            color: #29241e;
+
+            font-size: 10px;
+        }
+
+
+        .zdadm-custom-info small {
+
+            display: block;
+
+            margin-top: 4px;
+
+            color: #91887f;
+
+            font-size: 8px;
+        }
+
+
+
+        /* =====================================================
+           STATUS
+        ====================================================== */
+
+        .zdadm-custom-active {
+
+            display: block;
+
+            margin-top: 6px;
+
+            color: #2f7646;
+
+            font-size: 7px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+        }
+
+
+        .zdadm-custom-inactive {
+
+            display: block;
+
+            margin-top: 6px;
+
+            color: #9a3e3e;
+
+            font-size: 7px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+        }
+
+
+
+        /* =====================================================
+           ACTIONS
+        ====================================================== */
+
+        .zdadm-custom-actions {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            justify-content: flex-end;
+
+            gap: 6px;
+        }
+
+
+        .zdadm-custom-actions form {
+
+            margin: 0;
+        }
+
+
+        .zdadm-custom-action {
+
+            min-height: 32px;
+
+            padding: 0 9px;
+
+            border: 1px solid #cfc4b6;
+
+            background: white;
+
+            color: #625b53;
+
+            font-size: 7px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+            cursor: pointer;
+        }
+
+
+        .zdadm-custom-action.toggle {
+
+            border-color: #d0ac62;
+
+            color: #866219;
+        }
+
+
+        .zdadm-custom-action.delete {
+
+            border-color: #d3a0a0;
+
+            color: #963939;
+        }
+
+
+        .zdadm-custom-action.delete:hover {
+
+            background: #963939;
+
+            color: white;
+        }
+
+
+
+        /* =====================================================
+           SIDEBAR SCROLLBAR INVISIBLE
+           Le scroll reste fonctionnel.
+        ====================================================== */
+
+        .zdadm-sidebar {
+
+            scrollbar-width: none;
+
+            -ms-overflow-style: none;
+        }
+
+
+        .zdadm-sidebar::-webkit-scrollbar {
+
+            width: 0;
+
+            height: 0;
+        }
+
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1150px) {
+
+            .zdadm-custom-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .zdadm-custom-fields {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .zdadm-custom-field.full {
+
+                grid-column: auto;
+            }
+
+
+            .zdadm-custom-item {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+
+            .zdadm-custom-actions {
+
+                justify-content: flex-start;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     STRUCTURE ADMIN CORRECTE
+========================================================= -->
+
+<div class="zdadm-shell">
+
+
+    <!-- SIDEBAR -->
+
+    <div th:replace="~{fragments/admin-sidebar :: sidebar('customization')}">
+    </div>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="zdadm-main">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="zdadm-header">
+
+
+            <div>
+
+
+                <span class="zdadm-kicker">
+
+                    Fabrication sur mesure
+
+                </span>
+
+
+                <h1>
+
+                    Tissus &
+                    <span>Couleurs</span>
+
+                </h1>
+
+
+                <p>
+
+                    Gérez les tissus et les couleurs
+                    disponibles dans le configurateur client.
+
+                    Les éléments désactivés ne sont plus
+                    proposés sur la page sur mesure.
+
+                </p>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             GRID
+        ================================================== -->
+
+        <div class="zdadm-custom-grid">
+
+
+            <!-- =================================================
+                 TISSUS
+            ================================================== -->
+
+            <section class="zdadm-section">
+
+
+                <div class="zdadm-section-head">
+
+
+                    <div>
+
+                        <small>
+                            Catalogue
+                        </small>
+
+                        <h2>
+                            Tissus
+                        </h2>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- AJOUT TISSU -->
+
+                <form class="zdadm-custom-form"
+                      th:action="@{/admin/customization/fabrics/add}"
+                      method="post">
+
+
+                    <h3>
+                        Ajouter un nouveau tissu
+                    </h3>
+
+
+                    <div class="zdadm-custom-fields">
+
+
+                        <div class="zdadm-custom-field">
+
+
+                            <label for="fabricName">
+
+                                Nom
+
+                            </label>
+
+
+                            <input id="fabricName"
+                                   name="name"
+                                   type="text"
+                                   placeholder="Ex. Velours"
+                                   required>
+
+
+                        </div>
+
+
+
+                        <div class="zdadm-custom-field">
+
+
+                            <label for="fabricReference">
+
+                                Référence
+
+                            </label>
+
+
+                            <input id="fabricReference"
+                                   name="referenceCode"
+                                   type="text"
+                                   placeholder="Ex. TIS-015">
+
+
+                        </div>
+
+
+
+                        <div class="zdadm-custom-field full">
+
+
+                            <label for="fabricDescription">
+
+                                Description
+
+                            </label>
+
+
+                            <textarea id="fabricDescription"
+                                      name="description"
+                                      placeholder="Description du tissu..."></textarea>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <button type="submit"
+                            class="zdadm-custom-submit">
+
+                        + Ajouter le tissu
+
+                    </button>
+
+
+                </form>
+
+
+
+                <!-- LISTE -->
+
+                <div class="zdadm-custom-list">
+
+
+                    <div class="zdadm-custom-item"
+                         th:each="fabric : ${fabrics}">
+
+
+                        <div class="zdadm-custom-item-main">
+
+
+                            <div class="zdadm-fabric-icon">
+
+                                T
+
+                            </div>
+
+
+
+                            <div class="zdadm-custom-info">
+
+
+                                <strong th:text="${fabric.name}">
+
+                                    Velours
+
+                                </strong>
+
+
+                                <small th:text="${fabric.referenceCode}">
+
+                                    TIS-001
+
+                                </small>
+
+
+                                <span class="zdadm-custom-active"
+                                      th:if="${fabric.active}">
+
+                                    ● Actif
+
+                                </span>
+
+
+                                <span class="zdadm-custom-inactive"
+                                      th:unless="${fabric.active}">
+
+                                    ● Désactivé
+
+                                </span>
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="zdadm-custom-actions">
+
+
+                            <form th:action="@{/admin/customization/fabrics/{id}/toggle(id=${fabric.id})}"
+                                  method="post">
+
+
+                                <button type="submit"
+                                        class="zdadm-custom-action toggle">
+
+                                    Activer / Désactiver
+
+                                </button>
+
+
+                            </form>
+
+
+
+                            <form th:action="@{/admin/customization/fabrics/{id}/delete(id=${fabric.id})}"
+                                  method="post">
+
+
+                                <button type="submit"
+                                        class="zdadm-custom-action delete">
+
+                                    Supprimer
+
+                                </button>
+
+
+                            </form>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+
+            <!-- =================================================
+                 COULEURS
+            ================================================== -->
+
+            <section class="zdadm-section">
+
+
+                <div class="zdadm-section-head">
+
+
+                    <div>
+
+                        <small>
+                            Palette
+                        </small>
+
+                        <h2>
+                            Couleurs
+                        </h2>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- AJOUT COULEUR -->
+
+                <form class="zdadm-custom-form"
+                      th:action="@{/admin/customization/colors/add}"
+                      method="post">
+
+
+                    <h3>
+                        Ajouter une nouvelle couleur
+                    </h3>
+
+
+                    <div class="zdadm-custom-fields one">
+
+
+                        <div class="zdadm-custom-field">
+
+
+                            <label for="colorName">
+
+                                Nom
+
+                            </label>
+
+
+                            <input id="colorName"
+                                   name="name"
+                                   type="text"
+                                   placeholder="Ex. Beige sable"
+                                   required>
+
+
+                        </div>
+
+
+
+                        <div class="zdadm-custom-field">
+
+
+                            <label for="colorHex">
+
+                                Code HEX
+
+                            </label>
+
+
+                            <div class="zdadm-color-input">
+
+
+                                <input id="colorHex"
+                                       name="hexCode"
+                                       type="text"
+                                       value="#C8A87C"
+                                       required>
+
+
+                                <input id="colorPicker"
+                                       type="color"
+                                       class="zdadm-color-picker"
+                                       value="#C8A87C">
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <button type="submit"
+                            class="zdadm-custom-submit">
+
+                        + Ajouter la couleur
+
+                    </button>
+
+
+                </form>
+
+
+
+                <!-- LISTE -->
+
+                <div class="zdadm-custom-list">
+
+
+                    <div class="zdadm-custom-item"
+                         th:each="color : ${colors}">
+
+
+                        <div class="zdadm-custom-item-main">
+
+
+                            <input type="color"
+                                   class="zdadm-saved-color"
+                                   th:value="${color.hexCode}"
+                                   disabled>
+
+
+
+                            <div class="zdadm-custom-info">
+
+
+                                <strong th:text="${color.name}">
+
+                                    Beige
+
+                                </strong>
+
+
+                                <small th:text="${color.hexCode}">
+
+                                    #D8C3A5
+
+                                </small>
+
+
+                                <span class="zdadm-custom-active"
+                                      th:if="${color.active}">
+
+                                    ● Actif
+
+                                </span>
+
+
+                                <span class="zdadm-custom-inactive"
+                                      th:unless="${color.active}">
+
+                                    ● Désactivé
+
+                                </span>
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="zdadm-custom-actions">
+
+
+                            <form th:action="@{/admin/customization/colors/{id}/toggle(id=${color.id})}"
+                                  method="post">
+
+
+                                <button type="submit"
+                                        class="zdadm-custom-action toggle">
+
+                                    Activer / Désactiver
+
+                                </button>
+
+
+                            </form>
+
+
+
+                            <form th:action="@{/admin/customization/colors/{id}/delete(id=${color.id})}"
+                                  method="post">
+
+
+                                <button type="submit"
+                                        class="zdadm-custom-action delete">
+
+                                    Supprimer
+
+                                </button>
+
+
+                            </form>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     COLOR PICKER
+========================================================= -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        const picker =
+            document.getElementById(
+                "colorPicker"
+            );
+
+
+        const hex =
+            document.getElementById(
+                "colorHex"
+            );
+
+
+        if (!picker || !hex) {
+
+            return;
+
+        }
+
+
+        picker.addEventListener(
+            "input",
+            function () {
+
+                hex.value =
+                    picker.value.toUpperCase();
+
+            }
+        );
+
+
+        hex.addEventListener(
+            "input",
+            function () {
+
+
+                const value =
+                    hex.value.trim();
+
+
+                if (
+                    /^#[0-9A-Fa-f]{6}$/.test(value)
+                ) {
+
+                    picker.value =
+                        value;
+
+                }
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Clients | Administration Zineb Déco
+    </title>
+
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}"
+          href="/css/style.css">
+
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin.css}"
+          href="/css/admin.css">
+
+
+    <style>
+
+        /* =====================================================
+           STATISTIQUES CLIENTS
+        ====================================================== */
+
+        .customer-stats-grid {
+
+            margin-top: 28px;
+
+            display: grid;
+
+            grid-template-columns:
+                    repeat(3, minmax(0, 1fr));
+
+            gap: 14px;
+        }
+
+
+        .customer-stat {
+
+            min-height: 125px;
+
+            padding: 22px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            border: 1px solid #ddd3c5;
+
+            background: #ffffff;
+        }
+
+
+        .customer-stat.dark {
+
+            border-color: #080705;
+
+            background: #080705;
+
+            color: #ffffff;
+        }
+
+
+        .customer-stat.gold {
+
+            border-color: #b88627;
+
+            background: #f9f3e7;
+        }
+
+
+        /*
+         * NOUVEAU :
+         * carte clients actuellement en ligne
+         */
+
+        .customer-stat.online {
+
+            border-color: #96b79b;
+
+            background: #eef7f0;
+        }
+
+
+        .customer-stat.online .customer-stat-label {
+
+            color: #3c6842;
+        }
+
+
+        .customer-stat.online .customer-stat-value {
+
+            color: #315a37;
+        }
+
+
+        .customer-stat-label {
+
+            color: #867c70;
+
+            font-size: 7px;
+
+            font-weight: 900;
+
+            letter-spacing: 1.4px;
+
+            text-transform: uppercase;
+        }
+
+
+        .customer-stat.dark .customer-stat-label {
+
+            color: #d4a536;
+        }
+
+
+        .customer-stat-value {
+
+            margin-top: 13px;
+
+            font-family: Georgia, serif;
+
+            font-size: 35px;
+
+            font-weight: 400;
+        }
+
+
+
+        /* =====================================================
+           RECHERCHE / FILTRES
+        ====================================================== */
+
+        .customer-search-section {
+
+            margin-top: 28px;
+
+            padding: 22px;
+
+            border: 1px solid #ddd3c5;
+
+            background: #ffffff;
+        }
+
+
+        .customer-search-head span {
+
+            display: block;
+
+            color: #a47822;
+
+            font-size: 7px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+
+        .customer-search-head h2 {
+
+            margin: 5px 0 18px;
+
+            font-family: Georgia, serif;
+
+            font-size: 25px;
+
+            font-weight: 400;
+        }
+
+
+        .customer-search-form {
+
+            display: grid;
+
+            grid-template-columns:
+                    minmax(240px, 1.5fr)
+                    minmax(150px, .7fr)
+                    minmax(170px, .8fr)
+                    auto
+                    auto;
+
+            gap: 10px;
+
+            align-items: end;
+        }
+
+
+        .customer-search-field {
+
+            display: grid;
+
+            gap: 7px;
+        }
+
+
+        .customer-search-field label {
+
+            color: #6f675f;
+
+            font-size: 7px;
+
+            font-weight: 900;
+
+            letter-spacing: .7px;
+
+            text-transform: uppercase;
+        }
+
+
+        .customer-search-field input,
+        .customer-search-field select {
+
+            width: 100%;
+
+            min-height: 45px;
+
+            padding: 0 12px;
+
+            border: 1px solid #d6ccbe;
+
+            background: #faf8f4;
+
+            color: #29241e;
+
+            outline: none;
+        }
+
+
+        .customer-search-field input:focus,
+        .customer-search-field select:focus {
+
+            border-color: #b88627;
+
+            background: #ffffff;
+        }
+
+
+        .customer-search-submit {
+
+            min-height: 45px;
+
+            padding: 0 18px;
+
+            border: 1px solid #080705;
+
+            background: #080705;
+
+            color: #d4a536;
+
+            font-size: 7px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+            cursor: pointer;
+        }
+
+
+        .customer-search-submit:hover {
+
+            border-color: #d4a536;
+
+            background: #d4a536;
+
+            color: #080705;
+        }
+
+
+        .customer-search-reset {
+
+            min-height: 45px;
+
+            padding: 0 17px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border: 1px solid #cfc4b6;
+
+            background: #ffffff;
+
+            color: #625b53;
+
+            font-size: 7px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+        }
+
+
+        .customer-search-reset:hover {
+
+            border-color: #080705;
+
+            color: #080705;
+        }
+
+
+        .customer-results-info {
+
+            margin-top: 14px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            flex-wrap: wrap;
+
+            gap: 15px;
+
+            color: #837a70;
+
+            font-size: 8px;
+        }
+
+
+        .customer-results-info strong {
+
+            color: #a47822;
+        }
+
+
+
+        /* =====================================================
+           CLIENT
+        ====================================================== */
+
+        .customer-name {
+
+            display: block;
+
+            color: #29241e;
+
+            font-weight: 800;
+        }
+
+
+        .customer-account-label {
+
+            display: block;
+
+            margin-top: 3px;
+
+            color: #91887f;
+
+            font-size: 8px;
+        }
+
+
+
+        /* =====================================================
+           BADGES
+        ====================================================== */
+
+        .customer-badge {
+
+            min-width: 67px;
+
+            min-height: 25px;
+
+            padding: 0 9px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border: 1px solid #d7cec2;
+
+            border-radius: 30px;
+
+            background: #f8f5ef;
+
+            color: #625a51;
+
+            font-size: 7px;
+
+            font-weight: 900;
+
+            letter-spacing: .5px;
+
+            text-transform: uppercase;
+
+            white-space: nowrap;
+        }
+
+
+        .customer-badge.local {
+
+            border-color: #c9b788;
+
+            background: #faf5e8;
+
+            color: #8c691c;
+        }
+
+
+        .customer-badge.google {
+
+            border-color: #aebed3;
+
+            background: #eef4fb;
+
+            color: #335b91;
+        }
+
+
+        .customer-badge.verified {
+
+            border-color: #a9c2a2;
+
+            background: #eef7eb;
+
+            color: #3e6b36;
+        }
+
+
+        .customer-badge.unverified {
+
+            border-color: #d8b0a7;
+
+            background: #fff2ef;
+
+            color: #9d4f3f;
+        }
+
+
+        .customer-badge.active {
+
+            border-color: #9ebba2;
+
+            background: #eff7f0;
+
+            color: #3c6842;
+        }
+
+
+        .customer-badge.inactive {
+
+            border-color: #c9c2ba;
+
+            background: #f4f1ee;
+
+            color: #79716a;
+        }
+
+
+
+        /* =====================================================
+           NOUVEAU : ETAT EN LIGNE
+        ====================================================== */
+
+        .customer-badge.online {
+
+            border-color: #8eb296;
+
+            background: #ebf7ed;
+
+            color: #2f6739;
+        }
+
+
+        .customer-badge.offline {
+
+            border-color: #c9c2ba;
+
+            background: #f4f1ee;
+
+            color: #79716a;
+        }
+
+
+        .customer-status-dot {
+
+            width: 7px;
+
+            height: 7px;
+
+            margin-right: 6px;
+
+            display: inline-block;
+
+            border-radius: 50%;
+        }
+
+
+        .customer-status-dot.online {
+
+            background: #3f8c4d;
+        }
+
+
+        .customer-status-dot.offline {
+
+            background: #928981;
+        }
+
+
+
+        /* =====================================================
+           DATE CONNEXION
+        ====================================================== */
+
+        .customer-login-date {
+
+            display: block;
+
+            color: #3d3731;
+
+            font-size: 8px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+
+        .customer-login-empty {
+
+            color: #9a9188;
+
+            font-size: 8px;
+        }
+
+
+
+        /* =====================================================
+           TABLE
+        ====================================================== */
+
+        .customer-table {
+
+            min-width: 1380px;
+        }
+
+
+        .customer-email {
+
+            max-width: 210px;
+
+            overflow-wrap: anywhere;
+        }
+
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1100px) {
+
+            .customer-stats-grid {
+
+                grid-template-columns:
+                        repeat(2, minmax(0, 1fr));
+            }
+
+
+            .customer-search-form {
+
+                grid-template-columns:
+                        1fr 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .customer-stats-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .customer-search-form {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .customer-search-submit,
+            .customer-search-reset {
+
+                width: 100%;
+            }
+
+
+            .customer-results-info {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="zdadm-shell">
+
+
+    <!-- =====================================================
+         SIDEBAR ADMIN
+    ====================================================== -->
+
+    <div th:replace="~{fragments/admin-sidebar :: sidebar('clients')}"></div>
+
+
+
+    <!-- =====================================================
+         CONTENU
+    ====================================================== -->
+
+    <main class="zdadm-main">
+
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="zdadm-header">
+
+
+            <div>
+
+
+                <span class="zdadm-kicker">
+
+                    ADMINISTRATION / CLIENTS
+
+                </span>
+
+
+                <h1>
+
+                    Clients
+
+                </h1>
+
+
+                <p>
+
+                    Gérez les comptes clients,
+                    leur type de connexion,
+                    leur état en ligne,
+                    la vérification des emails
+                    et leur dernière connexion.
+
+                </p>
+
+
+            </div>
+
+
+
+            <a th:href="@{/admin}"
+               href="/admin"
+               class="zdadm-primary-button">
+
+                ← Tableau de bord
+
+            </a>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             ALERTES
+        ================================================== -->
+
+        <div th:if="${error}"
+             class="zdadm-alert error"
+             th:text="${error}">
+
+        </div>
+
+
+
+        <!-- =================================================
+             STATISTIQUES CLIENTS
+        ================================================== -->
+
+        <section class="customer-stats-grid">
+
+
+
+            <!-- TOTAL -->
+
+            <article class="customer-stat dark">
+
+
+                <span class="customer-stat-label">
+
+                    TOTAL CLIENTS
+
+                </span>
+
+
+                <strong class="customer-stat-value"
+                        th:text="${totalCustomers}">
+
+                    0
+
+                </strong>
+
+
+            </article>
+
+
+
+            <!-- LOCAL -->
+
+            <article class="customer-stat">
+
+
+                <span class="customer-stat-label">
+
+                    COMPTES LOCAL
+
+                </span>
+
+
+                <strong class="customer-stat-value"
+                        th:text="${localCustomers}">
+
+                    0
+
+                </strong>
+
+
+            </article>
+
+
+
+            <!-- GOOGLE -->
+
+            <article class="customer-stat">
+
+
+                <span class="customer-stat-label">
+
+                    COMPTES GOOGLE
+
+                </span>
+
+
+                <strong class="customer-stat-value"
+                        th:text="${googleCustomers}">
+
+                    0
+
+                </strong>
+
+
+            </article>
+
+
+
+            <!-- EMAILS VERIFIES -->
+
+            <article class="customer-stat gold">
+
+
+                <span class="customer-stat-label">
+
+                    EMAILS VÉRIFIÉS
+
+                </span>
+
+
+                <strong class="customer-stat-value"
+                        th:text="${verifiedCustomers}">
+
+                    0
+
+                </strong>
+
+
+            </article>
+
+
+
+            <!-- EMAILS NON VERIFIES -->
+
+            <article class="customer-stat">
+
+
+                <span class="customer-stat-label">
+
+                    NON VÉRIFIÉS
+
+                </span>
+
+
+                <strong class="customer-stat-value"
+                        th:text="${unverifiedCustomers}">
+
+                    0
+
+                </strong>
+
+
+            </article>
+
+
+
+            <!-- DEJA CONNECTES -->
+
+            <article class="customer-stat">
+
+
+                <span class="customer-stat-label">
+
+                    DÉJÀ CONNECTÉS
+
+                </span>
+
+
+                <strong class="customer-stat-value"
+                        th:text="${customersWithLogin}">
+
+                    0
+
+                </strong>
+
+
+            </article>
+
+
+
+            <!-- =================================================
+                 NOUVEAU : ACTUELLEMENT EN LIGNE
+            ================================================== -->
+
+            <article class="customer-stat online">
+
+
+                <span class="customer-stat-label">
+
+                    ● ACTUELLEMENT EN LIGNE
+
+                </span>
+
+
+                <strong class="customer-stat-value"
+                        th:text="${onlineCustomers}">
+
+                    0
+
+                </strong>
+
+
+            </article>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             RECHERCHE + FILTRES
+        ================================================== -->
+
+        <section class="customer-search-section">
+
+
+            <div class="customer-search-head">
+
+
+                <span>
+
+                    RECHERCHE CLIENT
+
+                </span>
+
+
+                <h2>
+
+                    Trouver un client
+
+                </h2>
+
+
+            </div>
+
+
+
+            <form th:action="@{/admin/clients}"
+                  action="/admin/clients"
+                  method="get"
+                  class="customer-search-form">
+
+
+
+                <!-- RECHERCHE -->
+
+                <div class="customer-search-field">
+
+
+                    <label for="search">
+
+                        Recherche
+
+                    </label>
+
+
+                    <input id="search"
+                           name="search"
+                           type="search"
+                           th:value="${search}"
+                           placeholder="Nom, email, téléphone, ville ou ID">
+
+
+                </div>
+
+
+
+                <!-- PROVIDER -->
+
+                <div class="customer-search-field">
+
+
+                    <label for="provider">
+
+                        Connexion
+
+                    </label>
+
+
+                    <select id="provider"
+                            name="provider">
+
+
+                        <option value=""
+                                th:selected="${provider == null or #strings.isEmpty(provider)}">
+
+                            Tous
+
+                        </option>
+
+
+                        <option value="LOCAL"
+                                th:selected="${provider != null and #strings.equalsIgnoreCase(provider, 'LOCAL')}">
+
+                            LOCAL
+
+                        </option>
+
+
+                        <option value="GOOGLE"
+                                th:selected="${provider != null and #strings.equalsIgnoreCase(provider, 'GOOGLE')}">
+
+                            GOOGLE
+
+                        </option>
+
+
+                    </select>
+
+
+                </div>
+
+
+
+                <!-- VERIFICATION -->
+
+                <div class="customer-search-field">
+
+
+                    <label for="verified">
+
+                        Email
+
+                    </label>
+
+
+                    <select id="verified"
+                            name="verified">
+
+
+                        <option value=""
+                                th:selected="${verified == null or #strings.isEmpty(verified)}">
+
+                            Tous
+
+                        </option>
+
+
+                        <option value="true"
+                                th:selected="${verified == 'true'}">
+
+                            Vérifiés
+
+                        </option>
+
+
+                        <option value="false"
+                                th:selected="${verified == 'false'}">
+
+                            Non vérifiés
+
+                        </option>
+
+
+                    </select>
+
+
+                </div>
+
+
+
+                <!-- RECHERCHER -->
+
+                <button type="submit"
+                        class="customer-search-submit">
+
+                    Filtrer
+
+                </button>
+
+
+
+                <!-- RESET -->
+
+                <a th:href="@{/admin/clients}"
+                   href="/admin/clients"
+                   class="customer-search-reset">
+
+                    Réinitialiser
+
+                </a>
+
+
+            </form>
+
+
+
+            <!-- =================================================
+                 RESULTATS
+            ================================================== -->
+
+            <div class="customer-results-info">
+
+
+                <span>
+
+
+                    <strong th:text="${resultCount}">
+
+                        0
+
+                    </strong>
+
+
+                    client(s) affiché(s)
+
+
+                </span>
+
+
+
+                <span>
+
+
+                    En ligne maintenant :
+
+
+                    <strong th:text="${onlineCustomers}">
+
+                        0
+
+                    </strong>
+
+
+                </span>
+
+
+
+                <span th:if="${search != null and !#strings.isEmpty(search)}">
+
+
+                    Recherche :
+
+
+                    <strong th:text="${search}">
+
+                        client
+
+                    </strong>
+
+
+                </span>
+
+
+
+                <span th:if="${provider != null and !#strings.isEmpty(provider)}">
+
+
+                    Connexion :
+
+
+                    <strong th:text="${provider}">
+
+                        LOCAL
+
+                    </strong>
+
+
+                </span>
+
+
+
+                <span th:if="${verified != null and !#strings.isEmpty(verified)}">
+
+
+                    Email :
+
+
+                    <strong th:text="${verified == 'true' ? 'Vérifié' : 'Non vérifié'}">
+
+                        Vérifié
+
+                    </strong>
+
+
+                </span>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             LISTE CLIENTS
+        ================================================== -->
+
+        <section class="zdadm-section">
+
+
+            <div class="zdadm-section-head">
+
+
+                <div>
+
+
+                    <small>
+
+                        BASE CLIENT
+
+                    </small>
+
+
+                    <h2>
+
+                        Clients enregistrés
+
+                    </h2>
+
+
+                </div>
+
+
+
+                <strong th:text="${resultCount + ' client(s)'}">
+
+                    0 client(s)
+
+                </strong>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 AUCUN CLIENT
+            ================================================== -->
+
+            <div th:if="${customers == null or #lists.isEmpty(customers)}"
+                 class="zdadm-empty">
+
+
+                <strong>
+
+                    Aucun client trouvé
+
+                </strong>
+
+
+                <p>
+
+                    Modifiez votre recherche
+                    ou réinitialisez les filtres.
+
+                </p>
+
+
+                <a th:href="@{/admin/clients}"
+                   href="/admin/clients"
+                   class="zdadm-primary-button"
+                   style="margin-top:15px;">
+
+                    Réinitialiser
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TABLE
+            ================================================== -->
+
+            <div th:if="${customers != null and !#lists.isEmpty(customers)}"
+                 class="zdadm-table-wrapper">
+
+
+                <table class="zdadm-table customer-table">
+
+
+                    <thead>
+
+
+                    <tr>
+
+
+                        <th>
+                            ID
+                        </th>
+
+
+                        <th>
+                            Client
+                        </th>
+
+
+                        <th>
+                            Email
+                        </th>
+
+
+                        <th>
+                            Connexion
+                        </th>
+
+
+                        <th>
+                            Email vérifié
+                        </th>
+
+
+                        <!-- NOUVEAU -->
+
+                        <th>
+                            État
+                        </th>
+
+
+                        <th>
+                            Dernière connexion
+                        </th>
+
+
+                        <th>
+                            Téléphone
+                        </th>
+
+
+                        <th>
+                            Ville
+                        </th>
+
+
+                        <th>
+                            Statut
+                        </th>
+
+
+                        <th>
+                            Action
+                        </th>
+
+
+                    </tr>
+
+
+                    </thead>
+
+
+
+                    <tbody>
+
+
+                    <tr th:each="customer : ${customers}">
+
+
+
+                        <!-- ID -->
+
+                        <td>
+
+
+                            <strong class="zdadm-id"
+                                    th:text="${'#' + customer.id}">
+
+                                #1
+
+                            </strong>
+
+
+                        </td>
+
+
+
+                        <!-- CLIENT -->
+
+                        <td>
+
+
+                            <strong class="customer-name"
+                                    th:text="${customer.firstName + ' ' + customer.lastName}">
+
+                                Client
+
+                            </strong>
+
+
+                            <span class="customer-account-label">
+
+                                Compte client
+
+                            </span>
+
+
+                        </td>
+
+
+
+                        <!-- EMAIL -->
+
+                        <td class="customer-email"
+                            th:text="${customer.email}">
+
+                            client@email.com
+
+                        </td>
+
+
+
+                        <!-- PROVIDER -->
+
+                        <td>
+
+
+                            <span class="customer-badge local"
+                                  th:if="${#strings.equalsIgnoreCase(customer.authProvider, 'LOCAL')}">
+
+                                LOCAL
+
+                            </span>
+
+
+
+                            <span class="customer-badge google"
+                                  th:if="${#strings.equalsIgnoreCase(customer.authProvider, 'GOOGLE')}">
+
+                                GOOGLE
+
+                            </span>
+
+
+
+                            <span class="customer-badge"
+                                  th:if="${customer.authProvider == null or #strings.isEmpty(customer.authProvider)}">
+
+                                LOCAL
+
+                            </span>
+
+
+                        </td>
+
+
+
+                        <!-- EMAIL VERIFIE -->
+
+                        <td>
+
+
+                            <span th:if="${customer.emailVerified}"
+                                  class="customer-badge verified">
+
+                                ✓ Vérifié
+
+                            </span>
+
+
+                            <span th:unless="${customer.emailVerified}"
+                                  class="customer-badge unverified">
+
+                                Non vérifié
+
+                            </span>
+
+
+                        </td>
+
+
+
+                        <!-- =================================================
+                             NOUVEAU : ETAT EN LIGNE
+                        ================================================== -->
+
+                        <td>
+
+
+                            <!-- EN LIGNE -->
+
+                            <span class="customer-badge online"
+                                  th:if="${onlineCustomerIds != null
+                                           and #lists.contains(
+                                                onlineCustomerIds,
+                                                customer.id
+                                           )}">
+
+
+                                <span class="customer-status-dot online"></span>
+
+                                En ligne
+
+
+                            </span>
+
+
+
+                            <!-- HORS LIGNE -->
+
+                            <span class="customer-badge offline"
+                                  th:unless="${onlineCustomerIds != null
+                                               and #lists.contains(
+                                                    onlineCustomerIds,
+                                                    customer.id
+                                               )}">
+
+
+                                <span class="customer-status-dot offline"></span>
+
+                                Hors ligne
+
+
+                            </span>
+
+
+                        </td>
+
+
+
+                        <!-- DERNIERE CONNEXION -->
+
+                        <td>
+
+
+                            <span th:if="${customer.lastLoginAt != null}"
+                                  class="customer-login-date"
+                                  th:text="${#temporals.format(
+                                                customer.lastLoginAt,
+                                                'dd/MM/yyyy HH:mm'
+                                           )}">
+
+                                22/08/2026 15:30
+
+                            </span>
+
+
+                            <span th:if="${customer.lastLoginAt == null}"
+                                  class="customer-login-empty">
+
+                                Jamais connecté
+
+                            </span>
+
+
+                        </td>
+
+
+
+                        <!-- TELEPHONE -->
+
+                        <td>
+
+
+                            <span th:if="${customer.phone != null and !#strings.isEmpty(customer.phone)}"
+                                  th:text="${customer.phone}">
+
+                                +212...
+
+                            </span>
+
+
+                            <span th:if="${customer.phone == null or #strings.isEmpty(customer.phone)}">
+
+                                —
+
+                            </span>
+
+
+                        </td>
+
+
+
+                        <!-- VILLE -->
+
+                        <td>
+
+
+                            <span th:if="${customer.city != null and !#strings.isEmpty(customer.city)}"
+                                  th:text="${customer.city}">
+
+                                Casablanca
+
+                            </span>
+
+
+                            <span th:if="${customer.city == null or #strings.isEmpty(customer.city)}">
+
+                                —
+
+                            </span>
+
+
+                        </td>
+
+
+
+                        <!-- STATUT COMPTE -->
+
+                        <td>
+
+
+                            <span th:if="${customer.active}"
+                                  class="customer-badge active">
+
+                                Actif
+
+                            </span>
+
+
+                            <span th:unless="${customer.active}"
+                                  class="customer-badge inactive">
+
+                                Inactif
+
+                            </span>
+
+
+                        </td>
+
+
+
+                        <!-- ACTION -->
+
+                        <td>
+
+
+                            <a th:href="@{/admin/clients/{id}(id=${customer.id})}"
+                               class="zdadm-small-button">
+
+                                Voir →
+
+                            </a>
+
+
+                        </td>
+
+
+                    </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+</body>
+
+</html>
