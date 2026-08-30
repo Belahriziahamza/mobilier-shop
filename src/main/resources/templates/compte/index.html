@@ -12,9 +12,417 @@
 
     <title>Mon compte | Zineb Déco</title>
 
+
     <link rel="stylesheet"
           th:href="@{/css/style.css}"
           href="/css/style.css">
+
+
+    <style>
+
+        /* =====================================================
+           COMPTE CLIENT - MODE SOMBRE
+        ====================================================== */
+
+        html.account-dark-theme .zd-account-section {
+            background: #07111b !important;
+            color: #ffffff !important;
+            border-color: rgba(217, 154, 43, .22) !important;
+        }
+
+
+        html.account-dark-theme .zd-account-section-head {
+            border-bottom-color: rgba(217, 154, 43, .20) !important;
+        }
+
+
+        html.account-dark-theme .zd-account-section-head h2 {
+            color: #ffffff !important;
+        }
+
+
+        html.account-dark-theme .zd-account-section-head p,
+        html.account-dark-theme .zd-account-section-head > strong {
+            color: #9da7b1 !important;
+        }
+
+
+        html.account-dark-theme .zd-account-section-label {
+            color: #d99a2b !important;
+        }
+
+
+
+        /* =====================================================
+           PROFIL - LABELS
+        ====================================================== */
+
+        html.account-dark-theme .zd-profile-field label {
+            color: #cbd3dc !important;
+        }
+
+
+        html.account-dark-theme .zd-profile-field small {
+            color: #8c98a4 !important;
+        }
+
+
+
+        /* =====================================================
+           PROFIL - INPUTS
+        ====================================================== */
+
+        html.account-dark-theme .zd-profile-field input,
+        html.account-dark-theme .zd-profile-field textarea {
+
+            background: #06101b !important;
+
+            color: #ffffff !important;
+
+            border:
+                1px solid
+                rgba(217, 154, 43, .25) !important;
+
+            outline: none !important;
+
+            caret-color: #d99a2b;
+        }
+
+
+        html.account-dark-theme .zd-profile-field input::placeholder,
+        html.account-dark-theme .zd-profile-field textarea::placeholder {
+
+            color: #727e89 !important;
+
+            opacity: 1;
+        }
+
+
+        html.account-dark-theme .zd-profile-field input:focus,
+        html.account-dark-theme .zd-profile-field textarea:focus {
+
+            background: #091522 !important;
+
+            border-color: #d99a2b !important;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(217, 154, 43, .08) !important;
+        }
+
+
+
+        /* =====================================================
+           EMAIL DESACTIVE
+        ====================================================== */
+
+        html.account-dark-theme .zd-profile-field input:disabled {
+
+            background: #0a1520 !important;
+
+            color: #77838f !important;
+
+            border-color:
+                rgba(255,255,255,.08) !important;
+
+            opacity: 1 !important;
+
+            cursor: not-allowed;
+        }
+
+
+
+        /* =====================================================
+           BOUTON PROFIL
+        ====================================================== */
+
+        html.account-dark-theme .zd-profile-save {
+
+            min-height: 48px;
+
+            padding: 0 22px;
+
+            border:
+                1px solid
+                #d99a2b !important;
+
+            background:
+                #d99a2b !important;
+
+            color:
+                #020914 !important;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition: .2s ease;
+        }
+
+
+        html.account-dark-theme .zd-profile-save:hover {
+
+            background:
+                #f0bd57 !important;
+
+            border-color:
+                #f0bd57 !important;
+
+            color:
+                #020914 !important;
+
+            transform: translateY(-1px);
+        }
+
+
+
+        /* =====================================================
+           SECURITE
+        ====================================================== */
+
+        html.account-dark-theme .zd-security-section {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #030a12,
+                    #07111b
+                ) !important;
+
+            border-color:
+                rgba(217,154,43,.25) !important;
+        }
+
+
+        html.account-dark-theme .zd-security-intro h2 {
+            color: #ffffff !important;
+        }
+
+
+        html.account-dark-theme .zd-security-intro p {
+            color: #9da7b1 !important;
+        }
+
+
+        html.account-dark-theme .zd-security-form {
+            background: #07111b !important;
+        }
+
+
+        html.account-dark-theme .zd-security-field label {
+            color: #cbd3dc !important;
+        }
+
+
+        html.account-dark-theme .zd-security-field input {
+
+            background: #06101b !important;
+
+            color: #ffffff !important;
+
+            border:
+                1px solid
+                rgba(217,154,43,.24) !important;
+
+            outline: none !important;
+
+            caret-color: #d99a2b;
+        }
+
+
+        html.account-dark-theme .zd-security-field input:focus {
+
+            border-color: #d99a2b !important;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(217,154,43,.08) !important;
+        }
+
+
+        html.account-dark-theme .zd-security-submit {
+
+            background: #d99a2b !important;
+
+            border-color: #d99a2b !important;
+
+            color: #020914 !important;
+
+            font-weight: 900 !important;
+        }
+
+
+        html.account-dark-theme .zd-security-submit:hover {
+
+            background: #f0bd57 !important;
+
+            border-color: #f0bd57 !important;
+
+            color: #020914 !important;
+        }
+
+
+
+        /* =====================================================
+           COMMANDES EN SOMBRE
+        ====================================================== */
+
+        html.account-dark-theme .zd-order {
+
+            background: #06101b !important;
+
+            border-color:
+                rgba(217,154,43,.20) !important;
+        }
+
+
+        html.account-dark-theme .zd-order-head {
+
+            background: #081522 !important;
+
+            border-bottom-color:
+                rgba(217,154,43,.15) !important;
+        }
+
+
+        html.account-dark-theme .zd-order-info span {
+            color: #8995a0 !important;
+        }
+
+
+        html.account-dark-theme .zd-order-info strong {
+            color: #ffffff;
+        }
+
+
+        html.account-dark-theme .zd-order-total,
+        html.account-dark-theme .zd-order-line-price {
+            color: #d99a2b !important;
+        }
+
+
+        html.account-dark-theme .zd-order-items {
+            background: #06101b !important;
+        }
+
+
+        html.account-dark-theme .zd-order-item {
+
+            border-color:
+                rgba(255,255,255,.08) !important;
+        }
+
+
+        html.account-dark-theme .zd-order-item h3 {
+            color: #ffffff !important;
+        }
+
+
+        html.account-dark-theme .zd-order-item p {
+            color: #9da7b1 !important;
+        }
+
+
+        html.account-dark-theme .zd-order-item p strong {
+            color: #ffffff !important;
+        }
+
+
+
+        /* =====================================================
+           FAVORIS SOMBRE
+        ====================================================== */
+
+        html.account-dark-theme .zd-favorite {
+
+            background: #06101b !important;
+
+            border-color:
+                rgba(217,154,43,.20) !important;
+        }
+
+
+        html.account-dark-theme .zd-favorite-content {
+            background: #06101b !important;
+        }
+
+
+        html.account-dark-theme .zd-favorite-content h3 {
+            color: #ffffff !important;
+        }
+
+
+        html.account-dark-theme .zd-favorite-price {
+            color: #d99a2b !important;
+        }
+
+
+
+        /* =====================================================
+           EMPTY
+        ====================================================== */
+
+        html.account-dark-theme .zd-account-empty {
+
+            background: #06101b !important;
+
+            color: #ffffff !important;
+
+            border-color:
+                rgba(217,154,43,.18) !important;
+        }
+
+
+        html.account-dark-theme .zd-account-empty strong {
+            color: #ffffff !important;
+        }
+
+
+        html.account-dark-theme .zd-account-empty p {
+            color: #9da7b1 !important;
+        }
+
+
+
+        /* =====================================================
+           MODE CLAIR
+        ====================================================== */
+
+        html:not(.account-dark-theme)
+        .zd-profile-field input,
+
+        html:not(.account-dark-theme)
+        .zd-profile-field textarea {
+
+            background: #faf8f4 !important;
+
+            color: #24211c !important;
+
+            border-color: #ddd4c7 !important;
+        }
+
+
+        html:not(.account-dark-theme)
+        .zd-profile-field input:focus,
+
+        html:not(.account-dark-theme)
+        .zd-profile-field textarea:focus {
+
+            background: #ffffff !important;
+
+            border-color: #b9882a !important;
+        }
+
+
+        html:not(.account-dark-theme)
+        .zd-profile-field input:disabled {
+
+            background: #ece8e1 !important;
+
+            color: #918980 !important;
+        }
+
+    </style>
 
 </head>
 
@@ -26,7 +434,8 @@
      HEADER
 ========================================================= -->
 
-<div th:replace="~{fragments/header :: header}"></div>
+<div th:replace="~{fragments/header :: header}">
+</div>
 
 
 
@@ -45,6 +454,7 @@
 
 
             <div>
+
 
                 <span class="zd-account-eyebrow">
                     ESPACE CLIENT
@@ -70,6 +480,7 @@
                     sécurisez votre compte Zineb Déco.
 
                 </p>
+
 
             </div>
 
@@ -129,7 +540,9 @@
         <div class="zd-account-container">
 
 
-            <!-- ALERTES -->
+            <!-- =================================================
+                 ALERTES
+            ================================================== -->
 
             <div th:if="${profileSuccess}"
                  class="zd-account-alert success"
@@ -180,26 +593,32 @@
 
                     <p class="zd-account-card-description">
 
+
                         <strong th:text="${customer.firstName + ' ' + customer.lastName}">
                             Client
                         </strong>
 
+
                         <br>
+
 
                         <span th:text="${customer.email}">
                             email@email.com
                         </span>
 
+
                         <br>
+
 
                         <span th:text="${customer.phone}">
                             +212...
                         </span>
 
+
                     </p>
 
 
-                    <a href="#profil"
+                    <a href="#modifier-profil"
                        class="zd-account-card-link">
 
                         Modifier mon profil →
@@ -228,16 +647,16 @@
 
                     <div class="zd-account-big-number">
 
-                        <strong
-                            th:text="${orders != null ? #lists.size(orders) : 0}">
 
+                        <strong th:text="${orders != null ? #lists.size(orders) : 0}">
                             0
-
                         </strong>
+
 
                         <span>
                             commande(s)
                         </span>
+
 
                     </div>
 
@@ -300,16 +719,16 @@
 
                     <div class="zd-account-big-number">
 
-                        <strong
-                            th:text="${favorites != null ? #lists.size(favorites) : 0}">
 
+                        <strong th:text="${favorites != null ? #lists.size(favorites) : 0}">
                             0
-
                         </strong>
+
 
                         <span>
                             produit(s)
                         </span>
+
 
                     </div>
 
@@ -341,7 +760,7 @@
                  PROFIL
             ================================================== -->
 
-            <section id="profil"
+            <section id="modifier-profil"
                      class="zd-account-section">
 
 
@@ -349,6 +768,7 @@
 
 
                     <div>
+
 
                         <span class="zd-account-section-label">
                             MES INFORMATIONS
@@ -367,6 +787,7 @@
                             prochaines commandes.
 
                         </p>
+
 
                     </div>
 
@@ -389,7 +810,10 @@
                     <div class="zd-profile-grid">
 
 
+                        <!-- PRENOM -->
+
                         <div class="zd-profile-field">
+
 
                             <label for="firstName">
                                 Prénom *
@@ -403,11 +827,15 @@
                                    required
                                    th:value="${customer.firstName}">
 
+
                         </div>
 
 
 
+                        <!-- NOM -->
+
                         <div class="zd-profile-field">
+
 
                             <label for="lastName">
                                 Nom *
@@ -421,11 +849,15 @@
                                    required
                                    th:value="${customer.lastName}">
 
+
                         </div>
 
 
 
+                        <!-- EMAIL -->
+
                         <div class="zd-profile-field">
+
 
                             <label>
                                 Adresse email
@@ -444,11 +876,15 @@
 
                             </small>
 
+
                         </div>
 
 
 
+                        <!-- TELEPHONE -->
+
                         <div class="zd-profile-field">
+
 
                             <label for="phone">
                                 Téléphone *
@@ -462,11 +898,15 @@
                                    required
                                    th:value="${customer.phone}">
 
+
                         </div>
 
 
 
+                        <!-- VILLE -->
+
                         <div class="zd-profile-field">
+
 
                             <label for="city">
                                 Ville
@@ -480,11 +920,15 @@
                                    placeholder="Ex : Casablanca"
                                    th:value="${customer.city}">
 
+
                         </div>
 
 
 
+                        <!-- ADRESSE -->
+
                         <div class="zd-profile-field full">
+
 
                             <label for="address">
                                 Adresse
@@ -496,8 +940,8 @@
                                       rows="4"
                                       maxlength="500"
                                       placeholder="Votre adresse"
-                                      th:text="${customer.address}">
-                            </textarea>
+                                      th:text="${customer.address}"></textarea>
+
 
                         </div>
 
@@ -583,6 +1027,7 @@
 
                     <div class="zd-security-field">
 
+
                         <label for="currentPassword">
                             Mot de passe actuel
                         </label>
@@ -593,11 +1038,13 @@
                                type="password"
                                required>
 
+
                     </div>
 
 
 
                     <div class="zd-security-field">
+
 
                         <label for="newPassword">
                             Nouveau mot de passe
@@ -611,11 +1058,13 @@
                                maxlength="100"
                                required>
 
+
                     </div>
 
 
 
                     <div class="zd-security-field">
+
 
                         <label for="confirmNewPassword">
                             Confirmation
@@ -628,6 +1077,7 @@
                                minlength="8"
                                maxlength="100"
                                required>
+
 
                     </div>
 
@@ -661,6 +1111,7 @@
 
                     <div>
 
+
                         <span class="zd-account-section-label">
                             HISTORIQUE
                         </span>
@@ -677,6 +1128,7 @@
                             leurs articles et leur statut.
 
                         </p>
+
 
                     </div>
 
@@ -705,8 +1157,10 @@
 
 
                     <p>
+
                         Vos futures commandes
                         apparaîtront ici.
+
                     </p>
 
 
@@ -733,44 +1187,49 @@
                              class="zd-order">
 
 
-                        <!-- HEADER COMMANDE -->
+                        <!-- HEADER -->
 
                         <div class="zd-order-head">
 
 
                             <div class="zd-order-info">
 
+
                                 <span>
                                     Commande
                                 </span>
 
+
                                 <strong th:text="${'#' + order.id}">
                                     #1
                                 </strong>
+
 
                             </div>
 
 
 
                             <div class="zd-order-info">
+
 
                                 <span>
                                     Date
                                 </span>
 
 
-                                <strong
-                                    th:text="${#temporals.format(order.createdAt, 'dd/MM/yyyy')}">
+                                <strong th:text="${#temporals.format(order.createdAt, 'dd/MM/yyyy')}">
 
                                     19/08/2026
 
                                 </strong>
+
 
                             </div>
 
 
 
                             <div class="zd-order-info">
+
 
                                 <span>
                                     Total
@@ -779,19 +1238,23 @@
 
                                 <strong class="zd-order-total">
 
+
                                     <span th:text="${order.totalAmount}">
                                         0
                                     </span>
 
                                     DH
 
+
                                 </strong>
+
 
                             </div>
 
 
 
                             <div class="zd-order-info">
+
 
                                 <span>
                                     Statut
@@ -826,6 +1289,7 @@
 
                                 </strong>
 
+
                             </div>
 
 
@@ -845,18 +1309,13 @@
                                 <div class="zd-order-image">
 
 
-                                    <img
-                                        th:if="${item.imagePath != null and !#strings.isEmpty(item.imagePath)}"
-
-                                        th:src="${item.imagePath}"
-
-                                        th:alt="${item.productName}">
+                                    <img th:if="${item.imagePath != null and !#strings.isEmpty(item.imagePath)}"
+                                         th:src="${item.imagePath}"
+                                         th:alt="${item.productName}">
 
 
-                                    <div
-                                        th:if="${item.imagePath == null or #strings.isEmpty(item.imagePath)}"
-
-                                        class="zd-order-placeholder">
+                                    <div th:if="${item.imagePath == null or #strings.isEmpty(item.imagePath)}"
+                                         class="zd-order-placeholder">
 
                                         ZD
 
@@ -892,13 +1351,16 @@
 
                                         <strong>
 
+
                                             <span th:text="${item.unitPrice}">
                                                 0
                                             </span>
 
                                             DH
 
+
                                         </strong>
+
 
                                     </p>
 
@@ -909,11 +1371,13 @@
 
                                 <strong class="zd-order-line-price">
 
+
                                     <span th:text="${item.lineTotal}">
                                         0
                                     </span>
 
                                     DH
+
 
                                 </strong>
 
@@ -921,8 +1385,6 @@
                             </div>
 
 
-
-                            <!-- BOUTON DETAIL -->
 
                             <a th:href="@{/compte/commandes/{id}(id=${order.id})}"
                                class="zd-order-detail-link">
@@ -958,6 +1420,7 @@
 
                     <div>
 
+
                         <span class="zd-account-section-label">
                             MA SÉLECTION
                         </span>
@@ -974,6 +1437,7 @@
                             les produits enregistrés.
 
                         </p>
+
 
                     </div>
 
@@ -1019,18 +1483,13 @@
                            class="zd-favorite-image">
 
 
-                            <img
-                                th:if="${favorite.product.imagePath != null and !#strings.isEmpty(favorite.product.imagePath)}"
-
-                                th:src="${favorite.product.imagePath}"
-
-                                th:alt="${favorite.product.name}">
+                            <img th:if="${favorite.product.imagePath != null and !#strings.isEmpty(favorite.product.imagePath)}"
+                                 th:src="${favorite.product.imagePath}"
+                                 th:alt="${favorite.product.name}">
 
 
-                            <div
-                                th:if="${favorite.product.imagePath == null or #strings.isEmpty(favorite.product.imagePath)}"
-
-                                class="zd-order-placeholder">
+                            <div th:if="${favorite.product.imagePath == null or #strings.isEmpty(favorite.product.imagePath)}"
+                                 class="zd-order-placeholder">
 
                                 ZD
 
@@ -1051,11 +1510,13 @@
 
                             <strong class="zd-favorite-price">
 
+
                                 <span th:text="${favorite.product.price}">
                                     0
                                 </span>
 
                                 DH
+
 
                             </strong>
 
@@ -1072,9 +1533,8 @@
 
 
 
-                                <form
-                                    th:action="@{/compte/favoris/{id}/toggle(id=${favorite.product.id})}"
-                                    method="post">
+                                <form th:action="@{/compte/favoris/{id}/toggle(id=${favorite.product.id})}"
+                                      method="post">
 
 
                                     <input type="hidden"
@@ -1121,7 +1581,144 @@
      FOOTER
 ========================================================= -->
 
-<div th:replace="~{fragments/footer :: footer}"></div>
+<div th:replace="~{fragments/footer :: footer}">
+</div>
+
+
+
+<!-- =========================================================
+     MODE CLAIR / SOMBRE
+========================================================= -->
+
+<script>
+
+(function () {
+
+    "use strict";
+
+
+    const themeToggle =
+        document.getElementById(
+            "zdThemeToggle"
+        );
+
+
+    function syncAccountTheme() {
+
+
+        if (!themeToggle) {
+            return;
+        }
+
+
+        const pressed =
+            themeToggle.getAttribute(
+                "aria-pressed"
+            ) === "true";
+
+
+        const label =
+            (
+                themeToggle.getAttribute(
+                    "aria-label"
+                )
+                || ""
+            )
+            .toLowerCase();
+
+
+        /*
+         * Si le bouton affiche :
+         * "Activer le mode clair"
+         *
+         * cela signifie que le site
+         * est actuellement en mode sombre.
+         */
+
+        const dark =
+            pressed
+            ||
+            label.includes(
+                "mode clair"
+            );
+
+
+        document.documentElement
+            .classList
+            .toggle(
+                "account-dark-theme",
+                dark
+            );
+
+    }
+
+
+
+    if (themeToggle) {
+
+
+        const observer =
+            new MutationObserver(
+                function () {
+
+                    syncAccountTheme();
+
+                }
+            );
+
+
+        observer.observe(
+            themeToggle,
+            {
+                attributes: true,
+
+                attributeFilter: [
+                    "aria-pressed",
+                    "aria-label",
+                    "class"
+                ]
+            }
+        );
+
+
+        themeToggle.addEventListener(
+            "click",
+            function () {
+
+                window.setTimeout(
+                    syncAccountTheme,
+                    0
+                );
+
+            }
+        );
+
+    }
+
+
+
+    window.setTimeout(
+        syncAccountTheme,
+        50
+    );
+
+
+    window.addEventListener(
+        "pageshow",
+        function () {
+
+            window.setTimeout(
+                syncAccountTheme,
+                20
+            );
+
+        }
+    );
+
+
+})();
+
+</script>
 
 
 </body>

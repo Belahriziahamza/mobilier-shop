@@ -6,39 +6,84 @@
 <body>
 
 
+<!-- =========================================================
+     SIDEBAR ADMIN
+========================================================= -->
+
 <aside th:fragment="sidebar(activePage)"
        class="zdadm-sidebar">
 
 
     <!-- =====================================================
-         LOGO
+         LOGO / IDENTITE
     ====================================================== -->
 
-    <a th:href="@{/admin}"
-       href="/admin"
-       class="zdadm-logo">
+    <div class="zdadm-sidebar-brand">
 
-        <img th:src="@{/images/logo-zineb-deco.png}"
-             src="/images/logo-zineb-deco.png"
-             alt="Zineb Déco">
 
-    </a>
+        <a th:href="@{/admin}"
+           href="/admin"
+           class="zdadm-sidebar-logo">
+
+
+            <img th:src="@{/images/logo-zineb-deco.png}"
+                 src="/images/logo-zineb-deco.png"
+                 alt="Zineb Déco">
+
+
+        </a>
+
+
+        <div class="zdadm-sidebar-brand-text">
+
+
+            <strong>
+                Zineb Déco
+            </strong>
+
+
+            <span>
+                Administration
+            </span>
+
+
+        </div>
+
+
+    </div>
 
 
 
     <!-- =====================================================
-         BRAND
+         APPARENCE
     ====================================================== -->
 
-    <div class="zdadm-brand">
+    <div class="zdadm-theme-box">
 
-        <span>
-            ZINEB DÉCO
+
+        <span class="zdadm-theme-label">
+            APPARENCE
         </span>
 
-        <strong>
-            Administration
-        </strong>
+
+        <button type="button"
+                class="admin-theme-toggle"
+                data-admin-theme-toggle
+                aria-label="Changer le thème">
+
+
+            <span class="admin-theme-icon">
+                ☾
+            </span>
+
+
+            <span class="admin-theme-text">
+                Mode sombre
+            </span>
+
+
+        </button>
+
 
     </div>
 
@@ -51,11 +96,16 @@
     <nav class="zdadm-nav">
 
 
-        <!-- TABLEAU DE BORD -->
+        <!-- =================================================
+             TABLEAU DE BORD
+        ================================================== -->
 
         <a th:href="@{/admin}"
            href="/admin"
-           th:classappend="${activePage == 'dashboard'} ? 'active' : ''">
+
+           th:classappend="${activePage == 'dashboard'}
+                ? 'active'
+                : ''">
 
             Tableau de bord
 
@@ -63,11 +113,50 @@
 
 
 
-        <!-- COMMANDES -->
+        <!-- =================================================
+             PRODUITS
+        ================================================== -->
+
+        <a th:href="@{/admin/produits}"
+           href="/admin/produits"
+
+           th:classappend="${activePage == 'produits'}
+                ? 'active'
+                : ''">
+
+            Produits
+
+        </a>
+
+
+
+        <!-- =================================================
+             PIECES
+        ================================================== -->
+
+        <a th:href="@{/admin/pieces}"
+           href="/admin/pieces"
+
+           th:classappend="${activePage == 'pieces'}
+                ? 'active'
+                : ''">
+
+            Pièces
+
+        </a>
+
+
+
+        <!-- =================================================
+             COMMANDES
+        ================================================== -->
 
         <a th:href="@{/admin/commandes}"
            href="/admin/commandes"
-           th:classappend="${activePage == 'commandes'} ? 'active' : ''">
+
+           th:classappend="${activePage == 'commandes'}
+                ? 'active'
+                : ''">
 
             Commandes
 
@@ -75,13 +164,18 @@
 
 
 
-        <!-- PRODUITS -->
+        <!-- =================================================
+             CLIENTS
+        ================================================== -->
 
-        <a th:href="@{/admin/produits}"
-           href="/admin/produits"
-           th:classappend="${activePage == 'produits'} ? 'active' : ''">
+        <a th:href="@{/admin/clients}"
+           href="/admin/clients"
 
-            Produits
+           th:classappend="${activePage == 'clients'}
+                ? 'active'
+                : ''">
+
+            Clients
 
         </a>
 
@@ -91,9 +185,12 @@
              TISSUS & COULEURS
         ================================================== -->
 
-        <a th:href="@{/admin/customization}"
-           href="/admin/customization"
-           th:classappend="${activePage == 'customization'} ? 'active' : ''">
+        <a th:href="@{/admin/tissus-couleurs}"
+           href="/admin/tissus-couleurs"
+
+           th:classappend="${activePage == 'tissus-couleurs'}
+                ? 'active'
+                : ''">
 
             Tissus & Couleurs
 
@@ -101,23 +198,16 @@
 
 
 
-        <!-- CLIENTS -->
-
-        <a th:href="@{/admin/clients}"
-           href="/admin/clients"
-           th:classappend="${activePage == 'clients'} ? 'active' : ''">
-
-            Clients
-
-        </a>
-
-
-
-        <!-- PARAMETRES -->
+        <!-- =================================================
+             PARAMETRES
+        ================================================== -->
 
         <a th:href="@{/admin/parametres}"
            href="/admin/parametres"
-           th:classappend="${activePage == 'parametres'} ? 'active' : ''">
+
+           th:classappend="${activePage == 'parametres'}
+                ? 'active'
+                : ''">
 
             Paramètres
 
@@ -129,26 +219,39 @@
 
 
     <!-- =====================================================
-         BOTTOM
+         BAS SIDEBAR
     ====================================================== -->
 
-    <div class="zdadm-bottom">
+    <div class="zdadm-sidebar-bottom">
 
+
+        <!-- =================================================
+             VOIR LA BOUTIQUE
+        ================================================== -->
 
         <a th:href="@{/}"
            href="/"
-           class="zdadm-shop">
+           target="_blank"
+           rel="noopener"
+           class="zdadm-sidebar-site">
 
-            Voir la boutique
+            Voir la boutique →
 
         </a>
 
 
 
+        <!-- =================================================
+             DECONNEXION ADMIN
+        ================================================== -->
+
         <form th:action="@{/admin/logout}"
               action="/admin/logout"
-              method="post">
+              method="post"
+              class="zdadm-sidebar-logout-form">
 
+
+            <!-- CSRF -->
 
             <input type="hidden"
                    th:name="${_csrf.parameterName}"
@@ -156,7 +259,7 @@
 
 
             <button type="submit"
-                    class="zdadm-logout">
+                    class="zdadm-sidebar-logout">
 
                 Déconnexion
 
@@ -167,6 +270,16 @@
 
 
     </div>
+
+
+
+    <!-- =====================================================
+         THEME JS
+    ====================================================== -->
+
+    <script th:src="@{/js/admin-theme.js}"
+            src="/js/admin-theme.js">
+    </script>
 
 
 </aside>

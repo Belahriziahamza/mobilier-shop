@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mobilier.shop.entity.CustomerOrder;
+import com.mobilier.shop.service.OrderNotificationService;
 import com.mobilier.shop.service.OrderService;
 
 
@@ -22,10 +23,12 @@ public class AdminOrderController {
 
 
     /* =========================================================
-       SERVICE
+       SERVICES
     ========================================================= */
 
     private final OrderService orderService;
+
+    private final OrderNotificationService orderNotificationService;
 
 
 
@@ -34,27 +37,24 @@ public class AdminOrderController {
     ========================================================= */
 
     public AdminOrderController(
-            OrderService orderService
+
+            OrderService orderService,
+
+            OrderNotificationService orderNotificationService
     ) {
 
         this.orderService =
                 orderService;
+
+
+        this.orderNotificationService =
+                orderNotificationService;
     }
 
 
 
     /* =========================================================
        LISTE + RECHERCHE + FILTRE
-
-       Exemples :
-
-       /admin/commandes
-
-       /admin/commandes?search=hamza
-
-       /admin/commandes?status=NOUVELLE
-
-       /admin/commandes?search=hamza&status=CONFIRMEE
     ========================================================= */
 
     @GetMapping
@@ -101,7 +101,6 @@ public class AdminOrderController {
                                 );
 
 
-
         String normalizedStatus =
                 status == null
                         ? ""
@@ -121,12 +120,14 @@ public class AdminOrderController {
                 allOrders
                         .stream()
 
+
                         /* =====================================
                            RECHERCHE CLIENT
                         ====================================== */
 
                         .filter(
                                 order -> {
+
 
                                     if (
                                             normalizedSearch.isBlank()
@@ -191,12 +192,14 @@ public class AdminOrderController {
                                 }
                         )
 
+
                         /* =====================================
                            FILTRE STATUT
                         ====================================== */
 
                         .filter(
                                 order -> {
+
 
                                     if (
                                             normalizedStatus.isBlank()
@@ -213,12 +216,13 @@ public class AdminOrderController {
                                 }
                         )
 
+
                         .toList();
 
 
 
         /* =====================================================
-           STATISTIQUES SUR TOUTES LES COMMANDES
+           STATISTIQUES
         ===================================================== */
 
         long totalOrders =
@@ -327,8 +331,7 @@ public class AdminOrderController {
 
 
         /*
-         * Permet au formulaire HTML
-         * de conserver les filtres sélectionnés.
+         * Conserver les valeurs des filtres.
          */
 
         model.addAttribute(
@@ -401,7 +404,7 @@ public class AdminOrderController {
 
 
     /* =========================================================
-       MODIFIER STATUT
+       MODIFIER STATUT + NOTIFIER CLIENT
     ========================================================= */
 
     @PostMapping("/{id}/statut")
@@ -420,17 +423,120 @@ public class AdminOrderController {
         try {
 
 
-            orderService.updateStatus(
-                    id,
-                    status
-            );
+            /* =================================================
+               COMMANDE AVANT MODIFICATION
+            ================================================= */
 
-
-            redirectAttributes
-                    .addFlashAttribute(
-                            "success",
-                            "Le statut de la commande a été mis à jour."
+            CustomerOrder currentOrder =
+                    orderService.findById(
+                            id
                     );
+
+
+            String previousStatus =
+                    currentOrder.getStatus();
+
+
+
+            /* =================================================
+               MODIFIER ET ENREGISTRER LE STATUT
+            ================================================= */
+
+            CustomerOrder updatedOrder =
+                    orderService.updateStatus(
+                            id,
+                            status
+                    );
+
+
+
+            /* =================================================
+               VERIFIER SI LE STATUT A CHANGE
+            ================================================= */
+
+            boolean statusChanged =
+                    previousStatus == null
+                    ||
+                    !previousStatus.equalsIgnoreCase(
+                            updatedOrder.getStatus()
+                    );
+
+
+
+            /* =================================================
+               SI STATUT INCHANGE
+            ================================================= */
+
+            if (!statusChanged) {
+
+
+                redirectAttributes
+                        .addFlashAttribute(
+                                "success",
+                                "Le statut de la commande est déjà "
+                                        + formatStatus(updatedOrder.getStatus())
+                                        + "."
+                        );
+
+
+                return "redirect:/admin/commandes";
+            }
+
+
+
+            /* =================================================
+               ENVOYER EMAIL AU CLIENT
+            ================================================= */
+
+            boolean emailSent =
+                    orderNotificationService
+                            .sendStatusNotification(
+                                    updatedOrder
+                            );
+
+
+
+            /* =================================================
+               MESSAGE ADMIN
+            ================================================= */
+
+            if (emailSent) {
+
+
+                redirectAttributes
+                        .addFlashAttribute(
+                                "success",
+                                "Commande #"
+                                        + updatedOrder.getId()
+                                        + " mise à jour : "
+                                        + formatStatus(
+                                                updatedOrder.getStatus()
+                                        )
+                                        + ". Le client a été notifié par email."
+                        );
+
+
+            } else {
+
+
+                /*
+                 * Le statut reste enregistré même si
+                 * l'email n'a pas pu être envoyé.
+                 */
+
+                redirectAttributes
+                        .addFlashAttribute(
+                                "success",
+                                "Commande #"
+                                        + updatedOrder.getId()
+                                        + " mise à jour : "
+                                        + formatStatus(
+                                                updatedOrder.getStatus()
+                                        )
+                                        + ". L'email client n'a pas été envoyé."
+                        );
+
+            }
 
 
         } catch (
@@ -443,10 +549,17 @@ public class AdminOrderController {
                             "error",
                             e.getMessage()
                     );
+
         }
 
 
-        return "redirect:/admin/commandes/" + id;
+
+        /* =====================================================
+           IMPORTANT :
+           RETOUR VERS MES COMMANDES ADMIN
+        ===================================================== */
+
+        return "redirect:/admin/commandes";
     }
 
 
@@ -461,6 +574,7 @@ public class AdminOrderController {
 
             String status
     ) {
+
 
         return orders
                 .stream()
@@ -478,12 +592,65 @@ public class AdminOrderController {
 
 
     /* =========================================================
+       FORMATTER STATUT
+    ========================================================= */
+
+    private String formatStatus(
+            String status
+    ) {
+
+
+        if (
+                status == null
+                ||
+                status.isBlank()
+        ) {
+
+            return "";
+        }
+
+
+        return switch (
+                status
+                        .trim()
+                        .toUpperCase(
+                                Locale.ROOT
+                        )
+        ) {
+
+            case "NOUVELLE" ->
+                    "Nouvelle";
+
+            case "CONFIRMEE" ->
+                    "Confirmée";
+
+            case "EN_FABRICATION" ->
+                    "En fabrication";
+
+            case "PRETE" ->
+                    "Prête";
+
+            case "LIVREE" ->
+                    "Livrée";
+
+            case "ANNULEE" ->
+                    "Annulée";
+
+            default ->
+                    status;
+        };
+    }
+
+
+
+    /* =========================================================
        STRING SECURISEE
     ========================================================= */
 
     private String safe(
             String value
     ) {
+
 
         if (value == null) {
 

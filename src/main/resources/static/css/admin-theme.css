@@ -1,0 +1,978 @@
+/* =========================================================
+   ZINEB DECO
+   ADMIN LIGHT / DARK GLOBAL
+========================================================= */
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+html[data-admin-theme="light"] {
+
+    --adm-page: #f5f0e7;
+
+    --adm-card: #ffffff;
+
+    --adm-card-soft: #faf8f4;
+
+    --adm-text: #211c17;
+
+    --adm-text-soft: #746c63;
+
+    --adm-border: #ddd3c5;
+
+    --adm-gold: #b88627;
+
+    --adm-gold-light: #d99a2b;
+
+}
+
+
+html[data-admin-theme="dark"] {
+
+    --adm-page: #020915;
+
+    --adm-card: #07111b;
+
+    --adm-card-soft: #06101b;
+
+    --adm-text: #ffffff;
+
+    --adm-text-soft: #aab2bc;
+
+    --adm-border:
+        rgba(217, 154, 43, .22);
+
+    --adm-gold: #d99a2b;
+
+    --adm-gold-light: #f0bd57;
+
+}
+
+
+
+/* =========================================================
+   PAGE GENERALE
+========================================================= */
+
+html[data-admin-theme="light"] body,
+
+html[data-admin-theme="light"] .zdadm-shell,
+
+html[data-admin-theme="light"] .zdadm-main {
+
+    background: #f5f0e7 !important;
+
+    color: #211c17 !important;
+}
+
+
+
+html[data-admin-theme="dark"] body,
+
+html[data-admin-theme="dark"] .zdadm-shell,
+
+html[data-admin-theme="dark"] .zdadm-main {
+
+    background: #020915 !important;
+
+    color: #ffffff !important;
+}
+
+
+
+/* =========================================================
+   POLICES
+========================================================= */
+
+.zdadm-main {
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+}
+
+
+.zdadm-main h1,
+
+.zdadm-main h2,
+
+.zdadm-main h3,
+
+.zdadm-stat-value,
+
+.dashboard-customer-value {
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif !important;
+}
+
+
+
+/* =========================================================
+   TITRES
+========================================================= */
+
+html[data-admin-theme="light"]
+.zdadm-main h1,
+
+html[data-admin-theme="light"]
+.zdadm-main h2,
+
+html[data-admin-theme="light"]
+.zdadm-main h3 {
+
+    color: #211c17 !important;
+}
+
+
+
+html[data-admin-theme="dark"]
+.zdadm-main h1,
+
+html[data-admin-theme="dark"]
+.zdadm-main h2,
+
+html[data-admin-theme="dark"]
+.zdadm-main h3 {
+
+    color: #ffffff !important;
+}
+
+
+
+/* =========================================================
+   PARAGRAPHES
+========================================================= */
+
+html[data-admin-theme="light"]
+.zdadm-main p {
+
+    color: #746c63 !important;
+}
+
+
+html[data-admin-theme="dark"]
+.zdadm-main p {
+
+    color: #aab2bc !important;
+}
+
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+html[data-admin-theme="light"]
+.zdadm-header {
+
+    background: #f5f0e7 !important;
+}
+
+
+html[data-admin-theme="dark"]
+.zdadm-header {
+
+    background: #020915 !important;
+}
+
+
+.zdadm-kicker {
+
+    color: #d99a2b !important;
+}
+
+
+
+/* =========================================================
+   SIDEBAR
+   TOUJOURS SOMBRE
+========================================================= */
+
+.zdadm-sidebar {
+
+    background:
+        linear-gradient(
+            180deg,
+            #080705 0%,
+            #0b0906 100%
+        ) !important;
+
+    color: #ffffff !important;
+}
+
+
+.zdadm-brand span {
+
+    color: #d99a2b !important;
+}
+
+
+.zdadm-brand strong {
+
+    color: #ffffff !important;
+}
+
+
+.zdadm-nav a {
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            .72
+        ) !important;
+}
+
+
+.zdadm-nav a:hover {
+
+    color: #ffffff !important;
+
+    background:
+        rgba(
+            217,
+            154,
+            43,
+            .08
+        ) !important;
+}
+
+
+.zdadm-nav a.active {
+
+    color: #d99a2b !important;
+
+    background:
+        rgba(
+            217,
+            154,
+            43,
+            .12
+        ) !important;
+
+    border-left:
+        3px solid
+        #d99a2b !important;
+}
+
+
+
+/* =========================================================
+   THEME SIDEBAR
+========================================================= */
+
+.zdadm-theme-box {
+
+    margin:
+        22px
+        22px
+        8px;
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            .10
+        );
+}
+
+
+.zdadm-theme-label {
+
+    display: block;
+
+    margin-bottom: 9px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            .40
+        );
+
+    font-size: 7px;
+
+    font-weight: 900;
+
+    letter-spacing: 1.8px;
+
+    text-transform: uppercase;
+}
+
+
+.admin-theme-toggle {
+
+    width: 100%;
+
+    min-height: 44px;
+
+    padding:
+        0
+        14px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    border:
+        1px solid
+        rgba(
+            217,
+            154,
+            43,
+            .40
+        );
+
+    background:
+        rgba(
+            217,
+            154,
+            43,
+            .04
+        );
+
+    color: #d99a2b;
+
+    cursor: pointer;
+
+    font-weight: 800;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease;
+}
+
+
+.admin-theme-toggle:hover {
+
+    background:
+        rgba(
+            217,
+            154,
+            43,
+            .12
+        );
+
+    border-color: #d99a2b;
+}
+
+
+.admin-theme-icon {
+
+    width: 24px;
+
+    font-size: 18px;
+
+    text-align: center;
+}
+
+
+.admin-theme-text {
+
+    font-size: 8px;
+
+    letter-spacing: .8px;
+
+    text-transform: uppercase;
+}
+
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+html[data-admin-theme="light"]
+.zdadm-stat {
+
+    background: #ffffff !important;
+
+    border-color: #ddd3c5 !important;
+
+    color: #211c17 !important;
+}
+
+
+html[data-admin-theme="dark"]
+.zdadm-stat {
+
+    background: #07111b !important;
+
+    border-color:
+        rgba(
+            217,
+            154,
+            43,
+            .22
+        ) !important;
+
+    color: #ffffff !important;
+}
+
+
+
+/* =========================================================
+   CARTE NOIRE
+========================================================= */
+
+html[data-admin-theme="light"]
+.zdadm-stat.dark,
+
+html[data-admin-theme="dark"]
+.zdadm-stat.dark {
+
+    background: #03070b !important;
+
+    color: #ffffff !important;
+}
+
+
+html[data-admin-theme="light"]
+.zdadm-stat.dark *,
+
+html[data-admin-theme="dark"]
+.zdadm-stat.dark * {
+
+    color: #ffffff;
+}
+
+
+html[data-admin-theme="light"]
+.zdadm-stat.dark
+.zdadm-stat-label,
+
+html[data-admin-theme="dark"]
+.zdadm-stat.dark
+.zdadm-stat-label {
+
+    color: #aab2bc !important;
+}
+
+
+html[data-admin-theme="light"]
+.zdadm-stat.dark
+.zdadm-stat-value,
+
+html[data-admin-theme="dark"]
+.zdadm-stat.dark
+.zdadm-stat-value {
+
+    color: #d99a2b !important;
+}
+
+
+
+/* =========================================================
+   CARTE DOREE
+========================================================= */
+
+html[data-admin-theme="light"]
+.zdadm-stat.gold {
+
+    background: #dfb54f !important;
+
+    border-color: #c69326 !important;
+
+    color: #080705 !important;
+}
+
+
+html[data-admin-theme="dark"]
+.zdadm-stat.gold {
+
+    background: #b88627 !important;
+
+    border-color: #d99a2b !important;
+
+    color: #020915 !important;
+}
+
+
+.zdadm-stat.gold
+.zdadm-stat-label,
+
+.zdadm-stat.gold
+.zdadm-stat-value,
+
+.zdadm-stat.gold
+.zdadm-stat-value span,
+
+.zdadm-stat.gold
+.zdadm-stat-value small {
+
+    color: #020915 !important;
+}
+
+
+
+/* =========================================================
+   CARTE NORMALE
+========================================================= */
+
+html[data-admin-theme="dark"]
+.zdadm-stat:not(.dark):not(.gold)
+.zdadm-stat-label {
+
+    color: #aab2bc !important;
+}
+
+
+html[data-admin-theme="dark"]
+.zdadm-stat:not(.dark):not(.gold)
+.zdadm-stat-value {
+
+    color: #ffffff !important;
+}
+
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+html[data-admin-theme="light"]
+.zdadm-section {
+
+    background: #ffffff !important;
+
+    border-color: #ddd3c5 !important;
+}
+
+
+html[data-admin-theme="dark"]
+.zdadm-section {
+
+    background: #07111b !important;
+
+    border-color:
+        rgba(
+            217,
+            154,
+            43,
+            .20
+        ) !important;
+}
+
+
+html[data-admin-theme="dark"]
+.zdadm-section-head {
+
+    border-color:
+        rgba(
+            217,
+            154,
+            43,
+            .18
+        ) !important;
+}
+
+
+.zdadm-section-head small {
+
+    color: #d99a2b !important;
+}
+
+
+
+/* =========================================================
+   CARTES CLIENT
+========================================================= */
+
+html[data-admin-theme="light"]
+.dashboard-customer-card {
+
+    background: #ffffff !important;
+
+    border-color: #ddd3c5 !important;
+
+    color: #211c17 !important;
+}
+
+
+html[data-admin-theme="dark"]
+.dashboard-customer-card {
+
+    background: #06101b !important;
+
+    border-color:
+        rgba(
+            217,
+            154,
+            43,
+            .20
+        ) !important;
+
+    color: #ffffff !important;
+}
+
+
+html[data-admin-theme="dark"]
+.dashboard-customer-card
+.dashboard-customer-value {
+
+    color: #ffffff !important;
+}
+
+
+html[data-admin-theme="dark"]
+.dashboard-customer-card
+.dashboard-customer-label {
+
+    color: #d99a2b !important;
+}
+
+
+html[data-admin-theme="dark"]
+.dashboard-customer-card
+.dashboard-customer-note {
+
+    color: #aab2bc !important;
+}
+
+
+
+/* TOTAL CLIENTS NOIR */
+
+.dashboard-customer-card.dark {
+
+    background: #03070b !important;
+
+    color: #ffffff !important;
+}
+
+
+.dashboard-customer-card.dark
+.dashboard-customer-value {
+
+    color: #ffffff !important;
+}
+
+
+
+/* =========================================================
+   TABLES
+========================================================= */
+
+html[data-admin-theme="dark"]
+.zdadm-table-wrapper {
+
+    background: #06101b !important;
+
+    border-color:
+        rgba(
+            217,
+            154,
+            43,
+            .20
+        ) !important;
+}
+
+
+html[data-admin-theme="dark"]
+.zdadm-table {
+
+    background: #07111b !important;
+
+    color: #ffffff !important;
+}
+
+
+html[data-admin-theme="dark"]
+.zdadm-table thead th {
+
+    background: #020915 !important;
+
+    color: #d99a2b !important;
+}
+
+
+html[data-admin-theme="dark"]
+.zdadm-table tbody td {
+
+    background: #07111b !important;
+
+    color: #e1e5e9 !important;
+
+    border-color:
+        rgba(
+            255,
+            255,
+            255,
+            .07
+        ) !important;
+}
+
+
+html[data-admin-theme="dark"]
+.zdadm-table tbody tr:hover td {
+
+    background: #0b1723 !important;
+}
+
+
+html[data-admin-theme="dark"]
+.zdadm-table strong {
+
+    color: #ffffff !important;
+}
+
+
+html[data-admin-theme="dark"]
+.zdadm-table small {
+
+    color: #9da4ae !important;
+}
+
+
+
+/* =========================================================
+   CARDS GENERIQUES
+========================================================= */
+
+html[data-admin-theme="dark"]
+.zdadm-card,
+
+html[data-admin-theme="dark"]
+.product-filter-section,
+
+html[data-admin-theme="dark"]
+.product-quick-card,
+
+html[data-admin-theme="dark"]
+.tc-form-card,
+
+html[data-admin-theme="dark"]
+.tc-table-card,
+
+html[data-admin-theme="dark"]
+.tc-toolbar,
+
+html[data-admin-theme="dark"]
+.tc-stat {
+
+    background: #07111b !important;
+
+    color: #ffffff !important;
+
+    border-color:
+        rgba(
+            217,
+            154,
+            43,
+            .20
+        ) !important;
+}
+
+
+
+/* =========================================================
+   PROBLEME TEXTE NOIR
+========================================================= */
+
+html[data-admin-theme="dark"]
+.zdadm-card h1,
+
+html[data-admin-theme="dark"]
+.zdadm-card h2,
+
+html[data-admin-theme="dark"]
+.zdadm-card h3,
+
+html[data-admin-theme="dark"]
+.product-filter-section h1,
+
+html[data-admin-theme="dark"]
+.product-filter-section h2,
+
+html[data-admin-theme="dark"]
+.product-filter-section h3,
+
+html[data-admin-theme="dark"]
+.tc-form-card h1,
+
+html[data-admin-theme="dark"]
+.tc-form-card h2,
+
+html[data-admin-theme="dark"]
+.tc-form-card h3,
+
+html[data-admin-theme="dark"]
+.tc-section-title h2 {
+
+    color: #ffffff !important;
+}
+
+
+
+/* =========================================================
+   FORMS
+========================================================= */
+
+html[data-admin-theme="dark"]
+.zdadm-field label,
+
+html[data-admin-theme="dark"]
+.product-filter-field label,
+
+html[data-admin-theme="dark"]
+.tc-field label {
+
+    color: #d7dce1 !important;
+}
+
+
+html[data-admin-theme="dark"]
+.zdadm-field input,
+
+html[data-admin-theme="dark"]
+.zdadm-field select,
+
+html[data-admin-theme="dark"]
+.zdadm-field textarea,
+
+html[data-admin-theme="dark"]
+.product-filter-field input,
+
+html[data-admin-theme="dark"]
+.product-filter-field select,
+
+html[data-admin-theme="dark"]
+.tc-field input,
+
+html[data-admin-theme="dark"]
+.tc-field select,
+
+html[data-admin-theme="dark"]
+.tc-field textarea {
+
+    background: #06101b !important;
+
+    color: #ffffff !important;
+
+    border-color:
+        rgba(
+            255,
+            255,
+            255,
+            .14
+        ) !important;
+}
+
+
+html[data-admin-theme="dark"]
+input::placeholder,
+
+html[data-admin-theme="dark"]
+textarea::placeholder {
+
+    color: #7f8993 !important;
+}
+
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+html[data-admin-theme="dark"]
+.zdadm-primary-button {
+
+    background: #d99a2b !important;
+
+    border-color: #d99a2b !important;
+
+    color: #020915 !important;
+}
+
+
+html[data-admin-theme="dark"]
+.zdadm-primary-button:hover {
+
+    background: #f0bd57 !important;
+}
+
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+html[data-admin-theme="dark"]
+.zdadm-empty,
+
+html[data-admin-theme="dark"]
+.tc-empty {
+
+    background: #07111b !important;
+
+    color: #aab2bc !important;
+}
+
+
+html[data-admin-theme="dark"]
+.zdadm-empty strong,
+
+html[data-admin-theme="dark"]
+.tc-empty strong {
+
+    color: #ffffff !important;
+}
+
+
+
+/* =========================================================
+   TEXTES INLINE DU DASHBOARD
+========================================================= */
+
+html[data-admin-theme="dark"]
+.zdadm-main [style*="color:#80776e"],
+
+html[data-admin-theme="dark"]
+.zdadm-main [style*="color:#91887f"],
+
+html[data-admin-theme="dark"]
+.zdadm-main [style*="color:#837a70"],
+
+html[data-admin-theme="dark"]
+.zdadm-main [style*="color:#867c70"] {
+
+    color: #aab2bc !important;
+}
+
+
+
+/* =========================================================
+   TRANSITIONS
+========================================================= */
+
+body,
+
+.zdadm-main,
+
+.zdadm-stat,
+
+.zdadm-section,
+
+.zdadm-card,
+
+.dashboard-customer-card {
+
+    transition:
+        background-color .22s ease,
+        color .22s ease,
+        border-color .22s ease;
+}

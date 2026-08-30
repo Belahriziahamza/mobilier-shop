@@ -99,6 +99,8 @@
 
             font-size: 29px;
             font-weight: 400;
+
+            color: #ffffff;
         }
 
 
@@ -204,9 +206,12 @@
 
             border: 1px solid #ddd3c5;
 
-            background: white;
+            background: #ffffff;
 
-            transition: .25s ease;
+            transition:
+                background-color .25s ease,
+                color .25s ease,
+                border-color .25s ease;
         }
 
 
@@ -544,6 +549,812 @@
 
         }
 
+
+
+        /* =====================================================
+           =====================================================
+           MODE SOMBRE - PARAMETRES
+           =====================================================
+        ====================================================== */
+
+
+        /* =====================================================
+           CARTE PRINCIPALE MAINTENANCE
+        ====================================================== */
+
+        html[data-admin-theme="dark"]
+        .maintenance-admin-card {
+
+            background: #07111b !important;
+
+            color: #ffffff !important;
+
+            border-color:
+                rgba(
+                    217,
+                    154,
+                    43,
+                    .25
+                ) !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .maintenance-admin-card h3 {
+
+            color: #ffffff !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .maintenance-admin-label {
+
+            color: #d99a2b !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .maintenance-admin-card p {
+
+            color: #aab2bc !important;
+        }
+
+
+
+        /* =====================================================
+           MAINTENANCE ACTIVE
+        ====================================================== */
+
+        html[data-admin-theme="dark"]
+        .maintenance-admin-card.active {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0c1520,
+                    #020915
+                ) !important;
+
+            border-color: #d99a2b !important;
+
+            color: #ffffff !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .maintenance-admin-card.active h3 {
+
+            color: #ffffff !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .maintenance-admin-card.active p {
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .67
+                ) !important;
+        }
+
+
+
+        /* =====================================================
+           STATUS SITE OUVERT
+        ====================================================== */
+
+        html[data-admin-theme="dark"]
+        .maintenance-status {
+
+            background: #06101b !important;
+
+            border-color:
+                rgba(
+                    217,
+                    154,
+                    43,
+                    .22
+                ) !important;
+
+            color: #ffffff !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .maintenance-status span {
+
+            color: #ffffff !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .maintenance-dot {
+
+            background: #47ad6c !important;
+
+            box-shadow:
+                0 0 12px
+                rgba(
+                    71,
+                    173,
+                    108,
+                    .45
+                ) !important;
+        }
+
+
+
+        /* =====================================================
+           STATUS QUAND MAINTENANCE ACTIVE
+        ====================================================== */
+
+        html[data-admin-theme="dark"]
+        .maintenance-admin-card.active
+        .maintenance-status {
+
+            background:
+                rgba(
+                    217,
+                    154,
+                    43,
+                    .08
+                ) !important;
+
+            border-color:
+                rgba(
+                    217,
+                    154,
+                    43,
+                    .42
+                ) !important;
+
+            color: #d99a2b !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .maintenance-admin-card.active
+        .maintenance-status span {
+
+            color: #d99a2b !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .maintenance-admin-card.active
+        .maintenance-dot {
+
+            background: #d99a2b !important;
+        }
+
+
+
+        /* =====================================================
+           BOUTON
+        ====================================================== */
+
+        html[data-admin-theme="dark"]
+        .maintenance-button {
+
+            background: #d99a2b !important;
+
+            border-color: #d99a2b !important;
+
+            color: #020915 !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .maintenance-button:hover {
+
+            background: #f0bd57 !important;
+
+            border-color: #f0bd57 !important;
+
+            color: #020915 !important;
+        }
+
+
+
+        /* =====================================================
+           WARNING
+        ====================================================== */
+
+        html[data-admin-theme="dark"]
+        .maintenance-warning {
+
+            color: #939da7 !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .maintenance-admin-card.active
+        .maintenance-warning {
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .48
+                ) !important;
+        }
+
+
+
+        /* =====================================================
+           NOTE IMPORTANTE
+        ====================================================== */
+
+        html[data-admin-theme="dark"]
+        .settings-note {
+
+            background: #0a1018 !important;
+
+            color: #d8dde2 !important;
+
+            border-left-color: #d99a2b !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .settings-note strong {
+
+            color: #d99a2b !important;
+        }
+
+
+
+        /* =====================================================
+           CARTE INFORMATIONS BOUTIQUE
+        ====================================================== */
+
+        html[data-admin-theme="dark"]
+        .zdadm-card {
+
+            background: #07111b !important;
+
+            color: #ffffff !important;
+
+            border-color:
+                rgba(
+                    217,
+                    154,
+                    43,
+                    .22
+                ) !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .zdadm-card-head h2 {
+
+            color: #ffffff !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .zdadm-card-head small {
+
+            color: #d99a2b !important;
+        }
+
+
+
+        /* =====================================================
+           FORMULAIRE
+        ====================================================== */
+
+        html[data-admin-theme="dark"]
+        .zdadm-field label {
+
+            color: #d9dee4 !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .zdadm-field input,
+
+        html[data-admin-theme="dark"]
+        .zdadm-field textarea {
+
+            background: #06101b !important;
+
+            color: #ffffff !important;
+
+            border-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .15
+                ) !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .zdadm-field input::placeholder,
+
+        html[data-admin-theme="dark"]
+        .zdadm-field textarea::placeholder {
+
+            color: #818b95 !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .zdadm-field input:focus,
+
+        html[data-admin-theme="dark"]
+        .zdadm-field textarea:focus {
+
+            border-color: #d99a2b !important;
+
+            background: #081522 !important;
+        }
+
+
+
+        /* =====================================================
+           BOUTON ENREGISTRER
+        ====================================================== */
+
+        html[data-admin-theme="dark"]
+        .zdadm-save {
+
+            background: #d99a2b !important;
+
+            border-color: #d99a2b !important;
+
+            color: #020915 !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .zdadm-save:hover {
+
+            background: #f0bd57 !important;
+
+            border-color: #f0bd57 !important;
+        }
+
+
+
+        /* =====================================================
+           APERCU BOUTIQUE
+        ====================================================== */
+
+        html[data-admin-theme="dark"]
+        .settings-description {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #06101b,
+                    #020915
+                ) !important;
+
+            border-color:
+                rgba(
+                    217,
+                    154,
+                    43,
+                    .25
+                ) !important;
+
+            color: #ffffff !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .settings-description h2 {
+
+            color: #ffffff !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .settings-description p {
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .65
+                ) !important;
+        }
+
+
+
+        /* =====================================================
+           INFOS BOUTIQUE
+        ====================================================== */
+
+        html[data-admin-theme="dark"]
+        .settings-info-item {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .025
+                ) !important;
+
+            border-color:
+                rgba(
+                    217,
+                    154,
+                    43,
+                    .18
+                ) !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .settings-info-item span {
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .48
+                ) !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .settings-info-item strong {
+
+            color: #d99a2b !important;
+        }
+
+
+
+        /* =====================================================
+           HEADER PARAMETRES
+        ====================================================== */
+
+        html[data-admin-theme="dark"]
+        .zdadm-header h1 {
+
+            color: #ffffff !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .zdadm-header h1 span {
+
+            color: #d99a2b !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .zdadm-header p {
+
+            color: #aab2bc !important;
+        }
+
+
+
+        /* =====================================================
+           MODE CLAIR
+        ====================================================== */
+
+        html[data-admin-theme="light"]
+        .maintenance-admin-card {
+
+            background: #ffffff !important;
+
+            border-color: #ddd3c5 !important;
+
+            color: #29241e !important;
+        }
+
+
+        html[data-admin-theme="light"]
+        .maintenance-admin-card h3 {
+
+            color: #29241e !important;
+        }
+
+
+        html[data-admin-theme="light"]
+        .maintenance-admin-card p {
+
+            color: #817970 !important;
+        }
+
+
+        html[data-admin-theme="light"]
+        .maintenance-status {
+
+            background: #faf8f4 !important;
+
+            border-color: #d8d0c4 !important;
+
+            color: #42603b !important;
+        }
+
+
+        html[data-admin-theme="light"]
+        .settings-note {
+
+            background: #f6f0e6 !important;
+
+            color: #71685f !important;
+
+            border-left-color: #d4a536 !important;
+        }
+/* =========================================================
+   FIX PARAMETRES - MODE CLAIR
+========================================================= */
+
+
+/* =========================================================
+   CARTE IDENTITE BOUTIQUE
+   Elle reste premium sombre même en mode clair
+========================================================= */
+
+html[data-admin-theme="light"]
+.settings-description {
+
+    background:
+        linear-gradient(
+            135deg,
+            #080705,
+            #171108
+        ) !important;
+
+    border-color:
+        rgba(184, 134, 39, .35) !important;
+
+    color: #ffffff !important;
+}
+
+
+/* PETIT TITRE ZINEB DECO */
+
+html[data-admin-theme="light"]
+.settings-description > small {
+
+    color: #d4a536 !important;
+}
+
+
+/* IDENTITE BOUTIQUE */
+
+html[data-admin-theme="light"]
+.settings-description h2 {
+
+    color: #ffffff !important;
+}
+
+
+/* DESCRIPTION */
+
+html[data-admin-theme="light"]
+.settings-description > p {
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            .68
+        ) !important;
+}
+
+
+/* =========================================================
+   PETITES CARTES
+========================================================= */
+
+html[data-admin-theme="light"]
+.settings-info-item {
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .035
+        ) !important;
+
+    border-color:
+        rgba(
+            212,
+            165,
+            54,
+            .24
+        ) !important;
+}
+
+
+/* LABELS */
+
+html[data-admin-theme="light"]
+.settings-info-item span {
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            .48
+        ) !important;
+}
+
+
+/* VALEURS */
+
+html[data-admin-theme="light"]
+.settings-info-item strong {
+
+    color: #d4a536 !important;
+}
+
+
+/* =========================================================
+   FORMULAIRE GAUCHE
+========================================================= */
+
+html[data-admin-theme="light"]
+.zdadm-card {
+
+    background: #ffffff !important;
+
+    border-color: #ddd3c5 !important;
+
+    color: #29241e !important;
+}
+
+
+html[data-admin-theme="light"]
+.zdadm-card-head h2 {
+
+    color: #29241e !important;
+}
+
+
+html[data-admin-theme="light"]
+.zdadm-card-head small {
+
+    color: #a47822 !important;
+}
+
+
+html[data-admin-theme="light"]
+.zdadm-field label {
+
+    color: #504941 !important;
+}
+
+
+html[data-admin-theme="light"]
+.zdadm-field input,
+
+html[data-admin-theme="light"]
+.zdadm-field textarea {
+
+    background: #faf8f4 !important;
+
+    color: #29241e !important;
+
+    border-color: #d8cec0 !important;
+}
+
+
+html[data-admin-theme="light"]
+.zdadm-field input:focus,
+
+html[data-admin-theme="light"]
+.zdadm-field textarea:focus {
+
+    background: #ffffff !important;
+
+    border-color: #b88627 !important;
+}
+
+
+/* =========================================================
+   BOUTON ENREGISTRER
+========================================================= */
+
+html[data-admin-theme="light"]
+.zdadm-save {
+
+    background: #080705 !important;
+
+    border-color: #080705 !important;
+
+    color: #d4a536 !important;
+}
+
+
+html[data-admin-theme="light"]
+.zdadm-save:hover {
+
+    background: #d4a536 !important;
+
+    border-color: #d4a536 !important;
+
+    color: #080705 !important;
+}
+
+
+/* =========================================================
+   MAINTENANCE EN MODE CLAIR
+========================================================= */
+
+html[data-admin-theme="light"]
+.maintenance-admin-card {
+
+    background: #ffffff !important;
+
+    color: #29241e !important;
+
+    border-color: #ddd3c5 !important;
+}
+
+
+html[data-admin-theme="light"]
+.maintenance-admin-card h3 {
+
+    color: #29241e !important;
+}
+
+
+html[data-admin-theme="light"]
+.maintenance-admin-card p {
+
+    color: #817970 !important;
+}
+
+
+html[data-admin-theme="light"]
+.maintenance-admin-label {
+
+    color: #a47822 !important;
+}
+
+
+html[data-admin-theme="light"]
+.maintenance-status {
+
+    background: #faf8f4 !important;
+
+    border-color: #d8d0c4 !important;
+
+    color: #42603b !important;
+}
+
+
+/* =========================================================
+   NOTE
+========================================================= */
+
+html[data-admin-theme="light"]
+.settings-note {
+
+    background: #f6f0e6 !important;
+
+    color: #71685f !important;
+
+    border-left-color: #d4a536 !important;
+}
+
+
+html[data-admin-theme="light"]
+.settings-note strong {
+
+    color: #8e6619 !important;
+}
     </style>
 
 </head>
@@ -615,8 +1426,6 @@
             </div>
 
 
-            <!-- VOIR BOUTIQUE -->
-
             <a th:href="@{/}"
                href="/"
                target="_blank"
@@ -653,7 +1462,6 @@
 
 
             <!-- =================================================
-                 COLONNE GAUCHE
                  INFORMATIONS BOUTIQUE
             ================================================== -->
 
@@ -681,10 +1489,6 @@
 
 
 
-                <!-- =================================================
-                     FORMULAIRE
-                ================================================== -->
-
                 <form th:action="@{/admin/parametres/save}"
                       action="/admin/parametres/save"
 
@@ -695,18 +1499,9 @@
                       class="zdadm-form">
 
 
-                    <!-- =================================================
-                         ID
-                    ================================================== -->
-
                     <input type="hidden"
                            th:field="*{id}">
 
-
-
-                    <!-- =================================================
-                         CSRF
-                    ================================================== -->
 
                     <input type="hidden"
                            th:name="${_csrf.parameterName}"
@@ -716,10 +1511,6 @@
 
                     <div class="zdadm-form-grid">
 
-
-                        <!-- =================================================
-                             NOM
-                        ================================================== -->
 
                         <div class="zdadm-field full">
 
@@ -745,10 +1536,6 @@
 
 
 
-                        <!-- =================================================
-                             TELEPHONE
-                        ================================================== -->
-
                         <div class="zdadm-field">
 
 
@@ -770,10 +1557,6 @@
                         </div>
 
 
-
-                        <!-- =================================================
-                             WHATSAPP
-                        ================================================== -->
 
                         <div class="zdadm-field">
 
@@ -797,10 +1580,6 @@
 
 
 
-                        <!-- =================================================
-                             EMAIL
-                        ================================================== -->
-
                         <div class="zdadm-field full">
 
 
@@ -822,10 +1601,6 @@
                         </div>
 
 
-
-                        <!-- =================================================
-                             ADRESSE
-                        ================================================== -->
 
                         <div class="zdadm-field full">
 
@@ -849,10 +1624,6 @@
 
 
 
-                        <!-- =================================================
-                             INSTAGRAM
-                        ================================================== -->
-
                         <div class="zdadm-field full">
 
 
@@ -874,10 +1645,6 @@
                         </div>
 
 
-
-                        <!-- =================================================
-                             FACEBOOK
-                        ================================================== -->
 
                         <div class="zdadm-field full">
 
@@ -901,10 +1668,6 @@
 
 
 
-                        <!-- =================================================
-                             GOOGLE MAPS
-                        ================================================== -->
-
                         <div class="zdadm-field full">
 
 
@@ -926,10 +1689,6 @@
                         </div>
 
 
-
-                        <!-- =================================================
-                             SAVE
-                        ================================================== -->
 
                         <div class="zdadm-form-actions">
 
@@ -996,8 +1755,6 @@
                     <div class="settings-info-list">
 
 
-                        <!-- NOM -->
-
                         <div class="settings-info-item">
 
 
@@ -1026,8 +1783,6 @@
                         </div>
 
 
-
-                        <!-- TELEPHONE -->
 
                         <div class="settings-info-item">
 
@@ -1058,8 +1813,6 @@
 
 
 
-                        <!-- WHATSAPP -->
-
                         <div class="settings-info-item">
 
 
@@ -1089,8 +1842,6 @@
 
 
 
-                        <!-- EMAIL -->
-
                         <div class="settings-info-item">
 
 
@@ -1119,8 +1870,6 @@
                         </div>
 
 
-
-                        <!-- ADRESSE -->
 
                         <div class="settings-info-item">
 
@@ -1180,10 +1929,6 @@
 
 
 
-                    <!-- =================================================
-                         SITE OUVERT
-                    ================================================== -->
-
                     <p th:unless="${shopSetting.maintenanceMode}">
 
                         La boutique est actuellement accessible
@@ -1197,10 +1942,6 @@
 
 
 
-                    <!-- =================================================
-                         MAINTENANCE ACTIVE
-                    ================================================== -->
-
                     <p th:if="${shopSetting.maintenanceMode}">
 
                         La boutique publique est actuellement
@@ -1213,10 +1954,6 @@
                     </p>
 
 
-
-                    <!-- =================================================
-                         STATUS
-                    ================================================== -->
 
                     <div class="maintenance-status">
 
@@ -1243,10 +1980,6 @@
 
 
 
-                    <!-- =================================================
-                         FORMULAIRE TOGGLE
-                    ================================================== -->
-
                     <form th:action="@{/admin/parametres/maintenance/toggle}"
                           action="/admin/parametres/maintenance/toggle"
 
@@ -1255,17 +1988,11 @@
                           class="maintenance-form">
 
 
-                        <!-- CSRF -->
-
                         <input type="hidden"
                                th:name="${_csrf.parameterName}"
                                th:value="${_csrf.token}">
 
 
-
-                        <!-- =================================================
-                             BOUTON ACTIVER
-                        ================================================== -->
 
                         <button th:unless="${shopSetting.maintenanceMode}"
 
@@ -1281,10 +2008,6 @@
 
 
 
-                        <!-- =================================================
-                             BOUTON DESACTIVER
-                        ================================================== -->
-
                         <button th:if="${shopSetting.maintenanceMode}"
 
                                 type="submit"
@@ -1299,8 +2022,6 @@
                     </form>
 
 
-
-                    <!-- INFO -->
 
                     <div class="maintenance-warning"
                          th:unless="${shopSetting.maintenanceMode}">

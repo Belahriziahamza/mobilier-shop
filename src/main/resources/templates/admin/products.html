@@ -15,10 +15,18 @@
     </title>
 
 
+    <!-- =====================================================
+         CSS GENERAL
+    ====================================================== -->
+
     <link rel="stylesheet"
           th:href="@{/css/style.css}"
           href="/css/style.css">
 
+
+    <!-- =====================================================
+         CSS ADMIN
+    ====================================================== -->
 
     <link rel="stylesheet"
           th:href="@{/css/admin.css}"
@@ -26,6 +34,20 @@
 
 
     <style>
+
+        /* =====================================================
+           SCROLL FORMULAIRE
+        ====================================================== */
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        #product-form {
+            scroll-margin-top: 25px;
+        }
+
 
         /* =====================================================
            FILTRES PRODUITS
@@ -179,7 +201,6 @@
         }
 
 
-
         /* =====================================================
            STATS RAPIDES
         ====================================================== */
@@ -255,7 +276,7 @@
 
         .product-quick-card.selected span {
 
-            color: rgba(255,255,255,.55);
+            color: rgba(255, 255, 255, .55);
         }
 
 
@@ -263,7 +284,6 @@
 
             color: #d4a536;
         }
-
 
 
         /* =====================================================
@@ -290,7 +310,6 @@
 
             color: #a47822;
         }
-
 
 
         /* =====================================================
@@ -342,7 +361,6 @@
         }
 
 
-
         /* =====================================================
            ANCIEN PRIX
         ====================================================== */
@@ -360,6 +378,133 @@
             text-decoration: line-through;
         }
 
+
+        /* =====================================================
+           MODE SOMBRE LOCAL
+        ====================================================== */
+
+        html[data-admin-theme="dark"]
+        .product-filter-section {
+
+            background: #07111b !important;
+
+            border-color:
+                rgba(217, 154, 43, .22) !important;
+
+            color: #ffffff !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .product-filter-head h2 {
+
+            color: #ffffff !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .product-filter-head span {
+
+            color: #d99a2b !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .product-filter-field label {
+
+            color: #d9dee4 !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .product-filter-field input,
+
+        html[data-admin-theme="dark"]
+        .product-filter-field select {
+
+            background: #06101b !important;
+
+            color: #ffffff !important;
+
+            border-color:
+                rgba(255, 255, 255, .15) !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .product-filter-field input::placeholder {
+
+            color: #89939d !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .product-filter-reset {
+
+            background: transparent !important;
+
+            border-color:
+                rgba(217, 154, 43, .45) !important;
+
+            color: #d99a2b !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .product-quick-card {
+
+            background: #07111b !important;
+
+            border-color:
+                rgba(217, 154, 43, .22) !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .product-quick-card span {
+
+            color: #aeb5bd !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .product-quick-card strong {
+
+            color: #d99a2b !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .product-quick-card.selected {
+
+            background: #03070b !important;
+
+            border-color: #d99a2b !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .product-results {
+
+            color: #aab2bc !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .product-current-image {
+
+            background: #06101b !important;
+
+            border-color:
+                rgba(217, 154, 43, .22) !important;
+        }
+
+
+        html[data-admin-theme="dark"]
+        .product-current-image span {
+
+            color: #aab2bc !important;
+        }
 
 
         /* =====================================================
@@ -470,8 +615,16 @@
 
 
 
-            <a th:href="@{/admin/produits/nouveau}"
-               href="/admin/produits/nouveau"
+            <!-- =================================================
+                 NOUVEAU PRODUIT
+
+                 Recharge /admin/produits pour quitter
+                 éventuellement le mode modification,
+                 puis descend vers le formulaire.
+            ================================================== -->
+
+            <a th:href="@{/admin/produits} + '#product-form'"
+               href="/admin/produits#product-form"
                class="zdadm-primary-button">
 
                 + Nouveau produit
@@ -507,6 +660,8 @@
         <section class="zdadm-stats">
 
 
+            <!-- TOTAL -->
+
             <article class="zdadm-stat dark">
 
 
@@ -529,6 +684,8 @@
 
 
 
+            <!-- RESULTATS -->
+
             <article class="zdadm-stat">
 
 
@@ -550,6 +707,8 @@
             </article>
 
 
+
+            <!-- ACTIFS -->
 
             <article class="zdadm-stat gold">
 
@@ -606,11 +765,15 @@
 
             <form th:action="@{/admin/produits}"
                   action="/admin/produits"
+
                   method="get"
+
                   class="product-filter-form">
 
 
-                <!-- RECHERCHE -->
+                <!-- =================================================
+                     RECHERCHE
+                ================================================== -->
 
                 <div class="product-filter-field">
 
@@ -624,8 +787,11 @@
 
                     <input id="search"
                            type="search"
+
                            name="search"
+
                            th:value="${search}"
+
                            placeholder="Nom, type, couleur, catégorie, ID...">
 
 
@@ -633,7 +799,9 @@
 
 
 
-                <!-- CATEGORIE -->
+                <!-- =================================================
+                     CATEGORIE
+                ================================================== -->
 
                 <div class="product-filter-field">
 
@@ -727,7 +895,9 @@
 
 
 
-                <!-- ETAT -->
+                <!-- =================================================
+                     ETAT
+                ================================================== -->
 
                 <div class="product-filter-field">
 
@@ -773,7 +943,9 @@
 
 
 
-                <!-- SPECIAL -->
+                <!-- =================================================
+                     SPECIAL
+                ================================================== -->
 
                 <div class="product-filter-field">
 
@@ -827,6 +999,8 @@
 
 
 
+                <!-- RECHERCHER -->
+
                 <button type="submit"
                         class="product-filter-submit">
 
@@ -835,6 +1009,8 @@
                 </button>
 
 
+
+                <!-- RESET -->
 
                 <a th:href="@{/admin/produits}"
                    href="/admin/produits"
@@ -848,6 +1024,10 @@
             </form>
 
 
+
+            <!-- =================================================
+                 RESULTATS
+            ================================================== -->
 
             <div class="product-results">
 
@@ -870,13 +1050,16 @@
 
                 <span th:if="${search != null and !#strings.isEmpty(search)}">
 
+
                     Recherche :
+
 
                     <strong th:text="${search}">
 
                         produit
 
                     </strong>
+
 
                 </span>
 
@@ -895,11 +1078,19 @@
         <section class="product-quick-stats">
 
 
-            <!-- TOUS -->
+            <!-- =================================================
+                 TOUS
+            ================================================== -->
 
             <a th:href="@{/admin/produits}"
+
                class="product-quick-card"
-               th:classappend="${selectedState == '' and selectedSpecial == '' and selectedCategory == ''} ? ' selected' : ''">
+
+               th:classappend="${selectedState == ''
+                    and selectedSpecial == ''
+                    and selectedCategory == ''}
+                    ? ' selected'
+                    : ''">
 
 
                 <span>
@@ -920,11 +1111,17 @@
 
 
 
-            <!-- ACTIFS -->
+            <!-- =================================================
+                 ACTIFS
+            ================================================== -->
 
             <a th:href="@{/admin/produits(state='ACTIVE')}"
+
                class="product-quick-card"
-               th:classappend="${selectedState == 'ACTIVE'} ? ' selected' : ''">
+
+               th:classappend="${selectedState == 'ACTIVE'}
+                    ? ' selected'
+                    : ''">
 
 
                 <span>
@@ -945,11 +1142,17 @@
 
 
 
-            <!-- INACTIFS -->
+            <!-- =================================================
+                 INACTIFS
+            ================================================== -->
 
             <a th:href="@{/admin/produits(state='INACTIVE')}"
+
                class="product-quick-card"
-               th:classappend="${selectedState == 'INACTIVE'} ? ' selected' : ''">
+
+               th:classappend="${selectedState == 'INACTIVE'}
+                    ? ' selected'
+                    : ''">
 
 
                 <span>
@@ -970,11 +1173,17 @@
 
 
 
-            <!-- NOUVEAUTES -->
+            <!-- =================================================
+                 NOUVEAUTES
+            ================================================== -->
 
             <a th:href="@{/admin/produits(special='NEW')}"
+
                class="product-quick-card"
-               th:classappend="${selectedSpecial == 'NEW'} ? ' selected' : ''">
+
+               th:classappend="${selectedSpecial == 'NEW'}
+                    ? ' selected'
+                    : ''">
 
 
                 <span>
@@ -995,11 +1204,17 @@
 
 
 
-            <!-- PROMOTIONS -->
+            <!-- =================================================
+                 PROMOTIONS
+            ================================================== -->
 
             <a th:href="@{/admin/produits(special='PROMOTION')}"
+
                class="product-quick-card"
-               th:classappend="${selectedSpecial == 'PROMOTION'} ? ' selected' : ''">
+
+               th:classappend="${selectedSpecial == 'PROMOTION'}
+                    ? ' selected'
+                    : ''">
 
 
                 <span>
@@ -1020,11 +1235,17 @@
 
 
 
-            <!-- VEDETTES -->
+            <!-- =================================================
+                 VEDETTES
+            ================================================== -->
 
             <a th:href="@{/admin/produits(special='FEATURED')}"
+
                class="product-quick-card"
-               th:classappend="${selectedSpecial == 'FEATURED'} ? ' selected' : ''">
+
+               th:classappend="${selectedSpecial == 'FEATURED'}
+                    ? ' selected'
+                    : ''">
 
 
                 <span>
@@ -1059,20 +1280,25 @@
                  FORMULAIRE
             ================================================== -->
 
-            <section class="zdadm-card">
+            <section id="product-form"
+                     class="zdadm-card">
 
 
                 <div class="zdadm-card-head">
 
 
-                    <small th:text="${editing ? 'MODIFICATION' : 'NOUVEAU PRODUIT'}">
+                    <small th:text="${editing
+                            ? 'MODIFICATION'
+                            : 'NOUVEAU PRODUIT'}">
 
                         NOUVEAU PRODUIT
 
                     </small>
 
 
-                    <h2 th:text="${editing ? 'Modifier le produit' : 'Ajouter un produit'}">
+                    <h2 th:text="${editing
+                            ? 'Modifier le produit'
+                            : 'Ajouter un produit'}">
 
                         Ajouter un produit
 
@@ -1084,19 +1310,27 @@
 
 
                 <form th:action="@{/admin/produits/save}"
+
                       th:object="${formProduct}"
+
                       method="post"
+
                       enctype="multipart/form-data"
+
                       class="zdadm-form">
 
 
-                    <!-- ID -->
+                    <!-- =================================================
+                         ID
+                    ================================================== -->
 
                     <input type="hidden"
                            th:field="*{id}">
 
 
-                    <!-- CSRF -->
+                    <!-- =================================================
+                         CSRF
+                    ================================================== -->
 
                     <input type="hidden"
                            th:name="${_csrf.parameterName}"
@@ -1123,13 +1357,18 @@
 
                             <input id="name"
                                    type="text"
+
                                    th:field="*{name}"
+
                                    placeholder="Ex : Canapé Royal Milano"
+
                                    required>
 
 
                             <small class="product-form-error"
+
                                    th:if="${#fields.hasErrors('name')}"
+
                                    th:errors="*{name}">
                             </small>
 
@@ -1243,7 +1482,9 @@
 
                             <input id="type"
                                    type="text"
+
                                    th:field="*{type}"
+
                                    placeholder="Moderne, classique...">
 
 
@@ -1267,14 +1508,20 @@
 
                             <input id="price"
                                    type="number"
+
                                    min="0"
+
                                    step="0.01"
+
                                    th:field="*{price}"
+
                                    required>
 
 
                             <small class="product-form-error"
+
                                    th:if="${#fields.hasErrors('price')}"
+
                                    th:errors="*{price}">
                             </small>
 
@@ -1299,8 +1546,11 @@
 
                             <input id="oldPrice"
                                    type="number"
+
                                    min="0"
+
                                    step="0.01"
+
                                    th:field="*{oldPrice}">
 
 
@@ -1324,7 +1574,9 @@
 
                             <input id="color"
                                    type="text"
+
                                    th:field="*{color}"
+
                                    placeholder="Beige, noir...">
 
 
@@ -1394,7 +1646,9 @@
 
                             <input id="sourceUrl"
                                    type="url"
+
                                    th:field="*{sourceUrl}"
+
                                    placeholder="https://...">
 
 
@@ -1417,7 +1671,9 @@
 
 
                             <textarea id="description"
+
                                       th:field="*{description}"
+
                                       placeholder="Description du produit...">
                             </textarea>
 
@@ -1430,7 +1686,10 @@
                              IMAGE ACTUELLE
                         ================================================== -->
 
-                        <div th:if="${editing and formProduct.imagePath != null and !#strings.isEmpty(formProduct.imagePath)}"
+                        <div th:if="${editing
+                                and formProduct.imagePath != null
+                                and !#strings.isEmpty(formProduct.imagePath)}"
+
                              class="zdadm-field full">
 
 
@@ -1444,15 +1703,10 @@
                             <div class="product-current-image">
 
 
-                                <!--
-                                    IMPORTANT :
-                                    On force toujours une URL absolue
-                                    commençant par /
-                                -->
-
                                 <img th:src="${#strings.startsWith(formProduct.imagePath, '/')
                                         ? formProduct.imagePath
                                         : '/' + formProduct.imagePath}"
+
                                      th:alt="${formProduct.name}">
 
 
@@ -1487,7 +1741,9 @@
 
                             <input id="image"
                                    type="file"
+
                                    name="image"
+
                                    accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
 
 
@@ -1569,8 +1825,12 @@
 
 
                             <button type="submit"
+
                                     class="zdadm-save"
-                                    th:text="${editing ? 'Enregistrer les modifications' : 'Ajouter le produit'}">
+
+                                    th:text="${editing
+                                        ? 'Enregistrer les modifications'
+                                        : 'Ajouter le produit'}">
 
                                 Ajouter le produit
 
@@ -1627,7 +1887,10 @@
                             font-size:10px;
                             color:#91887f;
                         "
-                              th:text="${'(' + (resultCount != null ? resultCount : 0) + ')'}">
+
+                        th:text="${'('
+                            + (resultCount != null ? resultCount : 0)
+                            + ')'}">
 
                             (0)
 
@@ -1658,7 +1921,8 @@
 
                     <p>
 
-                        Modifiez les filtres ou réinitialisez la recherche.
+                        Modifiez les filtres
+                        ou réinitialisez la recherche.
 
                     </p>
 
@@ -1689,22 +1953,14 @@
 
 
                         <!-- =================================================
-                             IMAGE PRODUIT
+                             IMAGE
                         ================================================== -->
 
                         <div class="zdadm-product-image">
 
 
-                            <!--
-                                IMPORTANT :
-                                Même si MySQL contient :
-                                uploads/products/photo.jpg
-
-                                on transforme automatiquement en :
-                                /uploads/products/photo.jpg
-                            -->
-
-                            <img th:if="${product.imagePath != null and !#strings.isEmpty(product.imagePath)}"
+                            <img th:if="${product.imagePath != null
+                                    and !#strings.isEmpty(product.imagePath)}"
 
                                  th:src="${#strings.startsWith(product.imagePath, '/')
                                      ? product.imagePath
@@ -1713,9 +1969,9 @@
                                  th:alt="${product.name}">
 
 
-                            <!-- PLACEHOLDER -->
+                            <div th:if="${product.imagePath == null
+                                    or #strings.isEmpty(product.imagePath)}"
 
-                            <div th:if="${product.imagePath == null or #strings.isEmpty(product.imagePath)}"
                                  class="zdadm-placeholder">
 
                                 ZD
@@ -1728,7 +1984,7 @@
 
 
                         <!-- =================================================
-                             INFOS
+                             INFORMATIONS
                         ================================================== -->
 
                         <div>
@@ -1758,7 +2014,8 @@
 
 
 
-                                        <span th:if="${product.type != null and !#strings.isEmpty(product.type)}">
+                                        <span th:if="${product.type != null
+                                                and !#strings.isEmpty(product.type)}">
 
                                             •
 
@@ -1766,7 +2023,9 @@
 
 
 
-                                        <span th:if="${product.type != null and !#strings.isEmpty(product.type)}"
+                                        <span th:if="${product.type != null
+                                                and !#strings.isEmpty(product.type)}"
+
                                               th:text="${product.type}">
                                         </span>
 
@@ -1778,7 +2037,9 @@
 
 
 
-                                <!-- PRIX -->
+                                <!-- =================================================
+                                     PRIX
+                                ================================================== -->
 
                                 <div class="zdadm-product-price">
 
@@ -1868,7 +2129,7 @@
 
 
                             <!-- =================================================
-                                 INFORMATIONS
+                                 DETAILS
                             ================================================== -->
 
                             <div style="
@@ -1879,7 +2140,8 @@
                             ">
 
 
-                                <span th:if="${product.color != null and !#strings.isEmpty(product.color)}">
+                                <span th:if="${product.color != null
+                                        and !#strings.isEmpty(product.color)}">
 
 
                                     Couleur :
@@ -1936,7 +2198,7 @@
 
 
 
-                                <!-- VOIR BOUTIQUE -->
+                                <!-- VOIR -->
 
                                 <a th:href="@{/produit/{id}(id=${product.id})}"
                                    target="_blank"
@@ -1951,7 +2213,9 @@
                                 <!-- SUPPRIMER -->
 
                                 <form th:action="@{/admin/produits/delete/{id}(id=${product.id})}"
+
                                       method="post"
+
                                       onsubmit="return confirm('Supprimer définitivement ce produit ?');">
 
 

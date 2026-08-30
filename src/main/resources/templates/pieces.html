@@ -1,0 +1,3922 @@
+<!DOCTYPE html>
+
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+<!-- =====================================================
+     CSRF SPRING SECURITY
+====================================================== -->
+
+<meta name="_csrf"
+      th:content="${_csrf != null ? _csrf.token : ''}">
+
+<meta name="_csrf_header"
+      th:content="${_csrf != null ? _csrf.headerName : ''}">
+    <title>Pièces & Matières | Zineb Déco</title>
+
+
+    <!-- CSS PRINCIPAL -->
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}"
+          href="/css/style.css">
+
+
+    <style>
+
+        /* =====================================================
+           HEADER TOUJOURS EN HAUT
+        ====================================================== */
+
+        .site-header.zd-premium-header {
+            position: sticky !important;
+            top: 0;
+            z-index: 3000 !important;
+        }
+
+
+        /* =====================================================
+           VARIABLES PAGE PIECES - MODE CLAIR
+        ====================================================== */
+
+        .piece-client-page {
+
+            --piece-bg: #f7f4ee;
+
+            --piece-card: #ffffff;
+
+            --piece-text: #17130f;
+
+            --piece-muted: #817970;
+
+            --piece-border: #ded5c8;
+
+            --piece-soft: #eee8df;
+
+            --piece-input: #faf5ea;
+
+            --piece-gold: #a47822;
+
+            --piece-gold-bright: #d99a2b;
+
+            min-height: 100vh;
+
+            background:
+                var(--piece-bg);
+
+            color:
+                var(--piece-text);
+
+            transition:
+                background .25s ease,
+                color .25s ease;
+        }
+
+
+        /* =====================================================
+           MODE SOMBRE
+           Synchronisé par le JS avec le bouton du header
+        ====================================================== */
+
+        html.piece-dark-theme
+        .piece-client-page {
+
+            --piece-bg: #020914;
+
+            --piece-card: #07111b;
+
+            --piece-text: #f7f8fa;
+
+            --piece-muted: #9da7b1;
+
+            --piece-border:
+                rgba(217,154,43,.22);
+
+            --piece-soft: #0b1724;
+
+            --piece-input: #06101b;
+
+            --piece-gold: #d99a2b;
+
+            --piece-gold-bright: #f0bd57;
+        }
+
+
+
+        /* =====================================================
+           RESET LOCAL
+        ====================================================== */
+
+        .piece-client-page *,
+        .piece-client-page *::before,
+        .piece-client-page *::after {
+            box-sizing: border-box;
+        }
+
+
+
+        /* =====================================================
+           HERO
+        ====================================================== */
+
+        .piece-client-hero {
+
+            padding:
+                85px 5% 65px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #020914 0%,
+                    #06111e 60%,
+                    #0c1724 100%
+                );
+
+            color:
+                #ffffff;
+
+            border-bottom:
+                1px solid
+                rgba(217,154,43,.30);
+        }
+
+
+        .piece-client-hero-inner {
+
+            max-width:
+                1450px;
+
+            margin:
+                0 auto;
+        }
+
+
+        .piece-client-kicker {
+
+            display:
+                block;
+
+            margin-bottom:
+                14px;
+
+            color:
+                #d99a2b;
+
+            font-size:
+                11px;
+
+            font-weight:
+                900;
+
+            letter-spacing:
+                4px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .piece-client-hero h1 {
+
+            max-width:
+                850px;
+
+            margin:
+                0;
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size:
+                clamp(
+                    42px,
+                    6vw,
+                    82px
+                );
+
+            font-weight:
+                400;
+
+            line-height:
+                .98;
+        }
+
+
+        .piece-client-hero p {
+
+            max-width:
+                750px;
+
+            margin:
+                25px 0 0;
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .65
+                );
+
+            font-size:
+                15px;
+
+            line-height:
+                1.8;
+        }
+
+
+
+        /* =====================================================
+           CONTENU
+        ====================================================== */
+
+        .piece-client-container {
+
+            max-width:
+                1450px;
+
+            margin:
+                0 auto;
+
+            padding:
+                50px 5% 90px;
+        }
+
+
+
+        /* =====================================================
+           TITRES
+        ====================================================== */
+
+        .piece-section-title {
+
+            margin-bottom:
+                25px;
+
+            display:
+                flex;
+
+            align-items:
+                end;
+
+            justify-content:
+                space-between;
+
+            gap:
+                20px;
+        }
+
+
+        .piece-section-title small {
+
+            display:
+                block;
+
+            margin-bottom:
+                7px;
+
+            color:
+                var(--piece-gold);
+
+            font-size:
+                10px;
+
+            font-weight:
+                900;
+
+            letter-spacing:
+                2px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .piece-section-title h2 {
+
+            margin:
+                0;
+
+            color:
+                var(--piece-text);
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size:
+                clamp(
+                    30px,
+                    4vw,
+                    48px
+                );
+
+            font-weight:
+                400;
+        }
+
+
+        .piece-result-count {
+
+            color:
+                var(--piece-muted);
+
+            font-size:
+                12px;
+        }
+
+
+        .piece-result-count strong {
+
+            color:
+                var(--piece-gold);
+        }
+
+
+
+        /* =====================================================
+           3 CATALOGUES HORIZONTAUX
+        ====================================================== */
+
+        .piece-client-catalogues {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    minmax(0, 1fr)
+                );
+
+            gap:
+                18px;
+
+            margin-bottom:
+                50px;
+        }
+
+
+        .piece-client-catalogue {
+
+            min-height:
+                220px;
+
+            padding:
+                26px;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            justify-content:
+                space-between;
+
+            text-decoration:
+                none;
+
+            background:
+                var(--piece-card);
+
+            border:
+                1px solid
+                var(--piece-border);
+
+            color:
+                var(--piece-text);
+
+            transition:
+                transform .25s ease,
+                border-color .25s ease,
+                box-shadow .25s ease,
+                background .25s ease;
+        }
+
+
+        .piece-client-catalogue:hover {
+
+            transform:
+                translateY(-4px);
+
+            border-color:
+                #b88627;
+
+            box-shadow:
+                0 18px 45px
+                rgba(18,13,7,.08);
+        }
+
+
+        .piece-client-catalogue.active {
+
+            background:
+                #06111e;
+
+            border-color:
+                #d99a2b;
+
+            color:
+                #ffffff;
+        }
+
+
+
+        /* =====================================================
+           ICONES
+        ====================================================== */
+
+        .piece-client-icon {
+
+            width:
+                58px;
+
+            height:
+                58px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border:
+                1px solid
+                rgba(184,134,39,.35);
+
+            background:
+                var(--piece-input);
+
+            color:
+                var(--piece-gold);
+        }
+
+
+        .piece-client-catalogue.active
+        .piece-client-icon {
+
+            background:
+                rgba(217,154,43,.08);
+
+            color:
+                #d99a2b;
+
+            border-color:
+                rgba(217,154,43,.45);
+        }
+
+
+        .piece-client-icon svg {
+
+            width:
+                30px;
+
+            height:
+                30px;
+
+            fill:
+                none;
+
+            stroke:
+                currentColor;
+
+            stroke-width:
+                1.7;
+
+            stroke-linecap:
+                round;
+
+            stroke-linejoin:
+                round;
+        }
+
+
+
+        /* =====================================================
+           CONTENU CATALOGUE
+        ====================================================== */
+
+        .piece-client-catalogue small {
+
+            display:
+                block;
+
+            margin-top:
+                25px;
+
+            color:
+                var(--piece-gold);
+
+            font-size:
+                9px;
+
+            font-weight:
+                900;
+
+            letter-spacing:
+                2px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .piece-client-catalogue h3 {
+
+            margin:
+                6px 0 0;
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size:
+                27px;
+
+            font-weight:
+                400;
+        }
+
+
+        .piece-client-catalogue-footer {
+
+            margin-top:
+                25px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+        }
+
+
+        .piece-client-catalogue-count {
+
+            color:
+                var(--piece-muted);
+
+            font-size:
+                11px;
+        }
+
+
+        .piece-client-catalogue.active
+        .piece-client-catalogue-count {
+
+            color:
+                rgba(255,255,255,.55);
+        }
+
+
+        .piece-client-catalogue-count strong {
+
+            color:
+                var(--piece-gold);
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size:
+                28px;
+
+            font-weight:
+                400;
+        }
+
+
+        .piece-client-catalogue.active
+        .piece-client-catalogue-count strong {
+
+            color:
+                #d99a2b;
+        }
+
+
+        .piece-client-arrow {
+
+            color:
+                var(--piece-gold);
+
+            font-size:
+                22px;
+        }
+
+
+
+        /* =====================================================
+           VOIR TOUS
+        ====================================================== */
+
+        .piece-all-row {
+
+            margin-bottom:
+                28px;
+        }
+
+
+        .piece-show-all {
+
+            min-height:
+                42px;
+
+            padding:
+                0 18px;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid
+                var(--piece-border);
+
+            color:
+                var(--piece-muted);
+
+            background:
+                transparent;
+
+            text-decoration:
+                none;
+
+            font-size:
+                10px;
+
+            font-weight:
+                900;
+
+            letter-spacing:
+                1px;
+
+            text-transform:
+                uppercase;
+
+            transition:
+                .2s ease;
+        }
+
+
+        .piece-show-all:hover,
+        .piece-show-all.active {
+
+            border-color:
+                #b88627;
+
+            color:
+                var(--piece-gold);
+
+            background:
+                rgba(184,134,39,.06);
+        }
+
+
+
+        /* =====================================================
+           GRILLE PIECES
+        ====================================================== */
+
+        .piece-client-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    4,
+                    minmax(0, 1fr)
+                );
+
+            gap:
+                22px;
+        }
+
+
+
+        /* =====================================================
+           CARTE PIECE
+        ====================================================== */
+
+        .piece-client-card {
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            min-width:
+                0;
+
+            background:
+                var(--piece-card);
+
+            border:
+                1px solid
+                var(--piece-border);
+
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease,
+                border-color .25s ease,
+                background .25s ease;
+        }
+
+
+        .piece-client-card:hover {
+
+            transform:
+                translateY(-4px);
+
+            border-color:
+                #b88627;
+
+            box-shadow:
+                0 18px 45px
+                rgba(15,10,5,.09);
+        }
+
+
+
+        /* =====================================================
+           IMAGE
+        ====================================================== */
+
+        .piece-client-image {
+
+            position:
+                relative;
+
+            width:
+                100%;
+
+            aspect-ratio:
+                1 / .85;
+
+            overflow:
+                hidden;
+
+            background:
+                var(--piece-soft);
+        }
+
+
+        .piece-client-image img {
+
+            width:
+                100%;
+
+            height:
+                100%;
+
+            object-fit:
+                cover;
+
+            transition:
+                transform .45s ease;
+        }
+
+
+        .piece-client-card:hover
+        .piece-client-image img {
+
+            transform:
+                scale(1.04);
+        }
+
+
+        .piece-client-placeholder {
+
+            width:
+                100%;
+
+            height:
+                100%;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            color:
+                var(--piece-gold);
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size:
+                45px;
+        }
+
+
+
+        /* =====================================================
+           BADGE CATALOGUE
+        ====================================================== */
+
+        .piece-client-badge {
+
+            position:
+                absolute;
+
+            top:
+                14px;
+
+            left:
+                14px;
+
+            padding:
+                7px 10px;
+
+            background:
+                rgba(2,9,20,.92);
+
+            color:
+                #d99a2b;
+
+            font-size:
+                8px;
+
+            font-weight:
+                900;
+
+            letter-spacing:
+                1px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+
+        /* =====================================================
+           INFOS
+        ====================================================== */
+
+        .piece-client-body {
+
+            padding:
+                19px;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            flex:
+                1;
+        }
+
+
+        .piece-client-type {
+
+            color:
+                var(--piece-gold);
+
+            font-size:
+                9px;
+
+            font-weight:
+                900;
+
+            letter-spacing:
+                1px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .piece-client-body h3 {
+
+            margin:
+                8px 0 0;
+
+            color:
+                var(--piece-text);
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size:
+                23px;
+
+            font-weight:
+                400;
+
+            line-height:
+                1.15;
+        }
+
+
+        .piece-client-description {
+
+            margin:
+                12px 0 0;
+
+            color:
+                var(--piece-muted);
+
+            font-size:
+                11px;
+
+            line-height:
+                1.7;
+        }
+
+
+
+        /* =====================================================
+           PRIX
+        ====================================================== */
+
+        .piece-client-bottom {
+
+            margin-top:
+                auto;
+
+            padding-top:
+                18px;
+        }
+
+
+        .piece-client-price {
+
+            margin-bottom:
+                15px;
+
+            color:
+                var(--piece-gold);
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size:
+                25px;
+        }
+
+
+        .piece-client-price small {
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+        }
+
+
+
+        /* =====================================================
+           AJOUT PANIER
+        ====================================================== */
+
+        .piece-add-cart {
+
+            width:
+                100%;
+
+            min-height:
+                48px;
+
+            padding:
+                0 15px;
+
+            border:
+                1px solid
+                #06111e;
+
+            background:
+                #06111e;
+
+            color:
+                #d99a2b;
+
+            font-size:
+                9px;
+
+            font-weight:
+                900;
+
+            letter-spacing:
+                1px;
+
+            text-transform:
+                uppercase;
+
+            cursor:
+                pointer;
+
+            transition:
+                .2s ease;
+        }
+
+
+        .piece-add-cart:hover {
+
+            background:
+                #d99a2b;
+
+            border-color:
+                #d99a2b;
+
+            color:
+                #06111e;
+        }
+
+
+        .piece-add-cart.added {
+
+            background:
+                #315f42;
+
+            border-color:
+                #315f42;
+
+            color:
+                #ffffff;
+        }
+
+
+
+        /* =====================================================
+           VIDE
+        ====================================================== */
+
+        .piece-client-empty {
+
+            grid-column:
+                1 / -1;
+
+            padding:
+                70px 30px;
+
+            text-align:
+                center;
+
+            border:
+                1px solid
+                var(--piece-border);
+
+            background:
+                var(--piece-card);
+        }
+
+
+        .piece-client-empty strong {
+
+            display:
+                block;
+
+            color:
+                var(--piece-text);
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size:
+                32px;
+
+            font-weight:
+                400;
+        }
+
+
+        .piece-client-empty p {
+
+            margin:
+                12px 0 0;
+
+            color:
+                var(--piece-muted);
+
+            font-size:
+                12px;
+        }
+
+
+
+        /* =====================================================
+           PANIER FLOTTANT
+        ====================================================== */
+
+        .piece-cart-floating {
+
+            position:
+                fixed;
+
+            right:
+                28px;
+
+            bottom:
+                28px;
+
+            z-index:
+                2500;
+
+            min-width:
+                210px;
+
+            min-height:
+                58px;
+
+            padding:
+                9px 15px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                18px;
+
+            border:
+                1px solid
+                rgba(217,154,43,.45);
+
+            background:
+                #020914;
+
+            color:
+                #ffffff;
+
+            box-shadow:
+                0 15px 45px
+                rgba(0,0,0,.25);
+
+            cursor:
+                pointer;
+        }
+
+
+        .piece-cart-floating-text small {
+
+            display:
+                block;
+
+            color:
+                #9ea6af;
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                1px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .piece-cart-floating-text strong {
+
+            display:
+                block;
+
+            margin-top:
+                3px;
+
+            color:
+                #d99a2b;
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size:
+                17px;
+        }
+
+
+        .piece-cart-floating-count {
+
+            width:
+                34px;
+
+            height:
+                34px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border-radius:
+                50%;
+
+            background:
+                #d99a2b;
+
+            color:
+                #020914;
+
+            font-size:
+                12px;
+
+            font-weight:
+                900;
+        }
+
+
+
+        /* =====================================================
+           OVERLAY PANIER
+        ====================================================== */
+
+        .piece-cart-overlay {
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            z-index:
+                3998;
+
+            background:
+                rgba(0,0,0,.55);
+
+            opacity:
+                0;
+
+            visibility:
+                hidden;
+
+            transition:
+                .25s ease;
+        }
+
+
+        .piece-cart-overlay.open {
+
+            opacity:
+                1;
+
+            visibility:
+                visible;
+        }
+
+
+
+        /* =====================================================
+           DRAWER
+        ====================================================== */
+
+        .piece-cart-drawer {
+
+            position:
+                fixed;
+
+            top:
+                0;
+
+            right:
+                0;
+
+            bottom:
+                0;
+
+            z-index:
+                3999;
+
+            width:
+                min(
+                    430px,
+                    94vw
+                );
+
+            padding:
+                25px;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            background:
+                #06111e;
+
+            color:
+                #ffffff;
+
+            transform:
+                translateX(105%);
+
+            transition:
+                transform .3s ease;
+
+            box-shadow:
+                -20px 0 50px
+                rgba(0,0,0,.30);
+        }
+
+
+        .piece-cart-drawer.open {
+
+            transform:
+                translateX(0);
+        }
+
+
+        .piece-cart-head {
+
+            padding-bottom:
+                18px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            border-bottom:
+                1px solid
+                rgba(217,154,43,.25);
+        }
+
+
+        .piece-cart-head small {
+
+            color:
+                #d99a2b;
+
+            font-size:
+                9px;
+
+            font-weight:
+                900;
+
+            letter-spacing:
+                2px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .piece-cart-head h2 {
+
+            margin:
+                5px 0 0;
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size:
+                28px;
+
+            font-weight:
+                400;
+        }
+
+
+        .piece-cart-close {
+
+            width:
+                38px;
+
+            height:
+                38px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.15);
+
+            background:
+                transparent;
+
+            color:
+                #ffffff;
+
+            font-size:
+                20px;
+
+            cursor:
+                pointer;
+        }
+
+
+
+        /* =====================================================
+           ITEMS PANIER
+        ====================================================== */
+
+        .piece-cart-items {
+
+            flex:
+                1;
+
+            overflow-y:
+                auto;
+
+            margin-top:
+                15px;
+
+            padding-right:
+                4px;
+        }
+
+
+        .piece-cart-empty {
+
+            padding:
+                50px 10px;
+
+            text-align:
+                center;
+
+            color:
+                #9da7b1;
+
+            font-size:
+                12px;
+
+            line-height:
+                1.7;
+        }
+
+
+        .piece-cart-item {
+
+            padding:
+                14px 0;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                68px minmax(0,1fr);
+
+            gap:
+                12px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.08);
+        }
+
+
+        .piece-cart-thumb {
+
+            width:
+                68px;
+
+            height:
+                68px;
+
+            overflow:
+                hidden;
+
+            background:
+                #101b27;
+        }
+
+
+        .piece-cart-thumb img {
+
+            width:
+                100%;
+
+            height:
+                100%;
+
+            object-fit:
+                cover;
+        }
+
+
+        .piece-cart-item h4 {
+
+            margin:
+                0;
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size:
+                15px;
+
+            font-weight:
+                400;
+        }
+
+
+        .piece-cart-item-type {
+
+            display:
+                block;
+
+            margin-top:
+                3px;
+
+            color:
+                #98a2ad;
+
+            font-size:
+                9px;
+        }
+
+
+        .piece-cart-item-price {
+
+            display:
+                block;
+
+            margin-top:
+                6px;
+
+            color:
+                #d99a2b;
+
+            font-size:
+                11px;
+
+            font-weight:
+                900;
+        }
+
+
+        .piece-cart-controls {
+
+            margin-top:
+                9px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+        }
+
+
+        .piece-cart-controls button {
+
+            width:
+                28px;
+
+            height:
+                28px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.16);
+
+            background:
+                transparent;
+
+            color:
+                #ffffff;
+
+            cursor:
+                pointer;
+        }
+
+
+        .piece-cart-controls span {
+
+            min-width:
+                24px;
+
+            text-align:
+                center;
+
+            font-size:
+                11px;
+
+            font-weight:
+                900;
+        }
+
+
+        .piece-cart-remove {
+
+            margin-left:
+                auto;
+
+            width:
+                auto !important;
+
+            padding:
+                0 7px;
+
+            color:
+                #e39b9b !important;
+        }
+
+
+
+        /* =====================================================
+           TOTAL
+        ====================================================== */
+
+        .piece-cart-footer {
+
+            padding-top:
+                18px;
+
+            border-top:
+                1px solid
+                rgba(217,154,43,.25);
+        }
+
+
+        .piece-cart-total {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+        }
+
+
+        .piece-cart-total span {
+
+            color:
+                #aab2ba;
+
+            font-size:
+                10px;
+
+            font-weight:
+                900;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .piece-cart-total strong {
+
+            color:
+                #d99a2b;
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size:
+                26px;
+
+            font-weight:
+                400;
+        }
+
+
+        .piece-cart-info {
+
+            margin:
+                12px 0 0;
+
+            color:
+                #8e99a4;
+
+            font-size:
+                9px;
+
+            line-height:
+                1.7;
+        }
+
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1200px) {
+
+            .piece-client-grid {
+
+                grid-template-columns:
+                    repeat(
+                        3,
+                        minmax(0,1fr)
+                    );
+            }
+
+        }
+
+
+        @media (max-width: 950px) {
+
+            .piece-client-catalogues {
+
+                grid-template-columns:
+                    repeat(
+                        3,
+                        minmax(210px,1fr)
+                    );
+
+                overflow-x:
+                    auto;
+
+                padding-bottom:
+                    7px;
+            }
+
+
+            .piece-client-grid {
+
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(0,1fr)
+                    );
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .piece-client-hero {
+
+                padding-top:
+                    55px;
+            }
+
+
+            .piece-client-container {
+
+                padding-left:
+                    18px;
+
+                padding-right:
+                    18px;
+            }
+
+
+            .piece-client-catalogues {
+
+                display:
+                    flex;
+
+                overflow-x:
+                    auto;
+
+                scroll-snap-type:
+                    x mandatory;
+            }
+
+
+            .piece-client-catalogue {
+
+                min-width:
+                    82vw;
+
+                scroll-snap-align:
+                    start;
+            }
+
+
+            .piece-client-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .piece-section-title {
+
+                align-items:
+                    start;
+
+                flex-direction:
+                    column;
+            }
+
+
+            .piece-cart-floating {
+
+                right:
+                    15px;
+
+                bottom:
+                    15px;
+
+                min-width:
+                    185px;
+            }
+
+        }
+/* =====================================================
+   FIX PRIX + BOUTON AJOUT PANIER
+====================================================== */
+
+.piece-client-bottom {
+    margin-top: 20px !important;
+    padding-top: 16px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    gap: 14px !important;
+
+    border-top: 1px solid var(--piece-border);
+}
+
+
+.piece-client-price {
+    margin: 0 !important;
+
+    display: flex;
+    align-items: baseline;
+
+    gap: 6px;
+
+    color: var(--piece-gold);
+
+    font-family: Georgia, serif;
+
+    font-size: 28px;
+}
+
+
+.piece-client-price small {
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   BOUTON
+====================================================== */
+
+.piece-add-cart {
+    width: 100% !important;
+
+    min-height: 48px !important;
+
+    margin: 0 !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 0 16px !important;
+
+    border: 1px solid #d99a2b !important;
+
+    background: #d99a2b !important;
+
+    color: #020914 !important;
+
+    font-size: 9px !important;
+
+    font-weight: 900 !important;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+
+.piece-add-cart:hover {
+    background: #f0bd57 !important;
+
+    border-color: #f0bd57 !important;
+
+    color: #020914 !important;
+
+    transform: translateY(-1px);
+}
+
+
+.piece-add-cart.added {
+    background: #315f42 !important;
+
+    border-color: #315f42 !important;
+
+    color: #ffffff !important;
+}
+
+
+/* =====================================================
+   DARK MODE
+====================================================== */
+
+html.piece-dark-theme .piece-client-bottom {
+    border-top-color: rgba(217,154,43,.20);
+}
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER PUBLIC COMMUN
+========================================================= -->
+
+<div th:replace="~{fragments/header :: header}">
+</div>
+
+
+
+<!-- =========================================================
+     PAGE PIECES
+========================================================= -->
+
+<div class="piece-client-page">
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="piece-client-hero">
+
+
+        <div class="piece-client-hero-inner">
+
+
+            <span class="piece-client-kicker">
+                ZINEB DÉCO / NOS CATALOGUES
+            </span>
+
+
+            <h1>
+                Pièces, couture & matières
+            </h1>
+
+
+            <p>
+
+                Découvrez les accessoires de tapisserie,
+                les articles de couture et les matières disponibles.
+                Ajoutez vos articles au panier et préparez votre réservation.
+
+            </p>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CONTENU
+    ====================================================== -->
+
+    <main class="piece-client-container">
+
+
+        <!-- =================================================
+             TITRE
+        ================================================== -->
+
+        <div class="piece-section-title">
+
+
+            <div>
+
+
+                <small>
+                    NOS UNIVERS
+                </small>
+
+
+                <h2>
+                    Choisissez votre catalogue
+                </h2>
+
+
+            </div>
+
+
+            <div class="piece-result-count">
+
+
+                <strong th:text="${resultCount != null ? resultCount : 0}">
+                    0
+                </strong>
+
+                article(s) disponible(s)
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             3 CATALOGUES HORIZONTAUX
+        ================================================== -->
+
+        <section class="piece-client-catalogues">
+
+
+            <!-- =================================================
+                 TAPISSIER
+            ================================================== -->
+
+            <a th:href="@{/pieces(catalogue='TAPISSERIE')}"
+               href="/pieces?catalogue=TAPISSERIE"
+
+               class="piece-client-catalogue"
+
+               th:classappend="${selectedCatalogue == 'TAPISSERIE'}
+                    ? ' active'
+                    : ''">
+
+
+                <div>
+
+
+                    <div class="piece-client-icon">
+
+
+                        <svg viewBox="0 0 24 24"
+                             aria-hidden="true">
+
+                            <path d="M5 11V8.5A3.5 3.5 0 0 1 8.5 5h7A3.5 3.5 0 0 1 19 8.5V11"/>
+
+                            <path d="M4 11h16a2 2 0 0 1 2 2v5H2v-5a2 2 0 0 1 2-2Z"/>
+
+                            <path d="M5 18v2"/>
+
+                            <path d="M19 18v2"/>
+
+                            <path d="M7 11V8"/>
+
+                            <path d="M17 11V8"/>
+
+                        </svg>
+
+
+                    </div>
+
+
+                    <small>
+                        CATALOGUE 01
+                    </small>
+
+
+                    <h3>
+                        Pièces Tapissier
+                    </h3>
+
+
+                </div>
+
+
+                <div class="piece-client-catalogue-footer">
+
+
+                    <span class="piece-client-catalogue-count">
+
+
+                        <strong th:text="${tapisserieCount != null ? tapisserieCount : 0}">
+                            0
+                        </strong>
+
+                        articles
+
+
+                    </span>
+
+
+                    <span class="piece-client-arrow">
+                        →
+                    </span>
+
+
+                </div>
+
+
+            </a>
+
+
+
+            <!-- =================================================
+                 COUTURE
+            ================================================== -->
+
+            <a th:href="@{/pieces(catalogue='COUTURE')}"
+               href="/pieces?catalogue=COUTURE"
+
+               class="piece-client-catalogue"
+
+               th:classappend="${selectedCatalogue == 'COUTURE'}
+                    ? ' active'
+                    : ''">
+
+
+                <div>
+
+
+                    <div class="piece-client-icon">
+
+
+                        <svg viewBox="0 0 24 24"
+                             aria-hidden="true">
+
+                            <path d="M20 4 8 16"/>
+
+                            <path d="M14 4h6v6"/>
+
+                            <path d="M5.5 18.5 8 16"/>
+
+                            <path d="M3 21l2.5-2.5"/>
+
+                            <path d="M3 8c5 0 5 8 10 8"/>
+
+                            <circle cx="3"
+                                    cy="8"
+                                    r="1.5"/>
+
+                        </svg>
+
+
+                    </div>
+
+
+                    <small>
+                        CATALOGUE 02
+                    </small>
+
+
+                    <h3>
+                        Pièces Couture
+                    </h3>
+
+
+                </div>
+
+
+                <div class="piece-client-catalogue-footer">
+
+
+                    <span class="piece-client-catalogue-count">
+
+
+                        <strong th:text="${coutureCount != null ? coutureCount : 0}">
+                            0
+                        </strong>
+
+                        articles
+
+
+                    </span>
+
+
+                    <span class="piece-client-arrow">
+                        →
+                    </span>
+
+
+                </div>
+
+
+            </a>
+
+
+
+            <!-- =================================================
+                 MATIERES / TISSUS
+            ================================================== -->
+
+            <a th:href="@{/pieces(catalogue='MATIERES_TISSUS')}"
+               href="/pieces?catalogue=MATIERES_TISSUS"
+
+               class="piece-client-catalogue"
+
+               th:classappend="${selectedCatalogue == 'MATIERES_TISSUS'}
+                    ? ' active'
+                    : ''">
+
+
+                <div>
+
+
+                    <div class="piece-client-icon">
+
+
+                        <svg viewBox="0 0 24 24"
+                             aria-hidden="true">
+
+                            <path d="M6 4h10a3 3 0 0 1 3 3v13H9a3 3 0 0 1-3-3Z"/>
+
+                            <path d="M6 4a3 3 0 0 0 0 6h3"/>
+
+                            <path d="M9 10v10"/>
+
+                            <path d="M13 7h3"/>
+
+                            <path d="M13 11h3"/>
+
+                        </svg>
+
+
+                    </div>
+
+
+                    <small>
+                        CATALOGUE 03
+                    </small>
+
+
+                    <h3>
+                        Matières & Tissus
+                    </h3>
+
+
+                </div>
+
+
+                <div class="piece-client-catalogue-footer">
+
+
+                    <span class="piece-client-catalogue-count">
+
+
+                        <strong th:text="${matieresTissusCount != null ? matieresTissusCount : 0}">
+                            0
+                        </strong>
+
+                        articles
+
+
+                    </span>
+
+
+                    <span class="piece-client-arrow">
+                        →
+                    </span>
+
+
+                </div>
+
+
+            </a>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             VOIR TOUS
+        ================================================== -->
+
+        <div class="piece-all-row">
+
+
+            <a th:href="@{/pieces}"
+               href="/pieces"
+
+               class="piece-show-all"
+
+               th:classappend="${selectedCatalogue == null
+                    or #strings.isEmpty(selectedCatalogue)}
+                    ? ' active'
+                    : ''">
+
+                Voir tous les articles
+
+            </a>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             TITRE CATALOGUE
+        ================================================== -->
+
+        <div class="piece-section-title">
+
+
+            <div>
+
+
+                <small>
+                    CATALOGUE
+                </small>
+
+
+                <h2 th:text="${catalogueTitle != null
+                        ? catalogueTitle
+                        : 'Toutes les pièces'}">
+
+                    Toutes les pièces
+
+                </h2>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             GRILLE
+        ================================================== -->
+
+        <section class="piece-client-grid">
+
+
+            <!-- =================================================
+                 VIDE
+            ================================================== -->
+
+            <div th:if="${pieces == null or #lists.isEmpty(pieces)}"
+                 class="piece-client-empty">
+
+
+                <strong>
+                    Aucun article disponible
+                </strong>
+
+
+                <p>
+
+                    Les nouveaux articles ajoutés par
+                    Zineb Déco apparaîtront ici.
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PIECES
+            ================================================== -->
+
+            <article th:each="piece : ${pieces}"
+                     class="piece-client-card">
+
+
+                <!-- =================================================
+                     PHOTO
+                ================================================== -->
+
+                <div class="piece-client-image">
+
+
+                    <img th:if="${piece.imagePath != null
+                            and !#strings.isEmpty(piece.imagePath)}"
+
+                         th:src="${#strings.startsWith(piece.imagePath, '/')
+                            ? piece.imagePath
+                            : '/' + piece.imagePath}"
+
+                         th:alt="${piece.name}">
+
+
+                    <div th:if="${piece.imagePath == null
+                            or #strings.isEmpty(piece.imagePath)}"
+
+                         class="piece-client-placeholder">
+
+                        ZD
+
+                    </div>
+
+
+
+                    <!-- CATALOGUE -->
+
+                    <span class="piece-client-badge"
+                          th:switch="${piece.catalogue}">
+
+
+                        <span th:case="'TAPISSERIE'">
+                            Tapissier
+                        </span>
+
+
+                        <span th:case="'COUTURE'">
+                            Couture
+                        </span>
+
+
+                        <span th:case="'MATIERES_TISSUS'">
+                            Matières & Tissus
+                        </span>
+
+
+                        <span th:case="*"
+                              th:text="${piece.catalogue}">
+                        </span>
+
+
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     INFORMATIONS
+                ================================================== -->
+
+                <div class="piece-client-body">
+
+
+                    <span class="piece-client-type"
+                          th:text="${piece.type}">
+
+                        Type
+
+                    </span>
+
+
+                    <h3 th:text="${piece.name}">
+
+                        Pièce
+
+                    </h3>
+
+
+
+                    <p th:if="${piece.description != null
+                            and !#strings.isEmpty(piece.description)}"
+
+                       class="piece-client-description"
+
+                       th:text="${piece.description}">
+
+                        Description
+
+                    </p>
+
+
+
+                    <div class="piece-client-bottom">
+
+
+                        <!-- PRIX -->
+
+                        <div class="piece-client-price">
+
+
+                            <span th:text="${piece.price}">
+                                0
+                            </span>
+
+
+                            <small>
+                                DH
+                            </small>
+
+
+                        </div>
+
+
+
+                        <!-- =================================================
+                             AJOUTER AU PANIER
+                        ================================================== -->
+
+                        <button type="button"
+
+                                class="piece-add-cart"
+
+                                th:attr="
+                                    data-piece-id=${piece.id},
+                                    data-piece-name=${piece.name},
+                                    data-piece-type=${piece.type},
+                                    data-piece-price=${piece.price},
+                                    data-piece-image=${piece.imagePath},
+                                    data-piece-catalogue=${piece.catalogue}
+                                ">
+
+                            Ajouter au panier
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </article>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     PANIER FLOTTANT
+========================================================= -->
+
+<button type="button"
+        class="piece-cart-floating"
+        id="pieceCartOpen">
+
+
+    <span class="piece-cart-floating-text">
+
+
+        <small>
+            Votre panier pièces
+        </small>
+
+
+        <strong id="pieceCartFloatingTotal">
+            0.00 DH
+        </strong>
+
+
+    </span>
+
+
+    <span class="piece-cart-floating-count"
+          id="pieceCartCount">
+
+        0
+
+    </span>
+
+
+</button>
+
+
+
+<!-- =========================================================
+     OVERLAY
+========================================================= -->
+
+<div class="piece-cart-overlay"
+     id="pieceCartOverlay">
+</div>
+
+
+
+<!-- =========================================================
+     DRAWER PANIER
+========================================================= -->
+
+<aside class="piece-cart-drawer"
+       id="pieceCartDrawer">
+
+
+    <div class="piece-cart-head">
+
+
+        <div>
+
+
+            <small>
+                VOTRE SÉLECTION
+            </small>
+
+
+            <h2>
+                Panier pièces
+            </h2>
+
+
+        </div>
+
+
+        <button type="button"
+                class="piece-cart-close"
+                id="pieceCartClose"
+                aria-label="Fermer le panier">
+
+            ×
+
+        </button>
+
+
+    </div>
+
+
+
+    <div class="piece-cart-items"
+         id="pieceCartItems">
+
+
+        <div class="piece-cart-empty">
+
+            Votre panier est vide.
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="piece-cart-footer">
+
+
+        <div class="piece-cart-total">
+
+
+            <span>
+                Total
+            </span>
+
+
+            <strong id="pieceCartTotal">
+                0.00 DH
+            </strong>
+
+
+        </div>
+
+
+        <p class="piece-cart-info">
+
+            Le panier des pièces est conservé
+            dans votre navigateur.
+
+        </p>
+
+
+    </div>
+
+
+</aside>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+(function () {
+
+    "use strict";
+
+
+    /* =========================================================
+       THEME CLAIR / SOMBRE
+    ========================================================= */
+
+    const themeToggle =
+        document.getElementById(
+            "zdThemeToggle"
+        );
+
+
+    function syncPieceTheme() {
+
+        if (!themeToggle) {
+            return;
+        }
+
+
+        const pressed =
+            themeToggle.getAttribute(
+                "aria-pressed"
+            ) === "true";
+
+
+        const label =
+            (
+                themeToggle.getAttribute(
+                    "aria-label"
+                )
+                || ""
+            ).toLowerCase();
+
+
+        const dark =
+            pressed
+            ||
+            label.includes(
+                "mode clair"
+            );
+
+
+        document.documentElement
+            .classList
+            .toggle(
+                "piece-dark-theme",
+                dark
+            );
+    }
+
+
+    if (themeToggle) {
+
+        const themeObserver =
+            new MutationObserver(
+                function () {
+                    syncPieceTheme();
+                }
+            );
+
+
+        themeObserver.observe(
+            themeToggle,
+            {
+                attributes: true,
+                attributeFilter: [
+                    "aria-pressed",
+                    "aria-label",
+                    "class"
+                ]
+            }
+        );
+
+
+        themeToggle.addEventListener(
+            "click",
+            function () {
+
+                window.setTimeout(
+                    syncPieceTheme,
+                    0
+                );
+            }
+        );
+    }
+
+
+    window.setTimeout(
+        syncPieceTheme,
+        50
+    );
+
+
+
+    /* =========================================================
+       PANIER PIECES
+    ========================================================= */
+
+    const PIECE_CART_KEY =
+        "zineb-deco-piece-cart";
+
+
+    /*
+     * Panier normal du site :
+     * salons, canapés, chambres...
+     */
+    const PRODUCT_CART_KEY =
+        "zinebDecoCart";
+
+
+
+    /* =========================================================
+       ELEMENTS
+    ========================================================= */
+
+    const cartDrawer =
+        document.getElementById(
+            "pieceCartDrawer"
+        );
+
+
+    const cartOverlay =
+        document.getElementById(
+            "pieceCartOverlay"
+        );
+
+
+    const cartOpen =
+        document.getElementById(
+            "pieceCartOpen"
+        );
+
+
+    const cartClose =
+        document.getElementById(
+            "pieceCartClose"
+        );
+
+
+    const cartItems =
+        document.getElementById(
+            "pieceCartItems"
+        );
+
+
+    const cartCount =
+        document.getElementById(
+            "pieceCartCount"
+        );
+
+
+    const cartTotal =
+        document.getElementById(
+            "pieceCartTotal"
+        );
+
+
+    const floatingTotal =
+        document.getElementById(
+            "pieceCartFloatingTotal"
+        );
+
+
+
+    /* =========================================================
+       CHARGER PANIER PIECES
+    ========================================================= */
+
+    function loadCart() {
+
+        try {
+
+            const value =
+                localStorage.getItem(
+                    PIECE_CART_KEY
+                );
+
+
+            if (!value) {
+                return [];
+            }
+
+
+            const parsed =
+                JSON.parse(
+                    value
+                );
+
+
+            return Array.isArray(parsed)
+                ? parsed
+                : [];
+
+
+        } catch (error) {
+
+            console.error(
+                "Erreur panier pièces :",
+                error
+            );
+
+            return [];
+        }
+    }
+
+
+
+    /* =========================================================
+       CHARGER PANIER PRODUITS NORMAL
+    ========================================================= */
+
+    function loadProductCart() {
+
+        try {
+
+            const value =
+                localStorage.getItem(
+                    PRODUCT_CART_KEY
+                );
+
+
+            if (!value) {
+                return [];
+            }
+
+
+            const parsed =
+                JSON.parse(
+                    value
+                );
+
+
+            return Array.isArray(parsed)
+                ? parsed
+                : [];
+
+
+        } catch (error) {
+
+            console.error(
+                "Erreur panier produits :",
+                error
+            );
+
+            return [];
+        }
+    }
+
+
+
+    /* =========================================================
+       SAUVEGARDER PANIER PIECES
+    ========================================================= */
+
+    function saveCart(cart) {
+
+        localStorage.setItem(
+            PIECE_CART_KEY,
+            JSON.stringify(
+                cart
+            )
+        );
+
+
+        renderCart();
+    }
+
+
+
+    /* =========================================================
+       PRIX
+    ========================================================= */
+
+    function parsePrice(value) {
+
+        const price =
+            Number.parseFloat(
+                String(
+                    value
+                )
+                .replace(
+                    ",",
+                    "."
+                )
+            );
+
+
+        return Number.isFinite(price)
+            ? price
+            : 0;
+    }
+
+
+
+    function formatPrice(value) {
+
+        return parsePrice(
+            value
+        )
+        .toFixed(
+            2
+        )
+        +
+        " DH";
+    }
+
+
+
+    /* =========================================================
+       IMAGE
+    ========================================================= */
+
+    function normalizeImage(image) {
+
+        if (
+            !image
+            ||
+            image === "null"
+            ||
+            image === "undefined"
+        ) {
+
+            return "";
+        }
+
+
+        return image.startsWith("/")
+            ? image
+            : "/" + image;
+    }
+
+
+
+    /* =========================================================
+       SECURITE HTML
+    ========================================================= */
+
+    function escapeHtml(value) {
+
+        return String(
+            value ?? ""
+        )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+    }
+
+
+
+    /* =========================================================
+       QUANTITE PANIER PRODUITS
+    ========================================================= */
+
+    function getProductCartQuantity() {
+
+        const cart =
+            loadProductCart();
+
+
+        return cart.reduce(
+            function (total, item) {
+
+                return (
+                    total
+                    +
+                    Number(
+                        item.quantity || 1
+                    )
+                );
+            },
+            0
+        );
+    }
+
+
+
+    /* =========================================================
+       QUANTITE PANIER PIECES
+    ========================================================= */
+
+    function getPieceCartQuantity() {
+
+        const cart =
+            loadCart();
+
+
+        return cart.reduce(
+            function (total, item) {
+
+                return (
+                    total
+                    +
+                    Number(
+                        item.quantity || 1
+                    )
+                );
+            },
+            0
+        );
+    }
+
+
+
+    /* =========================================================
+       COMPTEUR DU PANIER DANS LE HEADER
+
+       Exemple :
+       1 canapé + 2 pièces = badge 3
+    ========================================================= */
+
+    function updateHeaderCartCounter() {
+
+        const productQuantity =
+            getProductCartQuantity();
+
+
+        const pieceQuantity =
+            getPieceCartQuantity();
+
+
+        const totalQuantity =
+            productQuantity
+            +
+            pieceQuantity;
+
+
+        document
+            .querySelectorAll(
+                ".cart-count"
+            )
+            .forEach(
+                function (counter) {
+
+                    counter.textContent =
+                        totalQuantity;
+                }
+            );
+    }
+
+
+
+    /* =========================================================
+       AJOUTER UNE PIECE
+    ========================================================= */
+
+    function addToCart(button) {
+
+        const id =
+            Number(
+                button.dataset.pieceId
+            );
+
+
+        if (!id) {
+            return;
+        }
+
+
+        const cart =
+            loadCart();
+
+
+        const existing =
+            cart.find(
+                function (item) {
+
+                    return (
+                        Number(item.id)
+                        ===
+                        id
+                    );
+                }
+            );
+
+
+        if (existing) {
+
+            existing.quantity =
+                Number(
+                    existing.quantity || 1
+                )
+                +
+                1;
+
+        } else {
+
+            cart.push({
+
+                id: id,
+
+                itemType:
+                    "PIECE",
+
+                name:
+                    button.dataset.pieceName
+                    || "Pièce",
+
+                type:
+                    button.dataset.pieceType
+                    || "",
+
+                catalogue:
+                    button.dataset.pieceCatalogue
+                    || "",
+
+                price:
+                    parsePrice(
+                        button.dataset.piecePrice
+                    ),
+
+                image:
+                    normalizeImage(
+                        button.dataset.pieceImage
+                    ),
+
+                quantity:
+                    1
+            });
+        }
+
+
+        saveCart(
+            cart
+        );
+
+
+        button.classList.add(
+            "added"
+        );
+
+
+        button.textContent =
+            "Ajouté ✓";
+
+
+        window.setTimeout(
+            function () {
+
+                button.classList.remove(
+                    "added"
+                );
+
+                button.textContent =
+                    "Ajouter au panier";
+            },
+            1000
+        );
+    }
+
+
+
+    /* =========================================================
+       CHANGER QUANTITE
+    ========================================================= */
+
+    function changeQuantity(
+        id,
+        amount
+    ) {
+
+        const cart =
+            loadCart();
+
+
+        const item =
+            cart.find(
+                function (current) {
+
+                    return (
+                        Number(current.id)
+                        ===
+                        Number(id)
+                    );
+                }
+            );
+
+
+        if (!item) {
+            return;
+        }
+
+
+        item.quantity =
+            Number(
+                item.quantity || 1
+            )
+            +
+            amount;
+
+
+        if (
+            item.quantity <= 0
+        ) {
+
+            removeItem(
+                id
+            );
+
+            return;
+        }
+
+
+        saveCart(
+            cart
+        );
+    }
+
+
+
+    /* =========================================================
+       SUPPRIMER PIECE
+    ========================================================= */
+
+    function removeItem(id) {
+
+        const cart =
+            loadCart()
+                .filter(
+                    function (item) {
+
+                        return (
+                            Number(item.id)
+                            !==
+                            Number(id)
+                        );
+                    }
+                );
+
+
+        saveCart(
+            cart
+        );
+    }
+
+
+
+    /* =========================================================
+       AFFICHER PANIER PIECES
+    ========================================================= */
+
+    function renderCart() {
+
+        const cart =
+            loadCart();
+
+
+        let quantity =
+            0;
+
+
+        let total =
+            0;
+
+
+        cart.forEach(
+            function (item) {
+
+                const itemQuantity =
+                    Number(
+                        item.quantity || 1
+                    );
+
+
+                quantity +=
+                    itemQuantity;
+
+
+                total +=
+                    parsePrice(
+                        item.price
+                    )
+                    *
+                    itemQuantity;
+            }
+        );
+
+
+
+        /* =====================================================
+           PANIER FLOTTANT PIECES
+        ===================================================== */
+
+        if (cartCount) {
+
+            cartCount.textContent =
+                quantity;
+        }
+
+
+        if (cartTotal) {
+
+            cartTotal.textContent =
+                formatPrice(
+                    total
+                );
+        }
+
+
+        if (floatingTotal) {
+
+            floatingTotal.textContent =
+                formatPrice(
+                    total
+                );
+        }
+
+
+
+        /* =====================================================
+           PANIER HEADER
+
+           IMPORTANT :
+           Produits + pièces
+        ===================================================== */
+
+        updateHeaderCartCounter();
+
+
+
+        if (!cartItems) {
+            return;
+        }
+
+
+
+        /* =====================================================
+           VIDE
+        ===================================================== */
+
+        if (
+            cart.length === 0
+        ) {
+
+            cartItems.innerHTML =
+                '<div class="piece-cart-empty">'
+                +
+                'Votre panier est vide.'
+                +
+                '</div>';
+
+            return;
+        }
+
+
+
+        /* =====================================================
+           ARTICLES
+        ===================================================== */
+
+        cartItems.innerHTML =
+            cart
+                .map(
+                    function (item) {
+
+                        const imageHtml =
+                            item.image
+
+                            ?
+
+                            '<img src="'
+                            +
+                            escapeHtml(
+                                item.image
+                            )
+                            +
+                            '" alt="'
+                            +
+                            escapeHtml(
+                                item.name
+                            )
+                            +
+                            '">'
+
+                            :
+
+                            '<div style="'
+                            +
+                            'width:100%;'
+                            +
+                            'height:100%;'
+                            +
+                            'display:grid;'
+                            +
+                            'place-items:center;'
+                            +
+                            'color:#d99a2b;'
+                            +
+                            'font-family:Georgia,serif;'
+                            +
+                            '">ZD</div>';
+
+
+
+                        return (
+
+                            '<article class="piece-cart-item">'
+
+                            +
+
+                            '<div class="piece-cart-thumb">'
+                            +
+                            imageHtml
+                            +
+                            '</div>'
+
+                            +
+
+                            '<div>'
+
+                            +
+
+                            '<h4>'
+                            +
+                            escapeHtml(
+                                item.name
+                            )
+                            +
+                            '</h4>'
+
+                            +
+
+                            '<span class="piece-cart-item-type">'
+                            +
+                            escapeHtml(
+                                item.type
+                            )
+                            +
+                            '</span>'
+
+                            +
+
+                            '<span class="piece-cart-item-price">'
+                            +
+                            formatPrice(
+                                parsePrice(
+                                    item.price
+                                )
+                                *
+                                Number(
+                                    item.quantity || 1
+                                )
+                            )
+                            +
+                            '</span>'
+
+                            +
+
+                            '<div class="piece-cart-controls">'
+
+                            +
+
+                            '<button type="button" '
+                            +
+                            'data-cart-minus="'
+                            +
+                            item.id
+                            +
+                            '">−</button>'
+
+                            +
+
+                            '<span>'
+                            +
+                            Number(
+                                item.quantity || 1
+                            )
+                            +
+                            '</span>'
+
+                            +
+
+                            '<button type="button" '
+                            +
+                            'data-cart-plus="'
+                            +
+                            item.id
+                            +
+                            '">+</button>'
+
+                            +
+
+                            '<button type="button" '
+                            +
+                            'class="piece-cart-remove" '
+                            +
+                            'data-cart-remove="'
+                            +
+                            item.id
+                            +
+                            '">Supprimer</button>'
+
+                            +
+
+                            '</div>'
+
+                            +
+
+                            '</div>'
+
+                            +
+
+                            '</article>'
+                        );
+                    }
+                )
+                .join("");
+    }
+
+
+
+    /* =========================================================
+       BOUTONS AJOUTER AU PANIER
+    ========================================================= */
+
+    document
+        .querySelectorAll(
+            ".piece-add-cart"
+        )
+        .forEach(
+            function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        addToCart(
+                            button
+                        );
+                    }
+                );
+            }
+        );
+
+
+
+    /* =========================================================
+       ACTIONS DANS LE PANIER
+    ========================================================= */
+
+    if (cartItems) {
+
+        cartItems.addEventListener(
+            "click",
+            function (event) {
+
+
+                /* MOINS */
+
+                const minus =
+                    event.target.closest(
+                        "[data-cart-minus]"
+                    );
+
+
+                if (minus) {
+
+                    changeQuantity(
+                        Number(
+                            minus.dataset.cartMinus
+                        ),
+                        -1
+                    );
+
+                    return;
+                }
+
+
+
+                /* PLUS */
+
+                const plus =
+                    event.target.closest(
+                        "[data-cart-plus]"
+                    );
+
+
+                if (plus) {
+
+                    changeQuantity(
+                        Number(
+                            plus.dataset.cartPlus
+                        ),
+                        1
+                    );
+
+                    return;
+                }
+
+
+
+                /* SUPPRIMER */
+
+                const remove =
+                    event.target.closest(
+                        "[data-cart-remove]"
+                    );
+
+
+                if (remove) {
+
+                    removeItem(
+                        Number(
+                            remove.dataset.cartRemove
+                        )
+                    );
+                }
+            }
+        );
+    }
+
+
+
+    /* =========================================================
+       OUVRIR PANIER
+    ========================================================= */
+
+    function openCart() {
+
+        if (
+            !cartDrawer
+            ||
+            !cartOverlay
+        ) {
+
+            return;
+        }
+
+
+        cartDrawer.classList.add(
+            "open"
+        );
+
+
+        cartOverlay.classList.add(
+            "open"
+        );
+
+
+        document.body.style.overflow =
+            "hidden";
+    }
+
+
+
+    /* =========================================================
+       FERMER PANIER
+    ========================================================= */
+
+    function closeCart() {
+
+        if (
+            !cartDrawer
+            ||
+            !cartOverlay
+        ) {
+
+            return;
+        }
+
+
+        cartDrawer.classList.remove(
+            "open"
+        );
+
+
+        cartOverlay.classList.remove(
+            "open"
+        );
+
+
+        document.body.style.overflow =
+            "";
+    }
+
+
+
+    /* =========================================================
+       EVENEMENTS DRAWER
+    ========================================================= */
+
+    if (cartOpen) {
+
+        cartOpen.addEventListener(
+            "click",
+            openCart
+        );
+    }
+
+
+    if (cartClose) {
+
+        cartClose.addEventListener(
+            "click",
+            closeCart
+        );
+    }
+
+
+    if (cartOverlay) {
+
+        cartOverlay.addEventListener(
+            "click",
+            closeCart
+        );
+    }
+
+
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeCart();
+            }
+        }
+    );
+
+
+
+    /* =========================================================
+       SYNCHRONISER SI LOCALSTORAGE CHANGE
+    ========================================================= */
+
+    window.addEventListener(
+        "storage",
+        function (event) {
+
+            if (
+                event.key === PIECE_CART_KEY
+                ||
+                event.key === PRODUCT_CART_KEY
+            ) {
+
+                renderCart();
+            }
+        }
+    );
+
+
+
+    /* =========================================================
+       INITIALISATION
+    ========================================================= */
+
+    renderCart();
+
+
+})();
+
+</script>
+<!-- =====================================================
+     PANIER MYSQL PAR COMPTE CLIENT
+====================================================== -->
+
+<script th:src="@{/js/main.js}"
+        src="/js/main.js"
+        defer>
+</script>
+
+</body>
+
+</html>

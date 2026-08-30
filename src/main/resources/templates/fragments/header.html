@@ -7,739 +7,697 @@
 
 
 <!-- =========================================================
-     HEADER ZINEB DECO
+     HEADER PUBLIC
 ========================================================= -->
 
-<header
-    th:fragment="header"
-    class="site-header">
+<header th:fragment="header"
+        class="site-header zd-premium-header">
+  <!-- =====================================================
+     SECURITE CSRF GLOBALE
+     Utilisée par le panier MySQL
+====================================================== -->
 
+<div id="zdCsrfData"
+     hidden
+     th:data-csrf-token="${_csrf != null ? _csrf.token : ''}"
+     th:data-csrf-header="${_csrf != null ? _csrf.headerName : ''}">
+</div>
+<!-- =========================================================
+     SECURITE GLOBALE
+     TOKEN CSRF POUR PANIER / FAVORIS / API
+========================================================= -->
 
+<div id="zdGlobalSecurity"
+     hidden
+     th:attr="
+        data-csrf-token=${_csrf != null ? _csrf.token : ''},
+        data-csrf-header=${_csrf != null ? _csrf.headerName : ''}
+     ">
+</div>
     <!-- =====================================================
-         TOP BAR
+         CSS THEME
     ====================================================== -->
 
-    <div class="top-bar">
-
-        <div class="container top-bar-content">
-
-
-            <div class="top-bar-left">
-
-                <span>
-                    Mobilier & décoration sur mesure
-                </span>
-
-            </div>
-
-
-            <div class="top-bar-right">
-
-                <a href="tel:+212667928660">
-
-                    +212 667-928660
-
-                </a>
-
-
-                <span>
-                    |
-                </span>
-
-
-                <a
-                    href="https://wa.me/212667928660"
-                    target="_blank"
-                    rel="noopener">
-
-                    WhatsApp
-
-                </a>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
+    <link rel="stylesheet"
+          th:href="@{/css/theme.css}"
+          href="/css/theme.css">
 
 
     <!-- =====================================================
          HEADER PRINCIPAL
     ====================================================== -->
 
-    <div class="main-header">
+    <div class="zd-premium-header-inner">
 
-        <div class="container main-header-content">
+
+        <!-- =================================================
+             LOGO + NOM
+        ================================================== -->
+
+        <a th:href="@{/}"
+           href="/"
+           class="zd-premium-brand"
+           aria-label="Accueil">
+
+
+            <span class="zd-premium-logo">
+
+                <img th:src="@{/images/logo-zineb-deco.png}"
+                     src="/images/logo-zineb-deco.png"
+                     alt="Logo Zineb Déco">
+
+            </span>
+
+
+            <span class="zd-premium-brand-name">
+                ZINEB DÉCO
+            </span>
+
+
+        </a>
+
+
+
+        <!-- =================================================
+             NAVIGATION DESKTOP
+        ================================================== -->
+
+        <nav class="zd-premium-nav"
+             id="zdPremiumNavigation">
+
+
+            <!-- ACCUEIL -->
+
+            <a th:href="@{/}"
+               href="/"
+               data-nav-path="/">
+                Accueil
+            </a>
+
+
+            <!-- SALONS -->
+
+            <a th:href="@{/salons}"
+               href="/salons"
+               data-nav-path="/salons">
+                Salons
+            </a>
+
+
+            <!-- CANAPES -->
+
+            <a th:href="@{/canapes}"
+               href="/canapes"
+               data-nav-path="/canapes">
+                Canapés
+            </a>
+
+
+            <!-- CHAMBRES -->
+
+            <a th:href="@{/chambres}"
+               href="/chambres"
+               data-nav-path="/chambres">
+                Chambres
+            </a>
+
+
+            <!-- LITS -->
+
+            <a th:href="@{/lits}"
+               href="/lits"
+               data-nav-path="/lits">
+                Lits
+            </a>
+
+
+            <!-- SUR MESURE -->
+
+            <a th:href="@{/sur-mesure}"
+               href="/sur-mesure"
+               data-nav-path="/sur-mesure">
+                Sur mesure
+            </a>
 
 
             <!-- =================================================
-                 LOGO
+                 PIECES
             ================================================== -->
 
-            <a
-                th:href="@{/}"
-                href="/"
-                class="logo"
-                aria-label="Accueil Zineb Déco">
+            <a th:href="@{/pieces}"
+               href="/pieces"
+               data-nav-path="/pieces">
+                Pièces
+            </a>
 
 
-                <img
-                    th:src="@{/images/logo-zineb-deco.png}"
-                    src="/images/logo-zineb-deco.png"
-                    alt="Zineb Déco">
+            <!-- NOUVEAUTES -->
+
+            <a th:href="@{/nouveautes}"
+               href="/nouveautes"
+               data-nav-path="/nouveautes">
+                Nouveautés
+            </a>
+
+
+            <!-- PROMOTIONS -->
+
+            <a th:href="@{/promotions}"
+               href="/promotions"
+               data-nav-path="/promotions">
+                Promotions
+            </a>
+
+
+            <!-- CONTACT -->
+
+            <a th:href="@{/contact}"
+               href="/contact"
+               data-nav-path="/contact">
+                Contact
+            </a>
+
+
+        </nav>
+
+
+
+        <!-- =================================================
+             ACTIONS
+        ================================================== -->
+
+        <div class="zd-premium-actions">
+
+
+            <!-- =============================================
+                 RECHERCHE
+            ============================================== -->
+
+            <button type="button"
+                    class="zd-premium-icon-button"
+                    id="zdSearchButton"
+                    aria-label="Rechercher">
+
+
+                <svg viewBox="0 0 24 24"
+                     aria-hidden="true">
+
+                    <circle cx="11"
+                            cy="11"
+                            r="7">
+                    </circle>
+
+                    <path d="M20 20L16.5 16.5">
+                    </path>
+
+                </svg>
+
+
+            </button>
+
+
+
+            <!-- =============================================
+                 MODE CLAIR / SOMBRE
+            ============================================== -->
+
+            <button type="button"
+                    class="zd-theme-toggle"
+                    id="zdThemeToggle"
+                    aria-label="Activer le mode sombre"
+                    aria-pressed="false"
+                    title="Changer le thème">
+
+
+                <span class="zd-theme-sun"
+                      aria-hidden="true">
+
+                    ☀
+
+                </span>
+
+
+                <span class="zd-theme-moon"
+                      aria-hidden="true">
+
+                    ☾
+
+                </span>
+
+
+            </button>
+
+
+
+            <!-- =============================================
+                 COMPTE CLIENT
+            ============================================== -->
+
+            <a th:href="@{/compte}"
+               href="/compte"
+               class="zd-premium-account"
+               aria-label="Mon compte">
+
+
+                <!-- CLIENT CONNECTE -->
+
+                <span th:if="${headerCustomer != null
+                              and headerCustomer.firstName != null
+                              and !#strings.isEmpty(headerCustomer.firstName)}"
+
+                      th:text="${#strings.toUpperCase(
+                                    #strings.substring(
+                                        headerCustomer.firstName,
+                                        0,
+                                        1
+                                    )
+                               )}">
+
+                    H
+
+                </span>
+
+
+
+                <!-- CLIENT NON CONNECTE -->
+
+                <span th:if="${headerCustomer == null
+                              or headerCustomer.firstName == null
+                              or #strings.isEmpty(headerCustomer.firstName)}"
+
+                      class="zd-premium-account-guest">
+
+
+                    <svg viewBox="0 0 24 24"
+                         aria-hidden="true">
+
+                        <circle cx="12"
+                                cy="8"
+                                r="4">
+                        </circle>
+
+                        <path d="M4 21C4 16.6 7.6 13 12 13C16.4 13 20 16.6 20 21">
+                        </path>
+
+                    </svg>
+
+
+                </span>
+
 
             </a>
 
 
 
-            <!-- =================================================
-                 RECHERCHE
-            ================================================== -->
+            <!-- =============================================
+                 PANIER
+            ============================================== -->
 
-            <form
-                class="search-box"
-                id="mainSearchForm"
-                role="search">
-
-
-                <input
-                    id="mainSearchInput"
-                    type="search"
-                    autocomplete="off"
-                    placeholder="Rechercher un canapé, salon, lit...">
+            <a th:href="@{/panier}"
+               href="/panier"
+               class="zd-premium-cart"
+               aria-label="Mon panier">
 
 
-                <button
-                    type="submit"
-                    aria-label="Rechercher">
+                <svg viewBox="0 0 24 24"
+                     aria-hidden="true">
 
-                    ⌕  
+                    <path d="M3 4H5L7 16H18L21 8H6">
+                    </path>
 
-                </button>
+                    <circle cx="9"
+                            cy="20"
+                            r="1">
+                    </circle>
 
+                    <circle cx="18"
+                            cy="20"
+                            r="1">
+                    </circle>
 
-            </form>
-
-
-
-            <!-- =================================================
-                 ACTIONS
-            ================================================== -->
-
-            <div class="header-actions">
-
-
-                <!-- =============================================
-                     FAVORIS
-                ============================================== -->
-
-                <a
-                    th:href="@{/compte}"
-                    href="/compte"
-                    class="header-action"
-                    aria-label="Mes favoris">
+                </svg>
 
 
-                    <span class="header-action-icon">
-
-                        ♡
-
-                    </span>
+                <span class="zd-premium-cart-count cart-count">
+                    0
+                </span>
 
 
-                    <span class="header-action-text">
-
-                        <small>
-                            Mes
-                        </small>
-
-                        <strong>
-                            Favoris
-                        </strong>
-
-                    </span>
-
-                </a>
+            </a>
 
 
 
-                <!-- =============================================
-                     COMPTE CLIENT
-                ============================================== -->
+            <!-- =============================================
+                 MENU MOBILE
+            ============================================== -->
 
-                <a
-                    th:href="@{/compte}"
-                    href="/compte"
-                    class="header-action account-link"
-                    aria-label="Mon compte">
-
-
-                    <span class="header-action-icon">
-
-                        ♙
-
-                    </span>
-
-
-                    <span class="header-action-text">
-
-                        <small>
-                            Mon
-                        </small>
-
-                        <strong>
-                            Compte
-                        </strong>
-
-                    </span>
-
-                </a>
-
-
-
-                <!-- =============================================
-                     PANIER
-                ============================================== -->
-
-                <a
-                    th:href="@{/panier}"
-                    href="/panier"
-                    class="header-action cart-link"
-                    aria-label="Mon panier">
-
-
-                    <span class="header-action-icon">
-
-                        ♧
-
-
-                        <span
-                            class="cart-count">
-
-                            0
-
-                        </span>
-
-                    </span>
-
-
-                    <span class="header-action-text">
-
-                        <small>
-                            Mon
-                        </small>
-
-                        <strong>
-                            Panier
-                        </strong>
-
-                    </span>
-
-                </a>
-
-
-
-                <!-- =============================================
-                     MENU MOBILE
-                ============================================== -->
-
-                <button
-                    id="mobileMenuButton"
-                    type="button"
-                    class="mobile-menu-button"
+            <button type="button"
+                    id="zdPremiumMobileButton"
+                    class="zd-premium-mobile-button"
                     aria-label="Ouvrir le menu"
                     aria-expanded="false">
 
-                    ☰
+                <span></span>
+                <span></span>
+                <span></span>
 
-                </button>
-
-
-            </div>
+            </button>
 
 
         </div>
+
 
     </div>
 
 
 
     <!-- =====================================================
-         NAVIGATION
+         RECHERCHE
     ====================================================== -->
 
-    <nav
-        id="mainNavigation"
-        class="main-navigation">
+    <div id="zdPremiumSearchPanel"
+         class="zd-premium-search-panel">
 
 
-        <div class="container navigation-content">
+        <div class="zd-premium-search-inner">
 
 
-            <!-- ACCUEIL -->
+            <input id="zdPremiumSearchInput"
+                   type="search"
+                   autocomplete="off"
+                   placeholder="Rechercher un salon, canapé, pièce, tissu...">
 
-            <a
-                th:href="@{/}"
-                href="/">
 
-                Accueil
+            <button type="button"
+                    id="zdPremiumSearchSubmit">
 
-            </a>
+                Rechercher →
 
-
-
-            <!-- SALONS -->
-
-            <a
-                th:href="@{/salons}"
-                href="/salons">
-
-                Salons
-
-            </a>
-
-
-
-            <!-- CANAPES -->
-
-            <a
-                th:href="@{/canapes}"
-                href="/canapes">
-
-                Canapés
-
-            </a>
-
-
-
-            <!-- CHAMBRES -->
-
-            <a
-                th:href="@{/chambres}"
-                href="/chambres">
-
-                Chambres
-
-            </a>
-
-
-
-            <!-- LITS -->
-
-            <a
-                th:href="@{/lits}"
-                href="/lits">
-
-                Lits
-
-            </a>
-
-
-
-            <!-- TETES DE LIT -->
-
-            <a
-                th:href="@{/tetes-de-lit}"
-                href="/tetes-de-lit">
-
-                Têtes de lit
-
-            </a>
-
-
-
-            <!-- CHAISES -->
-
-            <a
-                th:href="@{/chaises}"
-                href="/chaises">
-
-                Chaises & fauteuils
-
-            </a>
-
-
-
-            <!-- TABLES -->
-
-            <a
-                th:href="@{/tables}"
-                href="/tables">
-
-                Tables
-
-            </a>
-
-
-
-            <!-- SUR MESURE -->
-
-            <a
-                th:href="@{/sur-mesure}"
-                href="/sur-mesure">
-
-                Sur mesure
-
-            </a>
-
-
-
-            <!-- NOUVEAUTES -->
-
-            <a
-                th:href="@{/nouveautes}"
-                href="/nouveautes">
-
-                Nouveautés
-
-            </a>
-
-
-
-            <!-- PROMOTIONS -->
-
-            <a
-                th:href="@{/promotions}"
-                href="/promotions"
-                class="nav-promotion">
-
-                Promotions
-
-            </a>
-
-
-
-            <!-- CONTACT -->
-
-            <a
-                th:href="@{/contact}"
-                href="/contact">
-
-                Contact
-
-            </a>
+            </button>
 
 
         </div>
 
 
+    </div>
+
+
+
+    <!-- =====================================================
+         MENU MOBILE
+    ====================================================== -->
+
+    <nav id="zdPremiumMobileMenu"
+         class="zd-premium-mobile-menu">
+
+
+        <a th:href="@{/}"
+           href="/">
+            Accueil
+        </a>
+
+
+        <a th:href="@{/salons}"
+           href="/salons">
+            Salons
+        </a>
+
+
+        <a th:href="@{/canapes}"
+           href="/canapes">
+            Canapés
+        </a>
+
+
+        <a th:href="@{/chambres}"
+           href="/chambres">
+            Chambres
+        </a>
+
+
+        <a th:href="@{/lits}"
+           href="/lits">
+            Lits
+        </a>
+
+
+        <a th:href="@{/tetes-de-lit}"
+           href="/tetes-de-lit">
+            Têtes de lit
+        </a>
+
+
+        <a th:href="@{/chaises}"
+           href="/chaises">
+            Chaises & fauteuils
+        </a>
+
+
+        <a th:href="@{/tables}"
+           href="/tables">
+            Tables
+        </a>
+
+
+        <a th:href="@{/sur-mesure}"
+           href="/sur-mesure">
+            Sur mesure
+        </a>
+
+
+        <!-- =================================================
+             PIECES MOBILE
+        ================================================== -->
+
+        <a th:href="@{/pieces}"
+           href="/pieces">
+            Pièces
+        </a>
+
+
+        <a th:href="@{/nouveautes}"
+           href="/nouveautes">
+            Nouveautés
+        </a>
+
+
+        <a th:href="@{/promotions}"
+           href="/promotions">
+            Promotions
+        </a>
+
+
+        <a th:href="@{/contact}"
+           href="/contact">
+            Contact
+        </a>
+
+
+        <a th:href="@{/compte}"
+           href="/compte">
+            Mon compte
+        </a>
+
+
+        <a th:href="@{/panier}"
+           href="/panier">
+            Mon panier
+        </a>
+
+
     </nav>
 
-<!-- =====================================================
-     PETIT MENU FLOTTANT AU SCROLL
-===================================================== -->
 
-<button type="button"
-        id="zdFloatingMenuButton"
-        class="zd-floating-menu-button"
-        aria-label="Ouvrir le menu"
-        aria-expanded="false">
 
-    <span class="zd-floating-menu-icon">
+    <!-- =====================================================
+         MENU FLOTTANT
+    ====================================================== -->
 
-        <span></span>
-        <span></span>
-        <span></span>
+    <button type="button"
+            id="zdFloatingMenuButton"
+            class="zd-floating-menu-button"
+            aria-label="Ouvrir le menu"
+            aria-expanded="false">
 
-    </span>
 
-</button>
+        <span class="zd-floating-menu-icon">
 
+            <span></span>
+            <span></span>
+            <span></span>
 
-<nav id="zdFloatingMenu"
-     class="zd-floating-menu">
+        </span>
 
-    <span class="zd-floating-menu-title">
 
-        Navigation
+    </button>
 
-    </span>
 
 
-    <ul class="zd-floating-menu-links">
+    <!-- =====================================================
+         PANNEAU FLOTTANT
+    ====================================================== -->
 
+    <nav id="zdFloatingMenu"
+         class="zd-floating-menu">
 
-        <li>
 
-            <a th:href="@{/}"
-               href="/">
+        <span class="zd-floating-menu-title">
+            Navigation
+        </span>
 
-                Accueil
 
-            </a>
+        <ul class="zd-floating-menu-links">
 
-        </li>
 
+            <li>
 
-        <li>
+                <a th:href="@{/}"
+                   href="/">
+                    Accueil
+                </a>
 
-            <a th:href="@{/salons}"
-               href="/salons">
+            </li>
 
-                Salons
 
-            </a>
+            <li>
 
-        </li>
+                <a th:href="@{/salons}"
+                   href="/salons">
+                    Salons
+                </a>
 
+            </li>
 
-        <li>
 
-            <a th:href="@{/canapes}"
-               href="/canapes">
+            <li>
 
-                Canapés
+                <a th:href="@{/canapes}"
+                   href="/canapes">
+                    Canapés
+                </a>
 
-            </a>
+            </li>
 
-        </li>
 
+            <li>
 
-        <li>
+                <a th:href="@{/chambres}"
+                   href="/chambres">
+                    Chambres
+                </a>
 
-            <a th:href="@{/chambres}"
-               href="/chambres">
+            </li>
 
-                Chambres
 
-            </a>
+            <li>
 
-        </li>
+                <a th:href="@{/lits}"
+                   href="/lits">
+                    Lits
+                </a>
 
+            </li>
 
-        <li>
 
-            <a th:href="@{/sur-mesure}"
-               href="/sur-mesure">
+            <li>
 
-                Sur mesure
+                <a th:href="@{/sur-mesure}"
+                   href="/sur-mesure">
+                    Sur mesure
+                </a>
 
-            </a>
+            </li>
 
-        </li>
 
+            <!-- =================================================
+                 PIECES MENU FLOTTANT
+            ================================================== -->
 
-        <li>
+            <li>
 
-            <a th:href="@{/nouveautes}"
-               href="/nouveautes">
+                <a th:href="@{/pieces}"
+                   href="/pieces">
+                    Pièces
+                </a>
 
-                Nouveautés
+            </li>
 
-            </a>
 
-        </li>
+            <li>
 
+                <a th:href="@{/nouveautes}"
+                   href="/nouveautes">
+                    Nouveautés
+                </a>
 
-        <li>
+            </li>
 
-            <a th:href="@{/promotions}"
-               href="/promotions">
 
-                Promotions
+            <li>
 
-            </a>
+                <a th:href="@{/promotions}"
+                   href="/promotions">
+                    Promotions
+                </a>
 
-        </li>
+            </li>
 
 
-        <li>
+            <li>
 
-            <a th:href="@{/contact}"
-               href="/contact">
+                <a th:href="@{/contact}"
+                   href="/contact">
+                    Contact
+                </a>
 
-                Contact
+            </li>
 
-            </a>
 
-        </li>
+            <li class="zd-floating-menu-separator">
+            </li>
 
 
-        <li class="zd-floating-menu-separator"></li>
+            <li>
 
+                <a th:href="@{/compte}"
+                   href="/compte">
+                    Mon compte
+                </a>
 
-        <li>
+            </li>
 
-            <a th:href="@{/compte}"
-               href="/compte">
 
-                Mon compte
+            <li>
 
-            </a>
+                <a th:href="@{/panier}"
+                   href="/panier"
+                   class="zd-floating-cart">
 
-        </li>
+                    Mon panier
 
+                </a>
 
-        <li>
+            </li>
 
-            <a th:href="@{/panier}"
-               href="/panier"
-               class="zd-floating-cart">
 
-                Mon panier
+        </ul>
 
-            </a>
 
-        </li>
+    </nav>
 
 
-    </ul>
 
+    <!-- =====================================================
+         JS HEADER
+    ====================================================== -->
 
-</nav>
-<!-- =====================================================
-     MENU FLOTTANT
-===================================================== -->
+    <script th:src="@{/js/header.js}"
+            src="/js/header.js">
+    </script>
 
-<button type="button"
-        id="zdFloatingMenuButton"
-        class="zd-floating-menu-button"
-        aria-label="Ouvrir le menu">
 
-    <span class="zd-floating-menu-icon">
-        <span></span>
-        <span></span>
-        <span></span>
-    </span>
-
-</button>
-
-
-<nav id="zdFloatingMenu"
-     class="zd-floating-menu">
-
-    <span class="zd-floating-menu-title">
-        ZINEB DÉCO
-    </span>
-
-    <ul class="zd-floating-menu-links">
-
-        <li>
-            <a th:href="@{/}">Accueil</a>
-        </li>
-
-        <li>
-            <a th:href="@{/salons}">Salons</a>
-        </li>
-
-        <li>
-            <a th:href="@{/canapes}">Canapés</a>
-        </li>
-
-        <li>
-            <a th:href="@{/chambres}">Chambres</a>
-        </li>
-
-        <li>
-            <a th:href="@{/sur-mesure}">Sur mesure</a>
-        </li>
-
-        <li>
-            <a th:href="@{/nouveautes}">Nouveautés</a>
-        </li>
-
-        <li>
-            <a th:href="@{/promotions}">Promotions</a>
-        </li>
-
-        <li>
-            <a th:href="@{/contact}">Contact</a>
-        </li>
-
-        <li class="zd-floating-menu-separator"></li>
-
-        <li>
-            <a th:href="@{/compte}">Mon compte</a>
-        </li>
-
-        <li>
-            <a th:href="@{/panier}"
-               class="zd-floating-cart">
-                Panier
-            </a>
-        </li>
-
-    </ul>
-
-</nav>
-
-
-<script>
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const button =
-        document.getElementById("zdFloatingMenuButton");
-
-    const menu =
-        document.getElementById("zdFloatingMenu");
-
-
-    if (!button || !menu) {
-        console.log("Menu flottant introuvable");
-        return;
-    }
-
-
-    function updateFloatingButton() {
-
-        if (window.scrollY > 200) {
-
-            button.classList.add("visible");
-
-        } else {
-
-            button.classList.remove("visible");
-            button.classList.remove("open");
-            menu.classList.remove("open");
-
-        }
-
-    }
-
-
-    window.addEventListener(
-        "scroll",
-        updateFloatingButton,
-        { passive: true }
-    );
-
-
-    button.addEventListener("click", function (event) {
-
-        event.stopPropagation();
-
-        button.classList.toggle("open");
-        menu.classList.toggle("open");
-
-    });
-
-
-    menu.addEventListener("click", function (event) {
-        event.stopPropagation();
-    });
-
-
-    document.addEventListener("click", function () {
-
-        button.classList.remove("open");
-        menu.classList.remove("open");
-
-    });
-
-
-    updateFloatingButton();
-
-});
-
-</script>
-
-
-<!-- ⚠️ LE MENU DOIT ÊTRE AVANT CETTE LIGNE -->
 </header>
-</header>
+
 
 </body>
 

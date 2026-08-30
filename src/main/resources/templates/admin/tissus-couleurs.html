@@ -1,0 +1,2570 @@
+<!DOCTYPE html>
+
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Tissus & Couleurs | Administration Zineb Déco
+    </title>
+
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}"
+          href="/css/style.css">
+
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin.css}"
+          href="/css/admin.css">
+
+
+    <style>
+
+        /* =====================================================
+           PAGE
+        ====================================================== */
+
+        .tc-page {
+            min-height: 100vh;
+            background: #020915;
+            color: #ffffff;
+        }
+
+
+        .tc-main {
+            min-width: 0;
+        }
+
+
+        /* =====================================================
+           STATS
+        ====================================================== */
+
+        .tc-stats {
+            margin-top: 28px;
+
+            display: grid;
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 14px;
+        }
+
+
+        .tc-stat {
+            min-height: 125px;
+
+            padding: 22px;
+
+            border:
+                1px solid
+                rgba(217, 154, 43, .20);
+
+            background: #07111b;
+        }
+
+
+        .tc-stat:first-child {
+            background:
+                linear-gradient(
+                    135deg,
+                    #07111b,
+                    #0c1926
+                );
+        }
+
+
+        .tc-stat span {
+            display: block;
+
+            color: #9da4ae;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            letter-spacing: 1.6px;
+
+            text-transform: uppercase;
+        }
+
+
+        .tc-stat strong {
+            display: block;
+
+            margin-top: 15px;
+
+            color: #d99a2b;
+
+            font-family: Georgia, serif;
+
+            font-size: 38px;
+
+            font-weight: 400;
+        }
+
+
+        /* =====================================================
+           RECHERCHE
+        ====================================================== */
+
+        .tc-toolbar {
+            margin-top: 18px;
+
+            padding: 18px;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(250px, 1fr)
+                auto;
+
+            gap: 12px;
+
+            border:
+                1px solid
+                rgba(217, 154, 43, .18);
+
+            background: #06101b;
+        }
+
+
+        .tc-search {
+            width: 100%;
+
+            min-height: 46px;
+
+            padding: 0 15px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.12);
+
+            outline: none;
+
+            background: #07111b;
+
+            color: #ffffff;
+        }
+
+
+        .tc-search:focus {
+            border-color: #d99a2b;
+        }
+
+
+        .tc-filter-buttons {
+            display: flex;
+
+            gap: 7px;
+        }
+
+
+        .tc-filter-button {
+            min-height: 46px;
+
+            padding: 0 14px;
+
+            border:
+                1px solid
+                rgba(217,154,43,.30);
+
+            background: transparent;
+
+            color: #b7bdc5;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+            cursor: pointer;
+        }
+
+
+        .tc-filter-button.active,
+        .tc-filter-button:hover {
+            background: #d99a2b;
+            color: #020915;
+        }
+
+
+        /* =====================================================
+           LAYOUT FORM + TABLE
+        ====================================================== */
+
+        .tc-section {
+            margin-top: 24px;
+        }
+
+
+        .tc-section-title {
+            margin-bottom: 14px;
+
+            display: flex;
+
+            align-items: end;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+
+        .tc-section-title small {
+            color: #d99a2b;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+
+        .tc-section-title h2 {
+            margin-top: 5px;
+
+            font-family: Georgia, serif;
+
+            font-size: 34px;
+
+            font-weight: 400;
+        }
+
+
+        .tc-layout {
+            display: grid;
+
+            grid-template-columns:
+                380px
+                minmax(0, 1fr);
+
+            gap: 20px;
+
+            align-items: start;
+        }
+
+
+        /* =====================================================
+           FORM
+        ====================================================== */
+
+        .tc-form-card {
+            position: sticky;
+            top: 20px;
+
+            padding: 24px;
+
+            border:
+                1px solid
+                rgba(217,154,43,.20);
+
+            background: #07111b;
+        }
+
+
+        .tc-form-card small {
+            color: #d99a2b;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+
+        .tc-form-card h3 {
+            margin-top: 6px;
+
+            font-family: Georgia, serif;
+
+            font-size: 26px;
+
+            font-weight: 400;
+        }
+
+
+        .tc-form {
+            margin-top: 20px;
+
+            display: grid;
+
+            gap: 13px;
+        }
+
+
+        .tc-field {
+            display: grid;
+
+            gap: 6px;
+        }
+
+
+        .tc-field label {
+            color: #c5cad0;
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+        }
+
+
+        .tc-field input,
+        .tc-field select,
+        .tc-field textarea {
+            width: 100%;
+
+            border:
+                1px solid
+                rgba(255,255,255,.12);
+
+            outline: none;
+
+            background: #06101b;
+
+            color: #ffffff;
+        }
+
+
+        .tc-field input,
+        .tc-field select {
+            min-height: 45px;
+
+            padding: 0 12px;
+        }
+
+
+        .tc-field textarea {
+            min-height: 105px;
+
+            padding: 12px;
+
+            resize: vertical;
+        }
+
+
+        .tc-field input:focus,
+        .tc-field select:focus,
+        .tc-field textarea:focus {
+            border-color: #d99a2b;
+        }
+
+
+        .tc-checkboxes {
+            padding: 13px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 10px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            background:
+                rgba(255,255,255,.025);
+        }
+
+
+        .tc-checkboxes label {
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #c2c7cd;
+
+            font-size: 9px;
+        }
+
+
+        .tc-checkboxes input {
+            accent-color: #d99a2b;
+        }
+
+
+        .tc-form-actions {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                auto;
+
+            gap: 8px;
+        }
+
+
+        .tc-save {
+            min-height: 45px;
+
+            border: 1px solid #d99a2b;
+
+            background: #d99a2b;
+
+            color: #020915;
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+            cursor: pointer;
+        }
+
+
+        .tc-save:hover {
+            background: #f0bd57;
+        }
+
+
+        .tc-cancel {
+            min-height: 45px;
+
+            padding: 0 15px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border:
+                1px solid
+                rgba(255,255,255,.18);
+
+            color: #ffffff;
+
+            font-size: 8px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =====================================================
+           IMAGE PREVIEW
+        ====================================================== */
+
+        .tc-image-preview {
+            min-height: 150px;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border:
+                1px dashed
+                rgba(217,154,43,.35);
+
+            background: #06101b;
+
+            color: #747d87;
+        }
+
+
+        .tc-image-preview img {
+            width: 100%;
+            height: 180px;
+
+            object-fit: cover;
+        }
+
+
+        /* =====================================================
+           COLOR PICKER
+        ====================================================== */
+
+        .tc-color-picker-row {
+            display: grid;
+
+            grid-template-columns:
+                70px
+                minmax(0, 1fr);
+
+            gap: 10px;
+        }
+
+
+        .tc-color-picker {
+            min-height: 45px;
+
+            padding: 3px !important;
+
+            cursor: pointer;
+        }
+
+
+        .tc-color-preview {
+            min-height: 80px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 15px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.10);
+
+            background: #06101b;
+        }
+
+
+        .tc-color-preview-dot {
+            width: 48px;
+            height: 48px;
+
+            border-radius: 50%;
+
+            border:
+                2px solid
+                rgba(255,255,255,.30);
+
+            background: #d8c3a5;
+        }
+
+
+        .tc-color-preview strong {
+            color: #ffffff;
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           TABLES
+        ====================================================== */
+
+        .tc-table-card {
+            min-width: 0;
+
+            overflow-x: auto;
+
+            border:
+                1px solid
+                rgba(217,154,43,.18);
+
+            background: #07111b;
+        }
+
+
+        .tc-table {
+            width: 100%;
+
+            min-width: 820px;
+
+            border-collapse: collapse;
+        }
+
+
+        .tc-table th {
+            padding: 13px;
+
+            background: #06101b;
+
+            color: #d99a2b;
+
+            text-align: left;
+
+            font-size: 7px;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+        }
+
+
+        .tc-table td {
+            padding: 14px 13px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.06);
+
+            color: #dbe0e5;
+
+            font-size: 9px;
+
+            vertical-align: middle;
+        }
+
+
+        .tc-table tbody tr {
+            transition: background .2s ease;
+        }
+
+
+        .tc-table tbody tr:hover {
+            background:
+                rgba(217,154,43,.055);
+        }
+
+
+        .tc-thumb {
+            width: 66px;
+            height: 55px;
+
+            overflow: hidden;
+
+            border:
+                1px solid
+                rgba(217,154,43,.22);
+
+            background: #06101b;
+        }
+
+
+        .tc-thumb img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+
+        .tc-thumb-empty {
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: #d99a2b;
+
+            font-family: Georgia, serif;
+
+            font-size: 13px;
+        }
+
+
+        .tc-color-dot {
+            width: 35px;
+            height: 35px;
+
+            border-radius: 50%;
+
+            border:
+                2px solid
+                rgba(255,255,255,.25);
+        }
+
+
+        /* =====================================================
+           STATUS
+        ====================================================== */
+
+        .tc-badge {
+            display: inline-flex;
+
+            padding: 5px 8px;
+
+            font-size: 7px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+        }
+
+
+        .tc-badge.active {
+            background:
+                rgba(46,143,84,.18);
+
+            color: #72d597;
+        }
+
+
+        .tc-badge.inactive {
+            background:
+                rgba(255,255,255,.08);
+
+            color: #9098a1;
+        }
+
+
+        /* =====================================================
+           ACTIONS
+        ====================================================== */
+
+        .tc-actions {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 6px;
+        }
+
+
+        .tc-action {
+            min-height: 31px;
+
+            padding: 0 9px;
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border:
+                1px solid
+                rgba(217,154,43,.32);
+
+            background: transparent;
+
+            color: #d99a2b;
+
+            font-size: 7px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+            cursor: pointer;
+        }
+
+
+        .tc-action.status {
+            border-color:
+                rgba(82,175,111,.35);
+
+            color: #72d597;
+        }
+
+
+        .tc-action.delete {
+            border-color:
+                rgba(205,71,71,.38);
+
+            color: #e87575;
+        }
+
+
+        .tc-action:hover {
+            background:
+                rgba(255,255,255,.06);
+        }
+
+
+        /* =====================================================
+           EMPTY
+        ====================================================== */
+
+        .tc-empty {
+            padding: 55px 25px;
+
+            text-align: center;
+
+            color: #8e97a0;
+        }
+
+
+        .tc-empty strong {
+            display: block;
+
+            color: #ffffff;
+
+            font-family: Georgia, serif;
+
+            font-size: 22px;
+
+            font-weight: 400;
+        }
+/* =========================================================
+   FIX DESIGN TISSUS & COULEURS
+   PRIORITE SUR admin.css
+========================================================= */
+
+
+/* FOND GENERAL */
+
+body.tc-page {
+    background: #020915 !important;
+    color: #ffffff !important;
+}
+
+
+.tc-page .zdadm-shell {
+    background: #020915 !important;
+}
+
+
+.tc-page .zdadm-main {
+    background: #020915 !important;
+    color: #ffffff !important;
+}
+
+
+/* =========================================================
+   HEADER PAGE
+========================================================= */
+
+.tc-page .zdadm-header {
+    background: #020915 !important;
+    color: #ffffff !important;
+}
+
+
+.tc-page .zdadm-header h1 {
+    color: #ffffff !important;
+}
+
+
+.tc-page .zdadm-header p {
+    color: #9da4ae !important;
+}
+
+
+.tc-page .zdadm-kicker {
+    color: #d99a2b !important;
+}
+
+
+/* =========================================================
+   TITRES SECTIONS
+========================================================= */
+
+.tc-page .tc-section-title h2 {
+    color: #ffffff !important;
+}
+
+
+.tc-page .tc-section-title small {
+    color: #d99a2b !important;
+}
+
+
+/* =========================================================
+   FORMULAIRE
+========================================================= */
+
+.tc-page .tc-form-card {
+    background: #07111b !important;
+
+    border-color:
+        rgba(217, 154, 43, .25) !important;
+}
+
+
+.tc-page .tc-form-card h3 {
+    color: #ffffff !important;
+}
+
+
+.tc-page .tc-form-card small {
+    color: #d99a2b !important;
+}
+
+
+.tc-page .tc-field label {
+    color: #d9dde2 !important;
+}
+
+
+.tc-page .tc-field input,
+.tc-page .tc-field select,
+.tc-page .tc-field textarea {
+
+    background: #06101b !important;
+
+    color: #ffffff !important;
+
+    border-color:
+        rgba(255, 255, 255, .14) !important;
+}
+
+
+.tc-page .tc-field input::placeholder,
+.tc-page .tc-field textarea::placeholder {
+    color: #8f98a2 !important;
+}
+
+
+.tc-page .tc-field input:focus,
+.tc-page .tc-field select:focus,
+.tc-page .tc-field textarea:focus {
+    border-color: #d99a2b !important;
+}
+
+
+/* SELECT OPTIONS */
+
+.tc-page .tc-field select option {
+    background: #06101b !important;
+    color: #ffffff !important;
+}
+
+
+/* =========================================================
+   TABLE / ETAT VIDE
+========================================================= */
+
+.tc-page .tc-table-card {
+    background: #07111b !important;
+
+    border-color:
+        rgba(217, 154, 43, .20) !important;
+}
+
+
+.tc-page .tc-empty {
+    background: #07111b !important;
+    color: #9da4ae !important;
+}
+
+
+.tc-page .tc-empty strong {
+    color: #ffffff !important;
+}
+
+
+.tc-page .tc-empty p {
+    color: #9da4ae !important;
+}
+
+
+/* =========================================================
+   RECHERCHE
+========================================================= */
+
+.tc-page .tc-toolbar {
+    background: #06101b !important;
+
+    border-color:
+        rgba(217, 154, 43, .20) !important;
+}
+
+
+.tc-page .tc-search {
+    background: #07111b !important;
+    color: #ffffff !important;
+}
+
+
+.tc-page .tc-search::placeholder {
+    color: #8e97a0 !important;
+}
+
+
+/* =========================================================
+   STATISTIQUES
+========================================================= */
+
+.tc-page .tc-stat {
+    background: #07111b !important;
+}
+
+
+.tc-page .tc-stat span {
+    color: #9da4ae !important;
+}
+
+
+.tc-page .tc-stat strong {
+    color: #d99a2b !important;
+}
+
+
+/* =========================================================
+   CHECKBOX
+========================================================= */
+
+.tc-page .tc-checkboxes {
+    background: #06101b !important;
+}
+
+
+.tc-page .tc-checkboxes label {
+    color: #d5d9de !important;
+}
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1200px) {
+
+            .tc-layout {
+                grid-template-columns: 1fr;
+            }
+
+
+            .tc-form-card {
+                position: static;
+            }
+
+        }
+
+
+        @media (max-width: 850px) {
+
+            .tc-stats {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .tc-toolbar {
+                grid-template-columns: 1fr;
+            }
+
+
+            .tc-filter-buttons {
+                flex-wrap: wrap;
+            }
+
+        }
+
+
+        @media (max-width: 520px) {
+
+            .tc-stats {
+                grid-template-columns: 1fr;
+            }
+
+
+            .tc-form-actions {
+                grid-template-columns: 1fr;
+            }
+
+
+            .tc-cancel {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body class="tc-page">
+
+
+<div class="zdadm-shell">
+
+
+    <!-- SIDEBAR -->
+
+    <div th:replace="~{fragments/admin-sidebar :: sidebar('tissus-couleurs')}">
+    </div>
+
+
+
+    <main class="zdadm-main tc-main">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="zdadm-header">
+
+
+            <div>
+
+
+                <span class="zdadm-kicker">
+                    ADMINISTRATION / MATIÈRES
+                </span>
+
+
+                <h1>
+                    Tissus & Couleurs
+                </h1>
+
+
+                <p>
+
+                    Gérez les matières, textures et couleurs
+                    proposées aux clients pour leurs produits
+                    et projets sur mesure.
+
+                </p>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             ALERTES
+        ================================================== -->
+
+        <div th:if="${success}"
+             class="zdadm-alert success"
+             th:text="${success}">
+        </div>
+
+
+        <div th:if="${error}"
+             class="zdadm-alert error"
+             th:text="${error}">
+        </div>
+
+
+
+        <!-- =================================================
+             STATS
+        ================================================== -->
+
+        <section class="tc-stats">
+
+
+            <article class="tc-stat">
+
+                <span>
+                    Total tissus
+                </span>
+
+                <strong th:text="${totalTissus}">
+                    0
+                </strong>
+
+            </article>
+
+
+            <article class="tc-stat">
+
+                <span>
+                    Tissus actifs
+                </span>
+
+                <strong th:text="${activeTissus}">
+                    0
+                </strong>
+
+            </article>
+
+
+            <article class="tc-stat">
+
+                <span>
+                    Total couleurs
+                </span>
+
+                <strong th:text="${totalCouleurs}">
+                    0
+                </strong>
+
+            </article>
+
+
+            <article class="tc-stat">
+
+                <span>
+                    Couleurs actives
+                </span>
+
+                <strong th:text="${activeCouleurs}">
+                    0
+                </strong>
+
+            </article>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             RECHERCHE
+        ================================================== -->
+
+        <section class="tc-toolbar">
+
+
+            <input type="search"
+                   id="tcSearch"
+                   class="tc-search"
+                   placeholder="Rechercher un tissu ou une couleur...">
+
+
+            <div class="tc-filter-buttons">
+
+
+                <button type="button"
+                        class="tc-filter-button active"
+                        data-filter="all">
+
+                    Tous
+
+                </button>
+
+
+                <button type="button"
+                        class="tc-filter-button"
+                        data-filter="active">
+
+                    Actifs
+
+                </button>
+
+
+                <button type="button"
+                        class="tc-filter-button"
+                        data-filter="inactive">
+
+                    Inactifs
+
+                </button>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             TISSUS
+        ================================================== -->
+
+        <section class="tc-section">
+
+
+            <div class="tc-section-title">
+
+
+                <div>
+
+                    <small>
+                        MATIÈRES
+                    </small>
+
+                    <h2>
+                        Tissus
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="tc-layout">
+
+
+                <!-- =========================================
+                     FORM TISSU
+                ========================================== -->
+
+                <aside class="tc-form-card">
+
+
+                    <small th:text="${tissuForm.id == null
+                            ? 'NOUVEAU TISSU'
+                            : 'MODIFICATION'}">
+
+                        NOUVEAU TISSU
+
+                    </small>
+
+
+                    <h3 th:text="${tissuForm.id == null
+                            ? 'Ajouter un tissu'
+                            : 'Modifier le tissu'}">
+
+                        Ajouter un tissu
+
+                    </h3>
+
+
+
+                    <form th:action="${tissuForm.id == null}
+                                ? @{/admin/tissus/ajouter}
+                                : @{/admin/tissus/{id}/modifier(id=${tissuForm.id})}"
+
+                          th:object="${tissuForm}"
+
+                          method="post"
+
+                          enctype="multipart/form-data"
+
+                          class="tc-form">
+
+
+                        <input type="hidden"
+                               th:name="${_csrf.parameterName}"
+                               th:value="${_csrf.token}">
+
+
+                        <div class="tc-field">
+
+                            <label>
+                                Nom *
+                            </label>
+
+                            <input type="text"
+                                   th:field="*{name}"
+                                   placeholder="Velours Premium"
+                                   required>
+
+                        </div>
+
+
+                        <div class="tc-field">
+
+                            <label>
+                                Référence
+                            </label>
+
+                            <input type="text"
+                                   th:field="*{reference}"
+                                   placeholder="TIS-VEL-001">
+
+                        </div>
+
+
+                        <div class="tc-field">
+
+                            <label>
+                                Type
+                            </label>
+
+                            <select th:field="*{type}">
+
+                                <option value="">
+                                    Sélectionner
+                                </option>
+
+                                <option value="Velours">
+                                    Velours
+                                </option>
+
+                                <option value="Bouclé">
+                                    Bouclé
+                                </option>
+
+                                <option value="Lin">
+                                    Lin
+                                </option>
+
+                                <option value="Coton">
+                                    Coton
+                                </option>
+
+                                <option value="Chenille">
+                                    Chenille
+                                </option>
+
+                                <option value="Cuir">
+                                    Cuir
+                                </option>
+
+                                <option value="Simili cuir">
+                                    Simili cuir
+                                </option>
+
+                                <option value="Microfibre">
+                                    Microfibre
+                                </option>
+
+                                <option value="Autre">
+                                    Autre
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="tc-field">
+
+                            <label>
+                                Description
+                            </label>
+
+                            <textarea th:field="*{description}"
+                                      placeholder="Description du tissu...">
+                            </textarea>
+
+                        </div>
+
+
+                        <div class="tc-field">
+
+                            <label>
+                                Image / texture
+                            </label>
+
+                            <input id="tissuImageInput"
+                                   type="file"
+                                   name="image"
+                                   accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+
+                        </div>
+
+
+
+                        <div class="tc-image-preview"
+                             id="tissuImagePreview">
+
+
+                            <img th:if="${tissuForm.imagePath != null}"
+                                 th:src="${tissuForm.imagePath}"
+                                 alt="Texture">
+
+
+                            <span th:if="${tissuForm.imagePath == null}">
+                                Aperçu de la texture
+                            </span>
+
+
+                        </div>
+
+
+
+                        <div class="tc-checkboxes">
+
+
+                            <label>
+
+                                <input type="checkbox"
+                                       th:field="*{available}">
+
+                                Disponible
+
+                            </label>
+
+
+                            <label>
+
+                                <input type="checkbox"
+                                       th:field="*{active}">
+
+                                Actif
+
+                            </label>
+
+
+                        </div>
+
+
+
+                        <div class="tc-form-actions">
+
+
+                            <button type="submit"
+                                    class="tc-save">
+
+                                Enregistrer
+
+                            </button>
+
+
+                            <a th:if="${tissuForm.id != null}"
+                               th:href="@{/admin/tissus-couleurs}"
+                               class="tc-cancel">
+
+                                Annuler
+
+                            </a>
+
+
+                        </div>
+
+
+                    </form>
+
+
+                </aside>
+
+
+
+                <!-- =========================================
+                     LISTE TISSUS
+                ========================================== -->
+
+                <div class="tc-table-card">
+
+
+                    <div th:if="${tissus == null or #lists.isEmpty(tissus)}"
+                         class="tc-empty">
+
+                        <strong>
+                            Aucun tissu disponible.
+                        </strong>
+
+                        <p>
+                            Ajoutez votre premier tissu.
+                        </p>
+
+                    </div>
+
+
+
+                    <table th:if="${tissus != null and !#lists.isEmpty(tissus)}"
+                           class="tc-table">
+
+
+                        <thead>
+
+                        <tr>
+
+                            <th>
+                                Image
+                            </th>
+
+                            <th>
+                                Nom
+                            </th>
+
+                            <th>
+                                Type
+                            </th>
+
+                            <th>
+                                Référence
+                            </th>
+
+                            <th>
+                                Statut
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                        <tr th:each="tissu : ${tissus}"
+                            class="tc-filter-row"
+
+                            th:data-search="${(
+                                (tissu.name != null ? tissu.name : '')
+                                + ' '
+                                + (tissu.reference != null ? tissu.reference : '')
+                                + ' '
+                                + (tissu.type != null ? tissu.type : '')
+                            ).toLowerCase()}"
+
+                            th:data-status="${tissu.active ? 'active' : 'inactive'}">
+
+
+                            <td>
+
+                                <div class="tc-thumb">
+
+                                    <img th:if="${tissu.imagePath != null}"
+                                         th:src="${tissu.imagePath}"
+                                         th:alt="${tissu.name}">
+
+                                    <div th:if="${tissu.imagePath == null}"
+                                         class="tc-thumb-empty">
+
+                                        ZD
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <strong th:text="${tissu.name}">
+                                    Velours Premium
+                                </strong>
+
+                            </td>
+
+
+                            <td th:text="${tissu.type != null ? tissu.type : '-'}">
+                                Velours
+                            </td>
+
+
+                            <td th:text="${tissu.reference != null ? tissu.reference : '-'}">
+                                TIS-001
+                            </td>
+
+
+                            <td>
+
+                                <span th:if="${tissu.active}"
+                                      class="tc-badge active">
+
+                                    Actif
+
+                                </span>
+
+                                <span th:if="${!tissu.active}"
+                                      class="tc-badge inactive">
+
+                                    Inactif
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+
+                                <div class="tc-actions">
+
+
+                                    <a th:href="@{/admin/tissus-couleurs(editTissu=${tissu.id})}"
+                                       class="tc-action">
+
+                                        Modifier
+
+                                    </a>
+
+
+
+                                    <form th:action="@{/admin/tissus/{id}/statut(id=${tissu.id})}"
+                                          method="post">
+
+
+                                        <input type="hidden"
+                                               th:name="${_csrf.parameterName}"
+                                               th:value="${_csrf.token}">
+
+
+                                        <button type="submit"
+                                                class="tc-action status"
+                                                th:text="${tissu.active
+                                                    ? 'Désactiver'
+                                                    : 'Activer'}">
+
+                                            Désactiver
+
+                                        </button>
+
+
+                                    </form>
+
+
+
+                                    <form th:action="@{/admin/tissus/{id}/supprimer(id=${tissu.id})}"
+                                          method="post"
+
+                                          onsubmit="return confirm('Voulez-vous vraiment supprimer ce tissu ?');">
+
+
+                                        <input type="hidden"
+                                               th:name="${_csrf.parameterName}"
+                                               th:value="${_csrf.token}">
+
+
+                                        <button type="submit"
+                                                class="tc-action delete">
+
+                                            Supprimer
+
+                                        </button>
+
+
+                                    </form>
+
+
+                                </div>
+
+
+                            </td>
+
+
+                        </tr>
+
+
+                        </tbody>
+
+
+                    </table>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             COULEURS
+        ================================================== -->
+
+        <section class="tc-section"
+                 style="padding-bottom:60px;">
+
+
+            <div class="tc-section-title">
+
+
+                <div>
+
+                    <small>
+                        PALETTE
+                    </small>
+
+                    <h2>
+                        Couleurs
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="tc-layout">
+
+
+                <!-- =========================================
+                     FORM COULEUR
+                ========================================== -->
+
+                <aside class="tc-form-card">
+
+
+                    <small th:text="${couleurForm.id == null
+                            ? 'NOUVELLE COULEUR'
+                            : 'MODIFICATION'}">
+
+                        NOUVELLE COULEUR
+
+                    </small>
+
+
+                    <h3 th:text="${couleurForm.id == null
+                            ? 'Ajouter une couleur'
+                            : 'Modifier la couleur'}">
+
+                        Ajouter une couleur
+
+                    </h3>
+
+
+
+                    <form th:action="${couleurForm.id == null}
+                                ? @{/admin/couleurs/ajouter}
+                                : @{/admin/couleurs/{id}/modifier(id=${couleurForm.id})}"
+
+                          th:object="${couleurForm}"
+
+                          method="post"
+
+                          class="tc-form">
+
+
+                        <input type="hidden"
+                               th:name="${_csrf.parameterName}"
+                               th:value="${_csrf.token}">
+
+
+                        <div class="tc-field">
+
+                            <label>
+                                Nom *
+                            </label>
+
+                            <input id="colorName"
+                                   type="text"
+                                   th:field="*{name}"
+                                   placeholder="Beige"
+                                   required>
+
+                        </div>
+
+
+                        <div class="tc-field">
+
+                            <label>
+                                Couleur / Code HEX *
+                            </label>
+
+
+                            <div class="tc-color-picker-row">
+
+
+                                <input id="colorPicker"
+                                       class="tc-color-picker"
+                                       type="color"
+
+                                       th:value="${couleurForm.codeHex != null
+                                            ? couleurForm.codeHex
+                                            : '#D8C3A5'}">
+
+
+                                <input id="colorHex"
+                                       type="text"
+
+                                       th:field="*{codeHex}"
+
+                                       pattern="^#[0-9A-Fa-f]{6}$"
+
+                                       placeholder="#D8C3A5"
+
+                                       maxlength="7"
+
+                                       required>
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="tc-color-preview">
+
+
+                            <div id="colorPreview"
+                                 class="tc-color-preview-dot"
+
+                                 th:style="'background:' +
+                                    (${couleurForm.codeHex != null
+                                        ? couleurForm.codeHex
+                                        : '#D8C3A5'})">
+                            </div>
+
+
+                            <div>
+
+                                <strong id="colorPreviewName"
+                                        th:text="${couleurForm.name != null
+                                            and !#strings.isEmpty(couleurForm.name)
+                                            ? couleurForm.name
+                                            : 'Aperçu couleur'}">
+
+                                    Aperçu couleur
+
+                                </strong>
+
+                                <br>
+
+                                <small id="colorPreviewHex"
+                                       th:text="${couleurForm.codeHex != null
+                                            ? couleurForm.codeHex
+                                            : '#D8C3A5'}">
+
+                                    #D8C3A5
+
+                                </small>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="tc-field">
+
+                            <label>
+                                Référence
+                            </label>
+
+                            <input type="text"
+                                   th:field="*{reference}"
+                                   placeholder="COL-BEI-001">
+
+                        </div>
+
+
+                        <div class="tc-field">
+
+                            <label>
+                                Description
+                            </label>
+
+                            <textarea th:field="*{description}"
+                                      placeholder="Description facultative...">
+                            </textarea>
+
+                        </div>
+
+
+                        <div class="tc-checkboxes">
+
+
+                            <label>
+
+                                <input type="checkbox"
+                                       th:field="*{available}">
+
+                                Disponible
+
+                            </label>
+
+
+                            <label>
+
+                                <input type="checkbox"
+                                       th:field="*{active}">
+
+                                Actif
+
+                            </label>
+
+
+                        </div>
+
+
+
+                        <div class="tc-form-actions">
+
+
+                            <button type="submit"
+                                    class="tc-save">
+
+                                Enregistrer
+
+                            </button>
+
+
+                            <a th:if="${couleurForm.id != null}"
+                               th:href="@{/admin/tissus-couleurs}"
+                               class="tc-cancel">
+
+                                Annuler
+
+                            </a>
+
+
+                        </div>
+
+
+                    </form>
+
+
+                </aside>
+
+
+
+                <!-- =========================================
+                     TABLE COULEURS
+                ========================================== -->
+
+                <div class="tc-table-card">
+
+
+                    <div th:if="${couleurs == null or #lists.isEmpty(couleurs)}"
+                         class="tc-empty">
+
+                        <strong>
+                            Aucune couleur disponible.
+                        </strong>
+
+                        <p>
+                            Ajoutez votre première couleur.
+                        </p>
+
+                    </div>
+
+
+
+                    <table th:if="${couleurs != null and !#lists.isEmpty(couleurs)}"
+                           class="tc-table">
+
+
+                        <thead>
+
+                        <tr>
+
+                            <th>
+                                Aperçu
+                            </th>
+
+                            <th>
+                                Nom
+                            </th>
+
+                            <th>
+                                HEX
+                            </th>
+
+                            <th>
+                                Référence
+                            </th>
+
+                            <th>
+                                Statut
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                        <tr th:each="couleur : ${couleurs}"
+                            class="tc-filter-row"
+
+                            th:data-search="${(
+                                (couleur.name != null ? couleur.name : '')
+                                + ' '
+                                + (couleur.reference != null ? couleur.reference : '')
+                                + ' '
+                                + (couleur.codeHex != null ? couleur.codeHex : '')
+                            ).toLowerCase()}"
+
+                            th:data-status="${couleur.active ? 'active' : 'inactive'}">
+
+
+                            <td>
+
+                                <div class="tc-color-dot"
+                                     th:style="'background:' + ${couleur.codeHex}">
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <strong th:text="${couleur.name}">
+                                    Beige
+                                </strong>
+
+                            </td>
+
+
+                            <td th:text="${couleur.codeHex}">
+                                #D8C3A5
+                            </td>
+
+
+                            <td th:text="${couleur.reference != null
+                                    ? couleur.reference
+                                    : '-'}">
+
+                                COL-001
+
+                            </td>
+
+
+                            <td>
+
+                                <span th:if="${couleur.active}"
+                                      class="tc-badge active">
+
+                                    Actif
+
+                                </span>
+
+                                <span th:if="${!couleur.active}"
+                                      class="tc-badge inactive">
+
+                                    Inactif
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+
+                                <div class="tc-actions">
+
+
+                                    <a th:href="@{/admin/tissus-couleurs(editCouleur=${couleur.id})}"
+                                       class="tc-action">
+
+                                        Modifier
+
+                                    </a>
+
+
+
+                                    <form th:action="@{/admin/couleurs/{id}/statut(id=${couleur.id})}"
+                                          method="post">
+
+
+                                        <input type="hidden"
+                                               th:name="${_csrf.parameterName}"
+                                               th:value="${_csrf.token}">
+
+
+                                        <button type="submit"
+                                                class="tc-action status"
+
+                                                th:text="${couleur.active
+                                                    ? 'Désactiver'
+                                                    : 'Activer'}">
+
+                                            Désactiver
+
+                                        </button>
+
+
+                                    </form>
+
+
+
+                                    <form th:action="@{/admin/couleurs/{id}/supprimer(id=${couleur.id})}"
+                                          method="post"
+
+                                          onsubmit="return confirm('Voulez-vous vraiment supprimer cette couleur ?');">
+
+
+                                        <input type="hidden"
+                                               th:name="${_csrf.parameterName}"
+                                               th:value="${_csrf.token}">
+
+
+                                        <button type="submit"
+                                                class="tc-action delete">
+
+                                            Supprimer
+
+                                        </button>
+
+
+                                    </form>
+
+
+                                </div>
+
+
+                            </td>
+
+
+                        </tr>
+
+
+                        </tbody>
+
+
+                    </table>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<script>
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+
+            /* =================================================
+               RECHERCHE / FILTRES
+            ================================================= */
+
+            const search =
+                document.getElementById(
+                    "tcSearch"
+                );
+
+
+            const filterButtons =
+                document.querySelectorAll(
+                    ".tc-filter-button"
+                );
+
+
+            const rows =
+                document.querySelectorAll(
+                    ".tc-filter-row"
+                );
+
+
+            let currentFilter =
+                "all";
+
+
+            function applyFilters() {
+
+
+                const value =
+                    search
+                        ? search.value
+                            .trim()
+                            .toLowerCase()
+                        : "";
+
+
+                rows.forEach(
+                    function (row) {
+
+
+                        const haystack =
+                            row.dataset.search
+                            || "";
+
+
+                        const status =
+                            row.dataset.status
+                            || "";
+
+
+                        const matchesSearch =
+                            !value
+                            ||
+                            haystack.includes(
+                                value
+                            );
+
+
+                        const matchesStatus =
+                            currentFilter === "all"
+                            ||
+                            status === currentFilter;
+
+
+                        row.style.display =
+                            matchesSearch
+                            &&
+                            matchesStatus
+                                ? ""
+                                : "none";
+
+                    }
+                );
+
+            }
+
+
+            if (search) {
+
+                search.addEventListener(
+                    "input",
+                    applyFilters
+                );
+
+            }
+
+
+            filterButtons.forEach(
+                function (button) {
+
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+
+                            filterButtons
+                                .forEach(
+                                    function (item) {
+
+                                        item.classList
+                                            .remove(
+                                                "active"
+                                            );
+
+                                    }
+                                );
+
+
+                            button.classList.add(
+                                "active"
+                            );
+
+
+                            currentFilter =
+                                button.dataset.filter;
+
+
+                            applyFilters();
+
+                        }
+                    );
+
+                }
+            );
+
+
+
+            /* =================================================
+               PREVIEW IMAGE TISSU
+            ================================================= */
+
+            const tissuInput =
+                document.getElementById(
+                    "tissuImageInput"
+                );
+
+
+            const tissuPreview =
+                document.getElementById(
+                    "tissuImagePreview"
+                );
+
+
+            if (
+                tissuInput
+                &&
+                tissuPreview
+            ) {
+
+
+                tissuInput.addEventListener(
+                    "change",
+                    function () {
+
+
+                        const file =
+                            tissuInput.files
+                                &&
+                                tissuInput.files[0];
+
+
+                        if (!file) {
+                            return;
+                        }
+
+
+                        const url =
+                            URL.createObjectURL(
+                                file
+                            );
+
+
+                        tissuPreview.innerHTML =
+                            "";
+
+
+                        const image =
+                            document.createElement(
+                                "img"
+                            );
+
+
+                        image.src =
+                            url;
+
+
+                        image.onload =
+                            function () {
+
+                                URL.revokeObjectURL(
+                                    url
+                                );
+
+                            };
+
+
+                        tissuPreview.appendChild(
+                            image
+                        );
+
+                    }
+                );
+
+            }
+
+
+
+            /* =================================================
+               COLOR PICKER
+            ================================================= */
+
+            const picker =
+                document.getElementById(
+                    "colorPicker"
+                );
+
+
+            const hex =
+                document.getElementById(
+                    "colorHex"
+                );
+
+
+            const preview =
+                document.getElementById(
+                    "colorPreview"
+                );
+
+
+            const previewHex =
+                document.getElementById(
+                    "colorPreviewHex"
+                );
+
+
+            const colorName =
+                document.getElementById(
+                    "colorName"
+                );
+
+
+            const previewName =
+                document.getElementById(
+                    "colorPreviewName"
+                );
+
+
+            function updateColor(
+                    value
+            ) {
+
+
+                if (
+                    !/^#[0-9A-Fa-f]{6}$/
+                        .test(value)
+                ) {
+
+                    return;
+                }
+
+
+                const normalized =
+                    value.toUpperCase();
+
+
+                if (picker) {
+
+                    picker.value =
+                        normalized;
+
+                }
+
+
+                if (hex) {
+
+                    hex.value =
+                        normalized;
+
+                }
+
+
+                if (preview) {
+
+                    preview.style
+                        .backgroundColor =
+                        normalized;
+
+                }
+
+
+                if (previewHex) {
+
+                    previewHex.textContent =
+                        normalized;
+
+                }
+
+            }
+
+
+            if (picker) {
+
+
+                picker.addEventListener(
+                    "input",
+                    function () {
+
+                        updateColor(
+                            picker.value
+                        );
+
+                    }
+                );
+
+            }
+
+
+            if (hex) {
+
+
+                hex.addEventListener(
+                    "input",
+                    function () {
+
+                        updateColor(
+                            hex.value.trim()
+                        );
+
+                    }
+                );
+
+            }
+
+
+            if (
+                colorName
+                &&
+                previewName
+            ) {
+
+
+                colorName.addEventListener(
+                    "input",
+                    function () {
+
+
+                        previewName.textContent =
+                            colorName.value.trim()
+                            ||
+                            "Aperçu couleur";
+
+                    }
+                );
+
+            }
+
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,2637 @@
+/* =========================================================
+   ZINEB DECO
+   THEME CLAIR / SOMBRE
+========================================================= */
+
+
+/* =========================================================
+   MODE CLAIR
+========================================================= */
+
+:root,
+html[data-theme="light"] {
+
+    --theme-page: #faf8f4;
+    --theme-surface: #ffffff;
+    --theme-surface-soft: #f2ece2;
+
+    --theme-text: #24211c;
+    --theme-text-soft: #756f67;
+
+    --theme-border: #e1d9ce;
+
+    --theme-header: #ffffff;
+    --theme-header-text: #171410;
+
+    --theme-gold: #dba72c;
+    --theme-gold-dark: #a87308;
+
+    --theme-shadow:
+        rgba(27, 20, 12, 0.08);
+}
+
+
+/* =========================================================
+   MODE SOMBRE
+========================================================= */
+
+html[data-theme="dark"] {
+
+    --theme-page: #020b17;
+    --theme-surface: #08111d;
+    --theme-surface-soft: #0d1723;
+
+    --theme-text: #ffffff;
+    --theme-text-soft: #a6adb6;
+
+    --theme-border:
+        rgba(219, 167, 44, 0.20);
+
+    --theme-header: #020b17;
+    --theme-header-text: #ffffff;
+
+    --theme-gold: #dba72c;
+    --theme-gold-dark: #dba72c;
+
+    --theme-shadow:
+        rgba(0, 0, 0, 0.32);
+}
+
+
+/* =========================================================
+   TRANSITION
+========================================================= */
+
+body,
+.site-header,
+.home-section,
+.categories-section,
+.products-section,
+.featured-section,
+.materials-home-section,
+.custom-home-section,
+.home-promotions-section,
+.home-contact,
+.product-card,
+.category-card,
+.material-home-card,
+.catalog-product-card,
+.cart-product,
+.zd-account-card {
+
+    transition:
+        background 0.25s ease,
+        background-color 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+
+    background:
+        var(--theme-page)
+        !important;
+
+    color:
+        var(--theme-text)
+        !important;
+}
+
+
+/* =========================================================
+   BOUTON THEME
+========================================================= */
+
+.zd-theme-toggle {
+
+    width: 44px;
+    height: 44px;
+
+    flex:
+        0 0 44px;
+
+    padding: 0;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border:
+        1px solid
+        rgba(219, 167, 44, 0.70);
+
+    border-radius:
+        50%;
+
+    background:
+        transparent;
+
+    color:
+        #dba72c;
+
+    font-size:
+        20px;
+
+    cursor:
+        pointer;
+
+    transition:
+        background 0.20s ease,
+        color 0.20s ease,
+        transform 0.20s ease;
+}
+
+
+.zd-theme-toggle:hover {
+
+    background:
+        #dba72c;
+
+    color:
+        #020b17;
+
+    transform:
+        translateY(-2px);
+}
+
+
+.zd-theme-sun,
+.zd-theme-moon {
+
+    display:
+        none;
+}
+
+
+html[data-theme="light"]
+.zd-theme-moon {
+
+    display:
+        inline;
+}
+
+
+html[data-theme="dark"]
+.zd-theme-sun {
+
+    display:
+        inline;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.site-header.zd-premium-header {
+
+    background:
+        var(--theme-header)
+        !important;
+
+    border-color:
+        var(--theme-border)
+        !important;
+}
+
+
+.zd-premium-nav a {
+
+    color:
+        var(--theme-header-text)
+        !important;
+}
+
+
+.zd-premium-nav a:hover,
+.zd-premium-nav a.active {
+
+    color:
+        var(--theme-gold)
+        !important;
+}
+
+
+.zd-premium-brand-name {
+
+    color:
+        var(--theme-gold)
+        !important;
+}
+
+
+.zd-premium-icon-button,
+.zd-premium-cart {
+
+    color:
+        var(--theme-header-text)
+        !important;
+}
+
+
+.zd-premium-icon-button:hover,
+.zd-premium-cart:hover {
+
+    color:
+        var(--theme-gold)
+        !important;
+}
+
+
+.zd-premium-account {
+
+    color:
+        var(--theme-gold)
+        !important;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.zd-premium-search-panel {
+
+    background:
+        var(--theme-header)
+        !important;
+
+    border-color:
+        var(--theme-border)
+        !important;
+}
+
+
+.zd-premium-search-inner input {
+
+    background:
+        var(--theme-surface)
+        !important;
+
+    color:
+        var(--theme-text)
+        !important;
+
+    border-color:
+        var(--theme-border)
+        !important;
+}
+
+
+.zd-premium-search-inner input::placeholder {
+
+    color:
+        var(--theme-text-soft)
+        !important;
+}
+
+
+/* =========================================================
+   MENU MOBILE
+========================================================= */
+
+.zd-premium-mobile-menu {
+
+    background:
+        var(--theme-header)
+        !important;
+}
+
+
+.zd-premium-mobile-menu a {
+
+    color:
+        var(--theme-header-text)
+        !important;
+
+    border-color:
+        var(--theme-border)
+        !important;
+}
+
+
+/* =========================================================
+   HERO ACCUEIL
+========================================================= */
+
+html[data-theme="light"]
+.home-hero-full::before {
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(250, 248, 244, 0.97) 0%,
+            rgba(250, 248, 244, 0.92) 30%,
+            rgba(250, 248, 244, 0.72) 52%,
+            rgba(250, 248, 244, 0.22) 78%,
+            rgba(250, 248, 244, 0.04) 100%
+        )
+        !important;
+}
+
+
+html[data-theme="dark"]
+.home-hero-full::before {
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(2, 6, 12, 0.97) 0%,
+            rgba(2, 6, 12, 0.91) 25%,
+            rgba(2, 6, 12, 0.68) 48%,
+            rgba(2, 6, 12, 0.26) 70%,
+            rgba(2, 6, 12, 0.08) 100%
+        )
+        !important;
+}
+
+
+html[data-theme="light"]
+.home-hero-full
+.home-hero-content h1 {
+
+    color:
+        #24211c
+        !important;
+}
+
+
+html[data-theme="dark"]
+.home-hero-full
+.home-hero-content h1 {
+
+    color:
+        #ffffff
+        !important;
+}
+
+
+.home-hero-full
+.home-hero-content h1 span {
+
+    color:
+        var(--theme-gold)
+        !important;
+}
+
+
+.home-hero-full
+.section-label {
+
+    color:
+        var(--theme-gold)
+        !important;
+}
+
+
+html[data-theme="light"]
+.home-hero-full
+.hero-description {
+
+    color:
+        #625d56
+        !important;
+}
+
+
+html[data-theme="dark"]
+.home-hero-full
+.hero-description {
+
+    color:
+        rgba(255, 255, 255, 0.78)
+        !important;
+}
+
+
+html[data-theme="light"]
+.home-hero-full
+.hero-benefit strong {
+
+    color:
+        #24211c
+        !important;
+}
+
+
+html[data-theme="dark"]
+.home-hero-full
+.hero-benefit strong {
+
+    color:
+        #ffffff
+        !important;
+}
+
+
+html[data-theme="light"]
+.home-hero-full
+.hero-benefit span {
+
+    color:
+        #756f67
+        !important;
+}
+
+
+html[data-theme="dark"]
+.home-hero-full
+.hero-benefit span {
+
+    color:
+        rgba(255, 255, 255, 0.48)
+        !important;
+}
+
+
+/* =========================================================
+   SECTIONS PRINCIPALES
+========================================================= */
+
+.categories-section,
+.products-section,
+.featured-section,
+.materials-home-section,
+.custom-home-section,
+.home-promotions-section,
+.home-contact,
+.page-hero,
+.generic-catalog-hero,
+.catalog-hero,
+.generic-catalog-products,
+.catalog-section,
+.product-detail,
+.cart-page,
+.cart-content {
+
+    background:
+        var(--theme-page)
+        !important;
+
+    background-image:
+        none
+        !important;
+
+    color:
+        var(--theme-text)
+        !important;
+}
+
+
+/* =========================================================
+   TITRES
+========================================================= */
+
+.section-heading h2,
+.products-title-row h2,
+.custom-home-content h2,
+.process-row h3,
+.material-home-card h3,
+.category-info h3,
+.product-content h3,
+.product-content h3 a,
+.catalog-product-info h2,
+.page-hero h1,
+.generic-catalog-header h1,
+.catalog-hero h1,
+.home-contact h2 {
+
+    color:
+        var(--theme-text)
+        !important;
+}
+
+
+/* =========================================================
+   TEXTES
+========================================================= */
+
+.section-heading p,
+.product-description,
+.custom-home-content p,
+.process-row p,
+.material-home-card p,
+.promotion-intro,
+.home-contact p,
+.page-hero p,
+.generic-catalog-header p,
+.catalog-hero p {
+
+    color:
+        var(--theme-text-soft)
+        !important;
+}
+
+
+/* =========================================================
+   DORE
+========================================================= */
+
+.section-label,
+.section-label.dark,
+.view-all-link,
+.promotion-view-all,
+.material-number,
+.material-home-card strong,
+.process-row > span,
+.custom-home-content h2 span {
+
+    color:
+        var(--theme-gold-dark)
+        !important;
+}
+
+
+/* =========================================================
+   CARTES
+========================================================= */
+
+.category-card,
+.product-card,
+.material-home-card,
+.catalog-product-card,
+.catalog-empty,
+.home-products-empty,
+.cart-empty,
+.cart-product {
+
+    background:
+        var(--theme-surface)
+        !important;
+
+    color:
+        var(--theme-text)
+        !important;
+
+    border-color:
+        var(--theme-border)
+        !important;
+
+    box-shadow:
+        0 15px 40px
+        var(--theme-shadow);
+}
+
+
+/* =========================================================
+   CARTES PRODUITS
+========================================================= */
+
+.product-category,
+.product-card-type,
+.product-description,
+.product-extra-info,
+.product-availability {
+
+    color:
+        var(--theme-text-soft)
+        !important;
+}
+
+
+.product-content h3,
+.product-content h3 a {
+
+    color:
+        var(--theme-text)
+        !important;
+}
+
+
+.product-price,
+.product-price-row strong,
+.promotion-price {
+
+    color:
+        var(--theme-gold-dark)
+        !important;
+}
+
+
+.old-price,
+.product-old-price {
+
+    color:
+        #999188
+        !important;
+}
+
+
+/* =========================================================
+   BOUTON AJOUTER
+========================================================= */
+
+.product-detail-button,
+.add-cart-button {
+
+    border-color:
+        var(--theme-text)
+        !important;
+
+    background:
+        transparent
+        !important;
+
+    color:
+        var(--theme-text)
+        !important;
+}
+
+
+.product-detail-button:hover,
+.add-cart-button:hover {
+
+    background:
+        var(--theme-text)
+        !important;
+
+    color:
+        var(--theme-surface)
+        !important;
+}
+
+
+/* =========================================================
+   SUR MESURE
+========================================================= */
+
+.custom-home-section {
+
+    background:
+        var(--theme-page)
+        !important;
+
+    color:
+        var(--theme-text)
+        !important;
+}
+
+
+.custom-home-section
+.custom-process {
+
+    border-color:
+        var(--theme-border)
+        !important;
+}
+
+
+.custom-home-section
+.process-row {
+
+    border-color:
+        var(--theme-border)
+        !important;
+}
+
+
+.custom-home-section
+.btn-gold {
+
+    background:
+        var(--theme-gold)
+        !important;
+
+    border-color:
+        var(--theme-gold)
+        !important;
+
+    color:
+        #080705
+        !important;
+}
+
+
+.custom-home-section
+.btn-gold:hover {
+
+    background:
+        var(--theme-text)
+        !important;
+
+    border-color:
+        var(--theme-text)
+        !important;
+
+    color:
+        var(--theme-surface)
+        !important;
+}
+
+
+/* =========================================================
+   PROMOTIONS
+========================================================= */
+
+.home-promotions-section {
+
+    background:
+        var(--theme-page)
+        !important;
+
+    color:
+        var(--theme-text)
+        !important;
+}
+
+
+.home-promotions-section
+.products-title-row h2 {
+
+    color:
+        var(--theme-text)
+        !important;
+}
+
+
+.home-promotions-section
+.product-card {
+
+    background:
+        var(--theme-surface)
+        !important;
+
+    color:
+        var(--theme-text)
+        !important;
+
+    border-color:
+        var(--theme-border)
+        !important;
+}
+
+
+/* =========================================================
+   MATERIAL DARK
+========================================================= */
+
+.material-home-card.material-dark {
+
+    background:
+        var(--theme-surface)
+        !important;
+
+    color:
+        var(--theme-text)
+        !important;
+}
+
+
+/* =========================================================
+   CATALOGUE
+========================================================= */
+
+.catalog-types {
+
+    background:
+        var(--theme-surface)
+        !important;
+
+    border-color:
+        var(--theme-border)
+        !important;
+}
+
+
+.catalog-type,
+.catalog-sort select,
+.filter-title,
+.filter-heading,
+.reset-filters {
+
+    background:
+        var(--theme-surface)
+        !important;
+
+    color:
+        var(--theme-text)
+        !important;
+
+    border-color:
+        var(--theme-border)
+        !important;
+}
+
+
+.filter-options label,
+.catalog-results,
+.catalog-sort label {
+
+    color:
+        var(--theme-text-soft)
+        !important;
+}
+
+
+/* =========================================================
+   DETAIL PRODUIT
+========================================================= */
+
+.product-detail-content h1,
+.detail-information strong {
+
+    color:
+        var(--theme-text)
+        !important;
+}
+
+
+.detail-description,
+.detail-information span {
+
+    color:
+        var(--theme-text-soft)
+        !important;
+}
+
+
+.detail-information,
+.detail-information > div {
+
+    border-color:
+        var(--theme-border)
+        !important;
+}
+
+
+/* =========================================================
+   PANIER
+========================================================= */
+
+.cart-hero {
+
+    background:
+        var(--theme-surface-soft)
+        !important;
+
+    color:
+        var(--theme-text)
+        !important;
+}
+
+
+.cart-hero h1,
+.cart-products-heading h2,
+.cart-product-top h3 {
+
+    color:
+        var(--theme-text)
+        !important;
+}
+
+
+.cart-hero p {
+
+    color:
+        var(--theme-text-soft)
+        !important;
+}
+
+
+html[data-theme="light"]
+.cart-summary {
+
+    background:
+        #24211c
+        !important;
+}
+
+
+html[data-theme="dark"]
+.cart-summary {
+
+    background:
+        #08111d
+        !important;
+
+    border:
+        1px solid
+        var(--theme-border);
+}
+
+
+/* =========================================================
+   ESPACE CLIENT
+========================================================= */
+
+.zd-account-page {
+
+    background:
+        var(--theme-page)
+        !important;
+
+    color:
+        var(--theme-text)
+        !important;
+}
+
+
+.zd-account-card,
+.zd-account-section,
+.zd-favorite,
+.zd-order {
+
+    background:
+        var(--theme-surface)
+        !important;
+
+    color:
+        var(--theme-text)
+        !important;
+
+    border-color:
+        var(--theme-border)
+        !important;
+}
+
+
+.zd-account-card.dark {
+
+    background:
+        var(--theme-surface)
+        !important;
+
+    color:
+        var(--theme-text)
+        !important;
+
+    border-color:
+        var(--theme-border)
+        !important;
+}
+
+
+.zd-account-card h2,
+.zd-account-section-head h2,
+.zd-favorite-content h3,
+.zd-order-item h3 {
+
+    color:
+        var(--theme-text)
+        !important;
+}
+
+
+.zd-account-card-description,
+.zd-account-section-head p,
+.zd-order-item p {
+
+    color:
+        var(--theme-text-soft)
+        !important;
+}
+
+
+/* =========================================================
+   ACCOUNT HERO
+========================================================= */
+
+html[data-theme="light"]
+.zd-account-hero {
+
+    background:
+        #f2ece2
+        !important;
+
+    color:
+        #24211c
+        !important;
+}
+
+
+html[data-theme="light"]
+.zd-account-hero h1 {
+
+    color:
+        #24211c
+        !important;
+}
+
+
+html[data-theme="light"]
+.zd-account-hero p {
+
+    color:
+        #756f67
+        !important;
+}
+
+
+html[data-theme="dark"]
+.zd-account-hero {
+
+    background:
+        linear-gradient(
+            110deg,
+            #020b17,
+            #08111d
+        )
+        !important;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+html[data-theme="light"]
+.footer {
+
+    background:
+        #f2ece2
+        !important;
+
+    color:
+        #24211c
+        !important;
+}
+
+
+html[data-theme="light"]
+.footer-column a,
+html[data-theme="light"]
+.footer-brand p,
+html[data-theme="light"]
+.footer-location-info p {
+
+    color:
+        #756f67
+        !important;
+}
+
+
+html[data-theme="dark"]
+.footer {
+
+    background:
+        #020b17
+        !important;
+
+    color:
+        #ffffff
+        !important;
+}
+
+
+/* =========================================================
+   MENU FLOTTANT
+========================================================= */
+
+.zd-floating-menu-button,
+.zd-floating-menu {
+
+    background:
+        var(--theme-header)
+        !important;
+
+    border-color:
+        var(--theme-gold)
+        !important;
+}
+
+
+.zd-floating-menu-button {
+
+    color:
+        var(--theme-gold)
+        !important;
+}
+
+
+.zd-floating-menu-links a {
+
+    color:
+        var(--theme-header-text)
+        !important;
+}
+
+
+.zd-floating-menu-links
+.zd-floating-cart {
+
+    background:
+        var(--theme-gold)
+        !important;
+
+    color:
+        #020b17
+        !important;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .zd-theme-toggle {
+
+        width:
+            39px;
+
+        height:
+            39px;
+
+        flex-basis:
+            39px;
+
+        font-size:
+            17px;
+    }
+
+}
+/* =========================================================
+   FIX SUR MESURE - MODE CLAIR / SOMBRE
+   DOIT ETRE TOUT A LA FIN DE theme.css
+========================================================= */
+
+
+/* =========================================================
+   MODE CLAIR
+========================================================= */
+
+html[data-theme="light"]
+.custom-home-section {
+
+    background: #ffffff !important;
+
+    background-image: none !important;
+
+    color: #24211c !important;
+}
+
+
+html[data-theme="light"]
+.custom-home-section
+.custom-home-content h2 {
+
+    color: #24211c !important;
+}
+
+
+html[data-theme="light"]
+.custom-home-section
+.custom-home-content h2 span {
+
+    color: #b47b09 !important;
+}
+
+
+html[data-theme="light"]
+.custom-home-section
+.custom-home-content p {
+
+    color: #756f67 !important;
+}
+
+
+html[data-theme="light"]
+.custom-home-section
+.process-row h3 {
+
+    color: #24211c !important;
+}
+
+
+html[data-theme="light"]
+.custom-home-section
+.process-row p {
+
+    color: #756f67 !important;
+}
+
+
+html[data-theme="light"]
+.custom-home-section
+.process-row > span {
+
+    color: #b47b09 !important;
+}
+
+
+html[data-theme="light"]
+.custom-home-section
+.custom-process {
+
+    border-top:
+        1px solid
+        #e2d9cc !important;
+}
+
+
+html[data-theme="light"]
+.custom-home-section
+.process-row {
+
+    border-bottom:
+        1px solid
+        #e2d9cc !important;
+}
+
+
+
+/* =========================================================
+   MODE SOMBRE
+========================================================= */
+
+html[data-theme="dark"]
+.custom-home-section {
+
+    background: #020b17 !important;
+
+    background-image: none !important;
+
+    color: #ffffff !important;
+}
+
+
+html[data-theme="dark"]
+.custom-home-section
+.section-label {
+
+    color: #dba72c !important;
+}
+
+
+html[data-theme="dark"]
+.custom-home-section
+.custom-home-content h2 {
+
+    color: #ffffff !important;
+}
+
+
+html[data-theme="dark"]
+.custom-home-section
+.custom-home-content h2 span {
+
+    color: #dba72c !important;
+}
+
+
+html[data-theme="dark"]
+.custom-home-section
+.custom-home-content p {
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.68
+        ) !important;
+}
+
+
+html[data-theme="dark"]
+.custom-home-section
+.process-row h3 {
+
+    color: #ffffff !important;
+}
+
+
+html[data-theme="dark"]
+.custom-home-section
+.process-row p {
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.55
+        ) !important;
+}
+
+
+html[data-theme="dark"]
+.custom-home-section
+.process-row > span {
+
+    color: #dba72c !important;
+}
+
+
+html[data-theme="dark"]
+.custom-home-section
+.custom-process {
+
+    border-top:
+        1px solid
+        rgba(
+            219,
+            167,
+            44,
+            0.25
+        ) !important;
+}
+
+
+html[data-theme="dark"]
+.custom-home-section
+.process-row {
+
+    border-bottom:
+        1px solid
+        rgba(
+            219,
+            167,
+            44,
+            0.20
+        ) !important;
+}
+
+
+
+/* =========================================================
+   BOUTON SUR MESURE - LES DEUX MODES
+========================================================= */
+
+.custom-home-section
+.btn-gold {
+
+    background: #dba72c !important;
+
+    border-color: #dba72c !important;
+
+    color: #020b17 !important;
+}
+
+
+.custom-home-section
+.btn-gold:hover {
+
+    background: #efbd45 !important;
+
+    border-color: #efbd45 !important;
+
+    color: #020b17 !important;
+}
+/* =========================================================
+   FIX CARTES PRODUITS - MODE SOMBRE
+========================================================= */
+
+html[data-theme="dark"]
+.product-card {
+
+    background: #08111d !important;
+
+    color: #ffffff !important;
+
+    border-color:
+        rgba(219, 167, 44, 0.20) !important;
+}
+
+
+/* CATEGORIE */
+
+html[data-theme="dark"]
+.product-card .product-category {
+
+    color:
+        rgba(255, 255, 255, 0.58) !important;
+}
+
+
+/* NOM PRODUIT */
+
+html[data-theme="dark"]
+.product-card .product-content h3,
+
+html[data-theme="dark"]
+.product-card .product-content h3 a {
+
+    color: #ffffff !important;
+}
+
+
+/* DESCRIPTION */
+
+html[data-theme="dark"]
+.product-card .product-description {
+
+    color:
+        rgba(255, 255, 255, 0.60) !important;
+}
+
+
+/* DISPONIBILITE / BADGES TEXTE */
+
+html[data-theme="dark"]
+.product-card .home-product-badges {
+
+    color: #ffffff !important;
+}
+
+
+html[data-theme="dark"]
+.product-card .home-product-badges span {
+
+    color: #ffffff !important;
+}
+
+
+/* ANCIEN PRIX */
+
+html[data-theme="dark"]
+.product-card .old-price,
+
+html[data-theme="dark"]
+.product-card .product-old-price {
+
+    color:
+        rgba(255, 255, 255, 0.48) !important;
+
+    text-decoration:
+        line-through !important;
+}
+
+
+/* PRIX ACTUEL */
+
+html[data-theme="dark"]
+.product-card .product-price,
+
+html[data-theme="dark"]
+.product-card .product-price-row strong,
+
+html[data-theme="dark"]
+.product-card .promotion-price {
+
+    color: #dba72c !important;
+}
+
+
+/* BOUTON AJOUTER */
+
+html[data-theme="dark"]
+.product-card .add-cart-button {
+
+    background: #dba72c !important;
+
+    border-color: #dba72c !important;
+
+    color: #020b17 !important;
+}
+
+
+html[data-theme="dark"]
+.product-card .add-cart-button:hover {
+
+    background: #ffffff !important;
+
+    border-color: #ffffff !important;
+
+    color: #020b17 !important;
+}
+
+
+/* FAVORI */
+
+html[data-theme="dark"]
+.product-card .favorite-button {
+
+    background: #ffffff !important;
+
+    color: #020b17 !important;
+}
+
+
+/* =========================================================
+   MODE CLAIR
+========================================================= */
+
+html[data-theme="light"]
+.product-card {
+
+    background: #ffffff !important;
+
+    color: #24211c !important;
+
+    border-color: #e1d9ce !important;
+}
+
+
+html[data-theme="light"]
+.product-card .product-content h3,
+
+html[data-theme="light"]
+.product-card .product-content h3 a {
+
+    color: #24211c !important;
+}
+
+
+html[data-theme="light"]
+.product-card .product-description {
+
+    color: #756f67 !important;
+}
+/* =========================================================
+   FIX BREADCRUMB + HERO CATALOGUE
+   MODE CLAIR / SOMBRE
+========================================================= */
+
+
+/* =========================================================
+   MODE SOMBRE
+========================================================= */
+
+html[data-theme="dark"]
+.catalog-breadcrumb {
+
+    background: #020b17 !important;
+
+    border-bottom:
+        1px solid
+        rgba(219, 167, 44, 0.18) !important;
+}
+
+
+html[data-theme="dark"]
+.catalog-breadcrumb .container {
+
+    color:
+        rgba(255, 255, 255, 0.55) !important;
+}
+
+
+html[data-theme="dark"]
+.catalog-breadcrumb a {
+
+    color:
+        rgba(255, 255, 255, 0.60) !important;
+}
+
+
+html[data-theme="dark"]
+.catalog-breadcrumb a:hover {
+
+    color: #dba72c !important;
+}
+
+
+html[data-theme="dark"]
+.catalog-breadcrumb strong {
+
+    color: #ffffff !important;
+}
+
+
+/* HERO CATALOGUE */
+
+html[data-theme="dark"]
+.generic-catalog-hero,
+html[data-theme="dark"]
+.catalog-hero {
+
+    background: #020b17 !important;
+
+    color: #ffffff !important;
+}
+
+
+html[data-theme="dark"]
+.generic-catalog-header h1,
+html[data-theme="dark"]
+.catalog-hero h1 {
+
+    color: #ffffff !important;
+}
+
+
+html[data-theme="dark"]
+.generic-catalog-header p,
+html[data-theme="dark"]
+.catalog-hero p {
+
+    color:
+        rgba(255, 255, 255, 0.65) !important;
+}
+
+
+/* COMPTEUR 0 MODELES */
+
+html[data-theme="dark"]
+.generic-result-count,
+html[data-theme="dark"]
+.catalog-hero-stat {
+
+    border-left:
+        1px solid
+        rgba(255, 255, 255, 0.35) !important;
+}
+
+
+html[data-theme="dark"]
+.generic-result-count strong,
+html[data-theme="dark"]
+.catalog-hero-stat strong {
+
+    color: #dba72c !important;
+}
+
+
+html[data-theme="dark"]
+.generic-result-count span,
+html[data-theme="dark"]
+.catalog-hero-stat span {
+
+    color:
+        rgba(255, 255, 255, 0.50) !important;
+}
+
+
+/* =========================================================
+   MODE CLAIR
+========================================================= */
+
+html[data-theme="light"]
+.catalog-breadcrumb {
+
+    background: #f6f2eb !important;
+
+    border-bottom:
+        1px solid #e1d9ce !important;
+}
+
+
+html[data-theme="light"]
+.catalog-breadcrumb .container {
+
+    color: #8d867d !important;
+}
+
+
+html[data-theme="light"]
+.catalog-breadcrumb a {
+
+    color: #8d867d !important;
+}
+
+
+html[data-theme="light"]
+.catalog-breadcrumb strong {
+
+    color: #24211c !important;
+}
+
+
+html[data-theme="light"]
+.generic-catalog-hero,
+html[data-theme="light"]
+.catalog-hero {
+
+    background: #faf8f4 !important;
+
+    color: #24211c !important;
+}
+
+
+html[data-theme="light"]
+.generic-catalog-header h1,
+html[data-theme="light"]
+.catalog-hero h1 {
+
+    color: #24211c !important;
+}
+
+
+html[data-theme="light"]
+.generic-catalog-header p,
+html[data-theme="light"]
+.catalog-hero p {
+
+    color: #756f67 !important;
+}
+
+
+html[data-theme="light"]
+.generic-result-count,
+html[data-theme="light"]
+.catalog-hero-stat {
+
+    border-left:
+        1px solid #e1d9ce !important;
+}
+/* =========================================================
+   SUR MESURE / CONFIGURATEUR
+   MODE CLAIR + MODE SOMBRE
+   A METTRE TOUT A LA FIN DE theme.css
+========================================================= */
+
+
+/* =========================================================
+   MODE SOMBRE - PAGE
+========================================================= */
+
+html[data-theme="dark"] .customizer-page {
+    background: #020b17 !important;
+    color: #ffffff !important;
+}
+
+
+/* TITRE PRINCIPAL */
+
+html[data-theme="dark"] .customizer-heading h1 {
+    color: #ffffff !important;
+}
+
+html[data-theme="dark"] .customizer-heading h1 span {
+    color: #dba72c !important;
+}
+
+html[data-theme="dark"] .customizer-heading p {
+    color: rgba(255, 255, 255, 0.62) !important;
+}
+
+html[data-theme="dark"] .customizer-heading .section-label {
+    color: #dba72c !important;
+}
+
+
+/* =========================================================
+   PROGRESSION
+========================================================= */
+
+html[data-theme="dark"] .customizer-progress {
+    background: #08111d !important;
+
+    border-color:
+        rgba(219, 167, 44, 0.22) !important;
+}
+
+
+html[data-theme="dark"] .progress-step {
+    color:
+        rgba(255, 255, 255, 0.42) !important;
+}
+
+
+html[data-theme="dark"]
+.progress-step:not(:last-child)::after {
+    background:
+        rgba(219, 167, 44, 0.20) !important;
+}
+
+
+html[data-theme="dark"] .progress-circle {
+    background: #08111d !important;
+
+    border-color:
+        rgba(219, 167, 44, 0.35) !important;
+
+    color:
+        rgba(255, 255, 255, 0.65) !important;
+}
+
+
+/* ETAPE ACTIVE */
+
+html[data-theme="dark"] .progress-step.active {
+    color: #dba72c !important;
+}
+
+html[data-theme="dark"]
+.progress-step.active .progress-circle {
+    background: #dba72c !important;
+    border-color: #dba72c !important;
+    color: #020b17 !important;
+}
+
+
+/* ETAPE TERMINEE */
+
+html[data-theme="dark"] .progress-step.done {
+    color: #ffffff !important;
+}
+
+html[data-theme="dark"]
+.progress-step.done .progress-circle {
+    background: #ffffff !important;
+    border-color: #ffffff !important;
+    color: #020b17 !important;
+}
+
+html[data-theme="dark"]
+.progress-step.done:not(:last-child)::after {
+    background: #dba72c !important;
+}
+
+
+/* =========================================================
+   GRANDE CARTE CONFIGURATEUR
+========================================================= */
+
+html[data-theme="dark"] .customizer-box {
+    background: #08111d !important;
+
+    border-color:
+        rgba(219, 167, 44, 0.22) !important;
+
+    color: #ffffff !important;
+}
+
+
+/* =========================================================
+   TITRES ET TEXTES ETAPES
+========================================================= */
+
+html[data-theme="dark"] .step-kicker {
+    color: #dba72c !important;
+}
+
+html[data-theme="dark"] .step-title {
+    color: #ffffff !important;
+}
+
+html[data-theme="dark"] .step-description {
+    color:
+        rgba(255, 255, 255, 0.56) !important;
+}
+
+
+/* =========================================================
+   CHOIX : SALON / CANAPE / LIT / FAUTEUIL...
+========================================================= */
+
+html[data-theme="dark"] .choice-card {
+    background: #0d1723 !important;
+
+    color: #ffffff !important;
+
+    border-color:
+        rgba(219, 167, 44, 0.20) !important;
+}
+
+
+html[data-theme="dark"] .choice-card:hover {
+    background: #121e2b !important;
+    border-color: #dba72c !important;
+
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.28) !important;
+}
+
+
+html[data-theme="dark"] .choice-card.selected {
+    background: #dba72c !important;
+    border-color: #dba72c !important;
+    color: #020b17 !important;
+
+    box-shadow:
+        inset 0 0 0 1px #dba72c !important;
+}
+
+
+html[data-theme="dark"] .choice-number {
+    color: #dba72c !important;
+}
+
+
+html[data-theme="dark"]
+.choice-card.selected .choice-number {
+    color: #020b17 !important;
+}
+
+
+html[data-theme="dark"] .choice-card strong {
+    color: inherit !important;
+}
+
+
+html[data-theme="dark"] .choice-card small {
+    color:
+        rgba(255, 255, 255, 0.48) !important;
+}
+
+
+html[data-theme="dark"]
+.choice-card.selected small {
+    color:
+        rgba(2, 11, 23, 0.70) !important;
+}
+
+
+/* =========================================================
+   DIMENSIONS
+========================================================= */
+
+html[data-theme="dark"] .dimension-field label {
+    color:
+        rgba(255, 255, 255, 0.67) !important;
+}
+
+
+html[data-theme="dark"] .dimension-field input,
+html[data-theme="dark"] .dimension-field select {
+    background: #0d1723 !important;
+
+    color: #ffffff !important;
+
+    border-color:
+        rgba(219, 167, 44, 0.20) !important;
+}
+
+
+html[data-theme="dark"] .dimension-field input::placeholder {
+    color:
+        rgba(255, 255, 255, 0.32) !important;
+}
+
+
+html[data-theme="dark"] .dimension-field input:focus,
+html[data-theme="dark"] .dimension-field select:focus {
+    background: #111d2a !important;
+    border-color: #dba72c !important;
+}
+
+
+/* =========================================================
+   TISSUS
+========================================================= */
+
+html[data-theme="dark"] .fabric-card {
+    background: #0d1723 !important;
+
+    border-color:
+        rgba(219, 167, 44, 0.20) !important;
+}
+
+
+html[data-theme="dark"] .fabric-card:hover,
+html[data-theme="dark"] .fabric-card.selected {
+    border-color: #dba72c !important;
+}
+
+
+html[data-theme="dark"] .fabric-info {
+    background: #0d1723 !important;
+}
+
+
+html[data-theme="dark"] .fabric-info strong {
+    color: #ffffff !important;
+}
+
+
+html[data-theme="dark"] .fabric-info span {
+    color:
+        rgba(255, 255, 255, 0.47) !important;
+}
+
+
+/* =========================================================
+   COULEURS
+========================================================= */
+
+html[data-theme="dark"] .color-card {
+    background: #0d1723 !important;
+
+    border-color:
+        rgba(219, 167, 44, 0.20) !important;
+}
+
+
+html[data-theme="dark"] .color-card:hover,
+html[data-theme="dark"] .color-card.selected {
+    border-color: #dba72c !important;
+}
+
+
+html[data-theme="dark"] .color-card.selected {
+    outline-color: #dba72c !important;
+}
+
+
+html[data-theme="dark"] .color-name {
+    color: #ffffff !important;
+}
+
+
+/* COULEUR PERSONNALISEE */
+
+html[data-theme="dark"] .custom-color-box {
+    background: #0d1723 !important;
+
+    border-color:
+        rgba(219, 167, 44, 0.20) !important;
+}
+
+
+html[data-theme="dark"] .custom-color-box h3 {
+    color: #ffffff !important;
+}
+
+
+html[data-theme="dark"] .custom-color-box p {
+    color:
+        rgba(255, 255, 255, 0.50) !important;
+}
+
+
+html[data-theme="dark"] .custom-color-input {
+    background: #08111d !important;
+    border-color: #dba72c !important;
+}
+
+
+/* =========================================================
+   NAVIGATION CONFIGURATEUR
+========================================================= */
+
+html[data-theme="dark"] .customizer-navigation {
+    border-top-color:
+        rgba(219, 167, 44, 0.18) !important;
+}
+
+
+html[data-theme="dark"] .customizer-button {
+    background: #dba72c !important;
+    border-color: #dba72c !important;
+    color: #020b17 !important;
+}
+
+
+html[data-theme="dark"] .customizer-button:hover {
+    background: #ffffff !important;
+    border-color: #ffffff !important;
+    color: #020b17 !important;
+}
+
+
+html[data-theme="dark"]
+.customizer-button.secondary {
+    background: transparent !important;
+
+    border-color:
+        rgba(219, 167, 44, 0.50) !important;
+
+    color: #dba72c !important;
+}
+
+
+html[data-theme="dark"]
+.customizer-button.secondary:hover {
+    background: #dba72c !important;
+    color: #020b17 !important;
+}
+
+
+/* =========================================================
+   RESUME
+========================================================= */
+
+html[data-theme="dark"] .summary-card {
+    background: #0d1723 !important;
+
+    border-color:
+        rgba(219, 167, 44, 0.20) !important;
+}
+
+
+html[data-theme="dark"] .summary-row {
+    border-bottom-color:
+        rgba(219, 167, 44, 0.15) !important;
+}
+
+
+html[data-theme="dark"] .summary-row span {
+    color:
+        rgba(255, 255, 255, 0.48) !important;
+}
+
+
+html[data-theme="dark"] .summary-row strong {
+    color: #ffffff !important;
+}
+
+
+html[data-theme="dark"] .summary-action {
+    background: #020b17 !important;
+
+    border:
+        1px solid
+        rgba(219, 167, 44, 0.20) !important;
+}
+
+
+html[data-theme="dark"] .summary-action h3 {
+    color: #ffffff !important;
+}
+
+
+html[data-theme="dark"] .summary-action p {
+    color:
+        rgba(255, 255, 255, 0.55) !important;
+}
+
+
+html[data-theme="dark"] .whatsapp-quote {
+    background: #dba72c !important;
+    color: #020b17 !important;
+}
+
+
+html[data-theme="dark"] .whatsapp-quote:hover {
+    background: #ffffff !important;
+}
+
+
+/* =========================================================
+   MODE CLAIR
+========================================================= */
+
+html[data-theme="light"] .customizer-page {
+    background: #f6f3ee !important;
+    color: #24211c !important;
+}
+
+
+html[data-theme="light"] .customizer-heading h1 {
+    color: #17130f !important;
+}
+
+
+html[data-theme="light"] .customizer-heading h1 span {
+    color: #b88727 !important;
+}
+
+
+html[data-theme="light"] .customizer-heading p {
+    color: #71695f !important;
+}
+
+
+html[data-theme="light"] .customizer-progress,
+html[data-theme="light"] .customizer-box {
+    background: #ffffff !important;
+    border-color: #ded5c8 !important;
+}
+
+
+html[data-theme="light"] .step-title {
+    color: #181410 !important;
+}
+
+
+html[data-theme="light"] .step-description {
+    color: #837a70 !important;
+}
+
+
+html[data-theme="light"] .choice-card {
+    background: #faf8f4 !important;
+    color: #28221c !important;
+    border-color: #ddd4c8 !important;
+}
+
+
+html[data-theme="light"] .fabric-card,
+html[data-theme="light"] .color-card {
+    background: #ffffff !important;
+    border-color: #ddd4c8 !important;
+}
+
+
+html[data-theme="light"] .dimension-field input,
+html[data-theme="light"] .dimension-field select {
+    background: #faf8f4 !important;
+    color: #28231e !important;
+    border-color: #d9d0c4 !important;
+}
+
+
+html[data-theme="light"] .custom-color-box,
+html[data-theme="light"] .summary-card {
+    background: #faf8f4 !important;
+    border-color: #ddd4c8 !important;
+}
+/* =========================================================
+   PAGE CONTACT - MODE CLAIR / SOMBRE
+========================================================= */
+
+
+/* =========================================================
+   MODE SOMBRE
+========================================================= */
+
+html[data-theme="dark"] .contact-page {
+
+    min-height: 100vh;
+
+    background: #020b17 !important;
+
+    color: #ffffff !important;
+}
+
+
+/* TITRE PRINCIPAL */
+
+html[data-theme="dark"] .contact-page h1,
+html[data-theme="dark"] .contact-page h2,
+html[data-theme="dark"] .contact-page h3 {
+
+    color: #ffffff !important;
+}
+
+
+/* PARTIE DOREE DU TITRE */
+
+html[data-theme="dark"] .contact-page h1 span,
+html[data-theme="dark"] .contact-page .section-label {
+
+    color: #dba72c !important;
+}
+
+
+/* TEXTES */
+
+html[data-theme="dark"] .contact-page p {
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.62
+        ) !important;
+}
+
+
+/* =========================================================
+   CARTES CONTACT
+========================================================= */
+
+html[data-theme="dark"]
+.contact-page [class*="card"] {
+
+    background: #08111d !important;
+
+    color: #ffffff !important;
+
+    border-color:
+        rgba(
+            219,
+            167,
+            44,
+            0.22
+        ) !important;
+}
+
+
+/* TITRES DES CARTES */
+
+html[data-theme="dark"]
+.contact-page [class*="card"] strong,
+
+html[data-theme="dark"]
+.contact-page [class*="card"] h3 {
+
+    color: #ffffff !important;
+}
+
+
+/* PETITS LABELS */
+
+html[data-theme="dark"]
+.contact-page [class*="card"] small,
+
+html[data-theme="dark"]
+.contact-page [class*="card"] span {
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.55
+        ) !important;
+}
+
+
+/* LABELS DORES */
+
+html[data-theme="dark"]
+.contact-page .section-label,
+
+html[data-theme="dark"]
+.contact-page [class*="label"] {
+
+    color: #dba72c !important;
+}
+
+
+/* =========================================================
+   LIENS
+========================================================= */
+
+html[data-theme="dark"]
+.contact-page a {
+
+    color: #ffffff;
+}
+
+
+html[data-theme="dark"]
+.contact-page a:hover {
+
+    color: #dba72c;
+}
+
+
+/* =========================================================
+   ICONES
+========================================================= */
+
+html[data-theme="dark"]
+.contact-page [class*="icon"] {
+
+    color: #dba72c !important;
+
+    border-color:
+        rgba(
+            219,
+            167,
+            44,
+            0.35
+        ) !important;
+}
+
+
+/* =========================================================
+   CARTE WHATSAPP
+========================================================= */
+
+html[data-theme="dark"]
+.contact-page [class*="whatsapp"] {
+
+    background: #0d1723 !important;
+
+    border-color:
+        #dba72c !important;
+
+    color: #ffffff !important;
+}
+
+
+/* =========================================================
+   MODE CLAIR
+========================================================= */
+
+html[data-theme="light"] .contact-page {
+
+    background: #faf8f4 !important;
+
+    color: #24211c !important;
+}
+
+
+html[data-theme="light"] .contact-page h1,
+html[data-theme="light"] .contact-page h2,
+html[data-theme="light"] .contact-page h3 {
+
+    color: #24211c !important;
+}
+
+
+html[data-theme="light"] .contact-page h1 span,
+html[data-theme="light"] .contact-page .section-label {
+
+    color: #b88727 !important;
+}
+
+
+html[data-theme="light"] .contact-page p {
+
+    color: #756f67 !important;
+}
+
+
+html[data-theme="light"]
+.contact-page [class*="card"] {
+
+    background: #ffffff !important;
+
+    color: #24211c !important;
+
+    border-color: #ded5c8 !important;
+}
+/* =========================================================
+   ESPACE ENTRE CONTACT ET RECHERCHE
+========================================================= */
+
+.zd-premium-actions {
+    margin-left: 24px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1500px) {
+
+    .zd-premium-actions {
+        margin-left: 18px;
+    }
+
+}
+
+
+@media (max-width: 1250px) {
+
+    .zd-premium-actions {
+        margin-left: 12px;
+    }
+
+}
+
+
+@media (max-width: 1000px) {
+
+    .zd-premium-actions {
+        margin-left: 0;
+    }
+
+}
+/* =========================================================
+   ESPACE CLIENT - MODE SOMBRE
+   PROFIL / COMMANDES / FAVORIS
+========================================================= */
+
+/* =========================================================
+   SECTION PROFIL
+========================================================= */
+
+html.account-dark-theme .zd-account-section {
+    background: #07111b !important;
+    border-color: rgba(217, 154, 43, .25) !important;
+    color: #ffffff !important;
+}
+
+
+html.account-dark-theme .zd-account-section-head {
+    border-bottom-color: rgba(217, 154, 43, .20) !important;
+}
+
+
+html.account-dark-theme .zd-account-section-head h2 {
+    color: #ffffff !important;
+}
+
+
+html.account-dark-theme .zd-account-section-head p {
+    color: #9da7b1 !important;
+}
+
+
+html.account-dark-theme .zd-account-section-label {
+    color: #d99a2b !important;
+}
+
+
+/* =========================================================
+   LABELS
+========================================================= */
+
+html.account-dark-theme .zd-profile-field label {
+    color: #cbd3dc !important;
+}
+
+
+/* =========================================================
+   INPUTS + TEXTAREA
+========================================================= */
+
+html.account-dark-theme .zd-profile-field input,
+html.account-dark-theme .zd-profile-field textarea {
+
+    background: #06101b !important;
+
+    color: #ffffff !important;
+
+    border: 1px solid rgba(217, 154, 43, .24) !important;
+
+    outline: none !important;
+}
+
+
+/* PLACEHOLDERS */
+
+html.account-dark-theme .zd-profile-field input::placeholder,
+html.account-dark-theme .zd-profile-field textarea::placeholder {
+
+    color: #788491 !important;
+
+    opacity: 1 !important;
+}
+
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+html.account-dark-theme .zd-profile-field input:focus,
+html.account-dark-theme .zd-profile-field textarea:focus {
+
+    background: #091522 !important;
+
+    border-color: #d99a2b !important;
+
+    box-shadow:
+        0 0 0 3px rgba(217, 154, 43, .08) !important;
+}
+
+
+/* =========================================================
+   EMAIL DESACTIVE
+========================================================= */
+
+html.account-dark-theme .zd-profile-field input:disabled {
+
+    background: #0b1621 !important;
+
+    color: #7f8a95 !important;
+
+    border-color: rgba(255,255,255,.08) !important;
+
+    cursor: not-allowed;
+}
+
+
+html.account-dark-theme .zd-profile-field small {
+    color: #8e99a4 !important;
+}
+
+
+/* =========================================================
+   BOUTON ENREGISTRER
+========================================================= */
+
+html.account-dark-theme .zd-profile-save {
+
+    min-height: 48px !important;
+
+    padding: 0 22px !important;
+
+    border: 1px solid #d99a2b !important;
+
+    background: #d99a2b !important;
+
+    color: #020914 !important;
+
+    font-weight: 900 !important;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+
+html.account-dark-theme .zd-profile-save:hover {
+
+    background: #f0bd57 !important;
+
+    border-color: #f0bd57 !important;
+
+    color: #020914 !important;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   MODE CLAIR
+========================================================= */
+
+html:not(.account-dark-theme) .zd-profile-field input,
+html:not(.account-dark-theme) .zd-profile-field textarea {
+
+    background: #faf8f4;
+
+    color: #24211c;
+
+    border-color: #ddd4c7;
+}
+
+
+html:not(.account-dark-theme)
+.zd-profile-field input:disabled {
+
+    background: #ece8e1;
+
+    color: #918980;
+}

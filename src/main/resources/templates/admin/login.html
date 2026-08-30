@@ -14,9 +14,644 @@
         Administration | Zineb Déco
     </title>
 
+
     <link rel="stylesheet"
           th:href="@{/css/style.css}"
           href="/css/style.css">
+
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ====================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+        }
+
+
+        body {
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+        }
+
+
+
+        /* =====================================================
+           PAGE
+        ====================================================== */
+
+        .admin-login-body {
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f1ede6 0%,
+                    #faf8f4 50%,
+                    #ece7df 100%
+                );
+
+            color: #17130f;
+        }
+
+
+        .admin-login-page {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 60px 20px;
+        }
+
+
+
+        /* =====================================================
+           CARTE
+        ====================================================== */
+
+        .admin-login-card {
+
+            width: 100%;
+            max-width: 700px;
+
+            position: relative;
+
+            padding: 65px 56px 45px;
+
+            background: #ffffff;
+
+            border: 1px solid #ddd4c7;
+
+            box-shadow:
+                0 25px 70px
+                rgba(40, 31, 20, .10);
+
+            text-align: center;
+        }
+
+
+        .admin-login-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 50%;
+
+            width: 75px;
+            height: 3px;
+
+            transform: translateX(-50%);
+
+            background: #d99a2b;
+        }
+
+
+
+        /* =====================================================
+           LOGO
+        ====================================================== */
+
+        .admin-login-logo {
+
+            width: 92px;
+            height: 92px;
+
+            margin:
+                -112px auto 32px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            border:
+                1px solid
+                #b88627;
+
+            border-radius: 50%;
+
+            background: #050505;
+
+            box-shadow:
+                0 15px 35px
+                rgba(0,0,0,.16);
+
+            text-decoration: none;
+        }
+
+
+        .admin-login-logo img {
+
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+        }
+
+
+
+        /* =====================================================
+           TITRE
+        ====================================================== */
+
+        .admin-login-kicker {
+
+            display: block;
+
+            margin-bottom: 22px;
+
+            color: #a77a20;
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            letter-spacing: 5px;
+
+            text-transform: uppercase;
+        }
+
+
+        .admin-login-card h1 {
+
+            margin: 0;
+
+            color: #101826;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                clamp(
+                    43px,
+                    5vw,
+                    60px
+                );
+
+            font-weight: 400;
+
+            line-height: 1;
+        }
+
+
+        .admin-login-description {
+
+            max-width: 500px;
+
+            margin: 25px auto 0;
+
+            color: #73695f;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+
+
+        /* =====================================================
+           ALERTES
+        ====================================================== */
+
+        .admin-login-alert {
+
+            margin-top: 25px;
+
+            padding: 14px 16px;
+
+            border: 1px solid;
+
+            text-align: left;
+
+            font-size: 12px;
+        }
+
+
+        .admin-login-alert.error {
+
+            border-color: #d6aaaa;
+
+            background: #fbefef;
+
+            color: #9e3e3e;
+        }
+
+
+        .admin-login-alert.success {
+
+            border-color: #a8c9ad;
+
+            background: #eff8f1;
+
+            color: #397048;
+        }
+
+
+
+        /* =====================================================
+           FORMULAIRE
+        ====================================================== */
+
+        .admin-login-form {
+
+            margin-top: 38px;
+
+            display: grid;
+
+            gap: 22px;
+
+            text-align: left;
+        }
+
+
+        .admin-login-field {
+
+            display: grid;
+
+            gap: 9px;
+        }
+
+
+        .admin-login-field label {
+
+            color: #655b50;
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+        }
+
+
+
+        /* =====================================================
+           INPUTS
+        ====================================================== */
+
+        .admin-login-field input {
+
+            width: 100%;
+
+            height: 62px;
+
+            padding:
+                0 18px;
+
+            border:
+                1px solid
+                #d6ccbe;
+
+            border-radius: 0;
+
+            background:
+                #faf8f4;
+
+            color:
+                #16130f;
+
+            font-family: inherit;
+
+            font-size: 17px;
+
+            outline: none;
+
+            transition:
+                border-color .2s ease,
+                background .2s ease,
+                box-shadow .2s ease;
+        }
+
+
+        .admin-login-field input::placeholder {
+
+            color: #8c8379;
+
+            opacity: 1;
+        }
+
+
+        .admin-login-field input:focus {
+
+            background: #ffffff;
+
+            border-color: #b88627;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(184,134,39,.08);
+        }
+
+
+
+        /* =====================================================
+           PASSWORD WRAPPER
+        ====================================================== */
+
+        .admin-password-wrapper {
+
+            position: relative;
+
+            width: 100%;
+        }
+
+
+        .admin-password-wrapper input {
+
+            width: 100%;
+
+            /*
+             * Espace réservé à l'œil
+             * situé à DROITE.
+             */
+            padding-right: 62px !important;
+        }
+
+
+
+        /* =====================================================
+           OEIL DROITE
+           IMPORTANT : all: unset empêche le style global
+           des boutons de transformer l'œil en barre noire.
+        ====================================================== */
+
+        .admin-login-form
+        .admin-password-toggle {
+
+            all: unset !important;
+
+            position: absolute !important;
+
+            top: 50% !important;
+            right: 17px !important;
+
+            transform:
+                translateY(-50%) !important;
+
+            width: 30px !important;
+            height: 30px !important;
+
+            display: flex !important;
+
+            align-items: center !important;
+            justify-content: center !important;
+
+            box-sizing: border-box !important;
+
+            color: #b88627 !important;
+
+            cursor: pointer !important;
+
+            z-index: 10 !important;
+        }
+
+
+        .admin-login-form
+        .admin-password-toggle:hover {
+
+            color: #d99a2b !important;
+        }
+
+
+        .admin-login-form
+        .admin-password-toggle:focus-visible {
+
+            outline:
+                1px solid
+                #d99a2b !important;
+
+            outline-offset:
+                3px !important;
+        }
+
+
+
+        /* =====================================================
+           SVG OEIL
+        ====================================================== */
+
+        .admin-login-form
+        .admin-password-toggle svg {
+
+            width: 22px !important;
+            height: 22px !important;
+
+            display: block;
+
+            fill: none !important;
+
+            stroke:
+                currentColor !important;
+
+            stroke-width: 1.8;
+
+            stroke-linecap: round;
+
+            stroke-linejoin: round;
+
+            pointer-events: none;
+        }
+
+
+
+        /* OEIL BARRE CACHE */
+
+        .admin-login-form
+        .admin-password-toggle
+        .admin-eye-hide {
+
+            display: none !important;
+        }
+
+
+
+        /* PASSWORD VISIBLE */
+
+        .admin-login-form
+        .admin-password-toggle.visible
+        .admin-eye-show {
+
+            display: none !important;
+        }
+
+
+        .admin-login-form
+        .admin-password-toggle.visible
+        .admin-eye-hide {
+
+            display: block !important;
+        }
+
+
+
+        /* =====================================================
+           BOUTON CONNEXION
+        ====================================================== */
+
+        .admin-login-submit {
+
+            width: 100%;
+
+            min-height: 58px;
+
+            margin-top: 4px;
+
+            padding:
+                0 22px;
+
+            border:
+                1px solid
+                #090806;
+
+            background:
+                #090806;
+
+            color:
+                #d99a2b;
+
+            font-family: inherit;
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            letter-spacing: 1.2px;
+
+            text-transform: uppercase;
+
+            cursor: pointer;
+
+            transition: .2s ease;
+        }
+
+
+        .admin-login-submit:hover {
+
+            border-color: #d99a2b;
+
+            background: #d99a2b;
+
+            color: #090806;
+
+            transform:
+                translateY(-1px);
+        }
+
+
+
+        /* =====================================================
+           RETOUR BOUTIQUE
+        ====================================================== */
+
+        .admin-login-footer {
+
+            margin-top: 26px;
+
+            padding-top: 20px;
+
+            border-top:
+                1px solid
+                #ece6dd;
+
+            text-align: left;
+        }
+
+
+        .admin-login-back {
+
+            color: #a77a20;
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            letter-spacing: .4px;
+
+            text-decoration: none;
+
+            text-transform: uppercase;
+        }
+
+
+        .admin-login-back:hover {
+
+            color: #d99a2b;
+        }
+
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 650px) {
+
+            .admin-login-page {
+
+                padding:
+                    90px 15px 30px;
+            }
+
+
+            .admin-login-card {
+
+                padding:
+                    50px 25px 30px;
+            }
+
+
+            .admin-login-logo {
+
+                width: 80px;
+                height: 80px;
+
+                margin-top:
+                    -92px;
+            }
+
+
+            .admin-login-card h1 {
+
+                font-size: 40px;
+            }
+
+
+            .admin-login-field input {
+
+                height: 58px;
+
+                font-size: 15px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -30,25 +665,32 @@
     <section class="admin-login-card">
 
 
-        <!-- LOGO -->
+        <!-- =================================================
+             LOGO
+        ================================================== -->
 
         <a th:href="@{/}"
            href="/"
-           class="admin-login-logo">
+           class="admin-login-logo"
+           aria-label="Retour à la boutique">
+
 
             <img th:src="@{/images/logo-zineb-deco.png}"
                  src="/images/logo-zineb-deco.png"
                  alt="Zineb Déco">
 
+
         </a>
 
 
 
-        <!-- TITRE -->
+        <!-- =================================================
+             TITRE
+        ================================================== -->
 
-        <span class="section-label dark">
+        <span class="admin-login-kicker">
 
-            ADMINISTRATION
+            Administration
 
         </span>
 
@@ -70,11 +712,12 @@
 
 
 
-        <!-- LOGIN INCORRECT -->
+        <!-- =================================================
+             ERREUR
+        ================================================== -->
 
         <div th:if="${param.error}"
-             class="admin-alert error"
-             style="margin-top:20px;">
+             class="admin-login-alert error">
 
             Identifiant ou mot de passe incorrect.
 
@@ -82,11 +725,12 @@
 
 
 
-        <!-- LOGOUT -->
+        <!-- =================================================
+             DECONNEXION
+        ================================================== -->
 
         <div th:if="${param.logout}"
-             class="admin-alert success"
-             style="margin-top:20px;">
+             class="admin-login-alert success">
 
             Vous êtes maintenant déconnecté.
 
@@ -94,7 +738,9 @@
 
 
 
-        <!-- FORMULAIRE -->
+        <!-- =================================================
+             FORMULAIRE
+        ================================================== -->
 
         <form th:action="@{/admin/login}"
               action="/admin/login"
@@ -110,9 +756,11 @@
 
 
 
-            <!-- USERNAME -->
+            <!-- =================================================
+                 IDENTIFIANT
+            ================================================== -->
 
-            <div>
+            <div class="admin-login-field">
 
 
                 <label for="username">
@@ -135,9 +783,11 @@
 
 
 
-            <!-- PASSWORD -->
+            <!-- =================================================
+                 MOT DE PASSE
+            ================================================== -->
 
-            <div>
+            <div class="admin-login-field">
 
 
                 <label for="password">
@@ -147,21 +797,91 @@
                 </label>
 
 
-                <input id="password"
-                       name="password"
-                       type="password"
-                       placeholder="Votre mot de passe"
-                       autocomplete="current-password"
-                       required>
+                <div class="admin-password-wrapper">
+
+
+                    <!-- INPUT -->
+
+                    <input id="password"
+                           name="password"
+                           type="password"
+                           placeholder="Votre mot de passe"
+                           autocomplete="current-password"
+                           required>
+
+
+
+                    <!-- =========================================
+                         OEIL A DROITE
+                    ========================================== -->
+
+                    <button type="button"
+                            id="adminPasswordToggle"
+                            class="admin-password-toggle"
+                            aria-label="Afficher le mot de passe"
+                            aria-pressed="false"
+                            title="Afficher le mot de passe">
+
+
+                        <!-- OEIL NORMAL -->
+
+                        <svg class="admin-eye-show"
+                             viewBox="0 0 24 24"
+                             aria-hidden="true">
+
+
+                            <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z">
+                            </path>
+
+
+                            <circle cx="12"
+                                    cy="12"
+                                    r="3">
+                            </circle>
+
+
+                        </svg>
+
+
+
+                        <!-- OEIL BARRE -->
+
+                        <svg class="admin-eye-hide"
+                             viewBox="0 0 24 24"
+                             aria-hidden="true">
+
+
+                            <path d="M3 3l18 18">
+                            </path>
+
+
+                            <path d="M10.6 6.2A10.8 10.8 0 0 1 12 6c6.5 0 10 6 10 6a17.4 17.4 0 0 1-3 3.7">
+                            </path>
+
+
+                            <path d="M6.2 6.2C3.5 8 2 12 2 12s3.5 6 10 6a9.7 9.7 0 0 0 4.1-.9">
+                            </path>
+
+
+                        </svg>
+
+
+                    </button>
+
+
+                </div>
 
 
             </div>
 
 
 
-            <!-- SUBMIT -->
+            <!-- =================================================
+                 CONNEXION
+            ================================================== -->
 
-            <button type="submit">
+            <button type="submit"
+                    class="admin-login-submit">
 
                 Se connecter à l'administration
 
@@ -172,23 +892,16 @@
 
 
 
-        <!-- RETOUR -->
+        <!-- =================================================
+             RETOUR
+        ================================================== -->
 
-        <div style="
-            margin-top:22px;
-            padding-top:17px;
-            border-top:1px solid #ece6dd;
-        ">
+        <div class="admin-login-footer">
 
 
             <a th:href="@{/}"
                href="/"
-               style="
-                    color:#a77a20;
-                    font-size:9px;
-                    font-weight:800;
-                    text-decoration:none;
-               ">
+               class="admin-login-back">
 
                 ← Retour à la boutique
 
@@ -202,6 +915,135 @@
 
 
 </main>
+
+
+
+<!-- =========================================================
+     AFFICHER / MASQUER MOT DE PASSE
+========================================================= -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        "use strict";
+
+
+        const passwordInput =
+            document.getElementById(
+                "password"
+            );
+
+
+        const toggle =
+            document.getElementById(
+                "adminPasswordToggle"
+            );
+
+
+        if (
+            !passwordInput ||
+            !toggle
+        ) {
+
+            return;
+        }
+
+
+
+        toggle.addEventListener(
+            "click",
+            function () {
+
+
+                const hidden =
+                    passwordInput.type ===
+                    "password";
+
+
+                /* =============================================
+                   AFFICHER / MASQUER
+                ============================================== */
+
+                passwordInput.type =
+                    hidden
+                        ? "text"
+                        : "password";
+
+
+                /* =============================================
+                   ICONE
+                ============================================== */
+
+                toggle.classList.toggle(
+                    "visible",
+                    hidden
+                );
+
+
+                /* =============================================
+                   ACCESSIBILITE
+                ============================================== */
+
+                toggle.setAttribute(
+                    "aria-pressed",
+                    hidden
+                        ? "true"
+                        : "false"
+                );
+
+
+                toggle.setAttribute(
+                    "aria-label",
+                    hidden
+                        ? "Masquer le mot de passe"
+                        : "Afficher le mot de passe"
+                );
+
+
+                toggle.setAttribute(
+                    "title",
+                    hidden
+                        ? "Masquer le mot de passe"
+                        : "Afficher le mot de passe"
+                );
+
+
+                /* =============================================
+                   GARDER FOCUS INPUT
+                ============================================== */
+
+                passwordInput.focus();
+
+
+                try {
+
+                    const length =
+                        passwordInput.value.length;
+
+
+                    passwordInput.setSelectionRange(
+                        length,
+                        length
+                    );
+
+                } catch (error) {
+
+                    /* Rien */
+
+                }
+
+
+            }
+        );
+
+
+    }
+);
+
+</script>
 
 
 </body>
